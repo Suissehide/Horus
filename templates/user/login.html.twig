@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/security.css') }}">
+{% endblock %}
+
+{% block body %}
+	<div class="security">
+
+		<div class="background-horus">
+			<div class="eye-container">
+				<div class="eye">
+                    <div class="iris"></div>
+                </div>
+			</div>
+		</div>
+
+		<div class="security-container">
+			<h1 class="title">Horus</h1>
+
+			<div class="form-container">
+				<div class="heading">
+					<h2>Se connecter</h2>
+					<div>ou
+						<a class="create-account" href="#">créer un compte</a>
+					</div>
+				</div>
+
+				<form action="{{ path('app_login') }}" class="form" method="post">
+					{% if error %}
+						<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					{% endif %}
+
+					<div class="input-group" data-validate="Email is required">
+						<input class="input" type="email" value="{{ last_username }}" name="_email" id="inputEmail" placeholder="Email" required autocomplete="email">
+						<span class="focus-input"></span>
+					</div>
+
+					<div class="input-group" data-validate="Password is required">
+						<input class="input" id="inputPassword" name="_password" placeholder="Mot de passe" type="password" required autocomplete="current-password">
+						<span class="focus-input"></span>
+					</div>
+
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+					<div class="checkbox-container">
+                        <input class="input-checkbox" id="ckb1" name="_remember_me" type="checkbox">
+                        <label class="label-checkbox" for="ckb1">
+                            Se souvenir de moi
+                        </label>
+					</div>
+
+					<div class="btn-container">
+						<button class="btn btn-default" type="submit">
+							Se connecter
+						</button>
+					</div>
+				</form>
+				<div>
+					<a class="txt1" href="#">
+						Mot de passe oublié ?
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+        let container = $('.security');
+
+        function moveHorusEye(e) {
+            let [xMin, xMax] = [-40, 35]
+            let [yMin, yMax] = [-9, 18]
+
+            let pos = container.position();
+
+            let perX = (e.pageX - pos.left) / container.width();
+            let perY = (e.pageY - pos.top) / container.height();
+
+			//yMax = 2 * -yMin
+            yMin =  yMin * (1 - (Math.abs(perX - 0.5) * 2));
+			yMax = yMax * (1 - (Math.abs(perX - 0.5) * 1));
+
+            let vX = xMin + (xMax - xMin) * perX;
+            let vY = yMin + (yMax - yMin) * perY;
+
+            $('.iris').css({
+                'transform': 'translate('+ vX + 'px, ' + vY + 'px)'
+            });
+        }
+
+        container.on('mousemove', function(e) {
+            moveHorusEye(e)
+        })
+
+        // container.on('mouseleave', function() {
+        //     $(this).find('.iris').css({
+        //         '-webkit-transform': 'translate(0,0)',
+        //         '-moz-transform': 'translate(0,0)',
+        //         '-ms-transform': 'translate(0,0)',
+        //         'transform': 'translate(0,0)'
+        //     });
+        // });
+
+		$('.create-account').on('click', function() {
+			$('.security').css({
+				'flex-flow': 'row'
+			});
+		})
+
+    </script>
+{% endblock %}

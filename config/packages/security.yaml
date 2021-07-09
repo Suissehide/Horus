@@ -1,16 +1,50 @@
 security:
     # https://symfony.com/doc/current/security/experimental_authenticators.html
     enable_authenticator_manager: true
+    password_hashers:
+        App\Entity\User:
+            algorithm: auto
+    
+    role_hierarchy:
+        ROLE_GUEST: ROLE_GUEST
+        ROLE_USER: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_USER, ROLE_ADMIN]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_SUPER_ADMIN]
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+        in_memory: { memory: ~ }
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            lazy: true
-            provider: users_in_memory
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+            pattern: ^/
+
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                username_parameter: _email
+                provider: app_user_provider
+
+                always_use_default_target_path: true
+                # default_target_path: index_participant
+
+            logout:
+                path: app_logout
+                target: app_login
+
+            entry_point: App\Security\LoginFormAuthenticator
+            custom_authenticator: App\Security\LoginFormAuthenticator
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -21,5 +55,10 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        # - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        # - { path: ^/onAuthenticationSuccess, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        # - { path: ^/utilisateur/edit, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        # - { path: ^/utilisateur/list, role: ROLE_ADMIN}
+        # - { path: ^/guest, role: ROLE_GUEST}
+        # - { path: ^/, role: ROLE_USER}

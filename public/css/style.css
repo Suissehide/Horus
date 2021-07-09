@@ -1,0 +1,649 @@
+/*
+* style.css
+* 
+*
+*/
+
+/* Fonts
+========================================================================== */
+
+@font-face {
+    font-family: Ubuntu-Regular;
+    src: url('../fonts/ubuntu/Ubuntu-Regular.ttf');
+}
+
+@font-face {
+    font-family: Ubuntu-Bold;
+    src: url('../fonts/ubuntu/Ubuntu-Bold.ttf');
+}
+
+@font-face {
+    font-family: Ubuntu-Light;
+    src: url('../fonts/ubuntu/Ubuntu-Light.ttf');
+}
+
+@font-face {
+    font-family: Ubuntu-Italic;
+    src: url('../fonts/ubuntu/Ubuntu-Italic.ttf');
+}
+
+/* Colors
+========================================================================== */
+
+:root {
+    --dark-goldenrod: #B8860B;
+    --lemon-curry: #CD9B1D;
+    --blue-green: #2493B4;
+    --blue-green-hover: #1E7D99;
+    --blue-pantone: #001CB3;
+    --persian-indigo: #280067;
+    --rich-black: #090909;
+    --alabaster: #E9EBDE;
+    --gray: #e6e6e6;
+}
+
+/* Sections
+========================================================================== */
+
+html {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Ubuntu-Regular, sans-serif;
+    font-size: 14px;
+    position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+}
+
+p {
+    margin: 0px;
+}
+
+ul, li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+iframe {
+    border: none !important;
+}
+
+::-moz-selection {
+    background: var(--alabaster);
+}
+
+::selection {
+    background: var(--alabaster);
+}
+
+/* Buttons
+========================================================================== */
+
+input:focus, a:focus, button:focus {
+    outline-style: none;
+}
+
+a {
+    cursor: pointer;
+    font-family: Ubuntu-Regular;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--blue-green);
+    margin: 0px;
+    transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    text-decoration: none;
+}
+
+a:focus {
+    outline: none !important;
+    color: var(--blue-green-hover);
+}
+
+a:hover {
+    text-decoration: none;
+    color: var(--blue-green-hover);
+}
+
+.btn {
+    cursor: pointer;
+    font-family: Ubuntu-Bold;
+    font-size: 14px;
+    color: #fff;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 42px;
+    background-color: var(--blue-green);
+    border-radius: 3px;
+    border: none;
+    transition: all 0.4s;
+}
+
+.btn:hover {
+    background-color: var(--blue-green-hover);
+}
+
+/* Input
+========================================================================== */
+
+input, textarea, select {
+    outline: none;
+    border: none;
+}
+
+textarea:focus, input:focus {
+    border-color: transparent;
+}
+
+input::-webkit-input-placeholder {
+    color: var(--gray);
+}
+
+input:-moz-placeholder {
+    color: var(--gray);
+}
+
+input::-moz-placeholder {
+    color: var(--gray);
+}
+
+input:-ms-input-placeholder {
+    color: var(--gray);
+}
+
+textarea::-webkit-input-placeholder {
+    color: var(--gray);
+}
+
+textarea:-moz-placeholder {
+    color: var(--gray);
+}
+
+textarea::-moz-placeholder {
+    color: var(--gray);
+}
+
+textarea:-ms-input-placeholder {
+    color: var(--gray);
+}
+
+label {
+    display: block;
+    margin: 0;
+}
+
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, textarea:-webkit-autofill, textarea:-webkit-autofill:hover, textarea:-webkit-autofill:focus, select:-webkit-autofill, select:-webkit-autofill:hover, select:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--persian-indigo);
+    box-shadow: 0 0 0px 1000px #e6e6e6 inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.input-group {
+    display: flex;
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+    margin-bottom: 15px;
+}
+
+.input {
+    display: block;
+    flex: 1;
+    font-family: Ubuntu-Bold;
+    color: var(--persian-indigo);
+    background-color: #e6e6e6;
+    font-size: 14px;
+    height: 42px;
+    padding: 0 20px;
+    border-radius: 3px;
+}
+
+.focus-input {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: -1px;
+    left: -1px;
+    pointer-events: none;
+    border: 1px solid var(--blue-green);
+    border-radius: 3px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.4s;
+    transform: scaleX(1.1) scaleY(1.1);
+}
+
+.input:focus+.focus-input {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+}
+
+select .focus-input {
+    height: calc(100% - 4px);
+    top: 4px;
+}
+
+/* Checkbox
+========================================================================== */
+
+.input-checkbox {
+    display: none;
+}
+
+.label-checkbox {
+    cursor: pointer;
+    display: block;
+    position: relative;
+    font-family: Ubuntu-Regular;
+    font-size: 14px;
+    color: #999999;
+    padding-left: 25px;
+    user-select: none;
+}
+
+.label-checkbox::before {
+    content: "✓";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    font-size: 12px;
+    border-radius: 3px;
+    color: transparent;
+    background: #fff;
+    border: 2px solid var(--blue-green);
+
+}
+
+.input-checkbox:checked+.label-checkbox::before {
+    color: var(--blue-green);
+}
+
+/* Radio
+========================================================================== */
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]+label, input[type="checkbox"]+label {
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+input[type="radio"]+label span {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin: -2px 0px 0 0;
+    vertical-align: middle;
+    cursor: pointer;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+}
+
+input[type="radio"]+label em, input[type="checkbox"]+label em {
+    font-style: normal;
+    text-transform: none;
+}
+
+input[type="radio"]+label span {
+    background-color: #fff;
+}
+
+input[type="radio"]:checked+label, input[type="checkbox"]:checked+label {
+    color: #333;
+    font-weight: 700;
+}
+
+input[type="radio"]:checked+label span {
+    background-color: var(--blue-green);
+    border: 2px solid #ffffff;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .1);
+}
+
+input[type="radio"]+label span, input[type="radio"]:checked+label span {
+    -webkit-transition: background-color 0.24s linear;
+    -o-transition: background-color 0.24s linear;
+    -moz-transition: background-color 0.24s linear;
+    transition: background-color 0.24s linear;
+}
+
+.radio-row [type="checkbox"]:not(:checked), .radio-row [type="checkbox"]:checked {
+    position: absolute;
+    left: 0;
+    opacity: 0.01;
+}
+
+.radio-row [type="checkbox"]:not(:checked)+label, .radio-row [type="checkbox"]:checked+label {
+    position: relative;
+    padding-left: 2.3em;
+    cursor: pointer;
+}
+
+.radio-row [type="checkbox"]:not(:checked)+label:before, .radio-row [type="checkbox"]:checked+label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.4em;
+    height: 1.4em;
+    border: 1px solid #aaa;
+    background: #FFF;
+    border-radius: .2em;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1), 0 0 0 rgba(203, 34, 237, .2);
+    transition: all .275s;
+}
+
+.radio-row [type="checkbox"]:not(:checked)+label:after, .radio-row [type="checkbox"]:checked+label:after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: .0em;
+    font-size: 1.6em;
+    color: var(--blue-green);
+    line-height: 0;
+    transition: all .2s;
+}
+
+.radio-row [type="checkbox"]:not(:checked)+label:after {
+    opacity: 0;
+    transform: scale(0) rotate(45deg);
+}
+
+.radio-row [type="checkbox"]:checked+label:after {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+}
+
+.radio-row {
+    display: flex;
+    position: relative;
+    flex-flow: row;
+}
+
+.radio-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.radio-container:last-child {
+    margin: 0;
+}
+
+.radio-container label {
+    margin: 0;
+}
+
+/* Alert Flashbag
+========================================================================== */
+
+.toast__svg {
+    fill: #fff;
+}
+
+.toast {
+    z-index: 1000;
+    position: fixed;
+    right: 11px;
+    text-align: left;
+    padding: 15px 0;
+    transition: opacity 0.7s;
+    opacity: 1;
+    border-bottom: #fff 1px solid;
+    border-top: #fff 1px solid;
+    border-right: #fff 1px solid;
+    background-color: #fff;
+    border-radius: 4px;
+    max-width: 500px;
+    top: 0px;
+    box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.2);
+}
+
+.toast:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.toast__icon {
+    position: absolute;
+    top: 50%;
+    left: 22px;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    padding: 7px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.toast__content {
+    font-family: Ubuntu-Bold;
+    padding-left: 70px;
+    padding-right: 60px;
+}
+
+.toast__type {
+    color: #3e3e3e;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 17px;
+}
+
+.toast__message {
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #878787;
+}
+
+.toast__close {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    width: 14px;
+    cursor: pointer;
+    height: 14px;
+    fill: #878787;
+    transform: translateY(-50%);
+}
+
+.toast--green {
+    border-color: #1a535c;
+}
+
+.toast--green:before, .toast--green .toast__icon {
+    background-color: #1a535c;
+}
+
+.toast--blue {
+    border-color: var(--blue-green);
+}
+
+.toast--blue:before, .toast--blue .toast__icon {
+    background-color: var(--blue-green);
+}
+
+.toast--yellow {
+    border-color: #D63B53;
+}
+
+.toast--yellow:before, .toast--yellow .toast__icon {
+    background-color: #D63B53;
+}
+
+/* ScrollTop
+========================================================================== */
+
+.cd-top {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    bottom: 40px;
+    right: 10px;
+    transition: opacity .3s 0s, visibility 0s .3s, background-color .3s 0s;
+}
+
+.cd-btn {
+    z-index: 999;
+    position: relative;
+    display: flex;
+    height: 60px;
+    width: 60px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    color: white;
+    cursor: pointer !important;
+}
+
+.cd-btn .fa {
+    position: absolute;
+    left: -1px;
+    top: 18px;
+    font-size: 24px;
+}
+
+.cd-btn .fa-check {
+    left: -5px;
+}
+
+.cd-btn:hover .fa, .cd-btn:focus .fa {
+    color: white;
+}
+
+.btn-top {
+    background: #1D1D2Ccc;
+}
+
+.btn-top:hover {
+    background: #1D1D2C;
+    color: white;
+}
+
+.btn-back {
+    background: #999999cc;
+}
+
+.btn-back:hover {
+    background: #999999;
+    color: white;
+}
+
+.btn-delete {
+    background: #E40C2Bcc;
+}
+
+.btn-delete:hover {
+    background: #E40C2B;
+    color: white;
+}
+
+.btn-save {
+    background: #438945cc;
+}
+
+.btn-save:hover {
+    background: #438945;
+    color: white;
+}
+
+.btn-check {
+    background: #2892D7cc;
+}
+
+.btn-check:hover {
+    background: var(--blue-green);
+    color: white;
+}
+
+.btn-redo {
+    background: #2892D7cc;
+}
+
+.btn-redo .fa {
+    left: -6px;
+}
+
+.btn-redo:hover {
+    background: var(--blue-green);
+    color: white;
+}
+
+.btn-bar {
+    display: flex;
+}
+
+.btn-bar a, .btn-bar button {
+    margin-right: 20px;
+}
+
+.cd-top.cd-top--show, .cd-top.cd-top--fade-out, .cd-top:hover {
+    transition: opacity .3s 0s, visibility 0s 0s, background-color .3s 0s;
+}
+
+.cd-top.cd-top--show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.cd-top.cd-top--fade-out {
+    opacity: .5;
+}
+
+.cd-top:hover {
+    opacity: 1;
+}
+
+@media only screen and (min-width: 768px) {
+    .cd-top {
+        right: 20px;
+        bottom: 30px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .cd-top {
+        right: 35px;
+        bottom: 35px;
+    }
+}
