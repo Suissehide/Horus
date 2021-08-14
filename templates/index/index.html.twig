@@ -1,20 +1,126 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block title %}Hello IndexController!{% endblock %}
+{% block title %}
+    Index
+{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+{% endblock %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{% block page_content %}
+	<div class="container-fluid">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/Horus/src/Controller/IndexController.php'|file_link(0) }}">src/Controller/IndexController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/Horus/templates/index/index.html.twig'|file_link(0) }}">templates/index/index.html.twig</a></code></li>
-    </ul>
-</div>
+		<div class="title-wrapper">
+			Liste des participants
+		</div>
+
+		<div class="container-form">
+			<div class="btn-bar">
+				<a href="{{ path('export_csv') }}" class="btn" download>
+					<i aria-hidden="true" class="fa fa-file-download"></i>
+					Exporter
+				</a>
+				<a href="{{ path('participant_add') }}" class="btn">
+					<i aria-hidden="true" class="fa fa-plus"></i>Ajouter un participant</a>
+			</div>
+			<div class="flex">
+				<div class="table-wrapper">
+					<table cellspacing="0" class="table table-condensed table-hover table-striped" id="data-grid">
+						<thead>
+							<tr>
+								<th data-column-id="id" data-identifier="true" data-searchable="false" data-type="numeric" data-visible="false">Id</th>
+								<th data-column-id="code">Code</th>
+								<th data-column-id="consentement">Date de consentement</th>
+								<th data-column-id="evenement">Date de l'événement</th>
+								<th data-column-id="inclusion">Date de l'inclusion</th>
+								<th data-column-id="error" data-formatter="error" data-sortable="false" data-width="261px"></th>
+								<th data-column-id="status" data-searchable="false" data-visible="false">Status</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/bootgrid.min.js') }}"></script>
+
+    <script>
+        $('li:eq(1)').addClass('active');
+
+        $('ul li').on('click', function() {
+            $('li').removeClass('active');
+            $(this).addClass('active');
+        });
+    </script>
+
+    <script>
+        var grid = $("#data-grid").bootgrid({
+            rowCount: [
+                20, 50, -1
+            ],
+            columnSelection: false,
+            ajax: true,
+            statusMapping: {
+                0: "in",
+                1: "out"
+            },
+            requestHandler: function (request) {
+                return request;
+            },
+            url: "{{ path('index_participant') }}",
+            formatters: {
+                "error": function (column, row) {
+                    fetchAdvancement(row.id);
+                },
+                "commands": function (column, row) {
+                    return "<button type=\"button\" class=\"btn btn-xs btn-default command-view\" data-row-id=\"" + row.id + "\"><i class=\"fa fa-eye\"></i></button> " + "<button type=\"button\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><i class=\"fa fa-pencil-alt\"></i></button> " + "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\"><i class=\"fa fa-trash-alt\"></i></button>";
+                }
+            }
+        }).on("loaded.rs.jquery.bootgrid", function () {
+            grid.find(".command-edit").on("click", function (e) {
+            }).end().find(".command-delete").on("click", function (e) {
+            }).end().find(".command-view").on("click", function (e) {
+            }).end().find("tr").on("click", function (e) {
+                redirect($(this).data("row-id"));
+            });
+        }).on("loaded.rs.jquery.bootgrid", function() {
+            
+        });
+
+        function redirect(id) {
+            if (id == undefined) 
+                return;
+
+            let pathArray = window.location.pathname.split("/");
+            let url = window.location.protocol + "//" + window.location.host;
+            for (let i = 0; i < pathArray.length - 1; i++) 
+                url += pathArray[i] + "/";
+
+            window.location.assign(url + "participant/" + id);
+        };
+
+        function fetchAdvancement(participantId) {
+            let url = '{{ path("advancement") }}';
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "id": participantId
+                },
+                success: function (json) {
+                    let listErr = '';
+                    for (i = 0; i < 7; i++) {
+                        listErr += '<div class="badge-spe badge-tab badge-' + $.parseJSON(json[i])['state'] + '">' + $.parseJSON(json[i])['number'] + '</div>';
+                    };
+                    $('#data-grid tr[data-row-id=' + participantId + '] td:nth-child(5)').append(listErr);
+                }
+            });
+        };
+    </script>
 {% endblock %}

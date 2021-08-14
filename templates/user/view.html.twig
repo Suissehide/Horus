@@ -23,7 +23,7 @@
 
 					<div class="row">
 						<div class="col-md-8">
-							<div class="wrap-input">
+							<div class="input-group">
 								<label>Email</label>
 								<p class="input-text">{{ user.email }}</p>
 							</div>
@@ -31,7 +31,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-8">
-							<div class="wrap-input">
+							<div class="input-group">
 								<label>Prenom</label>
 								<p class="input-text">{{ user.prenom }}</p>
 							</div>
@@ -39,7 +39,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-8">
-							<div class="wrap-input">
+							<div class="input-group">
 								<label>Nom</label>
 								<p class="input-text">{{ user.nom }}</p>
 							</div>
@@ -47,7 +47,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-8">
-                            <div class="wrap-input">
+                            <div class="input-group">
 								<label>Roles</label>
                                 <ul>
                                     {% for role in user.roles %}
@@ -65,7 +65,7 @@
 					</div>
 
                     <div class="button-block">
-                        <a type="button" class="form-btn btn-default" onclick="history.back(-1)">
+                        <a type="button" class="btn" onclick="history.back(-1)">
                             <i aria-hidden="true" class="fa fa-arrow-left"></i>Retour</a>
                     </div>
 

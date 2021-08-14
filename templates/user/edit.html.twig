@@ -16,7 +16,7 @@
     {% if help is not empty %}
         {% set widget_attr = {attr: {'aria-describedby': id ~"_help"}} %}
     {% endif %}
-    <div class="wrap-input" {% with {attr: row_attr|default({} )} %} {{ block('attributes') }} {% endwith %}>
+    <div class="input-group" {% with {attr: row_attr|default({} )} %} {{ block('attributes') }} {% endwith %}>
         {{ form_label(form) }}
         {{ form_errors(form) }}
         {{ form_widget(form, widget_attr) }}
@@ -35,45 +35,65 @@
         <div class="container-form">
 
             <main class="flex-row">
-                <section class="flex-2">
+                <section>
                     <h3>Informations générales</h3>
-                    {{ form_start(form, {'attr': {'class': 'form validate-form', 'autocomplete' : 'off'} }) }}
-                    {{ form_errors(form) }}
 
                     <div class="row">
                         <div class="col-md-8">
-                            {{ form_row(form.email, {'attr': {'class': 'input', 'autocomplete' : 'off'} }) }}
+                            {% if errorsForm %}
+                                <ul class="alert alert-danger alert-small">
+                                    {% for error in errorsForm %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            {{ form_row(form.prenom, {'attr': {'class': 'input', 'autocomplete' : 'off'} }) }}
+
+                    {{ form_start(form, {'attr': {'class': 'form validate-form', 'autocomplete' : 'off'} }) }}
+                    {{ form_errors(form) }}
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                {{ form_row(form.email, {'attr': {'class': 'input', 'autocomplete' : 'off'} }) }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            {{ form_row(form.nom, {'attr': {'class': 'input', 'autocomplete' : 'off'} }) }}
+                        <div class="row">
+                            <div class="col-md-8">
+                                {{ form_row(form.prenom, {'attr': {'class': 'input', 'autocomplete' : 'off'} }) }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <button id="utilisateur_save" name="utilisateur[save]" class="form-btn" type="submit">
-                                <i aria-hidden="true" class="fa fa-save"></i>Enregistrer</button>
+                        <div class="row">
+                            <div class="col-md-8">
+                                {{ form_row(form.nom, {'attr': {'class': 'input', 'autocomplete' : 'off'} }) }}
+                            </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                {# {{ form_row(form.save, {'attr': {'class': 'btn', 'autocomplete' : 'off'} }) }} #}
+                                <button id="user_form_save" name="user_form[save]" class="btn" type="submit">
+                                    <i aria-hidden="true" class="fa fa-save"></i>Enregistrer</button>
+                            </div>
+                        </div>
+
                     {{ form_row(form._token) }}
                     {{ form_end(form, {'render_rest' : false}) }}
                 </section>
 
-                <section class="flex-2">
+                <section>
                     <h3>Mot de passe</h3>
-                    {% if errors %}
-                        <ul class="alert alert-danger alert-small">
-                            {% for error in errors %}
-                                <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            {% if errorsPsw %}
+                                <ul class="alert alert-danger alert-small">
+                                    {% for error in errorsPsw %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
 
                     {{ form_start(psw, {'attr': {'class': 'form validate-form', 'autocomplete' : 'off'} }) }}
                     {{ form_errors(psw) }}
@@ -95,7 +115,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                            <button class="form-btn" id="password_form_edit" name="password_form[edit]" type="submit">
+                            <button class="btn" id="password_form_edit" name="password_form[edit]" type="submit">
                                 <i aria-hidden="true" class="fa fa-pen"></i>Modifier le mot de passe</button>
                         </div>
                     </div>

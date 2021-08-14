@@ -8,53 +8,64 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container-login">
-		<div class="wrap-login">
+	<div class="security">
 
-			{{ form_start(form, {'attr': {'class': 'login-form validate-form', 'autocomplete' : 'off'} }) }}
-
-			{% if errors %}
-				<ul class="alert alert-danger">
-					{% for error in errors %}
-						<li>{{ error }}</li>
-					{% endfor %}
-				</ul>
-			{% endif %}
-
-			<span class="login-form-title">
-				Inscription
-			</span>
-
-			<div class="input-group">
-				{{ form_widget(form.email, {'attr': {'autofocus' : true, 'class': 'input', 'autocomplete' : 'email'} }) }}
-				<span class="focus-input"></span>
+		<div class="background-horus">
+			<div class="eye-container">
+				<div class="eye">
+					<img class="eyelid" src="{{ asset('assets/images/eyelid.svg') }}"/>
+                    <div class="iris"></div>
+                </div>
 			</div>
+		</div>
+		
+		<div class="security-container">
+			<h1 class="title">Horus</h1>
 
-			<div class="input-group">
-				{{ form_widget(form.plainPassword.first, {'attr': {'class': 'input', 'autocomplete' : 'new-password'} }) }}
-				<span class="focus-input"></span>
-			</div>
+			<div class="form-container">
+				<div class="heading">
+					<h2>S'enregistrer</h2>
+					<div>ou
+						<a class="swap" href="{{ path('app_login') }}">se connecter</a>
+					</div>
+				</div>
 
-			<div class="input-group">
-				{{ form_widget(form.plainPassword.second, {'attr': {'class': 'input', 'autocomplete' : 'confirm-password'} }) }}
-				<span class="focus-input"></span>
-			</div>
+				{{ form_start(form, {'attr': {'class': 'login-form validate-form', 'autocomplete' : 'off'} }) }}
 
-			<div class="container-login-form-btn">
-				{{ form_widget(form.save, {'attr': {'class': 'login-form-btn'} }) }}
-			</div>
+					{% if errors %}
+						<ul class="alert alert-danger">
+							{% for error in errors %}
+								<li>{{ error }}</li>
+							{% endfor %}
+						</ul>
+					{% endif %}
 
-			<div class="txt-register">
-				<a class="txt1" href="{{ url('app_login') }}">
-					Connexion
-				</a>
-			</div>
+					<div class="input-group">
+						{{ form_widget(form.email, {'attr': {'autofocus' : true, 'class': 'input', 'autocomplete' : 'email'} }) }}
+						<span class="focus-input"></span>
+					</div>
 
-			{{ form_row(form._token) }}
+					<div class="input-group">
+						{{ form_widget(form.plainPassword.first, {'attr': {'class': 'input', 'autocomplete' : 'new-password'} }) }}
+						<span class="focus-input"></span>
+					</div>
+
+					<div class="input-group">
+						{{ form_widget(form.plainPassword.second, {'attr': {'class': 'input', 'autocomplete' : 'confirm-password'} }) }}
+						<span class="focus-input"></span>
+					</div>
+
+					<div class="btn-container">
+						{{ form_widget(form.save, {'attr': {'class': 'btn'} }) }}
+					</div>
+
+				{{ form_row(form._token) }}
 			{{ form_end(form, {'render_rest' : false}) }}
-
 		</div>
 	</div>
 {% endblock %}
 
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset('js/gsap.min.js') }}"></script>
+	<script src="{{ asset('js/security.js') }}"></script>
+{% endblock %}

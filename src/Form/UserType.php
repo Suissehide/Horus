@@ -57,6 +57,7 @@ class UserType extends AbstractType
                         'placeholder' => 'Confirmer le mot de passe'
                     ),
                 ),
+                'required' => false
             ])
             ->add('roles', ChoiceType::class, array(
                 'label' => "Rôles",
@@ -83,7 +84,7 @@ class UserType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('save', SubmitType::class, array('label' => 'S\'enregistrer'));
+            ->add('save', SubmitType::class, array('label' => 'Inscription'));
     }
 
     public function configureOptions(OptionsResolver $resolver)

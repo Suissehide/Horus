@@ -12,8 +12,10 @@
 		{# Run `composer require symfony/webpack-encore-bundle`
 				           and uncomment the following Encore helpers to start using Symfony UX #}
 
-        <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/all.css') }}">
+		<link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/bootgrid.min.css') }}">
 		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 		{% block stylesheets %}
@@ -59,8 +61,11 @@
 		{% block body %}{% endblock %}
 
 		<script src="{{ asset('js/jquery.min.js') }}"></script>
+		<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/datepicker.js') }}"></script>
         <script src="{{ asset('js/datepicker.fr.js') }}"></script>
+
+		<script src="{{ asset('js/script.js') }}"></script>
 
 		{% block javascripts %}
 			{#{{ encore_entry_script_tags('app') }}#}

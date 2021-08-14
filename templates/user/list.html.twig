@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/bootgrid.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 {% endblock %}
 
@@ -17,18 +16,24 @@
             Liste des utilisateurs
         </div>
 
-        <div class="form_checkbox_group">
-            <div class="form_checkbox_group-item">
-                <input id="checkbox-1" type="checkbox" name="checkbox" value="ROLE_GUEST" checked>
-                <label for="checkbox-1">Invité</label>
-            </div>
-            <div class="form_checkbox_group-item">
-                <input id="checkbox-2" type="checkbox" name="checkbox" value="ROLE_USER" checked>
-                <label for="checkbox-2">Utilisateur</label>
-            </div>
-            <div class="form_checkbox_group-item">
-                <input id="checkbox-3" type="checkbox" name="checkbox" value="ROLE_ADMIN" checked>
-                <label for="checkbox-3">Administrateur</label>
+        <div class="filter">
+            <p>Filtrer par :</p>
+            <div>
+                <label>
+                    <input type="checkbox" class="checkbox-round" checked="" value="ROLE_GUEST">
+                    <span style="border-color: var(--dark-goldenrod); background-color: var(--dark-goldenrod);"></span>
+                    Invité
+                </label>
+                <label>
+                    <input type="checkbox" class="checkbox-round" checked="" value="ROLE_USER">
+                    <span style="border-color: var(--blue-green); background-color: var(--blue-green);"></span>
+                    Utilisateur
+                </label>
+                <label>
+                    <input type="checkbox" class="checkbox-round" checked="" value="ROLE_ADMIN">
+                    <span style="border-color: var(--persian-indigo); background-color: var(--persian-indigo);"></span>
+                    Administrateur
+                </label>
             </div>
         </div>
 
@@ -63,35 +68,38 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                        <form class="container-form">
-                            <div class="wrap-input">
-                                <label class="required" for="utilisateur_email">Email</label>
-                                <input autocomplete="off" class="input" id="utilisateur_email" name="utilisateur[email]" readonly="readonly" required="required" type="text">
+                        <form class="form">
+                            <div class="input-group">
+                                <label class="required" for="user_email">Email</label>
+                                <input autocomplete="off" class="input" id="user_email" name="user[email]" readonly="readonly" required="required" type="text">
+                                <span class="focus-input"></span>
                             </div>
-                            <div class="wrap-input">
-                                <label class="required" for="utilisateur_nom">Nom</label>
-                                <input autocomplete="off" class="input" id="utilisateur_nom" name="utilisateur[nom]" type="text">
+                            <div class="input-group">
+                                <label class="required" for="user_nom">Nom</label>
+                                <input autocomplete="off" class="input" id="user_nom" name="user[nom]" type="text">
+                                <span class="focus-input"></span>
                             </div>
-                            <div class="wrap-input">
-                                <label class="required" for="utilisateur_prenom">Prénom</label>
-                                <input autocomplete="off" class="input" id="utilisateur_prenom" name="utilisateur[prenom]" type="text">
+                            <div class="input-group">
+                                <label class="required" for="user_prenom">Prénom</label>
+                                <input autocomplete="off" class="input" id="user_prenom" name="user[prenom]" type="text">
+                                <span class="focus-input"></span>
                             </div>
-                            <div class="wrap-input">
-                                <label for="utilisateur_roles">Roles</label>
-                                <select class="input" id="utilisateur_roles" name="utilisateur[roles]">
+                            <div class="input-group">
+                                <label for="user_roles">Roles</label>
+                                <select class="input" id="user_roles" name="user[roles]">
                                     <option value="Invité">Invité</option>
                                     <option value="Utilisateur">Utilisateur</option>
                                     <option value="Administrateur">Administrateur</option>
                                 </select>
                                 <span class="focus-input"></span>
                             </div>
-                            <div class="form-btn-container">
-                                <button class="form-btn btn-default" data-dismiss="modal">
-                                    <span class="fa fa-times"></span>
+                            <div class="btn-bar">
+                                <button class="btn btn-default" data-dismiss="modal">
+                                    <i class="fa fa-times"></i>
                                     Annuler
                                 </button>
-                                <button class="form-btn" data-dismiss="modal" id="edit">
-                                    <span class="fa fa-pencil-alt"></span>
+                                <button class="btn" data-dismiss="modal" id="edit">
+                                    <i class="fa fa-pencil-alt"></i>
                                     Modifier
                                 </button>
                             </div>
@@ -123,21 +131,21 @@
             if (id == undefined) 
                 return;
             
-            $('#utilisateur_email').val(row.find('td').eq(0).text());
-            $('#utilisateur_nom').val(row.find('td').eq(1).text());
-            $('#utilisateur_prenom').val(row.find('td').eq(2).text());
-            $('#utilisateur_roles').val(row.find('td').eq(3).text());
+            $('#user_email').val(row.find('td').eq(0).text());
+            $('#user_nom').val(row.find('td').eq(1).text());
+            $('#user_prenom').val(row.find('td').eq(2).text());
+            $('#user_roles').val(row.find('td').eq(3).text());
             $('#modal').appendTo("body").modal('show')
         };
 
         $("#edit").on('click', function (e) {
             e.preventDefault();
-            let email = $('#utilisateur_email').val();
-            let roles = $('#utilisateur_roles').val();
-            let prenom = $('#utilisateur_prenom').val();
-            let nom = $('#utilisateur_nom').val();
+            let email = $('#user_email').val();
+            let roles = $('#user_roles').val();
+            let prenom = $('#user_prenom').val();
+            let nom = $('#user_nom').val();
             $.ajax({
-                url: "{{ path( 'utilisateur_roles_edit' ) }}",
+                url: "{{ path( 'user_roles_edit' ) }}",
                 type: "POST",
                 dataType: "json",
                 data: {
@@ -174,17 +182,29 @@
         });
 
         var roles = [];
-        getRoles();
         function getRoles() {
             roles = [];
-            $('.form_checkbox_group :checked').each(function() {
-                roles.push($(this).val());
+            $('.filter :checkbox').each(function() {
+                if ($(this).prop('checked'))
+                    roles.push($(this).val());
             });
         }
-        $('.form_checkbox_group').change(function () {
+        getRoles();
+
+        $('.filter').on('click', 'label', function() {
+            let checkbox = $(this).find("input[type='checkbox']");
+            if (checkbox.prop('checked')) {
+                checkbox.prop('checked', false);
+                $(this).find('span').css('background-color', 'transparent');
+            } else {
+                checkbox.prop('checked', true);
+                let color = $(this).find('span').css('border-color');
+                $(this).find('span').css('background-color', color);
+            }
             getRoles();
             $("#data-grid").bootgrid('reload');
-        })
+            return false;
+        });
 
 
         var grid = $("#data-grid").bootgrid({
@@ -197,22 +217,22 @@
                 request.roles = roles;
                 return request;
             },
-            url: "{{ path('utilisateur_list') }}",
+            url: "{{ path('user_list') }}",
             formatters: {
                 "roles": function (column, row) {
-                    let ret = "<div>";
+                    let ret = "";
                     $.each(row.roles, function (i, e) {
                         if (e == "ROLE_GUEST") 
-                            ret += "<div class='tag tag-yellow'>Invité</div>"
+                            ret += "<div class='tag tag-guest'>Invité</div>"
                         
                         if (e == "ROLE_USER") 
-                            ret += "<div class='tag tag-green'>Utilisateur</div>"
+                            ret += "<div class='tag tag-user'>Utilisateur</div>"
                         
                         if (e == "ROLE_ADMIN") 
-                            ret += "<div class='tag tag-red'>Administrateur</div>"
+                            ret += "<div class='tag tag-admin'>Administrateur</div>"
                         
                     })
-                    return ret + "</div>";
+                    return ret;
                 }
             },
             statusMapping: {

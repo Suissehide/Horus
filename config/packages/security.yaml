@@ -18,33 +18,24 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
-        in_memory: { memory: ~ }
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            pattern: ^/
+
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800
-            pattern: ^/
-
-            form_login:
-                login_path: app_login
-                check_path: app_login
-                username_parameter: _email
-                provider: app_user_provider
-
-                always_use_default_target_path: true
-                # default_target_path: index_participant
 
             logout:
                 path: app_logout
                 target: app_login
 
-            entry_point: App\Security\LoginFormAuthenticator
-            custom_authenticator: App\Security\LoginFormAuthenticator
+            custom_authenticators:
+                - App\Security\LoginFormAuthenticator
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -55,10 +46,10 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY}
-        # - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY}
-        # - { path: ^/onAuthenticationSuccess, role: IS_AUTHENTICATED_ANONYMOUSLY}
-        # - { path: ^/utilisateur/edit, role: IS_AUTHENTICATED_ANONYMOUSLY}
-        # - { path: ^/utilisateur/list, role: ROLE_ADMIN}
-        # - { path: ^/guest, role: ROLE_GUEST}
-        # - { path: ^/, role: ROLE_USER}
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/onAuthenticationSuccess, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/user, role: ROLE_ADMIN}
+        # - { path: ^/user/edit, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/guest, role: ROLE_GUEST}
+        - { path: ^/, role: ROLE_USER}

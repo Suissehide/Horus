@@ -3,21 +3,29 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserFormType;
 use App\Form\PasswordFormType;
 use App\Repository\UserRepository;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UserController extends AbstractController
 {
+    public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->entityManager = $entityManager;
+        $this->passwordHasher = $passwordHasher;
+    }
+
     /**
      * @Route("/", name="default", methods="GET")
      */
@@ -26,37 +34,10 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_login');
     }
 
-
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/user/ajax", name="user_roles_edit")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('user/login.html.twig', [
-            'controller_name' => 'LoginController',
-            'last_username' => $lastUsername,
-            'error' => $error,
-        ]);
-    }
-
-    /**
-     * @Route("/logout", name="app_logout", methods="GET")
-     */
-    public function logout(): Response
-    {
-        return $this->redirectToRoute('app_login');
-    }
-
-    /**
-     * @Route("/user/ajax", name="User_roles_edit")
-     */
-    public function roles_edit(UserRepository $UserRepository, Request $request, AuthorizationCheckerInterface $authChecker): JsonResponse
+    public function roles_edit(UserRepository $userRepository, Request $request, AuthorizationCheckerInterface $authChecker): JsonResponse
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -66,16 +47,16 @@ class UserController extends AbstractController
             $prenom = $request->request->get('prenom');
             $roles = $request->request->get('roles');
 
-            $User = $UserRepository->findOneBy(['email' => $email]);
-            if ($User) {
+            $user = $userRepository->findOneBy(['email' => $email]);
+            if ($user) {
                 if ($roles == "Invité")
-                    $User->setRoles(["ROLE_GUEST"]);
-                else if ($roles == "User")
-                    $User->setRoles(["ROLE_USER"]);
+                    $user->setRoles(["ROLE_GUEST"]);
+                else if ($roles == "Utilisateur")
+                    $user->setRoles(["ROLE_USER"]);
                 else if ($roles == "Administrateur")
-                    $User->setRoles(["ROLE_ADMIN"]);
-                $User->setNom($nom);
-                $User->setPrenom($prenom);
+                    $user->setRoles(["ROLE_ADMIN"]);
+                $user->setNom($nom);
+                $user->setPrenom($prenom);
                 $em->flush();
             }
             return new JsonResponse();
@@ -83,7 +64,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/list", name="User_list")
+     * @Route("/user/list", name="user_list")
      */
     public function list(UserRepository $UserRepository, Request $request): Response
     {
@@ -135,34 +116,39 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/edit", name="User_edit")
+     * @Route("/user/edit", name="user_edit")
      */
-    public function edit(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function edit(Request $request): Response
     {
         $user = $this->getUser();
-        $roles = $user->getRoles();
         $em = $this->getDoctrine()->getManager();
-        $errors = [];
 
-        $form = $this->createForm(UserRepository::class, $user);
+        $errorsForm = [];
+        $form = $this->createForm(UserFormType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('save')->isClicked()) {
                 $user = $form->getData();
-                $user->setRoles($roles);
                 $em->persist($user);
                 $em->flush();
+
+                return $this->redirectToRoute('user_edit');
+            } else {
+                $errorsForm[] = 'Erreur :';
+                foreach ($form->getErrors(true) as $error) {
+                    $errorsForm[] = $error->getMessage();
+                }
             }
-            return $this->redirectToRoute('User_edit');
         }
 
+        $errorsPsw = [];
         $psw = $this->createForm(PasswordFormType::class, $user);
         $psw->handleRequest($request);
         if ($psw->isSubmitted() && $psw->isValid()) {
             $oldPassword = $request->request->get('password_form')['oldPassword'];
-            if ($psw->get('edit')->isClicked() && $passwordEncoder->isPasswordValid($user, $oldPassword)) {
+            if ($psw->get('edit')->isClicked() && $this->passwordHasher->isPasswordValid($user, $oldPassword)) {
                 $user = $form->getData();
-                $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+                $password = $this->passwordHasher->hashPassword($user, $user->get('plainPassword')->getData());
                 $user->setPassword($password);
                 $user->setRoles($roles);
 
@@ -171,11 +157,11 @@ class UserController extends AbstractController
 
                 $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
 
-                return $this->redirectToRoute('User_edit');
+                return $this->redirectToRoute('user_edit');
             } else {
-                $errors[] = 'Ancien mot de passe incorrect.';
+                $errorsPsw[] = 'Ancien mot de passe incorrect.';
                 foreach ($form->getErrors(true) as $error) {
-                    $errors[] = $error->getMessage();
+                    $errorsPsw[] = $error->getMessage();
                 }
             }
         }
@@ -185,12 +171,13 @@ class UserController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
             'psw' => $psw->createView(),
-            'errors' => $errors,
+            'errorsForm' => $errorsForm,
+            'errorsPsw' => $errorsPsw,
         ]);
     }
 
     /**
-     * @Route("/user/view/{id}", name="User_view")
+     * @Route("/user/view/{id}", name="user_view")
      */
     public function view(User $User): Response
     {
@@ -201,7 +188,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/getByEmail", name="User_getByEmail")
+     * @Route("/user/getByEmail", name="user_getByEmail")
      */
     public function getByEmail(Request $request): Response
     {

@@ -5,10 +5,10 @@
 */
 
 .security {
+    position: relative;
     width: 100%;
     height: 100vh;
     display: flex;
-    flex-flow: row-reverse;
 }
 
 .background-horus {
@@ -19,12 +19,14 @@
     flex: 1;
     background: var(--persian-indigo);
     background: radial-gradient(circle, var(--persian-indigo) 0%, var(--rich-black) 100%);
+    margin-left: 470px;
 }
 
 .eye-container {
     position: relative;
     height: 200px;
     width: 200px;
+    user-select: none;
 }
 
 .eye {
@@ -32,6 +34,15 @@
     height: 100%;
     background: url("../assets/images/eye.svg") no-repeat center;
     background-size: 100%;
+}
+
+
+.eyelid {
+    position: absolute;
+    top: 61px;
+    left: 27px;
+    width: 150px;
+    height: 35px;
 }
 
 .iris {
@@ -46,8 +57,10 @@
 }
 
 .security-container {
-    position: relative;
-    width: 350px;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 470px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -55,6 +68,7 @@
     align-items: center;
     padding-left: calc(1440px * (1 / 24));
     padding-right: calc(1440px * (1 / 24));
+    background-color: #fff;
 }
 
 .security .title {
@@ -73,7 +87,7 @@
     left: 0;
     right: 0;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translate(-100%, -50%);
 }
 
 .heading {
@@ -102,4 +116,8 @@
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 15px;
+}
+
+.btn-container > .btn {
+    width: 100%;
 }
