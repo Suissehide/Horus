@@ -1,0 +1,123 @@
+/*
+* Security.css
+* 
+*
+*/
+
+.security {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.background-horus {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    background: var(--persian-indigo);
+    background: radial-gradient(circle, var(--persian-indigo) 0%, var(--rich-black) 100%);
+    margin-left: 470px;
+}
+
+.eye-container {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    user-select: none;
+}
+
+.eye {
+    position: relative;
+    height: 100%;
+    background: url("../assets/images/eye.svg") no-repeat center;
+    background-size: 100%;
+}
+
+
+.eyelid {
+    position: absolute;
+    top: 61px;
+    left: 27px;
+    width: 150px;
+    height: 35px;
+}
+
+.iris {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    background: url("../assets/images/iris.svg") no-repeat center;
+    background-size: contain;
+    top: 58px;
+    left: 88px;
+    transition: 0.2s linear;
+}
+
+.security-container {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 470px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: calc(1440px * (1 / 24));
+    padding-right: calc(1440px * (1 / 24));
+    background-color: #fff;
+}
+
+.security .title {
+    margin-top: 35px;
+    width: 100%;
+    text-align: right;
+    font-family: Ubuntu-Bold;
+    font-size: 42px;
+    color: var(--dark-goldenrod);
+    text-transform: uppercase;
+}
+
+.security-container .form-container {
+    position: absolute;
+    padding: inherit;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translate(-100%, -50%);
+}
+
+.heading {
+    margin-bottom: 15px;
+}
+
+.heading h2 {
+    font-size: 26px;
+}
+
+.security-container .form {
+    width: 100%;
+}
+
+.checkbox-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 3px;
+    padding-bottom: 18px;
+}
+
+.btn-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.btn-container > .btn {
+    width: 100%;
+}

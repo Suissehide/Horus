@@ -1,0 +1,55 @@
+security:
+    # https://symfony.com/doc/current/security/experimental_authenticators.html
+    enable_authenticator_manager: true
+    password_hashers:
+        App\Entity\User:
+            algorithm: auto
+    
+    role_hierarchy:
+        ROLE_GUEST: ROLE_GUEST
+        ROLE_USER: [ROLE_USER]
+        ROLE_ADMIN: [ROLE_USER, ROLE_ADMIN]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_SUPER_ADMIN]
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern: ^/
+
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+
+            logout:
+                path: app_logout
+                target: app_login
+
+            custom_authenticators:
+                - App\Security\LoginFormAuthenticator
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/onAuthenticationSuccess, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/user, role: ROLE_ADMIN}
+        # - { path: ^/user/edit, role: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/guest, role: ROLE_GUEST}
+        - { path: ^/, role: ROLE_USER}

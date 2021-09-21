@@ -1,0 +1,142 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Profil
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+{% endblock %}
+
+{% form_theme form _self %}
+{% form_theme psw _self %}
+
+{% block form_row %}
+    {% set widget_attr = {} %}
+    {% if help is not empty %}
+        {% set widget_attr = {attr: {'aria-describedby': id ~"_help"}} %}
+    {% endif %}
+    <div class="input-group" {% with {attr: row_attr|default({} )} %} {{ block('attributes') }} {% endwith %}>
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form, widget_attr) }}
+        {{ form_help(form) }}
+        <span class="focus-input"></span>
+    </div>
+{% endblock form_row %}
+
+{% block page_content %}
+    <div class="container-fluid">
+
+        <div class="title-wrapper">
+            Profil
+        </div>
+
+        <div class="container-form">
+
+            <main class="flex-row">
+                <section>
+                    <h3>Informations générales</h3>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            {% if errorsForm %}
+                                <ul class="alert alert-danger alert-small">
+                                    {% for error in errorsForm %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {{ form_start(form, {'attr': {'class': 'form validate-form', 'autocomplete' : 'off'} }) }}
+                    {{ form_errors(form) }}
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                {{ form_row(form.email, {'attr': {'class': 'input', 'autocomplete' : 'off'} }) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                {{ form_row(form.prenom, {'attr': {'class': 'input', 'autocomplete' : 'off'} }) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                {{ form_row(form.nom, {'attr': {'class': 'input', 'autocomplete' : 'off'} }) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                {# {{ form_row(form.save, {'attr': {'class': 'btn', 'autocomplete' : 'off'} }) }} #}
+                                <button id="user_form_save" name="user_form[save]" class="btn" type="submit">
+                                    <i aria-hidden="true" class="fa fa-save"></i>Enregistrer</button>
+                            </div>
+                        </div>
+
+                    {{ form_row(form._token) }}
+                    {{ form_end(form, {'render_rest' : false}) }}
+                </section>
+
+                <section>
+                    <h3>Mot de passe</h3>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            {% if errorsPsw %}
+                                <ul class="alert alert-danger alert-small">
+                                    {% for error in errorsPsw %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {{ form_start(psw, {'attr': {'class': 'form validate-form', 'autocomplete' : 'off'} }) }}
+                    {{ form_errors(psw) }}
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            {{ form_row(psw.oldPassword, {'attr': {'class': 'input', 'placeholder': '', 'autocomplete' : 'off'} }) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            {{ form_row(psw.plainPassword.first, {'attr': {'class': 'input', 'placeholder': '', 'autocomplete' : 'off'} }) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            {{ form_row(psw.plainPassword.second, {'attr': {'class': 'input', 'placeholder': '', 'autocomplete' : 'off'} }) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <button class="btn" id="password_form_edit" name="password_form[edit]" type="submit">
+                                <i aria-hidden="true" class="fa fa-pen"></i>Modifier le mot de passe</button>
+                        </div>
+                    </div>
+                    {{ form_row(psw._token) }}
+                    {{ form_end(psw, {'render_rest' : false}) }}
+                </section>
+            </main>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $('li:eq(0)').addClass('active');
+
+        $('ul li').on('click', function () {
+            $('li').removeClass('active');
+            $(this).addClass('active');
+        });
+    </script>
+
+{% endblock %}

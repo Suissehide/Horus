@@ -1,0 +1,249 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Liste des utilisateurs
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="container-fluid">
+
+        <div class="title-wrapper">
+            Liste des utilisateurs
+        </div>
+
+        <div class="filter">
+            <p>Filtrer par :</p>
+            <div>
+                <label>
+                    <input type="checkbox" class="checkbox-round" checked="" value="ROLE_GUEST">
+                    <span style="border-color: var(--dark-goldenrod); background-color: var(--dark-goldenrod);"></span>
+                    Invité
+                </label>
+                <label>
+                    <input type="checkbox" class="checkbox-round" checked="" value="ROLE_USER">
+                    <span style="border-color: var(--blue-green); background-color: var(--blue-green);"></span>
+                    Utilisateur
+                </label>
+                <label>
+                    <input type="checkbox" class="checkbox-round" checked="" value="ROLE_ADMIN">
+                    <span style="border-color: var(--persian-indigo); background-color: var(--persian-indigo);"></span>
+                    Administrateur
+                </label>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table cellspacing="0" class="table table-condensed table-hover table-striped" id="data-grid">
+                <thead>
+                    <tr>
+                        <th data-column-id="id" data-identifier="true" data-searchable="false" data-type="numeric" data-visible="false">Id</th>
+                        <th data-column-id="email">Email</th>
+                        <th data-column-id="nom">Nom</th>
+                        <th data-column-id="prenom">Prénom</th>
+                        <th data-column-id="roles" data-formatter="roles" data-sortable="false">Roles</th>
+                        {# <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-width="15%">Actions</th> #}
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <!-- Modal -->
+        <div id="modal" class="modal fade" role="dialog">
+            <div
+                class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">
+                            Modifier un utilisateur
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form">
+                            <div class="input-group">
+                                <label class="required" for="user_email">Email</label>
+                                <input autocomplete="off" class="input" id="user_email" name="user[email]" readonly="readonly" required="required" type="text">
+                                <span class="focus-input"></span>
+                            </div>
+                            <div class="input-group">
+                                <label class="required" for="user_nom">Nom</label>
+                                <input autocomplete="off" class="input" id="user_nom" name="user[nom]" type="text">
+                                <span class="focus-input"></span>
+                            </div>
+                            <div class="input-group">
+                                <label class="required" for="user_prenom">Prénom</label>
+                                <input autocomplete="off" class="input" id="user_prenom" name="user[prenom]" type="text">
+                                <span class="focus-input"></span>
+                            </div>
+                            <div class="input-group">
+                                <label for="user_roles">Roles</label>
+                                <select class="input" id="user_roles" name="user[roles]">
+                                    <option value="Invité">Invité</option>
+                                    <option value="Utilisateur">Utilisateur</option>
+                                    <option value="Administrateur">Administrateur</option>
+                                </select>
+                                <span class="focus-input"></span>
+                            </div>
+                            <div class="btn-bar">
+                                <button class="btn btn-default" data-dismiss="modal">
+                                    <i class="fa fa-times"></i>
+                                    Annuler
+                                </button>
+                                <button class="btn" data-dismiss="modal" id="edit">
+                                    <i class="fa fa-pencil-alt"></i>
+                                    Modifier
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/bootgrid.min.js') }}"></script>
+    <script>
+        $('li:eq(3)').addClass('active');
+
+        $('ul li').on('click', function () {
+            $('li').removeClass('active');
+            $(this).addClass('active');
+        });
+    </script>
+
+    <script>
+        alert_pos = 11;
+
+        function modal_event(row) {
+            let id = row.data("row-id");
+            if (id == undefined) 
+                return;
+            
+            $('#user_email').val(row.find('td').eq(0).text());
+            $('#user_nom').val(row.find('td').eq(1).text());
+            $('#user_prenom').val(row.find('td').eq(2).text());
+            $('#user_roles').val(row.find('td').eq(3).text());
+            $('#modal').appendTo("body").modal('show')
+        };
+
+        $("#edit").on('click', function (e) {
+            e.preventDefault();
+            let email = $('#user_email').val();
+            let roles = $('#user_roles').val();
+            let prenom = $('#user_prenom').val();
+            let nom = $('#user_nom').val();
+            $.ajax({
+                url: "{{ path( 'user_roles_edit' ) }}",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    "email": email,
+                    "prenom": prenom,
+                    "nom": nom,
+                    "roles": roles,
+                },
+                success: function (resp) {
+                    $('body').prepend(`<div class="toast toast--green" style="top:` + alert_pos + `px;">
+                            <div class="toast__icon">
+                                <svg version="1.1" class="toast__svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                    <g>
+                                        <g>
+                                            <path d="M504.502,75.496c-9.997-9.998-26.205-9.998-36.204,0L161.594,382.203L43.702,264.311c-9.997-9.998-26.205-9.997-36.204,0    c-9.998,9.997-9.998,26.205,0,36.203l135.994,135.992c9.994,9.997,26.214,9.99,36.204,0L504.502,111.7    C514.5,101.703,514.499,85.494,504.502,75.496z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="toast__content">
+                                <p class="toast__type">Succès</p>
+                                <p class="toast__message">Modification effectuée !</p>
+                            </div>
+                            <div class="toast__close">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.642 15.642" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 15.642 15.642">
+                                    <path fill-rule="evenodd" d="M8.882,7.821l6.541-6.541c0.293-0.293,0.293-0.768,0-1.061  c-0.293-0.293-0.768-0.293-1.061,0L7.821,6.76L1.28,0.22c-0.293-0.293-0.768-0.293-1.061,0c-0.293,0.293-0.293,0.768,0,1.061  l6.541,6.541L0.22,14.362c-0.293,0.293-0.293,0.768,0,1.061c0.147,0.146,0.338,0.22,0.53,0.22s0.384-0.073,0.53-0.22l6.541-6.541  l6.541,6.541c0.147,0.146,0.338,0.22,0.53,0.22c0.192,0,0.384-0.073,0.53-0.22c0.293-0.293,0.293-0.768,0-1.061L8.882,7.821z"></path>
+                                </svg>
+                            </div>
+                        </div>`)
+                    alert_pos += 99;
+                    $("#data-grid").bootgrid('reload');
+                }
+            });
+        });
+
+        var roles = [];
+        function getRoles() {
+            roles = [];
+            $('.filter :checkbox').each(function() {
+                if ($(this).prop('checked'))
+                    roles.push($(this).val());
+            });
+        }
+        getRoles();
+
+        $('.filter').on('click', 'label', function() {
+            let checkbox = $(this).find("input[type='checkbox']");
+            if (checkbox.prop('checked')) {
+                checkbox.prop('checked', false);
+                $(this).find('span').css('background-color', 'transparent');
+            } else {
+                checkbox.prop('checked', true);
+                let color = $(this).find('span').css('border-color');
+                $(this).find('span').css('background-color', color);
+            }
+            getRoles();
+            $("#data-grid").bootgrid('reload');
+            return false;
+        });
+
+
+        var grid = $("#data-grid").bootgrid({
+            rowCount: [
+                20, 50, 100, -1
+            ],
+            columnSelection: false,
+            ajax: true,
+            requestHandler: function (request) {
+                request.roles = roles;
+                return request;
+            },
+            url: "{{ path('user_list') }}",
+            formatters: {
+                "roles": function (column, row) {
+                    let ret = "";
+                    $.each(row.roles, function (i, e) {
+                        if (e == "ROLE_GUEST") 
+                            ret += "<div class='tag tag-guest'>Invité</div>"
+                        
+                        if (e == "ROLE_USER") 
+                            ret += "<div class='tag tag-user'>Utilisateur</div>"
+                        
+                        if (e == "ROLE_ADMIN") 
+                            ret += "<div class='tag tag-admin'>Administrateur</div>"
+                        
+                    })
+                    return ret;
+                }
+            },
+            statusMapping: {
+                0: "",
+                1: "striped",
+            }
+        }).on("loaded.rs.jquery.bootgrid", function () {
+            grid.find("tr").on("click", function (e) {
+                if ($(this).data("row-id") != {{ id }})
+                    modal_event($(this), e);
+            });
+        });
+    </script>
+{% endblock %}
