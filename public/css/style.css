@@ -37,6 +37,7 @@
     --lemon-curry: #CD9B1D;
     --blue-green: #2493B4;
     --blue-green-hover: #1E7D99;
+    --blue-green-active: #186177;
     --blue-pantone: #001CB3;
     --persian-indigo: #280067;
     --rich-black-light: #333333;
@@ -65,7 +66,7 @@ body {
     height: 100%;
     font-family: Ubuntu-Regular, sans-serif;
     font-size: 14px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -86,12 +87,20 @@ iframe {
     border: none !important;
 }
 
+button {
+    outline: none !important;
+    border: none;
+    background: transparent;
+}
+
 ::-moz-selection {
     background: var(--gray-dark);
+    color: var(--persian-indigo);
 }
 
 ::selection {
     background: var(--gray-dark);
+    color: var(--persian-indigo);
 }
 
 /* Buttons
@@ -171,6 +180,78 @@ a:hover {
     margin-left: 6px;
 }
 
+.form-btn {
+    font-family: Ubuntu-Bold;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 20px;
+    height: 42px;
+    background-color: var(--blue-green);
+    border-radius: 3px;
+    transition: all 0.4s;
+}
+
+.form-btn:hover {
+    color: #fff;
+    background-color: var(--blue-green-hover);
+}
+
+.form-btn:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-danger {
+    background-color: #d63b53;
+}
+
+.btn-danger:hover {
+    background-color: #a02c3e;
+}
+
+.form-btn.btn-default {
+    color: #808080;
+    background-color: #f4f9f7;
+    border: 1px solid #ccc;
+}
+
+.form-btn.btn-default:hover {
+    color: #333333;
+    background-color: #e6e6e6;
+    border-color: #808080;
+}
+
+.form-btn .fa {
+    margin-right: 10px;
+    color: white;
+}
+
+.form-btn.btn-default .fa {
+    color: var(--blue-green);
+}
+
+.form-btn:disabled {
+    background-color: #1a535c;
+    cursor: not-allowed;
+}
+
+.btn-block {
+    display: flex;
+}
+
+.btn-block>* {
+    margin-right: 10px;
+}
+
+.btn-block>*:last-child {
+    margin-right: 0px;
+}
+
 /* Input
 ========================================================================== */
 
@@ -247,7 +328,62 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 }
 
 .input-group label~.focus-input {
-    height: calc(100% - 24px);
+    height: calc(100% - 16px);
+}
+
+.wrap-input {
+    width: 100%;
+    position: relative;
+    background-color: #e6e6e6;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    margin-bottom: 16px;
+}
+
+label, .col-label, .row-label {
+    font-family: Ubuntu-Regular;
+    color: #808080;
+    line-height: 1.2;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+}
+
+.form-unity {
+    flex: 1;
+    position: relative;
+    display: flex;
+    /* margin-bottom: 16px; */
+}
+
+.form-unity>input {
+    flex: 80%;
+    margin-bottom: 0;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.form-unity .focus-input {
+    height: calc(100% + 2px);
+    top: -1px;
+}
+
+.unity {
+    /* flex: 20; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 20px;
+    color: #3CBCC3;
+    font-weight: bold;
+    background-color: #e6e6e6;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    word-break: normal;
 }
 
 /* Checkbox
@@ -316,6 +452,7 @@ input[type="radio"]+label span {
 input[type="radio"]+label em, input[type="checkbox"]+label em {
     font-style: normal;
     text-transform: none;
+    user-select: none;
 }
 
 input[type="radio"]+label span {
@@ -325,6 +462,7 @@ input[type="radio"]+label span {
 input[type="radio"]:checked+label, input[type="checkbox"]:checked+label {
     color: #333;
     font-weight: 700;
+    user-select: none;
 }
 
 input[type="radio"]:checked+label span {
@@ -393,15 +531,21 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     display: flex;
     position: relative;
     flex-flow: row;
+    flex: 1;
 }
 
 .radio-container {
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
-    margin-right: 15px;
+    padding: 0 20px;
+    flex: 1;
+    background-color: #e6e6e6;
+    height: 42px;
+    line-height: 42px;
+    border-radius: 3px;
 }
 
 .radio-container:last-child {
@@ -461,6 +605,10 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
 .table>tbody>tr.out:nth-of-type(odd)>td, .table>tbody>tr.out:nth-of-type(odd)>th, .table>tbody>tr>td.out:nth-of-type(odd), .table>tbody>tr>th.out:nth-of-type(odd), .table>tfoot>tr.out:nth-of-type(odd)>td, .table>tfoot>tr.out:nth-of-type(odd)>th, .table>tfoot>tr>td.out:nth-of-type(odd), .table>tfoot>tr>th.out:nth-of-type(odd), .table>thead>tr.out:nth-of-type(odd)>td, .table>thead>tr.out:nth-of-type(odd)>th, .table>thead>tr>td.out:nth-of-type(odd), .table>thead>tr>th.out:nth-of-type(odd) {
     background-color: #1D699C;
     color: white;
+}
+
+.table>thead>tr>th:hover {
+    background-color: var(--dark-goldenrod-hover);
 }
 
 .table-wrapper {
@@ -757,6 +905,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
 .navbar-wrapper {
     padding-left: 80px;
     z-index: 0;
+    /* height: 100%; */
 }
 
 /* ScrollTop
@@ -935,15 +1084,14 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     margin-top: 30px;
 }
 
-.modal-body .btn-bar > button {
+.modal-body .btn-bar>button {
     margin: 0;
 }
 
-.modal-body .btn-bar > button:not(:first-child) {
+.modal-body .btn-bar>button:not(:first-child) {
     margin-left: 15px;
 }
 
 .modal-footer {
     background-color: #f4f9f7;
 }
-

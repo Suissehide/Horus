@@ -1,6 +1,19 @@
 .flex {
+    position: relative;
     display: flex;
     align-items: stretch;
+}
+
+.flex-nowrap {
+    display: flex;
+    flex-flow: row;
+    gap: 0 15px;
+}
+
+.flex-wrap {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0 15px;
 }
 
 .flex-row {
@@ -56,11 +69,231 @@
     width: 100%;
     display: block;
     padding-top: 50px;
+    padding-left: 25px;
 }
 
 .title-wrapper span {
     color: #D63B53;
 }
+
+.container-form .wrap-input {
+    background-color: transparent;
+}
+
+/* Patient
+========================================================================== */
+
+.main {
+    position: relative;
+    padding-right: 15px;
+    padding-left: calc(30% + 15px);
+    transition: ease 0.2s;
+}
+
+.main.reduce {
+    padding-left: calc(55px + 15px);
+}
+
+.hero-tabs {
+    display: flex;
+    flex-direction: column;
+    justify-content: normal;
+    align-items: flex-start;
+}
+
+.hero-header {
+    width: 100%;
+    padding: 0 25px 40px;
+}
+
+.hero-title {
+    margin-bottom: 50px;
+}
+
+.hero-center {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.slide {
+    position: relative;
+    display: none;
+    padding-top: 50px;
+}
+
+.slide h1 {
+    position: relative;
+    margin-bottom: 50px;
+    font-size: 32px;
+}
+
+.slide h1::before {
+    content: "";
+    position: absolute;
+    border: 0;
+    height: 5px;
+    background-color: var(--dark-goldenrod);
+    width: 66px;
+    bottom: -5px;
+}
+
+.hero-tabs h1 span {
+    background-color: var(--dark-goldenrod);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.hero-tabs h3, .slide h3, main h3 {
+    position: relative;
+    display: inline-block;
+    opacity: 0.6;
+    margin-bottom: 10px;
+}
+
+.hero-tabs h5, .slide h5 {
+    position: relative;
+    width: fit-content;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.hero-tabs h5::after, .slide h5::after {
+    content: "";
+    position: absolute;
+    border: 0;
+    height: 8px;
+    background-color: #27006775;
+    width: 30px;
+    bottom: -2px;
+    left: -2px;
+}
+
+.form-space {
+    margin-bottom: 30px;
+}
+
+.margin-space {
+    margin-bottom: 30px;
+}
+
+.separator-space {
+    width: 50px;
+    height: 1px;
+    margin: 5px 0 16px 0;
+    background-color: var(--persian-indigo);
+}
+
+.hero-tabs-container {
+    display: flex;
+    flex-direction: row;
+    /* position: absolute; */
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    z-index: 10;
+}
+
+.hero-tabs-container--top {
+    position: fixed;
+    top: 0;
+    width: calc(100% - 80px);
+}
+
+.hero-tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    color: #000;
+    letter-spacing: 0.1rem;
+    transition: all 0.5s ease;
+    padding: 0 5px;
+}
+
+.hero-tab:hover {
+    color: white;
+    background: rgb(59, 189, 166, 0.8);
+    transition: all 0.5s ease;
+}
+
+.hero-tab, .hero-tab:visited, .hero-tab:focus {
+    text-decoration: none;
+}
+
+.hero-tab-slider {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 6px;
+    background: var(--blue-green);
+    transition: left 0.3s ease;
+}
+
+.hero-text {
+    position: absolute;
+    color: #f4f9f7;
+}
+
+.container-form-btn {
+    margin-top: 30px;
+}
+
+.flex-table {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    word-break:break-all
+}
+
+.col-flex-1 {
+    flex: 15%;
+}
+
+.col-flex-2 {
+    flex: 18%;
+}
+
+.col-flex-3 {
+    flex: 45%;
+}
+
+.no-label ~ label em {
+    display: none;
+}
+
+.history {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+    background-color: #E6E6E6;
+    border-left: 1px solid var(--blue-green);
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.history-icon {
+    z-index: 0;
+    height: 100%;
+    background: url(../assets/images/history.svg) center no-repeat;
+    background-size: 55%;
+    width: 42px;
+    transition: cubic-bezier(1, 0, 0, 1) 0.2s;
+}
+
+.history-icon:hover {
+    filter: invert(43%) sepia(86%) saturate(441%) hue-rotate(147deg) brightness(96%) contrast(84%);
+}
+
 
 /* User
 ========================================================================== */
@@ -134,4 +367,188 @@ input[type='checkbox'].checkbox-round+span {
 .striped {
     background: repeating-linear-gradient( 45deg, #f8f6ff, #f8f6ff 10px, #fff 10px, #fff 20px);
     cursor: not-allowed !important;
+}
+
+/* User
+========================================================================== */
+
+.letter__content {
+    resize: none;
+    width: 100%;
+    min-height: 400px;
+    line-height: 22px;
+    padding: 15px 20px;
+}
+
+/* ========= TOC ========= */
+
+.toc {
+    z-index: 100;
+    position: absolute;
+    left: 0px;
+    top: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 30%;
+}
+
+.toc--top {
+    position: fixed;
+    left: 80px;
+    top: 0px;
+    width: calc(30% - 24px);
+}
+
+.toc .sub-menu>ul {
+    display: none;
+}
+
+.toc ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: width ease;
+    transition-duration: 0.2s;
+    transition-delay: 0.2s;
+}
+
+.reduce .toc {
+    width: 55px;
+}
+
+.toc ul li a .menu-title>div {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.toc ul li a, .toc ul li button {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    background: var(--blue-green);
+    padding: 10px 15px;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.5s ease;
+}
+
+.toc>ul>li>a, .toc>ul>li>button {
+    height: 42px;
+}
+
+.toc ul li button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 14px;
+}
+
+.toc ul li button .fas {
+    margin-right: 8px;
+}
+
+.toc ul li a.active {
+    background: var(--blue-green-active);
+}
+
+.toc ul li a:hover, .toc ul li button:hover {
+    background: var(--blue-green-hover);
+}
+
+.toc ul li a .fa {
+    width: 25px;
+    text-align: left;
+}
+
+.reduce .toc ul li a .fa, .reduce .toc ul li button .fas {
+    text-align: center;
+}
+
+.toc ul li a .fa-caret-down, .toc ul li a .fa-caret-up {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reduce .toc ul li a .fa-caret-down, .reduce .toc ul li a .fa-caret-up, .reduce .toc ul li a .menu-title>div {
+    display: none;
+}
+
+.badge-spe {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    font-family: Ubuntu-Bold;
+    border: 2px solid #D74C53;
+    background: #D74C53;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    right: 43px;
+    top: 12px;
+}
+
+.badge-tab {
+    position: static;
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
+}
+
+.badge-tab:last-child {
+    margin-right: 0;
+}
+
+.badge-completed {
+    background-color: var(--blue-green);
+    border-color: var(--blue-green);
+}
+
+.badge-unfinished {
+    background-color: transparent;
+    color: #333333;
+    border-color: #ccc;
+}
+
+.badge-error {
+    background-color: #D74C53;
+    border-color: #D74C53;
+}
+
+.toc ul li ul li a {
+    position: relative;
+    color: #808080;
+    background: #e6e6e6;
+    border-left: 4px solid transparent;
+    padding: 10px 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.toc ul li ul li a:hover {
+    background: #999999cc;
+    color: #1a535c;
+    border-left: 4px solid var(--blue-green);
+}
+
+.menu-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.reduce .menu-title {
+    justify-content: center;
 }

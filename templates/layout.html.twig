@@ -13,15 +13,15 @@
 				</li>
 				{% if is_granted('ROLE_USER') %}
 					<li>
-						<a href="{{ url('index_participant') }}">
+						<a href="{{ url('index_patient') }}">
 							<i class="fas fa-list"></i>
-							<span class="tooltip">Liste des participants</span>
+							<span class="tooltip">Liste des patients</span>
 						</a>
 					</li>
 					<li>
-						<a href="{{ url('participant_add') }}">
+						<a href="{{ url('patient_add') }}">
 							<i class="fas fa-user-plus"></i>
-							<span class="tooltip">Ajout d'un participant</span>
+							<span class="tooltip">Ajout d'un patient</span>
 						</a>
 					</li>
 				{% endif %}

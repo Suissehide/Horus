@@ -1,5 +1,4 @@
 
-
 {% block form_label %}
     {% if label is not same as(false) %}
         {% if not compound %}
@@ -28,13 +27,29 @@
 {% block choice_widget_expanded %}
     <div {{ block('widget_container_attributes') }}>
         {% for child in form %}
-            <div class="radio-container">
+            {# <div class="radio-container"> #}
                 {{ form_widget(child) }}
-                {{ form_label(child, null, {translation_domain: choice_translation_domain}) }}
-            </div>
+                {# {{ form_label(child, null, {translation_domain: choice_translation_domain}) }} #}
+            {# </div> #}
         {% endfor %}
     </div>
 {% endblock choice_widget_expanded %}
+
+{% block checkbox_widget %}
+        <div class="radio-container">
+            <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+                    
+            {{ form_label(form, null) }}
+        </div>
+{% endblock checkbox_widget %}
+
+{% block radio_widget %}
+        <div class="radio-container">
+            <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+                    
+            {{ form_label(form, null) }}
+        </div>
+{% endblock radio_widget %}
 
 {% block form_row %}
     {% set widget_attr = {} %}
@@ -88,17 +103,19 @@
 
 
 {% block integer_widget %}
-    {%- set type = type|default('number') -%}
+    {% set type = type|default('number') %}
     {% if not useStyle|default(false) %}
         {{ block('form_widget_simple') }}
     {% else %}
-        {%- if type == 'range' or type == 'color' -%}
-            {%- set required = false -%}
-        {%- endif -%}
+        {% if type == 'range' or type == 'color' %}
+            {% set required = false %}
+        {% endif %}
         <div class="form-unity">
             <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %} value="{{ value }}" {% endif %}/>
             <span class="focus-input"></span>
-            <div class="unity">{{ attr.unity|default('') }}</div>
+            {% if attr.unity %}
+                <div class="unity">{{ attr.unity|default('') }}</div>
+            {% endif %}
         </div>
     {% endif %}
 {% endblock integer_widget %}
@@ -115,64 +132,3 @@
         </div>
     {% endif %}
 {% endblock number_widget %}
-
-
-
-{% block _donnee_genes_genes_entry_mutation_widget %}
-    <div class="flex{% if errors is not empty %} error-input{% endif %}">
-        {{ block('textarea_widget') }}
-        <button class="history"><div class="history-icon"></div></button>
-    </div>
-    {{ form_errors(form) }}
-{% endblock _donnee_genes_genes_entry_mutation_widget %}
-
-{% block _donnee_genes_genes_entry_statut_widget %}
-    {{ block('qcm_widget') }}
-{% endblock _donnee_genes_genes_entry_statut_widget %}
-
-{% block _donnee_traitement_qcm_entry_reponse_widget %}
-    {{ block('qcm_widget') }}
-{% endblock _donnee_traitement_qcm_entry_reponse_widget %}
-
-{% block _donnee_facteurs_qcm_entry_reponse_widget %}
-    {{ block('qcm_widget') }}
-{% endblock _donnee_facteurs_qcm_entry_reponse_widget %}
-
-{% block _information_type_qcm_entry_reponse_widget %}
-    {{ block('qcm_widget') }}
-{% endblock _information_type_qcm_entry_reponse_widget %}
-
-{% block _information_complications_qcm_entry_reponse_widget %}
-    {{ block('qcm_widget') }}
-{% endblock _information_complications_qcm_entry_reponse_widget %}
-
-{% block _cardiovasculaire_traitement_qcm_entry_reponse_widget %}
-    {{ block('qcm_widget') }}
-{% endblock _cardiovasculaire_traitement_qcm_entry_reponse_widget %}
-
-{% block _cardiovasculaire_facteurs_qcm_entry_reponse_widget %}
-    {{ block('qcm_widget') }}
-{% endblock _cardiovasculaire_facteurs_qcm_entry_reponse_widget %}
-
-{% block _verification_non_inclusion_qcm_entry_reponse_widget %}
-    {{ block('qcm_widget') }}
-{% endblock _verification_non_inclusion_qcm_entry_reponse_widget %}
-
-{% block _verification_inclusion_qcm_entry_reponse_widget %}
-    {{ block('qcm_widget') }}
-{% endblock _verification_inclusion_qcm_entry_reponse_widget %}
-
-{% block qcm_widget %}
-    <div class="flex">
-        <div {{ block('widget_container_attributes') }}>
-            {% for child in form %}
-                <div class="radio-container">
-                    {{ form_widget(child) }}
-                    {{ form_label(child, null, {translation_domain: choice_translation_domain}) }}
-                </div>
-            {% endfor %}
-        </div>
-        <button class="history"><div class="history-icon"></div></button>
-    </div>
-    {{ form_errors(form) }}
-{% endblock qcm_widget %}

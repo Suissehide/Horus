@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Participant;
-use App\Repository\ParticipantRepository;
+use App\Entity\Patient;
+use App\Repository\PatientRepository;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,9 +18,19 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 class IndexController extends AbstractController
 {
     /**
-     * @Route("/index", name="index_participant")
+     * @Route("/index", name="index_patient")
      */
-    public function index(Request $request, ParticipantRepository $participantRepository): Response
+    public function index(): Response
+    {
+        return $this->render('index/index.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+    }
+
+    /**
+     * @Route("/patient/list", name="patient_list")
+     */
+    public function list(Request $request, PatientRepository $patientRepository): Response
     {
         if ($request->isXmlHttpRequest()) {
             $current = $request->request->get('current');
@@ -28,27 +38,27 @@ class IndexController extends AbstractController
             $searchPhrase = $request->request->get('searchPhrase');
             $sort = $request->request->get('sort');
 
-            $participants = $participantRepository->findByFilter($sort, $searchPhrase);
+            $patients = $patientRepository->findByFilter($sort, $searchPhrase);
             if ($searchPhrase != "") {
-                $count = count($participants->getQuery()->getResult());
+                $count = count($patients->getQuery()->getResult());
             } else {
-                $count = $participantRepository->getCount();
+                $count = $patientRepository->getCount();
             }
             if ($rowCount != -1) {
                 $min = ($current - 1) * $rowCount;
                 $max = $rowCount;
-                $participants->setMaxResults($max)->setFirstResult($min);
+                $patients->setMaxResults($max)->setFirstResult($min);
             }
-            $participants = $participants->getQuery()->getResult();
+            $patients = $patients->getQuery()->getResult();
             $rows = array();
-            foreach ($participants as $participant) {
+            foreach ($patients as $patient) {
 
                 $row = array(
-                    "id" => $participant->getId(),
-                    // "code" => $participant->getCode(),
-                    // "consentement" => $participant->getVerification()->getDate() ? $participant->getVerification()->getDate()->format('d/m/Y') : '',
-                    // "evenement" => $participant->getInformation()->getDateSurvenue() ? $participant->getInformation()->getDateSurvenue()->format('d/m/Y') : '',
-                    // "inclusion" => $participant->getDonnee()->getDateVisite() ? $participant->getDonnee()->getDateVisite()->format('d/m/Y') : '',
+                    "id" => $patient->getId(),                   
+                    "civilite" => $patient->getGeneral()->getCivilite(),
+                    "prenom" => $patient->getGeneral()->getPrenom(),
+                    "nom" => $patient->getGeneral()->getNom(),
+                    "dateNaissance" => $patient->getGeneral()->getDateNaissance() ? $patient->getGeneral()->getDateNaissance()->format('d/m/Y') : '',
                     "error" => ''
                 );
                 array_push($rows, $row);
@@ -62,10 +72,6 @@ class IndexController extends AbstractController
             );
             return new JsonResponse($data);
         }
-
-        return $this->render('index/index.html.twig', [
-            'controller_name' => 'IndexController',
-        ]);
     }
 
     /**
@@ -76,22 +82,22 @@ class IndexController extends AbstractController
         if ($request->isXmlHttpRequest()) {
             $em = $this->getDoctrine()->getManager();
             $id = $request->request->get('id');
-            $participant = $this->getDoctrine()->getRepository(Participant::class)->find($id);
+            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($id);
 
             $RAW_QUERY = 'SELECT f.field_id
             FROM (
                 SELECT field_id, max(date_creation) AS maxdate
                 FROM erreur
-                GROUP BY field_id, participant_id
+                GROUP BY field_id, patient_id
             ) AS x
-            INNER JOIN erreur AS f ON f.etat = "error" AND f.field_id = x.field_id AND f.date_creation = x.maxdate AND f.participant_id = ' . $participant->getId() . ';';
+            INNER JOIN erreur AS f ON f.etat = "error" AND f.field_id = x.field_id AND f.date_creation = x.maxdate AND f.patient_id = ' . $patient->getId() . ';';
             $statement = $em->getConnection()->prepare($RAW_QUERY);
             $statement->execute();
             $errors = $statement->fetchAll();
 
             session_write_close();
 
-            $json = $this->serializeEntity($participant);
+            $json = $this->serializeEntity($patient);
 
             $arr = array();
             $iter = 0;
@@ -162,19 +168,19 @@ class IndexController extends AbstractController
     /**
      * @Route("/export/csv", name="export_csv", methods="GET")
      */
-    public function generateCsvAction(ParticipantRepository $participantRepository)
+    public function generateCsvAction(PatientRepository $patientRepository)
     {
         $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
 
         $res = $this->get('serializer')->normalize(
-            $participantRepository->findAll(),
+            $patientRepository->findAll(),
             'json',
             ['groups' => ['export']]
         );
         $data = $serializer->encode($res, 'csv');
 
         $data = str_replace(",", ";", $data);
-        $fileName = "export_participant_" . date("d_m_Y") . ".csv";
+        $fileName = "export_patient_" . date("d_m_Y") . ".csv";
         $response = new Response($data);
         $response->setStatusCode(200);
         $response->headers->set('Content-Type', 'text/csv; charset=UTF-8; application/excel');

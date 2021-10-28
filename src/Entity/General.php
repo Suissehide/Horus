@@ -19,11 +19,6 @@ class General
     private $id;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private $date;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $civilite;
@@ -46,17 +41,17 @@ class General
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $activiteProfessionnelle;
+    private $sexe;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $situationFamiliale;
+    private $nomNaissance;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $enfant;
+    private $profession;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -66,23 +61,11 @@ class General
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $telephone;
+    private $niveauEtude;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(?\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
     }
 
     public function getCivilite(): ?string
@@ -133,38 +116,38 @@ class General
         return $this;
     }
 
-    public function getActiviteProfessionnelle(): ?string
+    public function getSexe(): ?string
     {
-        return $this->activiteProfessionnelle;
+        return $this->sexe;
     }
 
-    public function setActiviteProfessionnelle(?string $activiteProfessionnelle): self
+    public function setSexe(?string $sexe): self
     {
-        $this->activiteProfessionnelle = $activiteProfessionnelle;
+        $this->sexe = $sexe;
 
         return $this;
     }
 
-    public function getSituationFamiliale(): ?string
+    public function getNomNaissance(): ?string
     {
-        return $this->situationFamiliale;
+        return $this->nomNaissance;
     }
 
-    public function setSituationFamiliale(?string $situationFamiliale): self
+    public function setNomNaissance(?string $nomNaissance): self
     {
-        $this->situationFamiliale = $situationFamiliale;
+        $this->nomNaissance = $nomNaissance;
 
         return $this;
     }
 
-    public function getEnfant(): ?string
+    public function getProfession(): ?string
     {
-        return $this->enfant;
+        return $this->profession;
     }
 
-    public function setEnfant(?string $enfant): self
+    public function setProfession(?string $profession): self
     {
-        $this->enfant = $enfant;
+        $this->profession = $profession;
 
         return $this;
     }
@@ -181,14 +164,14 @@ class General
         return $this;
     }
 
-    public function getTelephone(): ?string
+    public function getNiveauEtude(): ?string
     {
-        return $this->telephone;
+        return $this->niveauEtude;
     }
 
-    public function setTelephone(?string $telephone): self
+    public function setNiveauEtude(?string $niveauEtude): self
     {
-        $this->telephone = $telephone;
+        $this->niveauEtude = $niveauEtude;
 
         return $this;
     }

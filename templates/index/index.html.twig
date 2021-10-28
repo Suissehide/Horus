@@ -12,7 +12,7 @@
 	<div class="container-fluid">
 
 		<div class="title-wrapper">
-			Liste des participants
+			Liste des patients
 		</div>
 
 		<div class="container-form">
@@ -21,8 +21,8 @@
 					<i aria-hidden="true" class="fa fa-file-download"></i>
 					Exporter
 				</a>
-				<a href="{{ path('participant_add') }}" class="btn">
-					<i aria-hidden="true" class="fa fa-plus"></i>Ajouter un participant</a>
+				<a href="{{ path('patient_add') }}" class="btn">
+					<i aria-hidden="true" class="fa fa-plus"></i>Ajouter un patient</a>
 			</div>
 			<div class="flex">
 				<div class="table-wrapper">
@@ -30,10 +30,10 @@
 						<thead>
 							<tr>
 								<th data-column-id="id" data-identifier="true" data-searchable="false" data-type="numeric" data-visible="false">Id</th>
-								<th data-column-id="code">Code</th>
-								<th data-column-id="consentement">Date de consentement</th>
-								<th data-column-id="evenement">Date de l'événement</th>
-								<th data-column-id="inclusion">Date de l'inclusion</th>
+								<th data-column-id="civilite">Civilité</th>
+								<th data-column-id="prenom">Prénom</th>
+								<th data-column-id="nom">Nom</th>
+								<th data-column-id="dateNaissance">Date de naissance</th>
 								<th data-column-id="error" data-formatter="error" data-sortable="false" data-width="261px"></th>
 								<th data-column-id="status" data-searchable="false" data-visible="false">Status</th>
 							</tr>
@@ -71,7 +71,7 @@
             requestHandler: function (request) {
                 return request;
             },
-            url: "{{ path('index_participant') }}",
+            url: "{{ path('patient_list') }}",
             formatters: {
                 "error": function (column, row) {
                     fetchAdvancement(row.id);
@@ -100,10 +100,10 @@
             for (let i = 0; i < pathArray.length - 1; i++) 
                 url += pathArray[i] + "/";
 
-            window.location.assign(url + "participant/" + id);
+            window.location.assign(url + "patient/" + id);
         };
 
-        function fetchAdvancement(participantId) {
+        function fetchAdvancement(patientId) {
             let url = '{{ path("advancement") }}';
 
             $.ajax({
@@ -111,14 +111,14 @@
                 type: "POST",
                 dataType: "json",
                 data: {
-                    "id": participantId
+                    "id": patientId
                 },
                 success: function (json) {
                     let listErr = '';
                     for (i = 0; i < 7; i++) {
                         listErr += '<div class="badge-spe badge-tab badge-' + $.parseJSON(json[i])['state'] + '">' + $.parseJSON(json[i])['number'] + '</div>';
                     };
-                    $('#data-grid tr[data-row-id=' + participantId + '] td:nth-child(5)').append(listErr);
+                    $('#data-grid tr[data-row-id=' + patientId + '] td:nth-child(5)').append(listErr);
                 }
             });
         };

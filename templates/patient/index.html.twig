@@ -1,0 +1,645 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+	Patient
+    {{ patient.general.prenom }} {{ patient.general.nom }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/bootgrid.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/index.css') }}">
+{% endblock %}
+
+{% block page_content %}
+
+	<div class="container-form">
+		<!-- Hero -->
+		<section id="tab-profile" class="hero-tabs">
+			<div class="hero-header">
+				<div class="hero-title">
+					<h1 id="profile">
+                        PATIENT 
+                        <span>{{ patient.general.prenom }} {{ patient.general.nom }}</span>
+                    </h1>
+				</div>
+
+				<div class="btn-block">
+					<a href="{{ path('index_patient') }}" class="form-btn btn-default">
+						<i aria-hidden="true" class="fa fa-arrow-left"></i>Retour</a>
+                    <a href="{{ path('patient_letter', {id: patient.id}) }}" class="form-btn">
+						<i aria-hidden="true" class="fa fa-envelope"></i>Lettre</a>
+					{{ include('patient/_delete_form.html.twig') }}
+				</div>
+			</div>
+
+		</section>
+
+		<!-- Main -->
+		<main class="main">
+
+			<!-- Toc -->
+			<nav class='toc animated bounceInDown'>
+				<ul>
+					<li>
+						<a href='#history'>
+							<div class="menu-title">
+								<i class='fa fa-user'></i>
+								<div>Patient</div>
+                            </div>
+						</a>
+					</li>
+					<li class='sub-menu'>
+						<a href='#general'>
+							<div class="menu-title">
+								<i class='fa fa-stethoscope'></i>
+								<div>Informations générales</div>
+                            </div>
+							<i class='fa fa-caret-down right'></i>
+						</a>
+						<ul>
+							<li><a href='#identification'>Identification</a></li>
+                            <li><a href='#complement'>Complément</a></li>
+						</ul>
+					</li>
+					<li class='sub-menu'>
+						<a href='#facteur'>
+							<div class="menu-title">
+								<i class='fa fa-heartbeat'></i>
+								<div>Facteurs de risques lors de l'évènement</div>
+                            </div>
+							<i class='fa fa-caret-down right'></i>
+						</a>
+						<ul>
+							<li><a href='#biometrie'>Biométrie</a></li>
+							<li><a href='#description'>Description</a></li>
+						</ul>
+					</li>
+					<li class='sub-menu'>
+						<a href='#protocole'>
+							<div class="menu-title">
+								<i class='fa fa-procedures'></i>
+								<div>Protocoles</div>
+                            </div>
+							<i class='fa fa-caret-down right'></i>
+						</a>
+						<ul>
+							{# <li><a href='#type'>Type d’infarctus du Myocarde</a></li>
+							<li><a href='#aigue'>Traitement à la phase aiguë</a></li>
+							<li><a href='#complication'>Complications immédiates</a></li>
+							<li><a href='#biologie'>Biologie</a></li> #}
+						</ul>
+					</li>
+					<li>
+						<a href='#deces'>
+							<div class="menu-title">
+								<i class='fa fa-skull-crossbones'></i>
+								<div>Décès</div>
+                            </div>
+						</a>
+					</li>
+                    <li>
+                        <button id="js-reducemenu"><i class="fas fa-arrow-left"></i></button>
+                    </li>
+				</ul>
+			</nav>
+
+            <section class="slide" id="tab-history" style="display: block;">
+                <h1 id="history">Historique</h1>
+    
+                <div class="flex">
+                    <div class="table-wrapper">
+                        <table cellspacing="0" class="table table-condensed table-hover table-striped" id="data-grid">
+                            <thead>
+                                <tr>
+                                    <th data-column-id="id" data-identifier="true" data-searchable="false" data-type="numeric" data-visible="false">Id</th>
+                                    <th data-column-id="fieldId" data-searchable="false" data-visible="false">Id</th>
+                                    <th data-column-id="etat" data-width="10%" data-formatter="etat" data-searchable="false">Etat</th>
+                                    <th data-column-id="date" data-width="20%">Date</th>
+                                    <th data-column-id="utilisateur" data-width="20%">Utilisateur</th>
+                                    <th data-column-id="message" data-width="50%">Message</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+			{#========== GENERAL ==========#}
+			<section class="slide" id="tab-general">
+                {{ form_start(formGeneral, {'attr': {'class': 'form validate-form'} }) }}
+                {{ form_errors(formGeneral) }}
+
+                {% form_theme formGeneral 'form-theme.html.twig' %}
+
+				<h1 id="general">Informations générales</h1>
+
+				<h3 id="identification">Identification</h3>
+				<div class="form-space">
+					    {{ form_row(formGeneral.civilite, {'attr': {'class': 'input'} }) }}
+                        <div class="flex">
+                            {{ form_row(formGeneral.prenom, {'attr': {'class': 'input'} }) }}
+                            {{ form_row(formGeneral.nom, {'attr': {'class': 'input'} }) }}
+                        </div>
+                        {{ form_row(formGeneral.nomNaissance, {'attr': {'class': 'input'} }) }}
+                        {{ form_row(formGeneral.dateNaissance, {'attr': {'class': 'input js-datepicker'} }) }}
+                        {{ form_row(formGeneral.sexe, {'attr': {'class': 'input  radio-row'} }) }}
+				</div>
+
+                <h3 id="complement">Complément</h3>
+				<div class="form-space">
+                    {{ form_row(formGeneral.profession, {'attr': {'class': 'input'} }) }}
+                    {{ form_row(formGeneral.statutActuel, {'attr': {'class': 'input'} }) }}
+                    {{ form_row(formGeneral.niveauEtude, {'attr': {'class': 'input'} }) }}
+                </div>
+
+				{{ form_row(formGeneral.save, {'attr': {'class': 'form-btn'} }) }}
+
+                {{ form_row(formGeneral._token) }}
+                {{ form_end(formGeneral, {'render_rest' : false}) }}
+			</section>
+
+			{#========== FACTEUR ==========#}
+			<section class="slide" id="tab-facteur">
+                {{ form_start(formFacteur, {'attr': {'class': 'form validate-form'} }) }}
+                {{ form_errors(formFacteur) }}
+
+                {% form_theme formFacteur 'form-theme.html.twig' %}
+
+				<h1 id="facteur">Facteurs de risques lors de l'évènement</h1>
+
+				<h3 id="biometrie">Biométrie</h3>
+				<div class="form-space">
+					    {{ form_row(formFacteur.taille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                        {{ form_row(formFacteur.poids, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                        {{ form_row(formFacteur.tourTaille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+				</div>
+                <div class="flex-nowrap">
+                    {{ form_row(formFacteur.tensionArterielleJour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                    {{ form_row(formFacteur.tensionArterielleNuit, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                </div>
+
+                <h3 id="description">Description</h3>
+				<div class="form-space">
+                    <div class="flex-table">
+                        <div class="col-flex-1">&nbsp;</div>
+                        <div class="col-flex-2">Risques</div>
+                        <div class="col-flex-3">Depuis</div>
+                        <div class="col-flex-2">Traité</div>
+                    </div>
+                    <div class="flex-table">
+                        <div class="col-flex-1">HTA</div>
+                        <div class="col-flex-2 radio-row">
+                            {{ form_row(formFacteur.risqueHTA, {'attr': {'class': 'input radio-row'} }) }}
+                        </div>
+                        <div class="col-flex-3">
+                            {{ form_row(formFacteur.depuisHTA, {'attr': {'class': 'input'}, 'useStyle': true}) }}
+                        </div>
+                        <div class="col-flex-2 radio-row">
+                            {{ form_row(formFacteur.traiteHTA, {'attr': {'class': 'input radio-row'} }) }}
+                        </div>
+                    </div>
+                    <div class="flex-table">
+                        <div class="col-flex-1">Diabète</div>
+                        <div class="col-flex-2 radio-row">
+                            {{ form_row(formFacteur.risqueDiabete, {'attr': {'class': 'input radio-row'} }) }}
+                        </div>
+                        <div class="col-flex-3">
+                            {{ form_row(formFacteur.depuisDiabete, {'attr': {'class': 'input'}, 'useStyle': true}) }}
+                        </div>
+                        <div class="col-flex-2 radio-row">
+                            {{ form_row(formFacteur.traiteDiabete, {'attr': {'class': 'input radio-row'} }) }}
+                        </div>
+                    </div>
+                    <div class="flex-table">
+                        <div class="col-flex-1">Hypercholestérolémie</div>
+                        <div class="col-flex-2 radio-row">
+                            {{ form_row(formFacteur.risqueHypercholesterolemie, {'attr': {'class': 'input radio-row'} }) }}
+                        </div>
+                        <div class="col-flex-3">
+                            {{ form_row(formFacteur.depuisHypercholesterolemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}
+                        </div>
+                        <div class="col-flex-2 radio-row">
+                            {{ form_row(formFacteur.traiteHypercholesterolemie, {'attr': {'class': 'input radio-row'} }) }}
+                        </div>
+                    </div>
+                    <div class="flex-table">
+                        <div class="col-flex-1">Hypertriglycéridèmie</div>
+                        <div class="col-flex-2 radio-row">
+                            {{ form_row(formFacteur.risqueHypertriglyceridemie, {'attr': {'class': 'input radio-row'} }) }}
+                        </div>
+                        <div class="col-flex-3">
+                            {{ form_row(formFacteur.depuisHypertriglyceridemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}
+                        </div>
+                        <div class="col-flex-2 radio-row">
+                            {{ form_row(formFacteur.traiteHypertriglyceridemie, {'attr': {'class': 'input radio-row'} }) }}
+                        </div>
+                    </div>
+
+                    <div class="margin-space"></div>
+
+                    <div class="radio-row">
+                        {{ form_row(formFacteur.obesite, {'attr': {'class': 'input no-label'} }) }}
+                    </div>
+
+                    <div class="flex-wrap">
+                        <div class="radio-row">
+                            {{ form_row(formFacteur.alcoolisme, {'attr': {'class': 'input no-label'} }) }}
+                        </div>
+                        <div class="radio-row">
+                            {{ form_row(formFacteur.sevre, {'attr': {'class': 'input no-label'} }) }}
+                        </div>
+                    </div>
+
+                    <h5>Tabagisme</h5>
+                    <div class="flex-wrap">
+                        {{ form_row(formFacteur.tabagisme, {'attr': {'class': 'input'} }) }}
+                        {{ form_row(formFacteur.dateArret, {'attr': {'class': 'input js-datepicker'} }) }}
+                        {{ form_row(formFacteur.nombrePaquetsAn, {'attr': {'class': 'input  radio-row'} }) }}
+                    </div>
+
+                    <div class="margin-space"></div>
+
+                    <div class="radio-row">
+                        {{ form_row(formFacteur.antecedentFamiliaux, {'attr': {'class': 'input no-label'} }) }}
+                    </div>
+                </div>
+
+				{{ form_row(formFacteur.save, {'attr': {'class': 'form-btn'} }) }}
+
+                {{ form_row(formFacteur._token) }}
+                {{ form_end(formFacteur, {'render_rest' : false}) }}
+			</section>
+
+            {#========== PROTOCOLE ==========#}
+            <section class="slide" id="tab-protocole">
+                <div class="wrap-input">
+                    <label for="protocole">
+                        <span></span>
+                        <em>Fiches</em>
+                    </label>
+                
+                    <div class="flex">
+                        <select id="protocole_fiches" name="protocole[fiches]" class="input">
+                            <option value=""></option>
+                            <option value="motifsMedical">Motifs médical</option>
+                            <option value="medicaments">Médicaments à l'entrée</option>
+                            <option value="testsEffort">Définition des tests d'effort</option>
+                        </select>
+                        <span class="focus-input"></span>
+                    </div>
+                    <button class="form-btn"><i aria-hidden="true" class="fa fa-envelope"></i>Ajouter une fiche</a>
+
+                </div>
+
+
+            </section>
+
+		</main>
+
+		<div class="cd-top js-cd-top">
+			<a href="{{ path('index_patient') }}" class="cd-btn btn-back">
+				<i aria-hidden="true" class="fa fa-arrow-left"></i>
+			</a>
+			<button class="cd-btn btn-delete">
+				<i aria-hidden="true" class="fa fa-trash"></i>
+			</button>
+			<a class="cd-btn btn-top" href="#0">
+				<i aria-hidden="true" class="fa fa-chevron-up"></i>
+			</a>
+		</div>
+
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/bootgrid.min.js') }}"></script>
+
+    <script>
+        $('.sidebar-navigation ul li').on('click', function () {
+            $('li').removeClass('active');
+            $(this).addClass('active');
+        });
+    </script>
+
+    <script>
+
+		$('.btn-save').click(function(event) {
+			event.preventDefault();
+			$('.btn-save').prop("disabled", true);
+			$('.btn-save').text("En cours d'enregistrement...")
+			$(this).parents('.form').submit();
+		})
+
+        $('.error-list li').each(function() {
+            $(this).html($(this).text().replace(/\[(.*?)\]/g, "<b>$1</b>"));
+        })
+
+        /* Erreur badges */
+        $('.slide').each(function() {
+            let count = $(this).find('.error-container').length;
+            let id = $(this).attr('id').split('-')[1];
+            if (count > 0) $(".toc a[href$='#" + id + "']").append('<span class="badge badge-spe">' + count + '</span>');
+        });
+        $('h3').each(function() {
+            let count = $(this).nextUntil('h3').find('.error-container').length;
+            let id = $(this).attr('id');
+            if (count > 0) $(".toc a[href$='#" + id + "']").append('<span class="badge badge-spe">' + count + '</span>');
+        });
+
+        /* Tab history */
+        var url = "{{ path('history_list') }}";
+
+        var grid = $("#data-grid").bootgrid({
+            rowCount: [
+                20, 50, -1
+            ],
+            columnSelection: false,
+            ajax: true,
+            statusMapping: {
+                0: "in",
+                1: "out"
+            },
+            requestHandler: function (request) {
+                request.patientId = {{ patient.id }};
+                return request;
+            },
+            url: url,
+            formatters: {
+                "etat": function (column, row) {
+                    if (row.etat == 'notice') 
+                        return "<div class=\"pastille pastille__notice\"></div>";
+                    if (row.etat == 'info') 
+                        return "<div class=\"pastille pastille__info\"></div>";
+                    if (row.etat == 'error') 
+                        return "<div class=\"pastille pastille__error\"></div>";
+                },
+            }
+        }).on('click.rs.jquery.bootgrid', function (e, cols, row, target) {
+            if (typeof row != "undefined")
+                redirect(row.utilisateur);
+        }).on("loaded.rs.jquery.bootgrid", function() {
+            $('table tr td:nth-child(4)').each(function() {
+                $(this).html($(this).text().replace(/\[(.*?)\]/g, "<b class='history-markup'>$1</b>"));
+            })
+        });;
+
+        function redirect(id) {
+            if (id == undefined) 
+                return;
+    
+            let pathArray = window.location.pathname.split("/");
+            let url = window.location.protocol + "//" + window.location.host;
+            for (let i = 0; i < pathArray.length - 1; i++) 
+                url += pathArray[i] + "/";
+            window.location.assign(url + {{ patient.id }} + "/history/" + id);
+        };
+
+        /* Add error info */
+        $('.js-error-button').click(function(event) {
+            event.preventDefault();
+            let message = $(this).parent().find('.js-error-input').val();
+            let patientId = '{{ patient.id }}';
+            let fieldId = $(this).parents('.wrap-input').find('.input').attr('id');
+            if (message == '') {
+                $(this).parent().find('.js-error-input').attr('placeholder', 'Veuillez entrer un message.');
+                return
+            }
+            $.ajax({
+                type: "POST",
+                url: "{{ path('erreur_add_info') }}",
+                data: {
+                    'message': message,
+                    'patientId': patientId,
+                    'fieldId': fieldId,
+                },
+                success: function(response) {
+                    location.reload();
+                },
+            });
+        });
+
+        /* History */
+        $('.history').click(function(event) {
+            event.preventDefault(); 
+            patientId = {{ patient.id }};
+            fieldId = $(this).parents('.wrap-input').find('input, select, textarea').attr('id');
+            /* lowercase + add '_' before capital */
+            fieldId = fieldId.replace(/([a-z])([A-Z])/g, '$1_$2').trim();
+            fieldId = fieldId.toLowerCase();
+            if (fieldId.substring(fieldId.length - 2) === "_0")
+                fieldId = fieldId.substring(0, fieldId.length - 2);
+            var url = '{{ path("history_list_field", {'patient': 'patientId', 'fieldId': 'fieldId'}) }}'; 
+            url = url.replace("patientId", patientId);
+            url = url.replace("fieldId", fieldId);
+            window.location.href = url;
+        });
+
+        /* Date */
+        jQuery(document).ready(function () {
+            $('.js-datepicker').datepicker({language: 'fr', clearButton: true});
+        });
+
+        /* IMC */
+        {# function getIMC(poids, taille) {
+            if (poids && taille && taille > 0) {
+                let imc = poids / ((taille * 0.01) * (taille * 0.01));
+                return imc.toFixed(1);
+            }
+            return null
+        }
+
+        $('#general_taille, #general_poids').change(function() {
+            $('#general_imc').val(getIMC($('#general_poids').val(), $('#general_taille').val()));
+        }) #}
+
+        {# function getAge(dateString) {
+            var today = new Date();
+            let dateArray = dateString.split('/');
+            var date = new Date(dateArray[1], dateArray[0], 1);
+            var age = today.getFullYear() - date.getFullYear();
+            var m = today.getMonth() - date.getMonth();
+            if (isNaN(age))
+                return -1;
+            if (m < 0 || (m === 0 && today.getDate() < date.getDate())) 
+                age--;
+            return age;
+        } #}
+        {# $('#general_dateNaissance').on('change', function() {
+            $('#general_age').val(getAge($(this).val()));
+        }) #}
+        {# jQuery(document).ready(function () {
+            $('.js-birthday').datepicker({
+                language: 'fr',
+                clearButton: true,
+                onSelect: function (formattedDate, date, inst) {
+                    $('#general_age').val(getAge(formattedDate));
+                }
+            });
+        }); #}
+
+        /* Alimentation */
+        {# function alimentation(nb, item) {
+            ali = item.parents('.wrap-input').next();
+            ali.empty();
+            if (nb >= 4)
+                ali.append('<span class="green">Recommandée (4-5)</span');
+            else if (nb >= 2)
+                ali.append('<span class="orange">Intermédiaire (2-3)</span');
+            else
+                ali.append('<span class="red">Faible (0-1)</span');
+        }
+
+        $('.alimentation-js').each(function() {
+            alimentation($(this).find('input:checked').length, $(this));
+        })
+        $('.alimentation-js input').on('change', function () {
+            alimentation($(this).parents('.alimentation-js').find('input:checked').length, $(this).parents('.alimentation-js'));
+        }); #}
+
+        /* Eligibilite */
+        {# function isValid() {
+            let inclusion = 1;
+            let non_inclusion = 1;
+            $('#cb0').prop('checked', true);
+            $('#inclusion-qcm .qcm-row').each(function (e) {
+                var radioValue = $(this).find('input:checked').val();
+                if (radioValue != "Oui") {
+                    inclusion = 0;
+                    return;
+                }
+            });
+            $('#non-inclusion-qcm .qcm-row').each(function (e) {
+                var radioValue = $(this).find('input:checked').val();
+                if (radioValue != "Non") {
+                    non_inclusion = 0;
+                    return;
+                }
+            });
+            if (! inclusion || ! non_inclusion) {
+                $('#cb0').prop('checked', false);
+            }
+        }
+        isValid();
+        $('main .qcm-row input').change(function () {
+            isValid();
+        }); #}
+    </script>
+
+    <script>
+        /* TOC */
+        /* Smooth scroll */
+
+        function displaySlide(page) {
+            $('.slide').each(function(i, e) {
+                let id = 'tab-' + page.substring(1);
+                $(this).hide();
+                $(this).removeClass('slide-active');
+                if ($(this).attr('id') == id) {
+                    $(this).show();
+                    $(this).addClass('slide-active');
+                }
+            })
+        }
+
+        $('.toc > ul > li > a').on('click', function () {
+            displaySlide($(this).attr('href'));
+            window.location.hash = $(this).attr("href");
+            return false;
+        });
+
+        function scrollToc(page) {
+            let speed = 550;
+            if (!$(page).offset()) return;
+            $('html, body').animate({
+                scrollTop: $(page).offset().top - 30
+            }, speed);
+        }
+
+        $('.toc li a').on('click', function () {
+            scrollToc($(this).attr('href'));
+            return false;
+        });
+
+        //onLoad
+        var hash = window.location.hash.substr(0);
+        $('.toc > ul > li > a').each(function (i) {
+            page = $(this).attr('href');
+            if (hash == page) {
+                $(this).toggleClass('js-active active');
+                toggleMenu($(this));
+                displaySlide(page);
+                scrollToc(page);
+            }
+        });
+
+        $(".toc > ul > li > a").click(function () {
+            if (!$(this).hasClass('js-active')) {
+                $('.toc > ul > li > a').each(function (i) {
+                    if ($(this).hasClass('js-active')) 
+                        toggleMenu($(this));
+                    $(this).removeClass('js-active active');
+                });
+            }
+            if (!reduce) {
+                $(this).toggleClass('js-active active');
+                toggleMenu($(this));
+            } else {
+                $(this).toggleClass('active');
+            }
+        });
+
+        function toggleMenu(e) {
+            $(e).find(".right").toggleClass("fa-caret-up fa-caret-down");
+            $(e).parent(".sub-menu").children("ul").slideToggle("100");
+        }
+
+        $(window).scroll(function() {
+            onScroll();
+        });
+
+        function onScroll() {
+            let offset = $('.hero-tabs').offset().top + $('.hero-tabs').height() + 25;
+            if ($(window).scrollTop() > offset) {
+                $('.hero-tabs-container').addClass('hero-tabs-container--top');
+                $('.toc').addClass('toc--top');
+            } else {
+                $('.hero-tabs-container').removeClass('hero-tabs-container--top');
+                $('.toc').removeClass('toc--top');
+            }
+        }
+
+        /* Reduce menu */
+        var reduce = false;
+        $('#js-reducemenu').click(function() {
+            reduce = !reduce;
+
+            $( '.main' ).toggleClass( "reduce" );
+            $( '#js-reducemenu .fas' ).toggleClass( "fa-arrow-left fa-arrow-right" );
+
+            $('.toc > ul > li > a').each(function (i) {
+                if ($(this).hasClass('js-active')) 
+                    toggleMenu($(this));
+                $(this).removeClass('js-active');
+            });
+        })
+
+        $("textarea").keyup(function(e) {
+            while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
+                $(this).height($(this).height() + 1);
+            };
+        });
+
+        /* On key "ENTER" pressed */
+        $(document).keypress(function(event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (keycode == '13' && !$("textarea").is(":focus")) {
+                event.preventDefault();
+                if (validate == false) {
+                    $(this).find('.slide-active form').submit();
+                }
+            }
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+	Édition de la lettre
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/index.css') }}">
+{% endblock %}
+
+{% block page_content %}
+<div class="container-fluid">
+
+		<div class="title-wrapper">
+			Édition de la lettre
+		</div>
+
+		<div class="container-form">	
+            <!-- Main -->
+            <main>
+                {{ form_start(form, {'attr': {'class': 'form validate-form'} }) }}
+                {{ form_errors(form) }}
+
+                {{ form_widget(form.content, {'attr':{
+                    'class': 'input letter__content',
+                    'no-resize': true,
+                    'oninput': 'autoGrow(this)'
+                } }) }}
+
+                <div class="container-form-btn btn-block">
+                    <a href="{{ path('index_patient') }}" class="form-btn btn-default">
+                        <i aria-hidden="true" class="fa fa-arrow-left"></i>Retour</a>
+                    {{ form_row(form.save, {'attr': {'class': 'form-btn'} }) }}
+                </div>
+
+                {{ form_row(form._token) }}
+                {{ form_end(form, {'render_rest' : false}) }}
+            </mail>
+
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        function autoGrow(element) {
+            element.style.height = (element.scrollHeight) + "px";
+        }
+        
+        $('.letter__content').height($('.letter__content').prop('scrollHeight') + 'px');
+
+        $('.letter__content').on('keydown', function(e) {
+            if (e.key == 'Tab') {
+                e.preventDefault();
+                var start = this.selectionStart;
+                var end = this.selectionEnd;
+
+                // set textarea value to: text before caret + tab + text after caret
+                this.value = this.value.substring(0, start) +
+                "\t" + this.value.substring(end);
+
+                // put caret at right position again
+                this.selectionStart =
+                this.selectionEnd = start + 1;
+            }
+        });
+
+    </script>
+{% endblock %}
+

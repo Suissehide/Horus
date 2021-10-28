@@ -1,0 +1,53 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+	Création de la lettre
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/index.css') }}">
+{% endblock %}
+
+{% block page_content %}
+	<div class="container-fluid">
+
+		<div class="title-wrapper">
+			Création de la lettre
+		</div>
+
+		<div class="container-form">
+            <!-- Hero -->
+            <section id="tab-profile" class="hero-tabs">
+                <div class="hero-header">
+                    <div class="hero-title">
+                        <h1 id="profile">
+                            PATIENT 
+                            <span>{{ patient.general.prenom }} {{ patient.general.nom }}</span>
+                        </h1>
+                    </div>
+
+                    <div class="btn-block">
+                        <a href="{{ path('index_patient') }}" class="form-btn btn-default">
+                            <i aria-hidden="true" class="fa fa-arrow-left"></i>Retour</a>
+                        <button class="form-btn">
+                            <i aria-hidden="true" class="fa fa-copy"></i>Copier</button>
+                        <a href="{{ path('letter') }}" class="form-btn btn-save">
+                            <i aria-hidden="true" class="fa fa-edit"></i>Modifier</a>
+                    </div>
+                </div>
+            </section>
+			
+            <!-- Main -->
+            <main>
+                <textarea class='input letter__content' no-resize>{{letter.content}}</textarea>
+            </mail>
+
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('.letter__content').height($('.letter__content').prop('scrollHeight') + 'px');
+    </script>
+{% endblock %}

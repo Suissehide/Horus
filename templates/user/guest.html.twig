@@ -6,23 +6,25 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/security.css') }}">
 {% endblock %}
 
 {% block page_content %}
 
-    <section class="hero-tabs hero-center">
+    <section class="hero-message">
         <div class="hero-text">
-            <h1 class="waiting">Votre compte est en attente de validation.</h1>
-            <h3>Vous ne possédez pas encore les droits nécessaires pour naviguer dans l'application.<br/>
-            Veuillez contacter votre administrateur pour obtenir les droits d'accès.</h3>
+            <h1>Votre compte est en attente de validation.</h1>
+            <p>Vous ne possédez pas encore les droits nécessaires pour naviguer dans l'application.
+            Veuillez contacter votre administrateur pour obtenir les droits d'accès.</p>
         </div>
+        <div class="online-doctor"></div>
     </section>
 
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('js/three.js') }}"></script>
-    <script src="{{ asset('js/dna.js') }}"></script>
+    {# <script src="{{ asset('js/three.js') }}"></script> #}
+    {# <script src="{{ asset('js/dna.js') }}"></script> #}
     <script>
         $('ul li').on('click', function() {
             $('li').removeClass('active');

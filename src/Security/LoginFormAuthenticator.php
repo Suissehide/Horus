@@ -127,7 +127,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         if ($this->security->isGranted('ROLE_GUEST')) {
             $redirection = new RedirectResponse($this->urlGenerator->generate('guest'));
         } else {
-            $redirection = new RedirectResponse($this->urlGenerator->generate('index_participant'));
+            $redirection = new RedirectResponse($this->urlGenerator->generate('index_patient'));
         }
         return $redirection;
     }
