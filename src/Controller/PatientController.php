@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Patient;
 use App\Entity\Letter;
 use App\Entity\Erreur;
+use App\Entity\MedicamentsEntree;
 
 use App\Form\PatientType;
 use App\Form\GeneralType;
 use App\Form\FacteurType;
+use App\Form\MedicamentsEntreeType;
 
 use App\Repository\ErreurRepository;
 
@@ -33,9 +35,9 @@ use Symfony\Component\Security\Core\Security;
 class PatientController extends AbstractController
 {
     /**
-     * @Route("/patient/add", name="patient_add", methods="GET|POST")
+     * @Route("/patient/add", name="patient_add", methods={"GET", "POST"})
      */
-    public function add(Request $request): Response
+    public function patient_add(Request $request): Response
     {
         $patient = new Patient();
         $form = $this->createForm(PatientType::class, $patient);
@@ -54,10 +56,7 @@ class PatientController extends AbstractController
             //     $patient->setCode($id . ' ' . strtoupper($patient->getCode()));
             // }
 
-            // $this->verification_create($patient, $patient->getVerification()->getDate());
-            // $this->cardiovasculaire_create($patient);
-            // $this->information_create($patient);
-            // $this->donnee_create($patient);
+            $patient->getProtocole()->setMedicamentsEntree(new MedicamentsEntree());
 
             $em->persist($patient);
             $em->flush();
@@ -75,7 +74,7 @@ class PatientController extends AbstractController
     /**
      * @Route("/patient/history", name="history_list")
      */
-    public function history(ErreurRepository $erreurRepository, Request $request): Response
+    public function patient_history(ErreurRepository $erreurRepository, Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
             $current = $request->request->get('current');
@@ -119,9 +118,9 @@ class PatientController extends AbstractController
     }
 
     /**
-     * @Route("/patient/{id}", name="patient_view", methods="GET|POST")
+     * @Route("/patient/view/{id}", name="patient_view", methods={"GET", "POST"})
      */
-    public function index(Patient $patient, Request $request): Response
+    public function patient_index(Patient $patient, Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
         $oldArray = $this->serializeEntity($patient);
@@ -130,7 +129,7 @@ class PatientController extends AbstractController
         #========== GENERAL ==========#
         $general = $patient->getGeneral();
         $formGeneral = $this->createForm(GeneralType::class, $general);
-        
+
         /* GENERATE ERREUR */
         $this->generateErreur($patient->getId(), $formGeneral, $oldArray, 'general', 'general');
 
@@ -157,7 +156,7 @@ class PatientController extends AbstractController
         #========== FACTEUR ==========#
         $facteur = $patient->getFacteur();
         $formFacteur = $this->createForm(FacteurType::class, $facteur);
-        
+
         /* GENERATE ERREUR */
         $this->generateErreur($patient->getId(), $formFacteur, $oldArray, 'facteur', 'facteur');
 
@@ -181,16 +180,48 @@ class PatientController extends AbstractController
             return $this->redirect($request->getUri());
         }
 
+        #========== MEDICAMENTS A L ENTREE ==========#
+        $medicamentsEntree = $patient->getProtocole()->getMedicamentsEntree();
+        $formMedicamentsEntree = $this->createForm(MedicamentsEntreeType::class, $medicamentsEntree);
+
+        /* GENERATE ERREUR */
+        $this->generateErreur($patient->getId(), $formMedicamentsEntree, $oldArray, 'medicamentsEntree', 'medicamentsEntree');
+
+        $formMedicamentsEntree->handleRequest($request);
+        if ($formMedicamentsEntree->isSubmitted() && $formMedicamentsEntree->isValid()) {
+
+            /* SERIALISATION */
+            $facteurArray = $this->serializeEntity($formMedicamentsEntree->getData());
+
+            /* SPECIAL ERROR */
+
+
+            /* SEARCH DIFF */
+            $this->searchDiff($patient, $oldArray, $facteurArray, 'medicamentsEntree', 'medicamentsEntree');
+
+            $patient = $formMedicamentsEntree->getData();
+            $em->flush();
+
+            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
+
+            return $this->redirect($request->getUri());
+        }
+
+
+
         return $this->render('patient/index.html.twig', [
             'controller_name' => 'PatientController',
             'patient' => $patient,
             'formGeneral' => $formGeneral->createView(),
             'formFacteur' => $formFacteur->createView(),
+
+            'formMedicamentsEntree' => $formMedicamentsEntree->createView(),
             'date' => date("d/m/Y")
         ]);
     }
 
-    private function formatDate(\DateTime $date) {
+    private function formatDate(\DateTime $date)
+    {
         $formatter = new \IntlDateFormatter(
             \Locale::getDefault(),
             \IntlDateFormatter::MEDIUM,
@@ -225,7 +256,7 @@ class PatientController extends AbstractController
             $err = '';
             $num = count($x);
             $i = 0;
-            foreach($x as $key) {
+            foreach ($x as $key) {
                 $err .= $key;
                 if (++$i != $num)
                     $err .= ', ';
@@ -240,24 +271,19 @@ class PatientController extends AbstractController
         foreach ($newArray as $key => $value) {
             if (is_array($value) && array_key_exists('timestamp', $value)) {
                 if (!isset($oldArray[$start][$key]['timestamp']))
-                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) , 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [(vide)] en [' . date('d/m/Y', $value['timestamp']) . ']', true);
+                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [(vide)] en [' . date('d/m/Y', $value['timestamp']) . ']', true);
                 else if ($oldArray[$start][$key]['timestamp'] !== $value['timestamp'])
-                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) , 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . date('d/m/Y', $oldArray[$start][$key]['timestamp']) . '] en [' . date('d/m/Y', $value['timestamp']) . ']', true);
-            }
-            else if (is_array($oldArray[$start][$key]) && array_key_exists('timestamp', $oldArray[$start][$key]) && !is_array($value)) {
-                $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) , 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . date('d/m/Y', $oldArray[$start][$key]['timestamp']) . '] en [(vide)]', true);
-            }
-            else if (is_array($value) && array_key_exists('reponse', $value) && $oldArray[$start][$key]['reponse'] !== $value['reponse']) {
-                $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) . '_reponse' , 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$start][$key]['reponse']) . '] en [' . $this->checkEmpty($value['reponse']) . ']', true);
-            }
-            else if (is_array($value) && ('alimentation' === $key || 'traitementPhaseAigue' === $key) && !empty(array_diff($oldArray[$start][$key], $value))) {
-                $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) , 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$start][$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
-            }
-            else if (is_array($value) && !array_key_exists('timestamp', $value) && !array_key_exists('reponse', $value) && ('alimentation' !== $key && 'traitementPhaseAigue' !== $key)) {
+                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . date('d/m/Y', $oldArray[$start][$key]['timestamp']) . '] en [' . date('d/m/Y', $value['timestamp']) . ']', true);
+            } else if (is_array($oldArray[$start][$key]) && array_key_exists('timestamp', $oldArray[$start][$key]) && !is_array($value)) {
+                $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . date('d/m/Y', $oldArray[$start][$key]['timestamp']) . '] en [(vide)]', true);
+            } else if (is_array($value) && array_key_exists('reponse', $value) && $oldArray[$start][$key]['reponse'] !== $value['reponse']) {
+                $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) . '_reponse', 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$start][$key]['reponse']) . '] en [' . $this->checkEmpty($value['reponse']) . ']', true);
+            } else if (is_array($value) && ('alimentation' === $key || 'traitementPhaseAigue' === $key) && !empty(array_diff($oldArray[$start][$key], $value))) {
+                $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$start][$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
+            } else if (is_array($value) && !array_key_exists('timestamp', $value) && !array_key_exists('reponse', $value) && ('alimentation' !== $key && 'traitementPhaseAigue' !== $key)) {
                 $this->searchDiff($patient, $oldArray[$start], $newArray[$key], $key, $path . '_' . $this->formatKey($key));
-            }
-            else if ($oldArray[$start][$key] !== $value)
-                $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) , 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$start][$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
+            } else if ($oldArray[$start][$key] !== $value)
+                $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$start][$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
         }
     }
 
@@ -265,8 +291,8 @@ class PatientController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $erreurs = $em->getRepository(Erreur::class)->getLastErreur($patientId);
-    
-        if (!$array[$start]) return;
+
+        if (!isset($array[$start])) return;
 
         foreach ($array[$start] as $key => $value) {
             if (is_array($value) && !array_key_exists('timestamp', $value) && !array_key_exists('reponse', $value) && ('alimentation' !== $key && 'traitementPhaseAigue' !== $key)) {
@@ -275,13 +301,13 @@ class PatientController extends AbstractController
             if (is_array($value) && array_key_exists('reponse', $value))
                 $key = $key . '_reponse';
 
-            foreach($erreurs as $erreur) {
+            foreach ($erreurs as $erreur) {
                 if ($erreur->getFieldId() === $path . '_' . $this->formatKey($key)) {
                     if ($erreur->getEtat() !== 'error')
                         break;
                     $split = explode('_', $path . '_' . $key);
                     $formGet = $form;
-                    foreach(array_slice($split, 1) as $s) {
+                    foreach (array_slice($split, 1) as $s) {
                         $formGet = $formGet->get($s);
                     }
                     $formGet->addError(new FormError($erreur->getMessage()));
@@ -291,7 +317,8 @@ class PatientController extends AbstractController
         }
     }
 
-    private function addErreur($patientId, $fieldId, $etat, $message, bool $user) {
+    private function addErreur($patientId, $fieldId, $etat, $message, bool $user)
+    {
         $em = $this->getDoctrine()->getManager();
         $patient = $em->getRepository(Patient::class)->find($patientId);
         $createdAt = new DateTime("now", new DateTimeZone('Europe/Paris'));
@@ -325,12 +352,18 @@ class PatientController extends AbstractController
     }
 
     /**
-     * @Route("/patient/{id}/letter", name="patient_letter", methods="GET|POST")
+     * @Route("/patient/{id}/letter", name="patient_letter", methods={"GET", "POST"})
      */
     public function letter(Patient $patient): Response
     {
         $em = $this->getDoctrine()->getManager();
         $letter = $em->getRepository(Letter::class)->findOneBy([]);
+        $letter = $em->getRepository(Letter::class)->findOneBy([]);
+        if (!$letter) {
+            $letter = new Letter();
+            $em->persist($letter);
+            $em->flush();
+        }
 
         return $this->render('patient/letter.html.twig', [
             'title' => 'Création de la lettre',
@@ -341,9 +374,9 @@ class PatientController extends AbstractController
     }
 
     /**
-     * @Route("/patient/{id}", name="patient_delete", methods="DELETE")
+     * @Route("/patient/delete/{id}", name="patient_delete", methods={"POST", "DELETE"})
      */
-    public function delete(Request $request, Patient $patient) : Response
+    public function patient_delete(Request $request, Patient $patient): Response
     {
         if ($this->isCsrfTokenValid('delete' . $patient->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();

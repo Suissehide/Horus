@@ -176,7 +176,7 @@ class FacteurType extends AbstractType
             ->add('nombrePaquetsAn', IntegerType::class, array(
                 'label' => 'Nombres de paquets par an',
                 'attr' => array(
-                    'unity' => '',
+                    'unity' => 'paquets/an',
                     'data-min' => 0,
                     'data-max' => 0,
                 ),

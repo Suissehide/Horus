@@ -1,5 +1,8 @@
 <form method="post" action="{{ path('patient_delete', {'id': patient.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ patient.id) }}">
-    <button class="form-btn btn-danger"><i class="fa fa-trash" aria-hidden="true" id="btn-delete"></i>Supprimer</button>
+    <button type="submit" value="Delete" class="form-btn btn-danger">
+        <i class="fa fa-trash" aria-hidden="true" id="btn-delete"></i>
+        Supprimer
+    </button>
 </form>

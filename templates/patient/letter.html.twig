@@ -29,7 +29,7 @@
                     <div class="btn-block">
                         <a href="{{ path('index_patient') }}" class="form-btn btn-default">
                             <i aria-hidden="true" class="fa fa-arrow-left"></i>Retour</a>
-                        <button class="form-btn">
+                        <button class="form-btn" id="copy">
                             <i aria-hidden="true" class="fa fa-copy"></i>Copier</button>
                         <a href="{{ path('letter') }}" class="form-btn btn-save">
                             <i aria-hidden="true" class="fa fa-edit"></i>Modifier</a>
@@ -39,7 +39,7 @@
 			
             <!-- Main -->
             <main>
-                <textarea class='input letter__content' no-resize>{{letter.content}}</textarea>
+                <textarea id="test" class='input letter__content' no-resize>{{letter.content}}</textarea>
             </mail>
 
 		</div>
@@ -49,5 +49,11 @@
 {% block javascripts %}
     <script>
         $('.letter__content').height($('.letter__content').prop('scrollHeight') + 'px');
+
+        $('#copy').click(function() {
+            $(".letter__content").select();
+            document.execCommand('copy');
+        })
+
     </script>
 {% endblock %}

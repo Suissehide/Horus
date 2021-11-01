@@ -48,7 +48,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="app_register", methods="GET|POST")
+     * @Route("/register", name="app_register", methods={"GET", "POST"})
      */
     public function register(Request $request): Response
     {

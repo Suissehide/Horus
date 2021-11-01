@@ -33,6 +33,12 @@ class Patient
     private $facteur;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Protocole", cascade={"persist", "remove"})
+     * @Groups({"advancement", "export"})
+     */
+    private $protocole;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Erreur", mappedBy="patient", cascade={"remove"})
      */
     private $erreurs;
@@ -67,6 +73,18 @@ class Patient
     public function setFacteur(?Facteur $facteur): self
     {
         $this->facteur = $facteur;
+
+        return $this;
+    }
+
+    public function getProtocole(): ?Protocole
+    {
+        return $this->protocole;
+    }
+
+    public function setProtocole(?Protocole $protocole): self
+    {
+        $this->protocole = $protocole;
 
         return $this;
     }

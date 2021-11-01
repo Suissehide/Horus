@@ -1,0 +1,94 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    Liste des médicaments
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/index.css') }}">
+{% endblock %}
+
+{% block page_content %}
+	<div class="container-fluid">
+
+		<div class="title-wrapper">
+			Liste des médicaments
+		</div>
+
+		<div class="container-form">
+			<div class="btn-bar">
+                <input type="text" id="medicament_name" name="medicament[name]" placeholder="Nom du médicament" class="input">
+				<button class="btn"id="medicament_add">
+					<i aria-hidden="true" class="fa fa-plus"></i>
+                    Ajouter un médicament
+                </button>
+			</div>
+			<div class="flex">
+                <div class="table-wrapper">
+                    <table cellspacing="0" class="table table-condensed table-hover table-striped" id="data-grid">
+                        <thead>
+                            <tr>
+                                <th data-column-id="id" data-identifier="true" data-searchable="false" data-type="numeric" data-visible="false">Id</th>
+                                <th data-column-id="name">Nom</th>
+                                <th data-column-id="commands" data-formatter="commands" data-sortable="false" data-width="15%">Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/bootgrid.min.js') }}"></script>
+
+    <script>
+        var grid = $("#data-grid").bootgrid({
+            rowCount: [
+                50, 200, -1
+            ],
+            columnSelection: false,
+            ajax: true,
+            requestHandler: function (request) {
+                return request;
+            },
+            url: "{{ path('medicament') }}",
+            formatters: {
+                "commands": function (column, row) {
+                    return "<button type=\"button\" class=\"btn btn-xs command-delete\" data-row-id=\"" + row.id + "\"><i class=\"fa fa-trash-alt\"></i></button>";
+                }
+            }
+        }).on("loaded.rs.jquery.bootgrid", function () {
+            grid.find(".command-delete").on("click", function (e) {
+                $.ajax({
+                type: "POST",
+                url: "{{ path('medicament_delete') }}",
+                data: {
+                    'id': $(this).data("row-id"),
+                },
+                success: function(response) {
+                    $("#data-grid").bootgrid('reload');
+                },
+            });
+            });
+        }).on("loaded.rs.jquery.bootgrid", function() {
+            
+        });
+
+        $('#medicament_add').click(function() {
+            let name = $('#medicament_name').val();
+            if (!name) return;
+            $.ajax({
+                type: "POST",
+                url: "{{ path('medicament_add') }}",
+                data: {
+                    'name': name,
+                },
+                success: function(response) {
+                    $("#data-grid").bootgrid('reload');
+                },
+            });
+        })
+    </script>
+{% endblock %}

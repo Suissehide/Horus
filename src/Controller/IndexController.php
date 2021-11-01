@@ -75,7 +75,7 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/advancement", name="advancement", methods="GET|POST")
+     * @Route("/advancement", name="advancement", methods={"GET", "POST"})
      */
     public function advancement(Request $request): Response
     {
@@ -166,7 +166,7 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/export/csv", name="export_csv", methods="GET")
+     * @Route("/export/csv", name="export_csv", methods={"GET"})
      */
     public function generateCsvAction(PatientRepository $patientRepository)
     {

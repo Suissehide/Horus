@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootgrid.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/index.css') }}">
 {% endblock %}
@@ -142,7 +143,7 @@
                         </div>
                         {{ form_row(formGeneral.nomNaissance, {'attr': {'class': 'input'} }) }}
                         {{ form_row(formGeneral.dateNaissance, {'attr': {'class': 'input js-datepicker'} }) }}
-                        {{ form_row(formGeneral.sexe, {'attr': {'class': 'input  radio-row'} }) }}
+                        {{ form_row(formGeneral.sexe, {'attr': {'class': 'input radio-row'} }) }}
 				</div>
 
                 <h3 id="complement">Complément</h3>
@@ -254,7 +255,7 @@
                     <div class="flex-wrap">
                         {{ form_row(formFacteur.tabagisme, {'attr': {'class': 'input'} }) }}
                         {{ form_row(formFacteur.dateArret, {'attr': {'class': 'input js-datepicker'} }) }}
-                        {{ form_row(formFacteur.nombrePaquetsAn, {'attr': {'class': 'input  radio-row'} }) }}
+                        {{ form_row(formFacteur.nombrePaquetsAn, {'attr': {'class': 'input radio-row'} }) }}
                     </div>
 
                     <div class="margin-space"></div>
@@ -272,6 +273,24 @@
 
             {#========== PROTOCOLE ==========#}
             <section class="slide" id="tab-protocole">
+                <div class="form-space">
+                    <h3>Fiches déjà existantes :</h3>
+                    <div class="etiquette__list">
+                        {% for fiche in patient.protocole.fiches %}
+                            <div name={{ fiche }} class='etiquette'>
+                                {% if fiche == 'visite' %}Visite
+                                {% elseif fiche == 'medicaments' %}Médicaments à l'entrée
+                                {% elseif fiche == 'testsEffort' %}Définition des tests d'effort
+                                {% else %} {{ fiche }}
+                                {% endif %}
+                                <span class="delete">
+                                    <i class="fa fa-times"></i>
+                                </span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
                 <div class="wrap-input">
                     <label for="protocole">
                         <span></span>
@@ -281,16 +300,66 @@
                     <div class="flex">
                         <select id="protocole_fiches" name="protocole[fiches]" class="input">
                             <option value=""></option>
-                            <option value="motifsMedical">Motifs médical</option>
-                            <option value="medicaments">Médicaments à l'entrée</option>
-                            <option value="testsEffort">Définition des tests d'effort</option>
+                            {% if "visite" not in patient.protocole.fiches %}<option value="visite">Visite</option>{% endif %}
+                            {% if "medicaments" not in patient.protocole.fiches %}<option value="medicaments">Médicaments à l'entrée</option>{% endif %}
+                            {% if "testsEffort" not in patient.protocole.fiches %}<option value="testsEffort">Définition des tests d'effort</option>{% endif %}
                         </select>
                         <span class="focus-input"></span>
                     </div>
-                    <button class="form-btn"><i aria-hidden="true" class="fa fa-envelope"></i>Ajouter une fiche</a>
-
                 </div>
+                <button class="form-btn" id="add-fiche"><i aria-hidden="true" class="fa fa-plus"></i>Ajouter une fiche</button>
 
+                <div class="margin-space"></div>
+
+                {#========== Médicaments à l'entrée ==========#}
+                <div id="medicaments">
+                    {{ form_start(formMedicamentsEntree, {'attr': {'class': 'form validate-form'} }) }}
+                    {{ form_errors(formMedicamentsEntree) }}
+
+                    {% form_theme formMedicamentsEntree 'form-theme.html.twig' %}
+
+                    <h1 id="general">Médicaments à l'entrée</h1>
+
+                    <h3 id="description">Description</h3>
+                    <div class="form-space">
+                        {{ form_row(formMedicamentsEntree.nombreMedicamentsJour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                        {{ form_row(formMedicamentsEntree.nombrePrisesSemaine, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                        {{ form_row(formMedicamentsEntree.pilulier, {'attr': {'class': 'input radio-row'} }) }}
+                        {{ form_row(formMedicamentsEntree.gestion, {'attr': {'class': 'input'} }) }}
+                        {{ form_row(formMedicamentsEntree.priseDecalee, {'attr': {'class': 'input radio-row'} }) }}
+                        {{ form_row(formMedicamentsEntree.geneHeurePrise, {'attr': {'class': 'input radio-row'} }) }}
+                        {{ form_row(formMedicamentsEntree.evaluation, {'attr': {'class': 'input radio-row'} }) }}
+                        {{ form_row(formMedicamentsEntree.score, {'attr': {'class': 'input'} }) }}
+                    </div>
+
+                    <h3 id="complement">Médicaments</h3>
+                    <div class="form-space">
+                        <div>
+                            {% for medicament in formMedicamentsEntree.medicaments %}
+                                <div id='{{ medicament.id }}' class='etiquette'>
+                                    {{ medicament.name }}
+                                    <span class="delete">
+                                        <i class="fa fa-times"></i>
+                                    </span>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="btn-bar">
+                            <select class="js-medicaments-ajax"></select>
+                            <button type="button" class="btn add-medicament" data-collection-holder-class="medicaments">
+                                <i class="fa fa-plus"></i>
+                                Ajouter un médicaments
+                            </button>
+                        </div>
+                    </div>
+
+
+                    {{ form_row(formMedicamentsEntree.save, {'attr': {'class': 'form-btn'} }) }}
+
+                    {{ form_row(formMedicamentsEntree._token) }}
+                    {{ form_end(formMedicamentsEntree, {'render_rest' : false}) }}
+                </div>
 
             </section>
 
@@ -313,6 +382,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('js/select2.min.js') }}"></script>
     <script src="{{ asset('js/bootgrid.min.js') }}"></script>
 
     <script>
@@ -439,6 +509,132 @@
         jQuery(document).ready(function () {
             $('.js-datepicker').datepicker({language: 'fr', clearButton: true});
         });
+
+
+        /* Fiches */
+        let fiches = {{patient.protocole.fiches|json_encode|raw}};
+        $.each(fiches, function(i, e) {
+            $('#' + e).show();
+        })
+
+        $('#add-fiche').click(function() {
+            let fiche = $('#protocole_fiches').val()
+            if (!fiche) return;
+            fiches.push(fiche);
+            let text = $('#protocole_fiches').find(":selected").text();
+            var t = $(
+                `<div name='` + fiche + `' class='etiquette'>
+                    ` + text + `
+                    <span class="delete">
+                        <i class="fa fa-times"></i>
+                    </span>
+                </div>`
+            );
+            $('.etiquette__list').append(t);
+            $('#protocole_fiches option[value="' + fiche + '"').remove();
+            sortEtiquetteList();
+            $('#' + fiche).show();
+
+            $.ajax({
+                type: "POST",
+                url: "{{ path('fiche_add') }}",
+                data: {
+                    'fiche': fiche,
+                    'patientId': {{ patient.id }},
+                },
+                success: function(response) {},
+            });
+            console.log(fiches);
+        })
+
+        $('.etiquette__list').on('click', '.etiquette .delete', function() {
+            let fiche = $(this).parent().attr('name');
+            let text = $(this).parent().text();
+            const index = fiches.indexOf(fiche);
+            if (index > -1) {
+                fiches.splice(index, 1);
+            }
+            $('.etiquette[name="' + fiche + '"]').remove();
+            $('#protocole_fiches').append('<option value="' + fiche + '">' + text + '</option>')
+            sortEtiquetteList();
+            $('#' + fiche).hide();
+
+            $.ajax({
+                type: "POST",
+                url: "{{ path('fiche_delete') }}",
+                data: {
+                    'fiche': fiche,
+                    'patientId': {{ patient.id }},
+                },
+                success: function(response) {},
+            });
+            console.log(fiches);
+        })
+
+        function sortEtiquetteList() {
+            var mylist = $('.etiquette__list');
+            var listitems = mylist.children('div').get();
+
+            listitems.sort(function(a, b) {
+                return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+            });
+
+            $.each(listitems, function(index, item) {
+                mylist.append(item); 
+            });
+        }
+        sortEtiquetteList();
+
+        /* Medicament */
+
+        $('.add-medicament').click(function(e) {
+            
+        })
+
+        $(".js-medicaments-ajax").select2({
+            ajax: {
+                url: "{{ path('medicament_search') }}",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term,
+                        page: params.page
+                    };
+                },
+                processResults: function (data, params) {
+                    params.page = params.page || 1;
+
+                    return {
+                            results: data.items,
+                            pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            placeholder: 'Rechercher un médicament',
+            // minimumInputLength: 1,
+            templateResult: formatMed,
+            templateSelection: formatMedSelection
+        });
+
+        function formatMed (repo) {
+            if (repo.loading) {
+                return repo.text;
+            }
+
+            var $container = $(
+                "<div class='select2-result-medicament__name'></div>"
+            );
+            $container.find(".select2-result-medicament__name").text(repo.name);
+            return $container;
+        }
+
+        function formatMedSelection (repo) {
+            return repo.full_name || repo.text;
+        }
 
         /* IMC */
         {# function getIMC(poids, taille) {

@@ -58,7 +58,7 @@ class Facteur
     private $traiteHTA;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="boolean", length=255, nullable=true)
      */
     private $risqueDiabete;
 
@@ -238,12 +238,12 @@ class Facteur
         return $this;
     }
 
-    public function getRisqueDiabete(): ?string
+    public function getRisqueDiabete(): ?bool
     {
         return $this->risqueDiabete;
     }
 
-    public function setRisqueDiabete(?string $risqueDiabete): self
+    public function setRisqueDiabete(?bool $risqueDiabete): self
     {
         $this->risqueDiabete = $risqueDiabete;
 

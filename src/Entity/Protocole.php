@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProtocoleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ProtocoleRepository::class)
@@ -22,6 +23,12 @@ class Protocole
      */
     private $fiches = [];
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\MedicamentsEntree", cascade={"persist", "remove"})
+     * @Groups({"advancement", "export"})
+     */
+    private $medicamentsEntree;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +42,18 @@ class Protocole
     public function setFiches(?array $fiches): self
     {
         $this->fiches = $fiches;
+
+        return $this;
+    }
+    
+    public function getMedicamentsEntree(): ?MedicamentsEntree
+    {
+        return $this->medicamentsEntree;
+    }
+
+    public function setMedicamentsEntree(?MedicamentsEntree $medicamentsEntree): self
+    {
+        $this->medicamentsEntree = $medicamentsEntree;
 
         return $this;
     }

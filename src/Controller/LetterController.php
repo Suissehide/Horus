@@ -14,14 +14,17 @@ use Symfony\Component\HttpFoundation\Request;
 class LetterController extends AbstractController
 {
     /**
-     * @Route("/letter", name="letter", methods="GET|POST")
+     * @Route("/letter", name="letter", methods={"GET", "POST"})
      */
     public function index(Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
         $letter = $em->getRepository(Letter::class)->findOneBy([]);
-        if (!$letter)
+        if (!$letter) {
             $letter = new Letter();
+            $em->persist($letter);
+            $em->flush();
+        }
 
         $form = $this->createForm(LetterType::class, $letter);
 
@@ -38,7 +41,7 @@ class LetterController extends AbstractController
 
         return $this->render('letter/index.html.twig', [
             'controller_name' => 'LetterController',
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 }

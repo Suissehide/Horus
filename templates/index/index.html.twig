@@ -76,15 +76,9 @@
                 "error": function (column, row) {
                     fetchAdvancement(row.id);
                 },
-                "commands": function (column, row) {
-                    return "<button type=\"button\" class=\"btn btn-xs btn-default command-view\" data-row-id=\"" + row.id + "\"><i class=\"fa fa-eye\"></i></button> " + "<button type=\"button\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><i class=\"fa fa-pencil-alt\"></i></button> " + "<button type=\"button\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\"><i class=\"fa fa-trash-alt\"></i></button>";
-                }
             }
         }).on("loaded.rs.jquery.bootgrid", function () {
-            grid.find(".command-edit").on("click", function (e) {
-            }).end().find(".command-delete").on("click", function (e) {
-            }).end().find(".command-view").on("click", function (e) {
-            }).end().find("tr").on("click", function (e) {
+            grid.find("tr").on("click", function (e) {
                 redirect($(this).data("row-id"));
             });
         }).on("loaded.rs.jquery.bootgrid", function() {
@@ -100,7 +94,7 @@
             for (let i = 0; i < pathArray.length - 1; i++) 
                 url += pathArray[i] + "/";
 
-            window.location.assign(url + "patient/" + id);
+            window.location.assign(url + "patient/view/" + id);
         };
 
         function fetchAdvancement(patientId) {

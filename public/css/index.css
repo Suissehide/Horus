@@ -31,14 +31,6 @@
     margin-bottom: 15px;
 }
 
-.btn-bar {
-    display: flex;
-}
-
-.btn-bar>btn:not(:last-child) {
-    margin-right: 25px;
-}
-
 .alert {
     width: 100%;
     margin-bottom: 15px;
@@ -294,6 +286,31 @@
     filter: invert(43%) sepia(86%) saturate(441%) hue-rotate(147deg) brightness(96%) contrast(84%);
 }
 
+.etiquette__list {
+    display: flex;
+    flex-flow: row wrap;
+    /* margin: 5px; */
+}
+
+.etiquette {
+    color: #f4f9f7;
+    padding: 3px 15px;
+    margin: 5px 5px;
+    display: inline;
+    padding: 5px 8px;
+    border-radius: 0;
+    background-color: var(--blue-green);
+}
+
+.etiquette .delete {
+    cursor: pointer;
+    padding-left: 5px;
+    transition: 0.3s ease;
+}
+
+.etiquette .delete:hover {
+    color: var(--blue-green-active);
+}
 
 /* User
 ========================================================================== */
@@ -369,7 +386,7 @@ input[type='checkbox'].checkbox-round+span {
     cursor: not-allowed !important;
 }
 
-/* User
+/* Letter
 ========================================================================== */
 
 .letter__content {
@@ -378,6 +395,13 @@ input[type='checkbox'].checkbox-round+span {
     min-height: 400px;
     line-height: 22px;
     padding: 15px 20px;
+}
+
+/* Medicament
+========================================================================== */
+
+#medicament_name {
+    max-width: 400px;
 }
 
 /* ========= TOC ========= */
