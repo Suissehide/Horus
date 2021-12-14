@@ -50,13 +50,13 @@ class MedicamentRepository extends ServiceEntityRepository
     {
         $qb = $this
             ->createQueryBuilder('m')
-            ->select('m.name')
+            ->select('m.id, m.name')
         ;
         if ($searchPhrase != "") {
             $qb
                 ->andWhere('m.name LIKE :search')
                 ->setParameter('search', '%' . $searchPhrase . '%');
         }
-        return $qb;
+        return $qb->getQuery()->getResult();
     }
 }

@@ -84,9 +84,6 @@ class MedicamentController extends AbstractController
      */
     public function medicament_search(MedicamentRepository $medicamentRepository, Request $request): Response
     {
-
-        dump($request->request);
-
         if ($request->isXmlHttpRequest()) {
             $q = $request->request->get('q');
             $page = $request->request->get('page');
@@ -94,6 +91,8 @@ class MedicamentController extends AbstractController
             if (!$q) return new JsonResponse([]);
 
             $medicaments = $medicamentRepository->findByRequest($q);
+
+            // dump($medicaments);
 
             return new JsonResponse($medicaments);
         }

@@ -1,0 +1,194 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\TestEffortRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=TestEffortRepository::class)
+ */
+class TestEffort
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $maquille;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $duree;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $watts;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $frequenceMax;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $frequenceMaxPercent;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $TASRepos;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $TASEffort;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ECGModifie;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $mesure;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getMaquille(): ?string
+    {
+        return $this->maquille;
+    }
+
+    public function setMaquille(?string $maquille): self
+    {
+        $this->maquille = $maquille;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getDuree(): ?int
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(?int $duree): self
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    public function getWatts(): ?int
+    {
+        return $this->watts;
+    }
+
+    public function setWatts(?int $watts): self
+    {
+        $this->watts = $watts;
+
+        return $this;
+    }
+
+    public function getFrequenceMax(): ?int
+    {
+        return $this->frequenceMax;
+    }
+
+    public function setFrequenceMax(?int $frequenceMax): self
+    {
+        $this->frequenceMax = $frequenceMax;
+
+        return $this;
+    }
+
+    public function getFrequenceMaxPercent(): ?int
+    {
+        return $this->frequenceMaxPercent;
+    }
+
+    public function setFrequenceMaxPercent(?int $frequenceMaxPercent): self
+    {
+        $this->frequenceMaxPercent = $frequenceMaxPercent;
+
+        return $this;
+    }
+
+    public function getTASRepos(): ?int
+    {
+        return $this->TASRepos;
+    }
+
+    public function setTASRepos(?int $TASRepos): self
+    {
+        $this->TASRepos = $TASRepos;
+
+        return $this;
+    }
+
+    public function getTASEffort(): ?int
+    {
+        return $this->TASEffort;
+    }
+
+    public function setTASEffort(?int $TASEffort): self
+    {
+        $this->TASEffort = $TASEffort;
+
+        return $this;
+    }
+
+    public function getECGModifie(): ?string
+    {
+        return $this->ECGModifie;
+    }
+
+    public function setECGModifie(?string $ECGModifie): self
+    {
+        $this->ECGModifie = $ECGModifie;
+
+        return $this;
+    }
+
+    public function getMesure(): ?int
+    {
+        return $this->mesure;
+    }
+
+    public function setMesure(?int $mesure): self
+    {
+        $this->mesure = $mesure;
+
+        return $this;
+    }
+}

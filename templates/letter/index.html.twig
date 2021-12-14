@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/index.css') }}">
 {% endblock %}
 
@@ -18,6 +19,12 @@
 		<div class="container-form">	
             <!-- Main -->
             <main>
+
+                <div class="select-data">
+                    <select class="js-patient-struct"></select>
+                    <button class="form-btn add-data">Ajouter</button>
+                </div>
+
                 {{ form_start(form, {'attr': {'class': 'form validate-form'} }) }}
                 {{ form_errors(form) }}
 
@@ -42,7 +49,79 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('js/select2.min.js') }}"></script>
     <script>
+        let patient = {{patient|json_encode|raw}};
+
+        let exclude = ['id', '__initializer__', '__cloner__', '__isInitialized__', 'fiches', 'bullseye', 'erreurs'];
+        let special = ['dateArret', 'date', 'medicaments', 'motifs'];
+        function getNestedValue(obj, key, path) {
+            if (!obj || typeof obj !== 'object')
+                return {id: path, text: key};
+
+            let res = [];
+            for (var key in obj) {  
+                if (!exclude.includes(key)) {
+                    if (obj[key] === null || typeof obj[key] !== 'object') {
+                        res.push(getNestedValue(obj[key], key, path ? path + '-' + key : key));
+                    } else {
+                        res.push({
+                            text: key,
+                            children: getNestedValue(obj[key], key, path ? path + '-' + key : key)
+                        })
+                    }
+                }
+            }
+            return res;
+        }
+    
+        function getNestedValue2(obj, key, path, level) {
+            for (var key in obj) {
+                if (!exclude.includes(key)) {
+                    if (!obj[key] || typeof obj[key] !== 'object') {
+                        selectJson.push({id: path + '-' + key, text: key, level: level})
+                    } else if (special.includes(key)) {
+                        selectJson.push({id: path + '-' + key, text: key, level: level})
+                    } else {
+                        selectJson.push({text: key, children: [], level: level})
+                        getNestedValue2(obj[key], key, path ? path + '-' + key : key, level + 1);
+                    }
+                }
+            }
+        }
+
+        {# let selectJson = getNestedValue(patient, '', ''); #}
+        let selectJson = [];
+        getNestedValue2(patient, '', '', 0);
+
+        function formatResult(node) {
+            var $result = $('<span style="padding-left:' + (15 * node.level) + 'px;">' + node.text + '</span>');
+            return $result;
+        };
+
+        $(".js-patient-struct").select2({
+            width: '100%',
+            dropdownAutoWidth: true,
+            dropdownCssClass: "big-drop",
+            data: selectJson, 
+            formatSelection: function(item) {
+                return item.text
+            },
+            formatResult: function(item) {
+                return item.text
+            },
+            templateResult: formatResult,
+        });
+
+        $('.add-data').click(function() {
+            let data = $(".js-patient-struct").select2('data')[0];
+            let cursorPos = $('#letter_content').prop('selectionStart');
+            let v = $('#letter_content').val();
+            let textBefore = v.substring(0, cursorPos);
+            let textAfter  = v.substring(cursorPos, v.length);
+            $('#letter_content').val(textBefore + "\{\{ " + data.id + " \}\}" + textAfter);
+        });
+
         function autoGrow(element) {
             element.style.height = (element.scrollHeight) + "px";
         }
@@ -52,8 +131,8 @@
         $('.letter__content').on('keydown', function(e) {
             if (e.key == 'Tab') {
                 e.preventDefault();
-                var start = this.selectionStart;
-                var end = this.selectionEnd;
+                let start = this.selectionStart;
+                let end = this.selectionEnd;
 
                 // set textarea value to: text before caret + tab + text after caret
                 this.value = this.value.substring(0, start) +

@@ -137,9 +137,8 @@
 }
 
 .online-doctor {
-    position: relative;
-    height: 360px;
+    height: 540px;
     width: 100%;
     background: url(../assets/images/online-doctor.svg) no-repeat center;
-    background-size: cover;
+    background-size: contain;
 }

@@ -38,8 +38,11 @@
 {% block checkbox_widget %}
         <div class="radio-container">
             <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-                    
-            {{ form_label(form, null) }}
+            {% if useLabel|default(false) %}
+                {{ form_label(form, null, {'label': useLabel}) }}
+            {% else %}
+                {{ form_label(form, null) }}
+            {% endif %}
         </div>
 {% endblock checkbox_widget %}
 
@@ -59,9 +62,11 @@
     <div class="wrap-input" {% with {attr: row_attr|default({} )} %} {{ block('attributes') }} {% endwith %}>
         {{ form_label(form) }}
         <div class="flex{% if errors is not empty %} error-input{% endif %}">
-            {{ form_widget(form, widget_attr) }}
-            {{ form_help(form) }}
-            <span class="focus-input"></span>
+            <div class="form-input">
+                {{ form_widget(form, widget_attr) }}
+                {{ form_help(form) }}
+                <span class="focus-input"></span>
+            </div>
             <button class="history"><div class="history-icon"></div></button>
         </div>
         {{ form_errors(form) }}

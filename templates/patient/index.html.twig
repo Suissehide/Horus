@@ -71,7 +71,6 @@
 							<i class='fa fa-caret-down right'></i>
 						</a>
 						<ul>
-							<li><a href='#biometrie'>Biométrie</a></li>
 							<li><a href='#description'>Description</a></li>
 						</ul>
 					</li>
@@ -83,11 +82,20 @@
                             </div>
 							<i class='fa fa-caret-down right'></i>
 						</a>
-						<ul>
-							{# <li><a href='#type'>Type d’infarctus du Myocarde</a></li>
-							<li><a href='#aigue'>Traitement à la phase aiguë</a></li>
-							<li><a href='#complication'>Complications immédiates</a></li>
-							<li><a href='#biologie'>Biologie</a></li> #}
+						<ul class="protocole-list">
+                            {% for fiche in patient.protocole.fiches %}
+                                {% if fiche == 'angioplastiePontage' %}<li><a name='angioplastiePontage'>Angioplastie et pontage</a></li>
+                                {% elseif fiche == 'bfr' %}<li><a name='bfr'>Données BFR</a></li>
+                                {% elseif fiche == 'catheterisation' %}<li><a name='catheterisation'>Cathétérisation</a></li>
+                                {% elseif fiche == 'echocardiographie' %}<li><a name='echocardiographie'>Échocardiographie</a></li>
+                                {% elseif fiche == 'echographieVasculaire' %}<li><a name='echographieVasculaire'>Échographie vasculaire</a></li>
+                                {% elseif fiche == 'medicaments' %}<li><a name='medicaments'>Médicaments à l'entrée</a></li>
+                                {% elseif fiche == 'neuroImagerie' %}<li><a name='neuroImagerie'>Neuro-imagerie</a></li>
+                                {% elseif fiche == 'neuroPsychologie' %}<li><a name='neuroPsychologie'>Neuro-psychologie</a></li>
+                                {% elseif fiche == 'testsEffort' %}<li><a name='testsEffort'>Test d'effort</a></li>
+                                {% elseif fiche == 'visite' %}<li><a name='visite'>Visite</a></li>
+                                {% endif %}
+                            {% endfor %}
 						</ul>
 					</li>
 					<li>
@@ -137,7 +145,7 @@
 				<h3 id="identification">Identification</h3>
 				<div class="form-space">
 					    {{ form_row(formGeneral.civilite, {'attr': {'class': 'input'} }) }}
-                        <div class="flex">
+                        <div class="flex-nowrap">
                             {{ form_row(formGeneral.prenom, {'attr': {'class': 'input'} }) }}
                             {{ form_row(formGeneral.nom, {'attr': {'class': 'input'} }) }}
                         </div>
@@ -167,18 +175,6 @@
                 {% form_theme formFacteur 'form-theme.html.twig' %}
 
 				<h1 id="facteur">Facteurs de risques lors de l'évènement</h1>
-
-				<h3 id="biometrie">Biométrie</h3>
-				<div class="form-space">
-					    {{ form_row(formFacteur.taille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                        {{ form_row(formFacteur.poids, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                        {{ form_row(formFacteur.tourTaille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-				</div>
-                <div class="flex-nowrap">
-                    {{ form_row(formFacteur.tensionArterielleJour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                    {{ form_row(formFacteur.tensionArterielleNuit, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                </div>
-
                 <h3 id="description">Description</h3>
 				<div class="form-space">
                     <div class="flex-table">
@@ -239,15 +235,15 @@
                     <div class="margin-space"></div>
 
                     <div class="radio-row">
-                        {{ form_row(formFacteur.obesite, {'attr': {'class': 'input no-label'} }) }}
+                        {{ form_row(formFacteur.obesite, {'attr': {'class': 'input radio-row no-label'} }) }}
                     </div>
 
                     <div class="flex-wrap">
                         <div class="radio-row">
-                            {{ form_row(formFacteur.alcoolisme, {'attr': {'class': 'input no-label'} }) }}
+                            {{ form_row(formFacteur.alcoolisme, {'attr': {'class': 'input radio-row no-label'} }) }}
                         </div>
                         <div class="radio-row">
-                            {{ form_row(formFacteur.sevre, {'attr': {'class': 'input no-label'} }) }}
+                            {{ form_row(formFacteur.sevre, {'attr': {'class': 'input radio-row no-label'} }) }}
                         </div>
                     </div>
 
@@ -261,7 +257,7 @@
                     <div class="margin-space"></div>
 
                     <div class="radio-row">
-                        {{ form_row(formFacteur.antecedentFamiliaux, {'attr': {'class': 'input no-label'} }) }}
+                        {{ form_row(formFacteur.antecedentFamiliaux, {'attr': {'class': 'input radio-row no-label'} }) }}
                     </div>
                 </div>
 
@@ -275,20 +271,27 @@
             <section class="slide" id="tab-protocole">
                 <div class="form-space">
                     <h3>Fiches déjà existantes :</h3>
-                    <div class="etiquette__list">
+                    <ul class="etiquettes__list">
                         {% for fiche in patient.protocole.fiches %}
-                            <div name={{ fiche }} class='etiquette'>
-                                {% if fiche == 'visite' %}Visite
+                            <li name={{ fiche }} class='etiquette'>
+                                {% if fiche == 'angioplastiePontage' %}Angioplastie et pontage
+                                {% elseif fiche == 'bfr' %}Données BFR
+                                {% elseif fiche == 'catheterisation' %}Cathétérisation
+                                {% elseif fiche == 'echocardiographie' %}Échocardiographie
+                                {% elseif fiche == 'echographieVasculaire' %}Échographie vasculaire
                                 {% elseif fiche == 'medicaments' %}Médicaments à l'entrée
-                                {% elseif fiche == 'testsEffort' %}Définition des tests d'effort
+                                {% elseif fiche == 'neuroImagerie' %}Neuro-imagerie
+                                {% elseif fiche == 'neuroPsychologie' %}Neuro-psychologie
+                                {% elseif fiche == 'testsEffort' %}Test d'effort
+                                {% elseif fiche == 'visite' %}Visite
                                 {% else %} {{ fiche }}
                                 {% endif %}
                                 <span class="delete">
                                     <i class="fa fa-times"></i>
                                 </span>
-                            </div>
+                            </li>
                         {% endfor %}
-                    </div>
+                    </ul>
                 </div>
 
                 <div class="wrap-input">
@@ -300,69 +303,554 @@
                     <div class="flex">
                         <select id="protocole_fiches" name="protocole[fiches]" class="input">
                             <option value=""></option>
-                            {% if "visite" not in patient.protocole.fiches %}<option value="visite">Visite</option>{% endif %}
+                            {% if "angioplastiePontage" not in patient.protocole.fiches %}<option value="angioplastiePontage">Angioplastie et pontage</option>{% endif %}
+                            {% if "bfr" not in patient.protocole.fiches %}<option value="bfr">Données BFR</option>{% endif %}
+                            {% if "catheterisation" not in patient.protocole.fiches %}<option value="catheterisation">Cathétérisation</option>{% endif %}
+                            {% if "echocardiographie" not in patient.protocole.fiches %}<option value="echocardiographie">Échocardiographie</option>{% endif %}
+                            {% if "echographieVasculaire" not in patient.protocole.fiches %}<option value="echographieVasculaire">Échographie vasculaire</option>{% endif %}
                             {% if "medicaments" not in patient.protocole.fiches %}<option value="medicaments">Médicaments à l'entrée</option>{% endif %}
+                            {% if "neuroImagerie" not in patient.protocole.fiches %}<option value="neuroImagerie">Neuro-imagerie</option>{% endif %}
+                            {% if "neuroPsychologie" not in patient.protocole.fiches %}<option value="neuroPsychologie">Neuro-psychologie</option>{% endif %}
                             {% if "testsEffort" not in patient.protocole.fiches %}<option value="testsEffort">Définition des tests d'effort</option>{% endif %}
+                            {% if "visite" not in patient.protocole.fiches %}<option value="visite">Visite</option>{% endif %}
                         </select>
                         <span class="focus-input"></span>
                     </div>
                 </div>
                 <button class="form-btn" id="add-fiche"><i aria-hidden="true" class="fa fa-plus"></i>Ajouter une fiche</button>
-
                 <div class="margin-space"></div>
 
-                {#========== Médicaments à l'entrée ==========#}
-                <div id="medicaments">
-                    {{ form_start(formMedicamentsEntree, {'attr': {'class': 'form validate-form'} }) }}
-                    {{ form_errors(formMedicamentsEntree) }}
+                <h1 id="protocole">Protocoles</h1>
 
-                    {% form_theme formMedicamentsEntree 'form-theme.html.twig' %}
+                <ul class="tabbed">
+                    {% for fiche in patient.protocole.fiches %}
+                        {% if fiche == 'angioplastiePontage' %}<li name="angioplastiePontage">Angioplastie et pontage</li>
+                        {% elseif fiche == 'bfr' %}<li name="bfr">Données BFR</li>
+                        {% elseif fiche == 'catheterisation' %}<li name="catheterisation">Cathétérisation</li>
+                        {% elseif fiche == 'echocardiographie' %}<li name="echocardiographie">Échocardiographie</li>
+                        {% elseif fiche == 'echographieVasculaire' %}<li name="echographieVasculaire">Échographie vasculaire</li>
+                        {% elseif fiche == 'medicaments' %}<li name="medicaments">Médicaments à l'entrée</li>
+                        {% elseif fiche == 'neuroImagerie' %}<li name="neuroImagerie">Neuro-imagerie</li>
+                        {% elseif fiche == 'neuroPsychologie' %}<li name="neuroPsychologie">Neuro-psychologie</li>
+                        {% elseif fiche == 'testsEffort' %}<li name="testsEffort">Test d'effort</li>
+                        {% elseif fiche == 'visite' %}<li name="visite">Visite</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
 
-                    <h1 id="general">Médicaments à l'entrée</h1>
+                <ul class="tab-list">
+					<li class="tab-content" name="angioplastiePontage">
+                        {#========== Angioplastie et pontage ==========#}
+                        <div id="protocole-angioplastie-pontage">
+                            {{ form_start(formAngioplastiePontage, {'attr': {'class': 'form validate-form'} }) }}
+                            {{ form_errors(formAngioplastiePontage) }}
 
-                    <h3 id="description">Description</h3>
-                    <div class="form-space">
-                        {{ form_row(formMedicamentsEntree.nombreMedicamentsJour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                        {{ form_row(formMedicamentsEntree.nombrePrisesSemaine, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                        {{ form_row(formMedicamentsEntree.pilulier, {'attr': {'class': 'input radio-row'} }) }}
-                        {{ form_row(formMedicamentsEntree.gestion, {'attr': {'class': 'input'} }) }}
-                        {{ form_row(formMedicamentsEntree.priseDecalee, {'attr': {'class': 'input radio-row'} }) }}
-                        {{ form_row(formMedicamentsEntree.geneHeurePrise, {'attr': {'class': 'input radio-row'} }) }}
-                        {{ form_row(formMedicamentsEntree.evaluation, {'attr': {'class': 'input radio-row'} }) }}
-                        {{ form_row(formMedicamentsEntree.score, {'attr': {'class': 'input'} }) }}
-                    </div>
+                            {% form_theme formAngioplastiePontage 'form-theme.html.twig' %}
 
-                    <h3 id="complement">Médicaments</h3>
-                    <div class="form-space">
-                        <div>
-                            {% for medicament in formMedicamentsEntree.medicaments %}
-                                <div id='{{ medicament.id }}' class='etiquette'>
-                                    {{ medicament.name }}
-                                    <span class="delete">
-                                        <i class="fa fa-times"></i>
-                                    </span>
+                            <h1 id="angioplastie-pontage">Angioplastie et pontage</h1>
+                            <h3 id="coronaires">Schémas coronaires</h3>
+                            <div class="coronaire">
+                                {{ form_row(formAngioplastiePontage.segment1, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+                                {{ form_row(formAngioplastiePontage.segment2, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+                                {{ form_row(formAngioplastiePontage.segment3, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+
+                                {{ form_row(formAngioplastiePontage.troncCommun, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+                                {{ form_row(formAngioplastiePontage.ivaProximal, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+                                {{ form_row(formAngioplastiePontage.diagonal, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+                                {{ form_row(formAngioplastiePontage.ivaMoyenne, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+                                {{ form_row(formAngioplastiePontage.circonflexeProximale, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+                                {{ form_row(formAngioplastiePontage.postrolLateral, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+                            </div>
+
+                            <h3 id="pont">Schémas ponts</h3>
+                            <div class="form-space pont">
+                                {{ form_row(formAngioplastiePontage.pontSaphenesGauche, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+                                {{ form_row(formAngioplastiePontage.pontSaphenesDroit, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+                                {{ form_row(formAngioplastiePontage.pontMammaire, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+                            </div>
+
+                            {{ form_row(formAngioplastiePontage.save, {'attr': {'class': 'form-btn'} }) }}
+
+                            {{ form_row(formAngioplastiePontage._token) }}
+                            {{ form_end(formAngioplastiePontage, {'render_rest' : false}) }}
+                        </div>
+                    </li>
+
+                    <li class="tab-content" name="bfr">
+                        {#========== BRF ==========#}
+                        <div id="protocole-bfr">
+                            {{ form_start(formBFR, {'attr': {'class': 'form validate-form'} }) }}
+                            {{ form_errors(formBFR) }}
+
+                            {% form_theme formBFR 'form-theme.html.twig' %}
+
+                            <h1 id="bfr">Données BFR</h1>
+                            <h3 id="biometrie">Biométrie</h3>
+                            <div class="form-space">
+                                {{ form_row(formBFR.taille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                {{ form_row(formBFR.poids, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                {{ form_row(formBFR.tourTaille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                            
+                                <div class="wrap-input">
+                                    <label for="bfr_IMC">
+                                        <span></span>
+                                        <em>IMC</em>
+                                    </label>
+                                    <div class="flex">
+                                        <div class="form-input">
+                                            <input disabled type="number" id="bfr_IMC" name="bfr[IMC]" unity="" data-min="0" data-max="0" class="input">
+                                            <span class="focus-input"></span>
+                                        </div>
+                                    </div>
                                 </div>
-                            {% endfor %}
+                            </div>
+                            <div class="flex-nowrap">
+                                {{ form_row(formBFR.tensionArterielleJour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                {{ form_row(formBFR.tensionArterielleNuit, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                            </div>
+
+                            <h3 id="bilan-hepatique">Bilan hépatique</h3>
+                            <div class="form-space flex-2">
+                                {{ form_row(formBFR.transaminasesASAT, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.transaminasesALAT, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.gamma, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            <h3 id="bilan-renal">Bilan rénal</h3>
+                            <div class="form-space flex-2">
+                                {{ form_row(formBFR.proteinurie, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.microAlbuminurie, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.creatinine, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.clairence, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.homoCysBasale, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            <h3 id="dyslipidemie">Dyslipidémie</h3>
+                            <div class="form-space flex-2">
+                                {{ form_row(formBFR.cholesterolTotal, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.triglicerides, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.HDLC, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.LDLC, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            <h3 id="diabete">Diabète</h3>
+                            <div class="form-space flex-2">
+                                {{ form_row(formBFR.glycemieAjeun, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.glycemiePostPrandiale, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.Hba1c, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.neuropathieClinique, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.fondOeil, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.neuroesthesiometriePiedDroit, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.neuroesthesiometriePiedGauche, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            <h3 id="facteur-thrombogeniques">Facteur thrombogéniques</h3>
+                            <div class="form-space flex-2">
+                                {{ form_row(formBFR.fibrinogene, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.CRP, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.VS, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.plaquettes, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.globulesBlancs, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.hemoglobine, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            <h3 id="activite-physique">Activité physique</h3>
+                            <div class="form-space">
+                                {{ form_row(formBFR.activitePhysique, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            {{ form_row(formBFR.save, {'attr': {'class': 'form-btn'} }) }}
+
+                            {{ form_row(formBFR._token) }}
+                            {{ form_end(formBFR, {'render_rest' : false}) }}
                         </div>
+                    </li>
 
-                        <div class="btn-bar">
-                            <select class="js-medicaments-ajax"></select>
-                            <button type="button" class="btn add-medicament" data-collection-holder-class="medicaments">
-                                <i class="fa fa-plus"></i>
-                                Ajouter un médicaments
-                            </button>
+                    <li class="tab-content" name="catheterisation">
+                        {#========== Catheterisation ==========#}
+                        <div id="protocole-catheterisation">
+                            {{ form_start(formCatheterisation, {'attr': {'class': 'form validate-form'} }) }}
+                            {{ form_errors(formCatheterisation) }}
+
+                            {% form_theme formCatheterisation 'form-theme.html.twig' %}
+
+                            <h1 id="catheterisation">Cathétérisation</h1>
+                            <h3 id="coronaires">Schémas coronaires</h3>
+                            <div class="coronaire">
+                                {{ form_row(formCatheterisation.segment1, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formCatheterisation.segment2, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formCatheterisation.segment3, {'attr': {'class': 'input'} }) }}
+
+                                {{ form_row(formCatheterisation.troncCommun, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formCatheterisation.ivaProximal, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formCatheterisation.diagonal, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formCatheterisation.ivaMoyenne, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formCatheterisation.circonflexeProximale, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formCatheterisation.postrolLateral, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            <h3 id="pont">Schémas ponts</h3>
+                            <div class="form-space pont">
+                                {{ form_row(formCatheterisation.pontSaphenesGauche, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formCatheterisation.pontSaphenesDroit, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formCatheterisation.pontMammaire, {'attr': {'class': 'input'} }) }}
+                            </div>
+                            <div class="flex">
+                                {{ form_row(formCatheterisation.FEVentriculographie, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                {{ form_row(formCatheterisation.FEIsotopique, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                            </div>
+
+                            {{ form_row(formCatheterisation.save, {'attr': {'class': 'form-btn'} }) }}
+
+                            {{ form_row(formCatheterisation._token) }}
+                            {{ form_end(formCatheterisation, {'render_rest' : false}) }}
                         </div>
-                    </div>
+                    </li>
 
+                    <li class="tab-content" name="echocardiographie">
+                        {#========== Échocardiographie ==========#}
+                        <div id="protocole-echocardiographie">
+                            {{ form_start(formEchocardiographie, {'attr': {'class': 'form validate-form'} }) }}
+                            {{ form_errors(formEchocardiographie) }}
 
-                    {{ form_row(formMedicamentsEntree.save, {'attr': {'class': 'form-btn'} }) }}
+                            {% form_theme formEchocardiographie 'form-theme.html.twig' %}
 
-                    {{ form_row(formMedicamentsEntree._token) }}
-                    {{ form_end(formMedicamentsEntree, {'render_rest' : false}) }}
-                </div>
+                            <h1 id="echocardiographie">Échocardiographie</h1>
+                            <div class="form-space">
+                                {{ form_row(formEchocardiographie.date, {'attr': {'class': 'input js-datepicker'} }) }}
+                                <div class="flex-nowrap">
+                                    {{ form_row(formEchocardiographie.fcRepos, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                    {{ form_row(formEchocardiographie.fcMax, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                </div>
+                                {{ form_row(formEchocardiographie.rythmeCardiaque, {'attr': {'class': 'input'} }) }}
+                                <div class="flex-nowrap">
+                                    {{ form_row(formEchocardiographie.taSystoliqueRepos, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                    {{ form_row(formEchocardiographie.taSystoliquePic, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                </div>
+                            </div>
+
+                            <h3 id="basal">Basal</h3>
+                            <div class="form-space">
+                                {{ form_row(formEchocardiographie.basalEchographie, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchocardiographie.basalFMTPercent, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchocardiographie.basalResult, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchocardiographie.basalNumberSegment, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchocardiographie.basalIschemieLocation, {'attr': {'class': 'input'} }) }}
+                            </div>
+                            <div class="echo">
+                                {% for segment in formEchocardiographie.basalBullseye.segments %}
+                                    {% set counter = ( counter | default(0) ) + 1 %}
+                                    <div class="segment">
+                                        <div class="wrap-input">
+                                            {{ form_widget(segment.segment, {'attr': {'class': 'input js-unity', 'placeholder': counter}, 'useStyle': false }) }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <h3 id="stress">Stress</h3>
+                            <div class="form-space">
+                                {{ form_row(formEchocardiographie.stressEchographie, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchocardiographie.stressFMTPercent, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchocardiographie.stressResult, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchocardiographie.stressNumberSegment, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchocardiographie.stressIschemieLocation, {'attr': {'class': 'input'} }) }}
+                            </div>
+                            <div class="echo">
+                                {% for segment in formEchocardiographie.stressBullseye.segments %}
+                                    {% set counter = ( counter | default(0) ) + 1 %}
+                                    <div class="segment">
+                                        <div class="wrap-input">
+                                            {{ form_widget(segment.segment, {'attr': {'class': 'input js-unity', 'placeholder': counter}, 'useStyle': false }) }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            {{ form_row(formEchocardiographie.save, {'attr': {'class': 'form-btn'} }) }}
+
+                            {{ form_row(formEchocardiographie._token) }}
+                            {{ form_end(formEchocardiographie, {'render_rest' : false}) }}
+                        </div>
+                    </li>
+
+                    <li class="tab-content" name="echographieVasculaire">
+                        {#========== Échographie vasculaire ==========#}
+                        <div id="protocole-echographie-vasculaire">
+                            {{ form_start(formEchographieVasculaire, {'attr': {'class': 'form validate-form'} }) }}
+                            {{ form_errors(formEchographieVasculaire) }}
+
+                            {% form_theme formEchographieVasculaire 'form-theme.html.twig' %}
+
+                            <h1 id="echographie-vasculaire">Échographie vasculaire</h1>
+                            <h3 id="tsa">Schéma TSA</h3>
+                            <div class="form-space schema-tsa">
+                                {{ form_row(formEchographieVasculaire.carotideInterneDroite, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.carotideInterneGauche, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.EIMDroit, {'attr': {'class': 'input large'} }) }}
+                                {{ form_row(formEchographieVasculaire.EIMGauche, {'attr': {'class': 'input large'} }) }}
+                                {{ form_row(formEchographieVasculaire.vertebraleDroite, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.vertebraleGauche, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.carotideCommuneDroite, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.carotideCommuneGauche, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.sousClaviereDroite, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.sousClaviereGauche, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.TSAAorte, {'attr': {'class': 'input large'}, 'useStyle': true }) }}
+                            </div>
+
+                            <h3 id="membres-inferieur">Schéma membres inférieur</h3>
+                            <div class="form-space schema-membres-inferieur">
+                                {{ form_row(formEchographieVasculaire.membresInferieurAorte, {'attr': {'class': 'input large'}, 'useStyle': true }) }}
+                                {{ form_row(formEchographieVasculaire.iliaqueDroite, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.iliaqueGauche, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.femoraleCommuneDroite, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.femoraleCommuneGauche, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.femoraleSuperficielleDroite, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.femoraleSuperficielleGauche, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.popliteDroite, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.popliteGauche, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.axesJambiersDroits, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formEchographieVasculaire.axesJambiersGauches, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            <div class="form-space">
+                                <div class="flex-nowrap">
+                                    {{ form_row(formEchographieVasculaire.IPSReposDroit, {'attr': {'class': 'input'} }) }}
+                                    {{ form_row(formEchographieVasculaire.IPSReposGauche, {'attr': {'class': 'input'} }) }}
+                                </div>
+                                <div class="flex-nowrap">
+                                    {{ form_row(formEchographieVasculaire.IPSEffortDroit, {'attr': {'class': 'input'} }) }}
+                                    {{ form_row(formEchographieVasculaire.IPSEffortGauche, {'attr': {'class': 'input'} }) }}
+                                </div>
+                                {{ form_row(formEchographieVasculaire.testStandness, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                <div class="def">* compris entre 0 et 1000, 9999 si non réalisé</div>
+                            </div>
+
+                            <h3 id="compliance-arterielle">Compliance artérielle</h3>
+                            <div class="form-space">
+                                <div class="flex-nowrap">
+                                    {{ form_row(formEchographieVasculaire.pressionSystolique, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                    {{ form_row(formEchographieVasculaire.pressionDiastolique, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                </div>
+                                <div class="flex-nowrap">
+                                    {{ form_row(formEchographieVasculaire.frequenceCardiaque, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                    {{ form_row(formEchographieVasculaire.velociteOndePouls, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                </div>
+                            </div>
+
+                            {{ form_row(formEchographieVasculaire.save, {'attr': {'class': 'form-btn'} }) }}
+
+                            {{ form_row(formEchographieVasculaire._token) }}
+                            {{ form_end(formEchographieVasculaire, {'render_rest' : false}) }}
+                        </div>
+                    </li>
+
+                    <li class="tab-content" name="medicaments">
+                        {#========== Médicaments à l'entrée ==========#}
+                        <div id="protocole-medicaments">
+                            {{ form_start(formMedicamentsEntree, {'attr': {'class': 'form validate-form'} }) }}
+                            {{ form_errors(formMedicamentsEntree) }}
+
+                            {% form_theme formMedicamentsEntree 'form-theme.html.twig' %}
+
+                            <h1 id="medicaments">Médicaments à l'entrée</h1>
+
+                            <h3 id="description">Description</h3>
+                            <div class="form-space">
+                                {{ form_row(formMedicamentsEntree.nombreMedicamentsJour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                {{ form_row(formMedicamentsEntree.nombrePrisesSemaine, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                {{ form_row(formMedicamentsEntree.pilulier, {'attr': {'class': 'input radio-row'} }) }}
+                                {{ form_row(formMedicamentsEntree.gestion, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formMedicamentsEntree.priseDecalee, {'attr': {'class': 'input radio-row'} }) }}
+                                {{ form_row(formMedicamentsEntree.geneHeurePrise, {'attr': {'class': 'input radio-row'} }) }}
+                                {{ form_row(formMedicamentsEntree.evaluation, {'attr': {'class': 'input radio-row'} }) }}
+                                {{ form_row(formMedicamentsEntree.score, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            <h3 id="complement">Médicaments</h3>
+                            <div class="btn-bar">
+                                <a href="{{ path('medicament') }}" class="form-btn">
+                                    <i aria-hidden="true" class="fa fa-cog"></i>
+                                    Gérer la liste des médicaments
+                                </a>
+                            </div>
+
+                            <div class="margin-space"></div>
+
+                            <div class="form-space">
+                                <div class="medicaments__list">
+                                    {% for medicament in patient.protocole.medicamentsEntree.medicaments %}
+                                        <div data-id='{{ medicament.id }}' class='medicament'>
+                                            {{ medicament.name }}
+                                            <span class="delete">
+                                                <i class="fa fa-times"></i>
+                                            </span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="form-space">
+                                <div class="btn-bar">
+                                    <select class="js-medicaments-ajax"></select>
+                                    <button type="button" class="btn add-medicament" data-collection-holder-class="medicaments">
+                                        <i class="fa fa-plus"></i>
+                                        Ajouter un médicaments
+                                    </button>
+                                </div>
+                            </div>
+
+                            {{ form_row(formMedicamentsEntree.save, {'attr': {'class': 'form-btn'} }) }}
+
+                            {{ form_row(formMedicamentsEntree._token) }}
+                            {{ form_end(formMedicamentsEntree, {'render_rest' : false}) }}
+                        </div>
+                    </li>
+
+                    <li class="tab-content" name="neuroImagerie">
+                        {#========== NeuroImagerie ==========#}
+                        <div id="protocole-neuro-imagerie">
+                            {{ form_start(formNeuroImagerie, {'attr': {'class': 'form validate-form'} }) }}
+                            {{ form_errors(formNeuroImagerie) }}
+
+                            {% form_theme formNeuroImagerie 'form-theme.html.twig' %}
+
+                            <h1 id="neuro-imagerie">Neuro-imagerie</h1>
+                            <div class="form-space">
+                                {{ form_row(formNeuroImagerie.localisation, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formNeuroImagerie.taille, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formNeuroImagerie.mecanisme, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            {{ form_row(formNeuroImagerie.save, {'attr': {'class': 'form-btn'} }) }}
+
+                            {{ form_row(formNeuroImagerie._token) }}
+                            {{ form_end(formNeuroImagerie, {'render_rest' : false}) }}
+                        </div>
+                    </li>
+
+                    <li class="tab-content" name="neuroPsychologie">
+                        {#========== NeuroPsychologie ==========#}
+                        <div id="protocole-neuro-psychologie">
+                            {{ form_start(formNeuroPsychologie, {'attr': {'class': 'form validate-form'} }) }}
+                            {{ form_errors(formNeuroPsychologie) }}
+
+                            {% form_theme formNeuroPsychologie 'form-theme.html.twig' %}
+
+                            <h1 id="neuro-psychologie">Neuro-psychologie</h1>
+                            <div class="form-space">
+                                <div class="flex-nowrap">
+                                    {{ form_row(formNeuroPsychologie.MMSE, {'attr': {'class': 'input'} }) }}
+                                    {{ form_row(formNeuroPsychologie.MOCA, {'attr': {'class': 'input'} }) }}
+                                </div>
+                                <div class="flex-nowrap">
+                                    {{ form_row(formNeuroPsychologie.HADAnxiete, {'attr': {'class': 'input'} }) }}
+                                    {{ form_row(formNeuroPsychologie.HADDepression, {'attr': {'class': 'input'} }) }}
+                                </div>
+                                {{ form_row(formNeuroPsychologie.barriereLangue, {'attr': {'class': 'input radio-row'} }) }}
+                                {{ form_row(formNeuroPsychologie.niveauSocioEducatif, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formNeuroPsychologie.aphasie, {'attr': {'class': 'input radio-row'} }) }}
+                                {{ form_row(formNeuroPsychologie.difficultesMouvementFin, {'attr': {'class': 'input radio-row'} }) }}
+                                {{ form_row(formNeuroPsychologie.rankin, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            {{ form_row(formNeuroPsychologie.save, {'attr': {'class': 'form-btn'} }) }}
+
+                            {{ form_row(formNeuroPsychologie._token) }}
+                            {{ form_end(formNeuroPsychologie, {'render_rest' : false}) }}
+                        </div>
+                    </li>
+
+                    <li class="tab-content" name="testsEffort">
+                        {#========== Test d'effort ==========#}
+                        <div id="protocole-testsEffort">
+                            {{ form_start(formTestEffort, {'attr': {'class': 'form validate-form'} }) }}
+                            {{ form_errors(formTestEffort) }}
+
+                            {% form_theme formTestEffort 'form-theme.html.twig' %}
+
+                            <h1 id="testsEffort">Définition des tests d'effort</h1>
+                            <div class="form-space">
+                                <div class="flex-nowrap">
+                                    {{ form_row(formTestEffort.maquille, {'attr': {'class': 'input radio-row'} }) }}
+                                    {{ form_row(formTestEffort.type, {'attr': {'class': 'input radio-row'} }) }}
+                                </div>
+
+                                <div class="separator-space"></div>
+
+                                {{ form_row(formTestEffort.duree, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                {{ form_row(formTestEffort.watts, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+
+                                <div class="separator-space"></div>
+
+                                <div class="flex-nowrap">
+                                    {{ form_row(formTestEffort.frequenceMax, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                    {{ form_row(formTestEffort.frequenceMaxPercent, {'attr': {'class': 'input'} }) }}
+                                </div>
+                                <div class="flex-nowrap">
+                                    {{ form_row(formTestEffort.TASRepos, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                    {{ form_row(formTestEffort.TASEffort, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                </div>
+                                <div class="flex-nowrap">
+                                    {{ form_row(formTestEffort.ECGModifie, {'attr': {'class': 'input'} }) }}
+                                    {{ form_row(formTestEffort.mesure, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                                </div>
+                            </div>
+
+                            {{ form_row(formTestEffort.save, {'attr': {'class': 'form-btn'} }) }}
+
+                            {{ form_row(formTestEffort._token) }}
+                            {{ form_end(formTestEffort, {'render_rest' : false}) }}
+                        </div>
+                    </li>
+
+                    <li class="tab-content" name="visite">
+                        {#========== Visite ==========#}
+                        <div id="protocole-visite">
+                            {{ form_start(formVisite, {'attr': {'class': 'form validate-form'} }) }}
+                            {{ form_errors(formVisite) }}
+
+                            {% form_theme formVisite 'form-theme.html.twig' %}
+
+                            <h1 id="visite">Visite</h1>
+                            <div class="form-space">
+                                {{ form_row(formVisite.motifs, {'attr': {'class': 'input js-motifs'} }) }}
+                            </div>
+
+                            {{ form_row(formVisite.save, {'attr': {'class': 'form-btn'} }) }}
+
+                            {{ form_row(formVisite._token) }}
+                            {{ form_end(formVisite, {'render_rest' : false}) }}
+                        </div>
+                    </li>
+                </ul>
+
 
             </section>
 
+			{#========== DECES ==========#}
+			<section class="slide" id="tab-deces">
+                {{ form_start(formDeces, {'attr': {'class': 'form validate-form'} }) }}
+                {{ form_errors(formDeces) }}
+
+                {% form_theme formDeces 'form-theme.html.twig' %}
+
+				<h1 id="deces">Décès</h1>
+				<div class="form-space">
+                    {{ form_row(formDeces.date, {'attr': {'class': 'input js-datepicker'} }) }}
+                    <div class="def">
+                        <span>Définition de la cause initiale du décès :</span>
+                        maladie ou traumatisme étant à l’origine de la séquence des événements morbides ayant entraîné la mort.
+                    </div>
+                    <div class="form-space"></div>
+                    {{ form_row(formDeces.cause, {'attr': {'class': 'input '} }) }}
+                    {{ form_row(formDeces.codage, {'attr': {'class': 'input '} }) }}
+				</div>
+
+				{{ form_row(formDeces.save, {'attr': {'class': 'form-btn'} }) }}
+
+                {{ form_row(formDeces._token) }}
+                {{ form_end(formDeces, {'render_rest' : false}) }}
+			</section>
 		</main>
 
 		<div class="cd-top js-cd-top">
@@ -492,14 +980,15 @@
         /* History */
         $('.history').click(function(event) {
             event.preventDefault(); 
-            patientId = {{ patient.id }};
-            fieldId = $(this).parents('.wrap-input').find('input, select, textarea').attr('id');
+            let patientId = "{{ patient.id }}";
+            let fieldId = $(this).parents('.wrap-input').find('input, select, textarea').attr('id');
             /* lowercase + add '_' before capital */
             fieldId = fieldId.replace(/([a-z])([A-Z])/g, '$1_$2').trim();
             fieldId = fieldId.toLowerCase();
-            if (fieldId.substring(fieldId.length - 2) === "_0")
+            if (fieldId.substring(fieldId.length - 2) === "_0") {
                 fieldId = fieldId.substring(0, fieldId.length - 2);
-            var url = '{{ path("history_list_field", {'patient': 'patientId', 'fieldId': 'fieldId'}) }}'; 
+            }
+            let url = '{{ path("history_list_field", {'patient': 'patientId', 'fieldId': 'fieldId'}) }}'; 
             url = url.replace("patientId", patientId);
             url = url.replace("fieldId", fieldId);
             window.location.href = url;
@@ -512,28 +1001,33 @@
 
 
         /* Fiches */
-        let fiches = {{patient.protocole.fiches|json_encode|raw}};
-        $.each(fiches, function(i, e) {
-            $('#' + e).show();
-        })
-
+        let fiches = [];
+        $.each({{patient.protocole.fiches|json_encode|raw}}, function (index, fiche) {
+            fiches[fiches.length] = fiche;
+        });
         $('#add-fiche').click(function() {
             let fiche = $('#protocole_fiches').val()
             if (!fiche) return;
             fiches.push(fiche);
             let text = $('#protocole_fiches').find(":selected").text();
-            var t = $(
-                `<div name='` + fiche + `' class='etiquette'>
+            let t = $(
+                `<li name='` + fiche + `' class='etiquette'>
                     ` + text + `
                     <span class="delete">
                         <i class="fa fa-times"></i>
                     </span>
-                </div>`
+                </li>`
             );
-            $('.etiquette__list').append(t);
+            $('.etiquettes__list').append(t);
+            $('.tabbed').append('<li name="' + fiche + '">' + text + '</li>');
+            $('.protocole-list').append('<li><a name="' + fiche + '">' + text + '</a></li>');
             $('#protocole_fiches option[value="' + fiche + '"').remove();
-            sortEtiquetteList();
-            $('#' + fiche).show();
+            sortList('.etiquettes__list', 'li');
+            sortList('.tabbed', 'li');
+            sortList('.protocole-list', 'li', 'a');
+            sortList('#protocole_fiches', 'option');
+            $('#protocole_fiches option').eq(0).prop('selected', true);
+            if (fiches.length === 1) selectTab(fiche);
 
             $.ajax({
                 type: "POST",
@@ -544,10 +1038,9 @@
                 },
                 success: function(response) {},
             });
-            console.log(fiches);
         })
 
-        $('.etiquette__list').on('click', '.etiquette .delete', function() {
+        $('.etiquettes__list').on('click', '.etiquette .delete', function() {
             let fiche = $(this).parent().attr('name');
             let text = $(this).parent().text();
             const index = fiches.indexOf(fiche);
@@ -555,9 +1048,18 @@
                 fiches.splice(index, 1);
             }
             $('.etiquette[name="' + fiche + '"]').remove();
+            $('.tabbed li[name="' + fiche + '"]').remove();
+            $('.protocole-list li a[name="' + fiche + '"]').remove();
             $('#protocole_fiches').append('<option value="' + fiche + '">' + text + '</option>')
-            sortEtiquetteList();
-            $('#' + fiche).hide();
+            sortList('.etiquettes__list', 'li');
+            sortList('.tabbed', 'li');
+            sortList('.protocole-list', 'li', 'a');
+            sortList('#protocole_fiches', 'option');
+            if (fiches.length === 0) clearTab();
+            else if (!isTabAvailable(fiche)) {
+                let tab = $('.tabbed li').eq(0).attr('name');
+                selectTab(tab);
+            }
 
             $.ajax({
                 type: "POST",
@@ -568,34 +1070,75 @@
                 },
                 success: function(response) {},
             });
-            console.log(fiches);
         })
 
-        function sortEtiquetteList() {
-            var mylist = $('.etiquette__list');
-            var listitems = mylist.children('div').get();
-
-            listitems.sort(function(a, b) {
-                return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
-            });
-
-            $.each(listitems, function(index, item) {
-                mylist.append(item); 
-            });
+        function sortList(list, element, depth = '') {
+            $(list + " " + element).sort(function(a, b) {
+                if (depth) {
+                    return $(a).find(depth).text().trim().toUpperCase().localeCompare($(b).find(depth).text().trim().toUpperCase());
+                }
+                return $(a).text().trim().toUpperCase().localeCompare($(b).text().trim().toUpperCase());
+            }).appendTo(list);
         }
-        sortEtiquetteList();
+        sortList('.etiquettes__list', 'li');
+        sortList('.tabbed', 'li');
+        sortList('.protocole-list', 'li', 'a');
+        sortList('#protocole_fiches', 'option');
+        $('#protocole_fiches option').eq(0).prop('selected', true);
 
         /* Medicament */
+        $('.add-medicament').click(function() {
+            let medicament = $('.js-medicaments-ajax').select2('data');
+            if (!medicament) return;
+            let t = $(
+                `<div class='medicament' data-id='` + medicament[0].id + `'>
+                    ` + medicament[0].name + `
+                    <span class="delete">
+                        <i class="fa fa-times"></i>
+                    </span>
+                </div>`
+            );
+            if ($('.medicament[data-id="' + medicament[0].id + '"]').length === 0) {
+                $('.medicaments__list').append(t);
+                sortMedicamentsList();
 
-        $('.add-medicament').click(function(e) {
-            
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('medicament_entree_add') }}",
+                    data: {
+                        'medicament': medicament[0].id,
+                        'patient': {{ patient.id }},
+                    },
+                    success: function(response) {},
+                });
+            }
         })
 
+        $('.medicaments__list').on('click', '.medicament .delete', function() {
+            let medicament = $(this).parent().attr('data-id');
+            $('.medicament[data-id="' + medicament + '"]').remove();
+            sortMedicamentsList();
+
+            $.ajax({
+                type: "POST",
+                url: "{{ path('medicament_entree_delete') }}",
+                data: {
+                    'medicament': medicament,
+                    'patient': {{ patient.id }},
+                },
+                success: function(response) {},
+            });
+        })
+
+
         $(".js-medicaments-ajax").select2({
+            width: '100%',
+            language: "fr",
             ajax: {
                 url: "{{ path('medicament_search') }}",
+                type: "POST",
                 dataType: 'json',
-                delay: 250,
+                delay: 150,
                 data: function (params) {
                     return {
                         q: params.term,
@@ -606,8 +1149,8 @@
                     params.page = params.page || 1;
 
                     return {
-                            results: data.items,
-                            pagination: {
+                        results: data,
+                        pagination: {
                             more: (params.page * 30) < data.total_count
                         }
                     };
@@ -615,29 +1158,53 @@
                 cache: true
             },
             placeholder: 'Rechercher un médicament',
-            // minimumInputLength: 1,
+            minimumInputLength: 1,
+            allowClear: true,
             templateResult: formatMed,
             templateSelection: formatMedSelection
         });
 
-        function formatMed (repo) {
-            if (repo.loading) {
-                return repo.text;
+        function formatMed(data) {
+            if (data.loading) {
+                return data.text;
             }
 
-            var $container = $(
-                "<div class='select2-result-medicament__name'></div>"
+            let $container = $(
+                "<div class='select2-result-medicament__name'>" + data.name + "</div>"
             );
-            $container.find(".select2-result-medicament__name").text(repo.name);
             return $container;
         }
 
-        function formatMedSelection (repo) {
-            return repo.full_name || repo.text;
+        function formatMedSelection(data) {
+            return data.name || data.text;
         }
 
+        function sortMedicamentsList() {
+            let mylist = $('.medicaments__list');
+            let listitems = mylist.children('div').get();
+
+            listitems.sort(function(a, b) {
+                return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+            });
+
+            $.each(listitems, function(index, item) {
+                mylist.append(item); 
+            });
+        }
+        sortMedicamentsList();
+
+        /* Modifs */
+        $(".js-motifs").select2({
+            multiple: true,
+            width: '100%',
+            language: "fr",
+            placeholder: 'Sélectionner un motif',
+            allowClear: true,
+        });
+
+
         /* IMC */
-        {# function getIMC(poids, taille) {
+        function getIMC(poids, taille) {
             if (poids && taille && taille > 0) {
                 let imc = poids / ((taille * 0.01) * (taille * 0.01));
                 return imc.toFixed(1);
@@ -645,87 +1212,57 @@
             return null
         }
 
-        $('#general_taille, #general_poids').change(function() {
-            $('#general_imc').val(getIMC($('#general_poids').val(), $('#general_taille').val()));
-        }) #}
-
-        {# function getAge(dateString) {
-            var today = new Date();
-            let dateArray = dateString.split('/');
-            var date = new Date(dateArray[1], dateArray[0], 1);
-            var age = today.getFullYear() - date.getFullYear();
-            var m = today.getMonth() - date.getMonth();
-            if (isNaN(age))
-                return -1;
-            if (m < 0 || (m === 0 && today.getDate() < date.getDate())) 
-                age--;
-            return age;
-        } #}
-        {# $('#general_dateNaissance').on('change', function() {
-            $('#general_age').val(getAge($(this).val()));
-        }) #}
-        {# jQuery(document).ready(function () {
-            $('.js-birthday').datepicker({
-                language: 'fr',
-                clearButton: true,
-                onSelect: function (formattedDate, date, inst) {
-                    $('#general_age').val(getAge(formattedDate));
-                }
-            });
-        }); #}
-
-        /* Alimentation */
-        {# function alimentation(nb, item) {
-            ali = item.parents('.wrap-input').next();
-            ali.empty();
-            if (nb >= 4)
-                ali.append('<span class="green">Recommandée (4-5)</span');
-            else if (nb >= 2)
-                ali.append('<span class="orange">Intermédiaire (2-3)</span');
-            else
-                ali.append('<span class="red">Faible (0-1)</span');
-        }
-
-        $('.alimentation-js').each(function() {
-            alimentation($(this).find('input:checked').length, $(this));
-        })
-        $('.alimentation-js input').on('change', function () {
-            alimentation($(this).parents('.alimentation-js').find('input:checked').length, $(this).parents('.alimentation-js'));
-        }); #}
-
-        /* Eligibilite */
-        {# function isValid() {
-            let inclusion = 1;
-            let non_inclusion = 1;
-            $('#cb0').prop('checked', true);
-            $('#inclusion-qcm .qcm-row').each(function (e) {
-                var radioValue = $(this).find('input:checked').val();
-                if (radioValue != "Oui") {
-                    inclusion = 0;
-                    return;
-                }
-            });
-            $('#non-inclusion-qcm .qcm-row').each(function (e) {
-                var radioValue = $(this).find('input:checked').val();
-                if (radioValue != "Non") {
-                    non_inclusion = 0;
-                    return;
-                }
-            });
-            if (! inclusion || ! non_inclusion) {
-                $('#cb0').prop('checked', false);
-            }
-        }
-        isValid();
-        $('main .qcm-row input').change(function () {
-            isValid();
-        }); #}
+        $('#bfr_taille, #bfr_poids').change(function() {
+            $('#bfr_IMC').val(getIMC($('#bfr_poids').val(), $('#bfr_taille').val()));
+        });
+        $('#bfr_IMC').val(getIMC($('#bfr_poids').val(), $('#bfr_taille').val()));
+       
     </script>
 
     <script>
+        /* TABBED */
+        $('.tabbed').on('click', 'li', function() {
+            if (this.classList.contains('active'))
+                return;
+            selectTab($(this).attr('name'));
+        })
+
+        function isTabAvailable(tab) {
+            $('.tabbed li').each(function() {
+                if ($(this).attr('name') === tab)
+                    return true;
+            })
+            return false;
+        }
+
+        let tabSelected = localStorage.getItem('tabSelected');
+        if (tabSelected === null || isTabAvailable(tabSelected)) {
+            tabSelected = $('.tabbed li').eq(0).attr('name');
+        }
+        selectTab(tabSelected);
+
+        $('ul.protocole-list').on('click', 'li a', function() {
+            let tab = $(this).attr('name')
+            selectTab(tab);
+            scrollToc('#protocole');
+        })
+
+        function selectTab(tab) {
+            localStorage.setItem('tabSelected', tab);
+            $(".tab-content").removeClass('active');
+            $(".tabbed li").removeClass('active');
+            $(".tab-content[name='" + tab + "']").addClass('active');
+            $(".tabbed li[name='" + tab + "']").addClass('active');
+        }
+
+        function clearTab() {
+            localStorage.setItem('tabSelected', null);
+            $(".tab-content").removeClass('active');
+            $(".tabbed li").removeClass('active');
+        }
+
         /* TOC */
         /* Smooth scroll */
-
         function displaySlide(page) {
             $('.slide').each(function(i, e) {
                 let id = 'tab-' + page.substring(1);
@@ -754,7 +1291,6 @@
 
         $('.toc li a').on('click', function () {
             scrollToc($(this).attr('href'));
-            return false;
         });
 
         //onLoad
@@ -806,19 +1342,24 @@
         }
 
         /* Reduce menu */
-        var reduce = false;
+        let reduce = localStorage.getItem('reduceMenu') === "true";
+        if (reduce) reduceMenu()
         $('#js-reducemenu').click(function() {
+            localStorage.setItem('reduceMenu', !reduce);    
             reduce = !reduce;
+            reduceMenu();        
+        })
 
-            $( '.main' ).toggleClass( "reduce" );
-            $( '#js-reducemenu .fas' ).toggleClass( "fa-arrow-left fa-arrow-right" );
+        function reduceMenu() {
+            $('.main').toggleClass("reduce");
+            $('#js-reducemenu .fas').toggleClass("fa-arrow-left fa-arrow-right");
 
-            $('.toc > ul > li > a').each(function (i) {
+            $('.toc > ul > li > a').each(function(i) {
                 if ($(this).hasClass('js-active')) 
                     toggleMenu($(this));
                 $(this).removeClass('js-active');
             });
-        })
+        }
 
         $("textarea").keyup(function(e) {
             while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
@@ -831,9 +1372,7 @@
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if (keycode == '13' && !$("textarea").is(":focus")) {
                 event.preventDefault();
-                if (validate == false) {
-                    $(this).find('.slide-active form').submit();
-                }
+                $(this).find('.slide-active form').submit();
             }
         });
     </script>

@@ -15,8 +15,15 @@
 			Liste des médicaments
 		</div>
 
-		<div class="container-form">
-			<div class="btn-bar">
+        <div class="btn-space">
+		    <div class="btn-block">
+                <button id="cancel" class="form-btn btn-default">
+                    <i aria-hidden="true" class="fa fa-arrow-left"></i>Retour</button>
+            </div>
+        </div>
+
+		<div class="container-form">            
+            <div class="btn-bar">
                 <input type="text" id="medicament_name" name="medicament[name]" placeholder="Nom du médicament" class="input">
 				<button class="btn"id="medicament_add">
 					<i aria-hidden="true" class="fa fa-plus"></i>
@@ -44,6 +51,11 @@
     <script src="{{ asset('js/bootgrid.min.js') }}"></script>
 
     <script>
+        $('button#cancel').on('click', function(e) {
+            e.preventDefault();
+            window.history.back();
+        });
+
         var grid = $("#data-grid").bootgrid({
             rowCount: [
                 50, 200, -1
@@ -79,6 +91,7 @@
         $('#medicament_add').click(function() {
             let name = $('#medicament_name').val();
             if (!name) return;
+            $('#medicament_name').val('');
             $.ajax({
                 type: "POST",
                 url: "{{ path('medicament_add') }}",

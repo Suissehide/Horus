@@ -18,31 +18,6 @@ class Facteur
     private $id;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
-    private $taille;
-
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
-    private $poids;
-
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
-    private $tourTaille;
-
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=3, nullable=true)
-     */
-    private $tensionArterielleJour;
-
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=3, nullable=true)
-     */
-    private $tensionArterielleNuit;
-
-    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $risqueHTA;
@@ -140,66 +115,6 @@ class Facteur
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTaille(): ?string
-    {
-        return $this->taille;
-    }
-
-    public function setTaille(?string $taille): self
-    {
-        $this->taille = $taille;
-
-        return $this;
-    }
-
-    public function getPoids(): ?string
-    {
-        return $this->poids;
-    }
-
-    public function setPoids(?string $poids): self
-    {
-        $this->poids = $poids;
-
-        return $this;
-    }
-
-    public function getTourTaille(): ?string
-    {
-        return $this->tourTaille;
-    }
-
-    public function setTourTaille(?string $tourTaille): self
-    {
-        $this->tourTaille = $tourTaille;
-
-        return $this;
-    }
-
-    public function getTensionArterielleJour(): ?string
-    {
-        return $this->tensionArterielleJour;
-    }
-
-    public function setTensionArterielleJour(?string $tensionArterielleJour): self
-    {
-        $this->tensionArterielleJour = $tensionArterielleJour;
-
-        return $this;
-    }
-
-    public function getTensionArterielleNuit(): ?string
-    {
-        return $this->tensionArterielleNuit;
-    }
-
-    public function setTensionArterielleNuit(?string $tensionArterielleNuit): self
-    {
-        $this->tensionArterielleNuit = $tensionArterielleNuit;
-
-        return $this;
     }
 
     public function getRisqueHTA(): ?bool

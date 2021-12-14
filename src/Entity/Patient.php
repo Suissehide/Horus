@@ -39,6 +39,12 @@ class Patient
     private $protocole;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Deces", cascade={"persist", "remove"})
+     * @Groups({"advancement", "export"})
+     */
+    private $deces;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Erreur", mappedBy="patient", cascade={"remove"})
      */
     private $erreurs;
@@ -85,6 +91,18 @@ class Patient
     public function setProtocole(?Protocole $protocole): self
     {
         $this->protocole = $protocole;
+
+        return $this;
+    }
+
+    public function getDeces(): ?Deces
+    {
+        return $this->deces;
+    }
+
+    public function setDeces(?Deces $deces): self
+    {
+        $this->deces = $deces;
 
         return $this;
     }

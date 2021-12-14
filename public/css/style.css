@@ -46,6 +46,7 @@
     --alabaster: #E9EBDE;
     --gray: #e6e6e6;
     --gray-hover: #d6d6d6;
+    --gray-disabled: #C2C2C2;
     --gray-dark: #8f8fa1;
 }
 
@@ -256,7 +257,7 @@ a:hover {
     margin-right: 0px;
 }
 
-.btn-xs > i {
+.btn-xs>i {
     margin: 0;
 }
 
@@ -309,8 +310,15 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     font-size: 14px;
     height: 42px;
     line-height: 42px;
-    padding: 0 20px;
+    padding: 0 15px;
     border-radius: 3px;
+    width: 100%;
+}
+
+.input:disabled {
+    cursor: not-allowed;
+    background-color: var(--gray-disabled);
+    border: 1px solid var(--persian-indigo);
 }
 
 .focus-input {
@@ -346,6 +354,11 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     border: 1px solid transparent;
     border-radius: 3px;
     margin-bottom: 16px;
+}
+
+.form-input {
+    position: relative;
+    flex: 1;
 }
 
 label, .col-label, .row-label {
@@ -486,19 +499,20 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     transition: background-color 0.24s linear;
 }
 
-.radio-row [type="checkbox"]:not(:checked), .radio-row [type="checkbox"]:checked {
+.radio-row[type="checkbox"]:not(:checked), .radio-row[type="checkbox"]:checked {
     position: absolute;
     left: 0;
     opacity: 0.01;
 }
 
-.radio-row [type="checkbox"]:not(:checked)+label, .radio-row [type="checkbox"]:checked+label {
+.radio-row[type="checkbox"]:not(:checked)+label, .radio-row[type="checkbox"]:checked+label {
     position: relative;
     padding-left: 2.3em;
     cursor: pointer;
+    background-color: #e6e6e6;
 }
 
-.radio-row [type="checkbox"]:not(:checked)+label:before, .radio-row [type="checkbox"]:checked+label:before {
+.radio-row[type="checkbox"]:not(:checked)+label:before, .radio-row[type="checkbox"]:checked+label:before {
     content: '';
     position: absolute;
     left: 0;
@@ -513,7 +527,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     transition: all .275s;
 }
 
-.radio-row [type="checkbox"]:not(:checked)+label:after, .radio-row [type="checkbox"]:checked+label:after {
+.radio-row[type="checkbox"]:not(:checked)+label:after, .radio-row[type="checkbox"]:checked+label:after {
     content: '✓';
     position: absolute;
     top: 50%;
@@ -525,12 +539,12 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     transition: all .2s;
 }
 
-.radio-row [type="checkbox"]:not(:checked)+label:after {
+.radio-row[type="checkbox"]:not(:checked)+label:after {
     opacity: 0;
     transform: scale(0) rotate(45deg);
 }
 
-.radio-row [type="checkbox"]:checked+label:after {
+.radio-row[type="checkbox"]:checked+label:after {
     opacity: 1;
     transform: scale(1) rotate(0);
 }
@@ -562,6 +576,10 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
 
 .radio-container label {
     margin: 0;
+}
+
+.flex-table .radio-container {
+    flex: 1;
 }
 
 /* Table & Bootgrid
@@ -603,6 +621,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
 .table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {
     padding: 10px;
     white-space: normal;
+    vertical-align: middle;
 }
 
 .table>tbody>tr.out>td, .table>tbody>tr.out>th, .table>tbody>tr>td.out, .table>tbody>tr>th.out, .table>tfoot>tr.out>td, .table>tfoot>tr.out>th, .table>tfoot>tr>td.out, .table>tfoot>tr>th.out, .table>thead>tr.out>td, .table>thead>tr.out>th, .table>thead>tr>td.out, .table>thead>tr>th.out {
@@ -913,7 +932,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
 .navbar-wrapper {
     padding-left: 80px;
     z-index: 0;
-    /* height: 100%; */
+    height: 100%;
 }
 
 /* ScrollTop

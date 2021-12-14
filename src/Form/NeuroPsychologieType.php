@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\MedicamentsEntree;
+use App\Entity\NeuroPsychologie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -10,31 +10,49 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class MedicamentsEntreeType extends AbstractType
+class NeuroPsychologieType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombreMedicamentsJour', IntegerType::class, array(
-                'label' => 'Nombre de médicaments par jour',
+            ->add('MMSE', IntegerType::class, array(
+                'label' => 'MMSE *',
                 'attr' => array(
-                    'unity' => 'médicament/jour',
+                    'unity' => '',
                     'data-min' => 0,
                     'data-max' => 0,
                 ),
                 'required' => false,
             ))
-            ->add('nombrePrisesSemaine', IntegerType::class, array(
-                'label' => 'Nombre de prises par semaine',
+            ->add('MOCA', IntegerType::class, array(
+                'label' => 'MOCA *',
                 'attr' => array(
-                    'unity' => 'prises/semaine',
+                    'unity' => '',
                     'data-min' => 0,
                     'data-max' => 0,
                 ),
                 'required' => false,
             ))
-            ->add('pilulier', ChoiceType::class, array(
-                'label' => 'Pilulier',
+            ->add('HADAnxiete', IntegerType::class, array(
+                'label' => 'HAD anxiété *',
+                'attr' => array(
+                    'unity' => '',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                ),
+                'required' => false,
+            ))
+            ->add('HADDepression', IntegerType::class, array(
+                'label' => 'HAD dépression *',
+                'attr' => array(
+                    'unity' => '',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                ),
+                'required' => false,
+            ))
+            ->add('barriereLangue', ChoiceType::class, array(
+                'label' => 'Barrière langue',
                 'expanded' => true,
                 'multiple' => false,
                 'placeholder' => false,
@@ -45,22 +63,20 @@ class MedicamentsEntreeType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('gestion', ChoiceType::class, array(
-                'label' => 'Gestion',
-                'expanded' => false,
-                'multiple' => false,
-                'placeholder' => false,
+            ->add('niveauSocioEducatif', ChoiceType::class, array(
+                'label' => 'Niveau socio-éducatif',
+                'placeholder' => '',
                 'choices' => array(
                     '' => '',
-                    'Personnelle' => 'Personnelle',
-                    'Familiale' => 'Familiale',
-                    'Infirmière' => 'Infirmière',
-                    'Tiers' => 'Tiers'
+                    'Ne sait pas compter' => 'Ne sait pas compter',
+                    'Ne sait pas lire' => 'Ne sait pas lire',
+                    'Ne sait ni lire ni compter' => 'Ne sait ni lire ni compter',
+                    'Aucune difficulté' => 'Aucune difficulté'
                 ),
                 'required' => false,
             ))
-            ->add('priseDecalee', ChoiceType::class, array(
-                'label' => 'Prise en décalée',
+            ->add('aphasie', ChoiceType::class, array(
+                'label' => 'Aphasie',
                 'expanded' => true,
                 'multiple' => false,
                 'placeholder' => false,
@@ -71,8 +87,8 @@ class MedicamentsEntreeType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('geneHeurePrise', ChoiceType::class, array(
-                'label' => 'Gêne heure prise',
+            ->add('difficultesMouvementFin', ChoiceType::class, array(
+                'label' => 'Difficultés mouvement fin',
                 'expanded' => true,
                 'multiple' => false,
                 'placeholder' => false,
@@ -83,20 +99,8 @@ class MedicamentsEntreeType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('evaluation', ChoiceType::class, array(
-                'label' => 'Évaluation de l\'observance possible',
-                'expanded' => true,
-                'multiple' => false,
-                'placeholder' => false,
-                'choices' => array(
-                    'Oui' => 'Oui',
-                    'Non' => 'Non',
-                    'Non précisé' => 'Non précisé',
-                ),
-                'required' => false,
-            ))
-            ->add('score', IntegerType::class, array(
-                'label' => 'Score observance CEPTA',
+            ->add('rankin', IntegerType::class, array(
+                'label' => 'Rankin *',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -105,13 +109,6 @@ class MedicamentsEntreeType extends AbstractType
                 'required' => false,
             ))
 
-            // ->add('medicaments', CollectionType::class, [
-            //     'entry_type' => MedicamentType::class,
-            //     'entry_options' => ['label' => false],
-            //     'allow_add' => true,
-            //     'by_reference' => false,
-            // ])
-        
             ->add('save', SubmitType::class, array('label' => 'Sauvegarder'))
         ;
     }
@@ -119,7 +116,7 @@ class MedicamentsEntreeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => MedicamentsEntree::class,
+            'data_class' => NeuroPsychologie::class,
         ]);
     }
 }

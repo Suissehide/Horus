@@ -79,8 +79,9 @@ class IndexController extends AbstractController
      */
     public function advancement(Request $request): Response
     {
+        $conn = $this->getDoctrine()->getConnection();
+
         if ($request->isXmlHttpRequest()) {
-            $em = $this->getDoctrine()->getManager();
             $id = $request->request->get('id');
             $patient = $this->getDoctrine()->getRepository(Patient::class)->find($id);
 
@@ -91,9 +92,9 @@ class IndexController extends AbstractController
                 GROUP BY field_id, patient_id
             ) AS x
             INNER JOIN erreur AS f ON f.etat = "error" AND f.field_id = x.field_id AND f.date_creation = x.maxdate AND f.patient_id = ' . $patient->getId() . ';';
-            $statement = $em->getConnection()->prepare($RAW_QUERY);
-            $statement->execute();
-            $errors = $statement->fetchAll();
+            $statement = $conn->prepare($RAW_QUERY);
+            $resultSet = $statement->executeQuery();
+            $errors = $resultSet->fetchAllAssociative();
 
             session_write_close();
 

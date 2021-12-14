@@ -48,6 +48,37 @@
 
 {% block javascripts %}
     <script>
+        let patient = {{patient|json_encode|raw}};
+
+        function arrayToString(arr, path) {
+            let s = [];
+            for (let i in arr) {
+                s.push(arr[i][path]);
+            }
+            return s.join(', ');
+        }
+
+        let text = $('.letter__content').val();
+        const regexp = '\{\{(.*?)\}\}';
+        let results = [...text.matchAll(regexp)];
+        $.each(results, function(index, elem) {
+            let path = elem[1].split('-');
+            let value = patient;
+            for (let p in path) {
+                value = value[path[p].trim()];
+            }
+            
+            if (elem[1].trim() === 'protocole-medicamentsEntree-medicaments') {
+                value = arrayToString(value, 'name');
+            } else {
+                value = $.isArray(value) ? value.join(', ') : value;
+            }
+
+            text = text.replace(elem[0], value ? value : '(vide)');
+        });
+        $('.letter__content').val(text);
+    
+
         $('.letter__content').height($('.letter__content').prop('scrollHeight') + 'px');
 
         $('#copy').click(function() {

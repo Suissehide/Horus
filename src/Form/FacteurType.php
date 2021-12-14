@@ -18,53 +18,6 @@ class FacteurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taille', IntegerType::class, array(
-                'label' => 'Taille',
-                'attr' => array(
-                    'unity' => 'cm',
-                    'data-min' => 100,
-                    'data-max' => 260,
-                ),
-                'required' => false,
-            ))
-            ->add('poids', IntegerType::class, array(
-                'label' => 'Poids',
-                'attr' => array(
-                    'unity' => 'kg',
-                    'data-min' => 10,
-                    'data-max' => 500,
-                ),
-                'required' => false,
-            ))
-            ->add('tourTaille', IntegerType::class, array(
-                'label' => 'Tour de taille',
-                'attr' => array(
-                    'unity' => 'cm',
-                    'data-min' => 10,
-                    'data-max' => 200,
-                ),
-                'required' => false,
-            ))
-            ->add('tensionArterielleJour', IntegerType::class, array(
-                'label' => 'Jour',
-                'attr' => array(
-                    'unity' => 'mmHg',
-                    'data-min' => 1,
-                    'data-max' => 200,
-                ),
-                'required' => false,
-            ))
-            ->add('tensionArterielleNuit', IntegerType::class, array(
-                'label' => 'Nuit',
-                'attr' => array(
-                    'unity' => 'mmHg',
-                    'data-min' => 1,
-                    'data-max' => 200,
-                ),
-                'required' => false
-            ))
-
-
             ->add('risqueHTA', CheckboxType::class, array(
                 'label' => ' ',
                 'required' => false

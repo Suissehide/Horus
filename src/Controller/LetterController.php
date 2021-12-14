@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Letter;
+use App\Entity\Patient;
 
 use App\Form\LetterType;
 
@@ -10,6 +11,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class LetterController extends AbstractController
 {
@@ -39,9 +44,30 @@ class LetterController extends AbstractController
             return $this->redirect($request->getUri());
         }
 
+        $jsonPatient = $this->serializeEntity(
+            $em->getRepository(Patient::class)->findOneBy([], ['id' => 'desc']),
+            'json'
+        );
+
         return $this->render('letter/index.html.twig', [
             'controller_name' => 'LetterController',
+            'patient' => $jsonPatient,
             'form' => $form->createView()
         ]);
+    }
+
+    private function serializeEntity($data)
+    {
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $serialized = $serializer->serialize($data, 'json', [
+            'groups' => 'advancement',
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            },
+        ]);
+        return json_decode($serialized, true);
     }
 }

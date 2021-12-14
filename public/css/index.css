@@ -7,13 +7,13 @@
 .flex-nowrap {
     display: flex;
     flex-flow: row;
-    gap: 0 15px;
+    gap: 0 16px;
 }
 
 .flex-wrap {
     display: flex;
     flex-flow: row wrap;
-    gap: 0 15px;
+    gap: 0 16px;
 }
 
 .flex-row {
@@ -29,6 +29,17 @@
 
 .flex-row>section h3 {
     margin-bottom: 15px;
+}
+
+.flex-2 {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+    gap: 0 15px;
+}
+
+.flex-2>* {
+    width: calc(50% - 8px);
 }
 
 .alert {
@@ -61,7 +72,7 @@
     width: 100%;
     display: block;
     padding-top: 50px;
-    padding-left: 25px;
+    padding-left: 15px;
 }
 
 .title-wrapper span {
@@ -70,6 +81,52 @@
 
 .container-form .wrap-input {
     background-color: transparent;
+}
+
+/* Tabs
+========================================================================== */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+ul.tabbed {
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 25px;
+}
+
+ul.tabbed li {
+    z-index: 2;
+    display: block;
+    text-align: center;
+    position: relative;
+    padding: 10px 24px 8px;
+    background-color: #e6e6e6;
+    color: #777;
+    cursor: pointer;
+    transition: all 250ms ease;
+    margin-bottom: 5px;
+    user-select: none;
+}
+
+ul.tabbed li.active {
+    z-index: 3;
+    background-color: var(--blue-green);
+    color: #fff;
+}
+
+ul.tabbed li:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+ul.tabbed li:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 /* Patient
@@ -174,6 +231,13 @@
     width: 50px;
     height: 1px;
     margin: 5px 0 16px 0;
+    background-color: var(--blue-green);
+}
+
+.separator-space {
+    width: 50px;
+    height: 1px;
+    margin: 5px 0 16px 0;
     background-color: var(--persian-indigo);
 }
 
@@ -227,8 +291,8 @@
 }
 
 .hero-text {
-    position: absolute;
-    color: #f4f9f7;
+    /* position: absolute;
+    color: #f4f9f7; */
 }
 
 .container-form-btn {
@@ -241,7 +305,7 @@
     align-items: center;
     gap: 15px;
     margin-bottom: 15px;
-    word-break:break-all
+    word-break: break-all
 }
 
 .col-flex-1 {
@@ -256,7 +320,7 @@
     flex: 45%;
 }
 
-.no-label ~ label em {
+.no-label~label em {
     display: none;
 }
 
@@ -286,13 +350,18 @@
     filter: invert(43%) sepia(86%) saturate(441%) hue-rotate(147deg) brightness(96%) contrast(84%);
 }
 
-.etiquette__list {
+.etiquettes__list {
     display: flex;
     flex-flow: row wrap;
-    /* margin: 5px; */
 }
 
-.etiquette {
+.medicaments__list {
+    display: flex;
+    flex-flow: column;
+}
+
+.etiquette, .medicament {
+    width: fit-content;
     color: #f4f9f7;
     padding: 3px 15px;
     margin: 5px 5px;
@@ -302,14 +371,28 @@
     background-color: var(--blue-green);
 }
 
-.etiquette .delete {
+.etiquettes__list .etiquette:first-child, .medicaments__list .medicament:first-child {
+    margin-left: 0;
+}
+
+.medicaments__list .medicament {
+    margin: 5px 0;
+}
+
+.etiquette .delete, .medicament .delete {
     cursor: pointer;
-    padding-left: 5px;
+    float: right;
+    padding-left: 10px;
     transition: 0.3s ease;
 }
 
-.etiquette .delete:hover {
+.etiquette .delete:hover, .medicament .delete:hover {
     color: var(--blue-green-active);
+}
+
+.def {
+    padding: 5px;
+    border-left: 2px solid var(--blue-green);
 }
 
 /* User
@@ -382,26 +465,478 @@ input[type='checkbox'].checkbox-round+span {
 }
 
 .striped {
-    background: repeating-linear-gradient( 45deg, #f8f6ff, #f8f6ff 10px, #fff 10px, #fff 20px);
+    background: repeating-linear-gradient(45deg, #f8f6ff, #f8f6ff 10px, #fff 10px, #fff 20px);
     cursor: not-allowed !important;
 }
 
 /* Letter
 ========================================================================== */
-
 .letter__content {
     resize: none;
     width: 100%;
-    min-height: 400px;
+    min-height: 500px;
     line-height: 22px;
     padding: 15px 20px;
 }
 
+.select-data {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.select-data button {
+    margin-left: 15px;
+}
+
+.select2-results__option {
+    text-transform: capitalize;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: var(--blue-green-hover);
+}
+
 /* Medicament
 ========================================================================== */
+.btn-space {
+    margin: 50px 15px 0;
+}
 
 #medicament_name {
     max-width: 400px;
+}
+
+/* Echographie
+========================================================================== */
+.echo {
+    position: relative;
+    background: url(../assets/images/bullseye_color.png) no-repeat center;
+    background-size: 100%;
+    height: 650px;
+    width: 800px;
+    margin: 0 auto;
+}
+
+.segment {
+    position: absolute;
+}
+
+.segment .input {
+    text-align: center;
+    padding: 0 20px;
+    width: 120px;
+}
+
+.segment .unity {
+    padding-right: 10px;
+}
+
+.segment:nth-child(1) {
+    top: 74px;
+    left: 368px;
+}
+
+.segment:nth-child(2) {
+    top: 175px;
+    left: 162px;
+}
+
+.segment:nth-child(3) {
+    top: 383px;
+    left: 162px;
+}
+
+.segment:nth-child(4) {
+    top: 480px;
+    left: 368px;
+}
+
+.segment:nth-child(5) {
+    top: 383px;
+    left: 575px;
+}
+
+.segment:nth-child(6) {
+    top: 175px;
+    left: 575px;
+}
+
+.segment:nth-child(7) {
+    top: 148px;
+    left: 368px;
+}
+
+.segment:nth-child(8) {
+    top: 220px;
+    left: 230px;
+}
+
+.segment:nth-child(9) {
+    top: 338px;
+    left: 230px;
+}
+
+.segment:nth-child(10) {
+    top: 408px;
+    left: 368px;
+}
+
+.segment:nth-child(11) {
+    top: 338px;
+    left: 506px;
+}
+
+.segment:nth-child(12) {
+    top: 220px;
+    left: 506px;
+}
+
+.segment:nth-child(13) {
+    top: 220px;
+    left: 368px;
+}
+
+.segment:nth-child(14) {
+    top: 278px;
+    left: 286px;
+}
+
+.segment:nth-child(15) {
+    top: 338px;
+    left: 368px;
+}
+
+.segment:nth-child(16) {
+    top: 278px;
+    left: 450px;
+}
+
+.segment input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    margin: 0;
+}
+
+/* Catheterisation
+========================================================================== */
+.coronaire {
+    position: relative;
+    background: url(../assets/images/coronaire.png) no-repeat center;
+    background-size: contain;
+    height: 420px;
+    width: 900px;
+    margin-top: 35px;
+}
+
+.coronaire>.wrap-input {
+    position: absolute;
+    width: 170px;
+}
+
+.coronaire label {
+    margin: 0;
+    padding: 5px 0;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.coronaire>.wrap-input:nth-child(1) {
+    top: -15px;
+    left: 156px;
+}
+
+.coronaire>.wrap-input:nth-child(2) {
+    top: 125px;
+    left: 90px;
+}
+
+.coronaire>.wrap-input:nth-child(3) {
+    top: 255px;
+    left: 130px;
+}
+
+.coronaire>.wrap-input:nth-child(4) {
+    top: -15px;
+    left: 377px;
+}
+
+.coronaire>.wrap-input:nth-child(5) {
+    top: 55px;
+    left: 546px;
+}
+
+.coronaire>.wrap-input:nth-child(6) {
+    top: -15px;
+    right: 15px;
+}
+
+.coronaire>.wrap-input:nth-child(7) {
+    top: 125px;
+    right: 15px;
+}
+
+.coronaire>.wrap-input:nth-child(8) {
+    top: 125px;
+    left: 377px;
+}
+
+.coronaire>.wrap-input:nth-child(9) {
+    top: 255px;
+    left: 444px;
+}
+
+.pont {
+    position: relative;
+    background: url(../assets/images/pont.png) no-repeat center;
+    background-size: contain;
+    height: 420px;
+    width: 900px;
+}
+
+.pont>.wrap-input {
+    position: absolute;
+    width: 170px;
+}
+
+.pont label {
+    margin: 0;
+    padding: 5px 0;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.pont>.wrap-input:nth-child(1) {
+    top: 125px;
+    left: 236px;
+}
+
+.pont>.wrap-input:nth-child(2) {
+    top: 295px;
+    left: 0;
+}
+
+.pont>.wrap-input:nth-child(3) {
+    top: 85px;
+    right: 15px;
+}
+
+/* Angioplastie Pontage
+========================================================================== */
+.schema-tsa {
+    position: relative;
+    background: url(../assets/images/tsa.png) no-repeat center;
+    background-size: contain;
+    height: 700px;
+    width: 900px;
+}
+
+.schema-tsa>.wrap-input {
+    position: absolute;
+    width: 220px;
+}
+
+.schema-tsa .large {
+    width: 126px;
+}
+
+.schema-tsa label {
+    margin: 0;
+    padding: 5px 0;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.schema-tsa>.wrap-input:nth-child(1) {
+    top: 35px;
+    left: 220px;
+}
+
+.schema-tsa>.wrap-input:nth-child(2) {
+    top: 35px;
+    right: 220px;
+}
+
+.schema-tsa>.wrap-input:nth-child(3) {
+    top: 115px;
+    left: 60px;
+}
+
+.schema-tsa>.wrap-input:nth-child(4) {
+    top: 115px;
+    right: 60px;
+}
+
+.schema-tsa>.wrap-input:nth-child(5) {
+    top: 195px;
+    left: 120px;
+}
+
+.schema-tsa>.wrap-input:nth-child(6) {
+    top: 195px;
+    right: 120px;
+}
+
+.schema-tsa>.wrap-input:nth-child(7) {
+    top: 275px;
+    left: 190px;
+}
+
+.schema-tsa>.wrap-input:nth-child(8) {
+    top: 275px;
+    right: 190px;
+}
+
+.schema-tsa>.wrap-input:nth-child(9) {
+    top: 355px;
+    left: 120px;
+}
+
+.schema-tsa>.wrap-input:nth-child(10) {
+    top: 355px;
+    right: 120px;
+}
+
+.schema-tsa>.wrap-input:nth-child(11) {
+    top: 465px;
+    left: 250px;
+}
+
+.schema-membres-inferieur {
+    position: relative;
+    background: url(../assets/images/membres_inferieur.jpg) no-repeat center;
+    background-size: contain;
+    height: 700px;
+    width: 900px;
+}
+
+.schema-membres-inferieur>.wrap-input {
+    position: absolute;
+    width: 260px;
+}
+
+.schema-membres-inferieur .large {
+    width: 166px;
+}
+
+.schema-membres-inferieur label {
+    margin: 0;
+    padding: 5px 0;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.schema-membres-inferieur>.wrap-input:nth-child(1) {
+    top: 15px;
+    left: 330px;
+}
+
+.schema-membres-inferieur>.wrap-input:nth-child(2) {
+    top: 95px;
+    left: 170px;
+}
+
+.schema-membres-inferieur>.wrap-input:nth-child(3) {
+    top: 95px;
+    right: 170px;
+}
+
+.schema-membres-inferieur>.wrap-input:nth-child(4) {
+    top: 175px;
+    left: 170px;
+}
+
+.schema-membres-inferieur>.wrap-input:nth-child(5) {
+    top: 175px;
+    right: 170px;
+}
+
+.schema-membres-inferieur>.wrap-input:nth-child(6) {
+    top: 275px;
+    left: 170px;
+}
+
+.schema-membres-inferieur>.wrap-input:nth-child(7) {
+    top: 275px;
+    right: 170px;
+}
+
+.schema-membres-inferieur>.wrap-input:nth-child(8) {
+    top: 385px;
+    left: 170px;
+}
+
+.schema-membres-inferieur>.wrap-input:nth-child(9) {
+    top: 385px;
+    right: 170px;
+}
+
+.schema-membres-inferieur>.wrap-input:nth-child(10) {
+    top: 495px;
+    left: 170px;
+}
+
+.schema-membres-inferieur>.wrap-input:nth-child(11) {
+    top: 495px;
+    right: 170px;
+}
+
+
+/* ========= SELECT2 ========= */
+
+.select2-container .select2-selection--single {
+    height: 42px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 42px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 42px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__clear {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 20px;
+    padding: 0 5px;
+    font-size: 20px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__clear {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0 10px;
+    font-size: 20px;
+}
+
+.select2-container--default .select2-selection--multiple {
+    min-height: 90px;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field {
+    resize: none;
+    padding-left: 10px;
+    padding-top: 7px;
+}
+
+.big-drop.select2-dropdown .select2-results>.select2-results__options {
+    max-height: 400px;
+}
+
+.select2-container--default .select2-results__group {
+    background-color: var(--blue-green);
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.select2-container--default .select2-results__option .select2-results__option .select2-results__group {
+    padding-left: 6px;
+}
+
+.select2-selection__rendered {
+    text-transform: capitalize;
 }
 
 /* ========= TOC ========= */

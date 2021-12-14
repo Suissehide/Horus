@@ -22,6 +22,7 @@ class GeneralType extends AbstractType
                 'multiple' => false,
                 'placeholder' => false,
                 'choices' => array(
+                    '' => '',
                     'Docteur' => 'Docteur',
                     'Madame' => 'Madame',
                     'Mademoiselle' => 'Mademoiselle',
@@ -122,6 +123,20 @@ class GeneralType extends AbstractType
                 ),
                 'required' => false,
             ))
+
+            ->add('feuille', ChoiceType::class, [
+                'label' => 'Ensemble de feuilles de données',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Ensemble 1' => 'Ensemble 1',
+                    'Ensemble 2' => 'Ensemble 2',
+                    'Ensemble 3' => 'Ensemble 3'
+                ),
+                'mapped' => false
+            ])
 
             ->add('save', SubmitType::class, array('label' => 'Sauvegarder'))
         ;
