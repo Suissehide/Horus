@@ -119,6 +119,7 @@ class IndexController extends AbstractController
         }
     }
 
+    //TODO
     private function isError($iter, $errors)
     {
         $err = 0;

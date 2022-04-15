@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Echocardiographie;
+use App\Entity\EchographieCardiaque;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Echocardiographie|null find($id, $lockMode = null, $lockVersion = null)
- * @method Echocardiographie|null findOneBy(array $criteria, array $orderBy = null)
- * @method Echocardiographie[]    findAll()
- * @method Echocardiographie[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method EchographieCardiaque|null find($id, $lockMode = null, $lockVersion = null)
+ * @method EchographieCardiaque|null findOneBy(array $criteria, array $orderBy = null)
+ * @method EchographieCardiaque[]    findAll()
+ * @method EchographieCardiaque[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EchocardiographieRepository extends ServiceEntityRepository
+class EchographieCardiaqueRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Echocardiographie::class);
+        parent::__construct($registry, EchographieCardiaque::class);
     }
 
     // /**
-    //  * @return Echocardiographie[] Returns an array of Echocardiographie objects
+    //  * @return EchographieCardiaque[] Returns an array of EchographieCardiaque objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class EchocardiographieRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Echocardiographie
+    public function findOneBySomeField($value): ?EchographieCardiaque
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.exampleField = :val')

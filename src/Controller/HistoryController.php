@@ -44,7 +44,7 @@ class HistoryController extends AbstractController
             foreach ($erreurs as $erreur) {
                 $row = array(
                     "id" => $erreur->getId(),
-                    "date" => $this->formatDate($erreur->getDateCreation()),
+                    "dateCreation" => $this->formatDate($erreur->getDateCreation()),
                     "utilisateur" => $erreur->getUtilisateur(),
                     "message" => $erreur->getMessage(),
                     "etat" => $erreur->getEtat(),

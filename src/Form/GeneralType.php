@@ -36,7 +36,7 @@ class GeneralType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'Nom'
                 ),
-                'required' => false,
+                'required' => true,
             ))
             ->add('prenom', TextType::class, array(
                 'label' => "Prénom",
@@ -125,7 +125,7 @@ class GeneralType extends AbstractType
             ))
 
             ->add('feuille', ChoiceType::class, [
-                'label' => 'Ensemble de feuilles de données',
+                'label' => 'Protocoles',
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => false,

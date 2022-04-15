@@ -642,6 +642,10 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     flex: 1;
 }
 
+.table-wrapper.history-tab {
+    padding: 0 15px;
+}
+
 .actionBar {
     padding: 0;
 }
@@ -891,7 +895,6 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     color: #f4f9f7;
     padding: 8px 15px;
     border-radius: 3px;
-    margin-top: -26px;
     left: 90px;
     opacity: 0;
     visibility: hidden;

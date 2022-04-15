@@ -155,22 +155,7 @@ class EchographieVasculaire
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $pressionSystolique;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $pressionDiastolique;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $frequenceCardiaque;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $velociteOndePouls;
+    private $vitesseOndePouls;
 
 
     public function getId(): ?int
@@ -502,50 +487,14 @@ class EchographieVasculaire
         return $this;
     }
 
-    public function getPressionSystolique(): ?int
+    public function getVitesseOndePouls(): ?int
     {
-        return $this->pressionSystolique;
+        return $this->vitesseOndePouls;
     }
 
-    public function setPressionSystolique(?int $pressionSystolique): self
+    public function setVitesseOndePouls(?int $vitesseOndePouls): self
     {
-        $this->pressionSystolique = $pressionSystolique;
-
-        return $this;
-    }
-
-    public function getPressionDiastolique(): ?int
-    {
-        return $this->pressionDiastolique;
-    }
-
-    public function setPressionDiastolique(?int $pressionDiastolique): self
-    {
-        $this->pressionDiastolique = $pressionDiastolique;
-
-        return $this;
-    }
-
-    public function getFrequenceCardiaque(): ?int
-    {
-        return $this->frequenceCardiaque;
-    }
-
-    public function setFrequenceCardiaque(?int $frequenceCardiaque): self
-    {
-        $this->frequenceCardiaque = $frequenceCardiaque;
-
-        return $this;
-    }
-
-    public function getVelociteOndePouls(): ?int
-    {
-        return $this->velociteOndePouls;
-    }
-
-    public function setVelociteOndePouls(?int $velociteOndePouls): self
-    {
-        $this->velociteOndePouls = $velociteOndePouls;
+        $this->vitesseOndePouls = $vitesseOndePouls;
 
         return $this;
     }

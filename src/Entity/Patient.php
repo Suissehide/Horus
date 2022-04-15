@@ -27,6 +27,18 @@ class Patient
     private $general;
 
     /**
+     * @ORM\OneToOne(targetEntity="App\Entity\AntecedentCardiovasculaire", cascade={"persist", "remove"})
+     * @Groups({"advancement", "export"})
+     */
+    private $antecedentCardiovasculaire;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Information", cascade={"persist", "remove"})
+     * @Groups({"advancement", "export"})
+     */
+    private $information;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Facteur", cascade={"persist", "remove"})
      * @Groups({"advancement", "export"})
      */
@@ -37,12 +49,6 @@ class Patient
      * @Groups({"advancement", "export"})
      */
     private $protocole;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Deces", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
-    private $deces;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Erreur", mappedBy="patient", cascade={"remove"})
@@ -71,6 +77,30 @@ class Patient
         return $this;
     }
 
+    public function getAntecedentCardiovasculaire(): ?AntecedentCardiovasculaire
+    {
+        return $this->antecedentCardiovasculaire;
+    }
+
+    public function setAntecedentCardiovasculaire(?AntecedentCardiovasculaire $antecedentCardiovasculaire): self
+    {
+        $this->antecedentCardiovasculaire = $antecedentCardiovasculaire;
+
+        return $this;
+    }
+
+    public function getInformation(): ?Information
+    {
+        return $this->information;
+    }
+
+    public function setInformation(?Information $information): self
+    {
+        $this->information = $information;
+
+        return $this;
+    }
+
     public function getFacteur(): ?Facteur
     {
         return $this->facteur;
@@ -91,18 +121,6 @@ class Patient
     public function setProtocole(?Protocole $protocole): self
     {
         $this->protocole = $protocole;
-
-        return $this;
-    }
-
-    public function getDeces(): ?Deces
-    {
-        return $this->deces;
-    }
-
-    public function setDeces(?Deces $deces): self
-    {
-        $this->deces = $deces;
 
         return $this;
     }

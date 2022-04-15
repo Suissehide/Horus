@@ -6,6 +6,7 @@ use App\Entity\BFR;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -334,6 +335,42 @@ class BFRType extends AbstractType
                     'Non Renseigné' => 'Non Renseigné',
                     'Faible' => 'Faible',
                     'Recommandé (> 30mm, 3 fois/semaine)' => 'Recommandé (> 30mm, 3 fois/semaine)'
+                ),
+                'required' => false,
+            ))
+
+
+            ->add('tabagisme', ChoiceType::class, array(
+                'label' => 'État',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Non fumeur' => 'Non fumeur',
+                    'Ancien fumeur' => 'Ancien fumeur',
+                    'Fumeur' => 'Fumeur',
+                ),
+                'required' => false,
+            ))
+            ->add('dateArret', DateType::class, array(
+                'label' => 'Date d\'arrêt',
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'attr' => [
+                    'placeholder' => 'dd/mm/yyyy',
+                    'class' => 'datepicker',
+                    'autocomplete' => 'off'
+                ],
+                'html5' => false,
+                'required' => false,
+            ))
+            ->add('nombrePaquetsAn', IntegerType::class, array(
+                'label' => 'Nombres de paquets par an',
+                'attr' => array(
+                    'unity' => 'paquets/an',
+                    'data-min' => 0,
+                    'data-max' => 0,
                 ),
                 'required' => false,
             ))

@@ -8,11 +8,14 @@ use App\Form\MedicamentsEntreeType;
 use App\Form\AngioplastiePontageType;
 use App\Form\BFRType;
 use App\Form\CatheterisationType;
-use App\Form\EchocardiographieType;
+use App\Form\CoronaireAngioplastieType;
+use App\Form\EchographieType;
+use App\Form\EchographieCardiaqueType;
 use App\Form\EchographieVasculaireType;
-use App\Form\NeuroImagerieType;
 use App\Form\NeuroPsychologieType;
+use App\Form\ScintigraphieType;
 use App\Form\TestEffortType;
+use App\Form\VisiteType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,20 +37,26 @@ class ProtocoleType extends AbstractType
             ->add('catheterisation', CatheterisationType::class, array(
                 'label' => 'Cathétérisation'
             ))
-            ->add('echocardiographie', EchocardiographieType::class, array(
-                'label' => 'Echocardiographie'
+            ->add('coronaireAngioplastie', CoronaireAngioplastieType::class, array(
+                'label' => 'Coronaire et angioplastie'
+            ))
+            ->add('echographie', EchographieType::class, array(
+                'label' => 'Echographie'
+            ))
+            ->add('echographieCardiaque', EchographieCardiaqueType::class, array(
+                'label' => 'Echographie cardiaque'
             ))
             ->add('echographieVasculaire', EchographieVasculaireType::class, array(
                 'label' => 'Echographie vasculaire'
             ))
             ->add('medicamentsEntree', MedicamentsEntreeType::class, array(
-                'label' => 'Médicament à l\'entrée'
-            ))
-            ->add('neuroImagerie', NeuroImagerieType::class, array(
-                'label' => 'Neuro-imagerie'
+                'label' => 'Médicament'
             ))
             ->add('neuroPsychologie', NeuroPsychologieType::class, array(
                 'label' => 'Neuro-psychologie'
+            ))
+            ->add('scintigraphie', ScintigraphieType::class, array(
+                'label' => 'Scintigraphie'
             ))
             ->add('testEffort', TestEffortType::class, array(
                 'label' => 'Définition des tests d\'effort'

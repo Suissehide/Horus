@@ -62,34 +62,51 @@
                             <li><a href='#complement'>Complément</a></li>
 						</ul>
 					</li>
-					<li class='sub-menu'>
-						<a href='#facteur'>
+                    <li>
+						<a href='#antecedentCardiovasculaire'>
 							<div class="menu-title">
-								<i class='fa fa-heartbeat'></i>
-								<div>Facteurs de risques lors de l'évènement</div>
+								<i class='fa fa-file-medical-alt'></i>
+								<div>Antécédent cardiovasculaire</div>
+                            </div>
+						</a>
+					</li>
+                    <li class='sub-menu'>
+						<a href='#information'>
+							<div class="menu-title">
+								<i class='fa fa-notes-medical'></i>
+								<div>Information sur l'événement cardiovasculaire</div>
                             </div>
 							<i class='fa fa-caret-down right'></i>
 						</a>
 						<ul>
-							<li><a href='#description'>Description</a></li>
+							<li><a href='#infarctusMyocarde'>Infarctus du myocarde</a></li>
+                            <li><a href='#accidentVasculaireCerebral'>Accident vasculaire cérébral</a></li>
 						</ul>
 					</li>
+					<li>
+						<a href='#facteur'>
+							<div class="menu-title">
+								<i class='fa fa-heartbeat'></i>
+								<div>Facteurs de risques initiaux</div>
+                            </div>
+						</a>
+					</li>
 					<li class='sub-menu'>
-						<a href='#protocole'>
+						<a href='#examen'>
 							<div class="menu-title">
 								<i class='fa fa-procedures'></i>
-								<div>Protocoles</div>
+								<div>Examens paracliniques</div>
                             </div>
 							<i class='fa fa-caret-down right'></i>
 						</a>
 						<ul class="protocole-list">
                             {% for fiche in patient.protocole.fiches %}
                                 {% if fiche == 'angioplastiePontage' %}<li><a name='angioplastiePontage'>Angioplastie et pontage</a></li>
-                                {% elseif fiche == 'bfr' %}<li><a name='bfr'>Données BFR</a></li>
+                                {% elseif fiche == 'bfr' %}<li><a name='bfr'>Bilan biologique et risque</a></li>
                                 {% elseif fiche == 'catheterisation' %}<li><a name='catheterisation'>Cathétérisation</a></li>
                                 {% elseif fiche == 'echocardiographie' %}<li><a name='echocardiographie'>Échocardiographie</a></li>
                                 {% elseif fiche == 'echographieVasculaire' %}<li><a name='echographieVasculaire'>Échographie vasculaire</a></li>
-                                {% elseif fiche == 'medicaments' %}<li><a name='medicaments'>Médicaments à l'entrée</a></li>
+                                {% elseif fiche == 'medicaments' %}<li><a name='medicaments'>Médicaments</a></li>
                                 {% elseif fiche == 'neuroImagerie' %}<li><a name='neuroImagerie'>Neuro-imagerie</a></li>
                                 {% elseif fiche == 'neuroPsychologie' %}<li><a name='neuroPsychologie'>Neuro-psychologie</a></li>
                                 {% elseif fiche == 'testsEffort' %}<li><a name='testsEffort'>Test d'effort</a></li>
@@ -99,10 +116,10 @@
 						</ul>
 					</li>
 					<li>
-						<a href='#deces'>
+						<a href='#suivi'>
 							<div class="menu-title">
 								<i class='fa fa-skull-crossbones'></i>
-								<div>Décès</div>
+								<div>Suivi</div>
                             </div>
 						</a>
 					</li>
@@ -167,6 +184,100 @@
                 {{ form_end(formGeneral, {'render_rest' : false}) }}
 			</section>
 
+
+			{#========== ANTECEDENT CARDIOVASCULAIRE ==========#}
+			<section class="slide" id="tab-antecedentCardiovasculaire">
+                {{ form_start(formAntecedentCardiovasculaire, {'attr': {'class': 'form validate-form'} }) }}
+                {{ form_errors(formAntecedentCardiovasculaire) }}
+
+                {% form_theme formAntecedentCardiovasculaire 'form-theme.html.twig' %}
+
+				<h1 id="antecedentCardiovasculaire">Antécédent cardiovasculaire</h1>
+
+				<div class="form-space">
+                    {{ form_row(formAntecedentCardiovasculaire.IDM_SCA, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.angorStable, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.angioplastieCoronaire, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.pontageCoronaire, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.insuffisanceCardiaque, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.AVC, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.AIT, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.endarteriectomieCarotidienne, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.arteriteMembresInferieurs, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.angioplastiePeripherique, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.pontagePeripherique, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.antecedentFibrillationAuriculaire, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.antecedentInsuffisanceCardiaque, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formAntecedentCardiovasculaire.valvulopathie, {'attr': {'class': 'input radio-row'} }) }}
+				</div>
+
+				{{ form_row(formAntecedentCardiovasculaire.save, {'attr': {'class': 'form-btn'} }) }}
+
+                {{ form_row(formAntecedentCardiovasculaire._token) }}
+                {{ form_end(formAntecedentCardiovasculaire, {'render_rest' : false}) }}
+			</section>
+
+
+            {#========== INFORMATION ==========#}
+			<section class="slide" id="tab-information">
+                {{ form_start(formInformation, {'attr': {'class': 'form validate-form'} }) }}
+                {{ form_errors(formInformation) }}
+
+                {% form_theme formInformation 'form-theme.html.twig' %}
+
+				<h1 id="information">Information sur l'événement cardiovasculaire</h1>
+
+				<h3 id="infarctusMyocarde">Type d'infarctus du myocarde</h3>
+				<div class="form-space">
+                    {{ form_row(formInformation.susDecalage, {'attr': {'class': 'input radio-row'} }) }}
+
+                    <div class="margin-space"></div>
+                    <h5>Territoire atteint</h5>
+                    {{ form_row(formInformation.anterieur, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.septoApical, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.lateral, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.inferieurPosterieur, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.sansTerritoire, {'attr': {'class': 'input radio-row'} }) }}
+
+                    <div class="margin-space"></div>
+                    <h5>Coronarographie (sténose > 50%)</h5>
+                    {{ form_row(formInformation.IVA, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.CD, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.Cx, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.marginale, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.diagonale, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.pontage, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.troncCommun, {'attr': {'class': 'input radio-row'} }) }}
+                </div>
+
+                <div class="margin-space"></div>
+                <h5>Type d'infarctus du myocarde</h5>
+				<div class="form-space">
+                    {{ form_row(formInformation.traitement, {'attr': {'class': 'input radio-row'} }) }}
+                </div>
+
+                <div class="margin-space"></div>
+                <h5>Complications immédiates</h5>
+				<div class="form-space">
+                    {{ form_row(formInformation.troubleRythmeVentriculaire, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.insuffisanceCardiaque, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.pericardite, {'attr': {'class': 'input radio-row'} }) }}
+                    {{ form_row(formInformation.complicationMecanique, {'attr': {'class': 'input radio-row'} }) }}
+                </div>
+
+				<h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
+				<div class="form-space">
+                    {{ form_row(formInformation.localisation, {'attr': {'class': 'input'} }) }}
+                    {{ form_row(formInformation.taille, {'attr': {'class': 'input'} }) }}
+                    {{ form_row(formInformation.mecanisme, {'attr': {'class': 'input'} }) }}
+                </div>
+
+				{{ form_row(formInformation.save, {'attr': {'class': 'form-btn'} }) }}
+
+                {{ form_row(formInformation._token) }}
+                {{ form_end(formInformation, {'render_rest' : false}) }}
+			</section>
+
 			{#========== FACTEUR ==========#}
 			<section class="slide" id="tab-facteur">
                 {{ form_start(formFacteur, {'attr': {'class': 'form validate-form'} }) }}
@@ -174,8 +285,14 @@
 
                 {% form_theme formFacteur 'form-theme.html.twig' %}
 
-				<h1 id="facteur">Facteurs de risques lors de l'évènement</h1>
-                <h3 id="description">Description</h3>
+				<h1 id="facteur">Facteurs de risques initiaux</h1>
+     
+                <div class="radio-row">
+                    {{ form_row(formFacteur.antecedentFamiliaux, {'attr': {'class': 'input radio-row'} }) }}
+                </div>
+
+                <div class="margin-space"></div>
+
 				<div class="form-space">
                     <div class="flex-table">
                         <div class="col-flex-1">&nbsp;</div>
@@ -185,80 +302,87 @@
                     </div>
                     <div class="flex-table">
                         <div class="col-flex-1">HTA</div>
-                        <div class="col-flex-2 radio-row">
+                        <div class="col-flex-2 radio-row no-label">
                             {{ form_row(formFacteur.risqueHTA, {'attr': {'class': 'input radio-row'} }) }}
                         </div>
                         <div class="col-flex-3">
                             {{ form_row(formFacteur.depuisHTA, {'attr': {'class': 'input'}, 'useStyle': true}) }}
                         </div>
-                        <div class="col-flex-2 radio-row">
+                        <div class="col-flex-2 radio-row no-label">
                             {{ form_row(formFacteur.traiteHTA, {'attr': {'class': 'input radio-row'} }) }}
                         </div>
                     </div>
                     <div class="flex-table">
                         <div class="col-flex-1">Diabète</div>
-                        <div class="col-flex-2 radio-row">
+                        <div class="col-flex-2 radio-row no-label">
                             {{ form_row(formFacteur.risqueDiabete, {'attr': {'class': 'input radio-row'} }) }}
                         </div>
                         <div class="col-flex-3">
                             {{ form_row(formFacteur.depuisDiabete, {'attr': {'class': 'input'}, 'useStyle': true}) }}
                         </div>
-                        <div class="col-flex-2 radio-row">
+                        <div class="col-flex-2 radio-row no-label">
                             {{ form_row(formFacteur.traiteDiabete, {'attr': {'class': 'input radio-row'} }) }}
                         </div>
                     </div>
                     <div class="flex-table">
                         <div class="col-flex-1">Hypercholestérolémie</div>
-                        <div class="col-flex-2 radio-row">
+                        <div class="col-flex-2 radio-row no-label">
                             {{ form_row(formFacteur.risqueHypercholesterolemie, {'attr': {'class': 'input radio-row'} }) }}
                         </div>
                         <div class="col-flex-3">
                             {{ form_row(formFacteur.depuisHypercholesterolemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}
                         </div>
-                        <div class="col-flex-2 radio-row">
+                        <div class="col-flex-2 radio-row no-label">
                             {{ form_row(formFacteur.traiteHypercholesterolemie, {'attr': {'class': 'input radio-row'} }) }}
                         </div>
                     </div>
                     <div class="flex-table">
                         <div class="col-flex-1">Hypertriglycéridèmie</div>
-                        <div class="col-flex-2 radio-row">
+                        <div class="col-flex-2 radio-row no-label">
                             {{ form_row(formFacteur.risqueHypertriglyceridemie, {'attr': {'class': 'input radio-row'} }) }}
                         </div>
                         <div class="col-flex-3">
                             {{ form_row(formFacteur.depuisHypertriglyceridemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}
                         </div>
-                        <div class="col-flex-2 radio-row">
+                        <div class="col-flex-2 radio-row no-label">
                             {{ form_row(formFacteur.traiteHypertriglyceridemie, {'attr': {'class': 'input radio-row'} }) }}
                         </div>
                     </div>
 
                     <div class="margin-space"></div>
-
-                    <div class="radio-row">
-                        {{ form_row(formFacteur.obesite, {'attr': {'class': 'input radio-row no-label'} }) }}
-                    </div>
-
-                    <div class="flex-wrap">
-                        <div class="radio-row">
-                            {{ form_row(formFacteur.alcoolisme, {'attr': {'class': 'input radio-row no-label'} }) }}
-                        </div>
-                        <div class="radio-row">
-                            {{ form_row(formFacteur.sevre, {'attr': {'class': 'input radio-row no-label'} }) }}
-                        </div>
-                    </div>
-
                     <h5>Tabagisme</h5>
                     <div class="flex-wrap">
-                        {{ form_row(formFacteur.tabagisme, {'attr': {'class': 'input'} }) }}
-                        {{ form_row(formFacteur.dateArret, {'attr': {'class': 'input js-datepicker'} }) }}
-                        {{ form_row(formFacteur.nombrePaquetsAn, {'attr': {'class': 'input radio-row'} }) }}
+                        <div class="flex-1">
+                            {{ form_row(formFacteur.tabagisme, {'attr': {'class': 'input'} }) }}
+                        </div>
+                        <div class="flex-1">
+                            {{ form_row(formFacteur.dateArret, {'attr': {'class': 'input js-datepicker'} }) }}
+                        </div>
+                        <div class="flex-1">
+                            {{ form_row(formFacteur.nombrePaquetsAn, {'attr': {'class': 'input radio-row'} }) }}
+                        </div>
                     </div>
 
-                    <div class="margin-space"></div>
+                    <h5>Obésité</h5>
+                    <div>
+                        {{ form_row(formFacteur.obesite, {'attr': {'class': 'input radio-row'} }) }}
+                    </div>
 
+                    <h5>Alcoolisme</h5>
+                    <div class="flex-wrap">
+                        <div class="flex-1">
+                            {{ form_row(formFacteur.alcoolisme, {'attr': {'class': 'input radio-row'} }) }}
+                        </div>
+                        <div class="flex-1">
+                            {{ form_row(formFacteur.sevre, {'attr': {'class': 'input radio-row'} }) }}
+                        </div>
+                    </div>
+
+                    <h5>Cannabis</h5>
                     <div class="radio-row">
-                        {{ form_row(formFacteur.antecedentFamiliaux, {'attr': {'class': 'input radio-row no-label'} }) }}
+                        {{ form_row(formFacteur.cannabis, {'attr': {'class': 'input radio-row'} }) }}
                     </div>
+
                 </div>
 
 				{{ form_row(formFacteur.save, {'attr': {'class': 'form-btn'} }) }}
@@ -267,19 +391,19 @@
                 {{ form_end(formFacteur, {'render_rest' : false}) }}
 			</section>
 
-            {#========== PROTOCOLE ==========#}
-            <section class="slide" id="tab-protocole">
+            {#========== EXAMEN ==========#}
+            <section class="slide" id="tab-examen">
                 <div class="form-space">
-                    <h3>Fiches déjà existantes :</h3>
+                    <h3>Fiches d'examen déjà existantes</h3>
                     <ul class="etiquettes__list">
                         {% for fiche in patient.protocole.fiches %}
                             <li name={{ fiche }} class='etiquette'>
                                 {% if fiche == 'angioplastiePontage' %}Angioplastie et pontage
-                                {% elseif fiche == 'bfr' %}Données BFR
+                                {% elseif fiche == 'bfr' %}Bilan biologique et risque
                                 {% elseif fiche == 'catheterisation' %}Cathétérisation
                                 {% elseif fiche == 'echocardiographie' %}Échocardiographie
                                 {% elseif fiche == 'echographieVasculaire' %}Échographie vasculaire
-                                {% elseif fiche == 'medicaments' %}Médicaments à l'entrée
+                                {% elseif fiche == 'medicaments' %}Médicaments
                                 {% elseif fiche == 'neuroImagerie' %}Neuro-imagerie
                                 {% elseif fiche == 'neuroPsychologie' %}Neuro-psychologie
                                 {% elseif fiche == 'testsEffort' %}Test d'effort
@@ -295,6 +419,7 @@
                 </div>
 
                 <div class="wrap-input">
+                    <h3>Ajouter une fiche d'examen</h3>
                     <label for="protocole">
                         <span></span>
                         <em>Fiches</em>
@@ -304,11 +429,11 @@
                         <select id="protocole_fiches" name="protocole[fiches]" class="input">
                             <option value=""></option>
                             {% if "angioplastiePontage" not in patient.protocole.fiches %}<option value="angioplastiePontage">Angioplastie et pontage</option>{% endif %}
-                            {% if "bfr" not in patient.protocole.fiches %}<option value="bfr">Données BFR</option>{% endif %}
+                            {% if "bfr" not in patient.protocole.fiches %}<option value="bfr">Bilan biologique et risque</option>{% endif %}
                             {% if "catheterisation" not in patient.protocole.fiches %}<option value="catheterisation">Cathétérisation</option>{% endif %}
                             {% if "echocardiographie" not in patient.protocole.fiches %}<option value="echocardiographie">Échocardiographie</option>{% endif %}
                             {% if "echographieVasculaire" not in patient.protocole.fiches %}<option value="echographieVasculaire">Échographie vasculaire</option>{% endif %}
-                            {% if "medicaments" not in patient.protocole.fiches %}<option value="medicaments">Médicaments à l'entrée</option>{% endif %}
+                            {% if "medicaments" not in patient.protocole.fiches %}<option value="medicaments">Médicaments</option>{% endif %}
                             {% if "neuroImagerie" not in patient.protocole.fiches %}<option value="neuroImagerie">Neuro-imagerie</option>{% endif %}
                             {% if "neuroPsychologie" not in patient.protocole.fiches %}<option value="neuroPsychologie">Neuro-psychologie</option>{% endif %}
                             {% if "testsEffort" not in patient.protocole.fiches %}<option value="testsEffort">Définition des tests d'effort</option>{% endif %}
@@ -320,16 +445,16 @@
                 <button class="form-btn" id="add-fiche"><i aria-hidden="true" class="fa fa-plus"></i>Ajouter une fiche</button>
                 <div class="margin-space"></div>
 
-                <h1 id="protocole">Protocoles</h1>
+                <h1 id="examens">Examens paracliniques</h1>
 
                 <ul class="tabbed">
                     {% for fiche in patient.protocole.fiches %}
                         {% if fiche == 'angioplastiePontage' %}<li name="angioplastiePontage">Angioplastie et pontage</li>
-                        {% elseif fiche == 'bfr' %}<li name="bfr">Données BFR</li>
+                        {% elseif fiche == 'bfr' %}<li name="bfr">Bilan biologique et risque</li>
                         {% elseif fiche == 'catheterisation' %}<li name="catheterisation">Cathétérisation</li>
                         {% elseif fiche == 'echocardiographie' %}<li name="echocardiographie">Échocardiographie</li>
                         {% elseif fiche == 'echographieVasculaire' %}<li name="echographieVasculaire">Échographie vasculaire</li>
-                        {% elseif fiche == 'medicaments' %}<li name="medicaments">Médicaments à l'entrée</li>
+                        {% elseif fiche == 'medicaments' %}<li name="medicaments">Médicaments</li>
                         {% elseif fiche == 'neuroImagerie' %}<li name="neuroImagerie">Neuro-imagerie</li>
                         {% elseif fiche == 'neuroPsychologie' %}<li name="neuroPsychologie">Neuro-psychologie</li>
                         {% elseif fiche == 'testsEffort' %}<li name="testsEffort">Test d'effort</li>
@@ -341,7 +466,7 @@
                 <ul class="tab-list">
 					<li class="tab-content" name="angioplastiePontage">
                         {#========== Angioplastie et pontage ==========#}
-                        <div id="protocole-angioplastie-pontage">
+                        <div id="examen-angioplastie-pontage">
                             {{ form_start(formAngioplastiePontage, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formAngioplastiePontage) }}
 
@@ -378,13 +503,13 @@
 
                     <li class="tab-content" name="bfr">
                         {#========== BRF ==========#}
-                        <div id="protocole-bfr">
+                        <div id="examen-bfr">
                             {{ form_start(formBFR, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formBFR) }}
 
                             {% form_theme formBFR 'form-theme.html.twig' %}
 
-                            <h1 id="bfr">Données BFR</h1>
+                            <h1 id="bfr">Bilan biologique et risque</h1>
                             <h3 id="biometrie">Biométrie</h3>
                             <div class="form-space">
                                 {{ form_row(formBFR.taille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
@@ -404,25 +529,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex-nowrap">
+
+                            <h3 id="tensionArterielle">Tension artérielle</h3>
+                            <div class="form-space flex-nowrap">
                                 {{ form_row(formBFR.tensionArterielleJour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
                                 {{ form_row(formBFR.tensionArterielleNuit, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                            </div>
-
-                            <h3 id="bilan-hepatique">Bilan hépatique</h3>
-                            <div class="form-space flex-2">
-                                {{ form_row(formBFR.transaminasesASAT, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.transaminasesALAT, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.gamma, {'attr': {'class': 'input'} }) }}
-                            </div>
-
-                            <h3 id="bilan-renal">Bilan rénal</h3>
-                            <div class="form-space flex-2">
-                                {{ form_row(formBFR.proteinurie, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.microAlbuminurie, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.creatinine, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.clairence, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.homoCysBasale, {'attr': {'class': 'input'} }) }}
                             </div>
 
                             <h3 id="dyslipidemie">Dyslipidémie</h3>
@@ -431,6 +542,13 @@
                                 {{ form_row(formBFR.triglicerides, {'attr': {'class': 'input'} }) }}
                                 {{ form_row(formBFR.HDLC, {'attr': {'class': 'input'} }) }}
                                 {{ form_row(formBFR.LDLC, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            <h3 id="activite-physique">Tabagisme</h3>
+                            <div class="form-space">
+                                {{ form_row(formBFR.tabagisme, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.dateArret, {'attr': {'class': 'input js-datepicker'} }) }}
+                                {{ form_row(formBFR.nombrePaquetsAn, {'attr': {'class': 'input'} }) }}
                             </div>
 
                             <h3 id="diabete">Diabète</h3>
@@ -442,6 +560,22 @@
                                 {{ form_row(formBFR.fondOeil, {'attr': {'class': 'input'} }) }}
                                 {{ form_row(formBFR.neuroesthesiometriePiedDroit, {'attr': {'class': 'input'} }) }}
                                 {{ form_row(formBFR.neuroesthesiometriePiedGauche, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            <h3 id="bilan-renal">Bilan rénal</h3>
+                            <div class="form-space flex-2">
+                                {{ form_row(formBFR.proteinurie, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.microAlbuminurie, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.creatinine, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.clairence, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.homoCysBasale, {'attr': {'class': 'input'} }) }}
+                            </div>
+
+                            <h3 id="bilan-hepatique">Bilan hépatique</h3>
+                            <div class="form-space flex-2">
+                                {{ form_row(formBFR.transaminasesASAT, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.transaminasesALAT, {'attr': {'class': 'input'} }) }}
+                                {{ form_row(formBFR.gamma, {'attr': {'class': 'input'} }) }}
                             </div>
 
                             <h3 id="facteur-thrombogeniques">Facteur thrombogéniques</h3>
@@ -468,7 +602,7 @@
 
                     <li class="tab-content" name="catheterisation">
                         {#========== Catheterisation ==========#}
-                        <div id="protocole-catheterisation">
+                        <div id="examen-catheterisation">
                             {{ form_start(formCatheterisation, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formCatheterisation) }}
 
@@ -495,7 +629,7 @@
                                 {{ form_row(formCatheterisation.pontSaphenesDroit, {'attr': {'class': 'input'} }) }}
                                 {{ form_row(formCatheterisation.pontMammaire, {'attr': {'class': 'input'} }) }}
                             </div>
-                            <div class="flex">
+                            <div class="flex-nowrap">
                                 {{ form_row(formCatheterisation.FEVentriculographie, {'attr': {'class': 'input'}, 'useStyle': true }) }}
                                 {{ form_row(formCatheterisation.FEIsotopique, {'attr': {'class': 'input'}, 'useStyle': true }) }}
                             </div>
@@ -507,9 +641,54 @@
                         </div>
                     </li>
 
+                    <li class="tab-content" name="coronaireAngiosplatie">
+                        {#========== Coronaire & Angioplastie ==========#}
+                        <div id="examen-coronaire-angioplastie">
+                            {{ form_start(formCoronaireAngiosplatie, {'attr': {'class': 'form validate-form'} }) }}
+                            {{ form_errors(formCoronaireAngiosplatie) }}
+
+                            {% form_theme formCoronaireAngiosplatie 'form-theme.html.twig' %}
+
+                            <h1 id="coronaire-angioplastie">Coronaire & Angioplastie</h1>
+
+                            <div class="table table-7">
+                                <div class="theader">
+                                    <div class="row">
+                                        <td></td>
+                                        <td>Sténose</td>
+                                        <td>FFR</td>
+                                        <td>CMR</td>
+                                        <td>IMR</td>
+                                        <td>Angioplastie</td>
+                                        <td>Coroscanner</td>
+                                    </div>
+                                </div>
+                                <div class="tbody">
+                                    <div class="row">
+                                        <tr></tr>
+                                        <tr></tr>
+                                        <tr></tr>
+                                        <tr></tr>
+                                        <tr></tr>
+                                        <tr></tr>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-space">
+                                {{ form_row(formCoronaireAngiosplatie.vitesseOndePouls, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+                            </div>
+
+                            {{ form_row(formCoronaireAngiosplatie.save, {'attr': {'class': 'form-btn'} }) }}
+
+                            {{ form_row(formCoronaireAngiosplatie._token) }}
+                            {{ form_end(formCoronaireAngiosplatie, {'render_rest' : false}) }}
+                        </div>
+                    </li>
+
                     <li class="tab-content" name="echocardiographie">
-                        {#========== Échocardiographie ==========#}
-                        <div id="protocole-echocardiographie">
+                        {#========== Échographie cardiaque ==========#}
+                        <div id="examen-echocardiographie">
                             {{ form_start(formEchocardiographie, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formEchocardiographie) }}
 
@@ -576,7 +755,7 @@
 
                     <li class="tab-content" name="echographieVasculaire">
                         {#========== Échographie vasculaire ==========#}
-                        <div id="protocole-echographie-vasculaire">
+                        <div id="examen-echographie-vasculaire">
                             {{ form_start(formEchographieVasculaire, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formEchographieVasculaire) }}
 
@@ -624,18 +803,9 @@
                                 </div>
                                 {{ form_row(formEchographieVasculaire.testStandness, {'attr': {'class': 'input'}, 'useStyle': true }) }}
                                 <div class="def">* compris entre 0 et 1000, 9999 si non réalisé</div>
-                            </div>
 
-                            <h3 id="compliance-arterielle">Compliance artérielle</h3>
-                            <div class="form-space">
-                                <div class="flex-nowrap">
-                                    {{ form_row(formEchographieVasculaire.pressionSystolique, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                                    {{ form_row(formEchographieVasculaire.pressionDiastolique, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                                </div>
-                                <div class="flex-nowrap">
-                                    {{ form_row(formEchographieVasculaire.frequenceCardiaque, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                                    {{ form_row(formEchographieVasculaire.velociteOndePouls, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                                </div>
+                                {{ form_row(formEchographieVasculaire.vitesseOndePouls, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+
                             </div>
 
                             {{ form_row(formEchographieVasculaire.save, {'attr': {'class': 'form-btn'} }) }}
@@ -646,14 +816,14 @@
                     </li>
 
                     <li class="tab-content" name="medicaments">
-                        {#========== Médicaments à l'entrée ==========#}
-                        <div id="protocole-medicaments">
+                        {#========== Médicaments ==========#}
+                        <div id="examen-medicaments">
                             {{ form_start(formMedicamentsEntree, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formMedicamentsEntree) }}
 
                             {% form_theme formMedicamentsEntree 'form-theme.html.twig' %}
 
-                            <h1 id="medicaments">Médicaments à l'entrée</h1>
+                            <h1 id="medicaments">Médicaments</h1>
 
                             <h3 id="description">Description</h3>
                             <div class="form-space">
@@ -708,7 +878,7 @@
 
                     <li class="tab-content" name="neuroImagerie">
                         {#========== NeuroImagerie ==========#}
-                        <div id="protocole-neuro-imagerie">
+                        <div id="examen-neuro-imagerie">
                             {{ form_start(formNeuroImagerie, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formNeuroImagerie) }}
 
@@ -730,7 +900,7 @@
 
                     <li class="tab-content" name="neuroPsychologie">
                         {#========== NeuroPsychologie ==========#}
-                        <div id="protocole-neuro-psychologie">
+                        <div id="examen-neuro-psychologie">
                             {{ form_start(formNeuroPsychologie, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formNeuroPsychologie) }}
 
@@ -762,7 +932,7 @@
 
                     <li class="tab-content" name="testsEffort">
                         {#========== Test d'effort ==========#}
-                        <div id="protocole-testsEffort">
+                        <div id="examen-testsEffort">
                             {{ form_start(formTestEffort, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formTestEffort) }}
 
@@ -805,7 +975,7 @@
 
                     <li class="tab-content" name="visite">
                         {#========== Visite ==========#}
-                        <div id="protocole-visite">
+                        <div id="examen-visite">
                             {{ form_start(formVisite, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formVisite) }}
 
@@ -827,29 +997,15 @@
 
             </section>
 
-			{#========== DECES ==========#}
-			<section class="slide" id="tab-deces">
+			{#========== SUIVI ==========#}
+			<section class="slide" id="tab-suivi">
                 {{ form_start(formDeces, {'attr': {'class': 'form validate-form'} }) }}
                 {{ form_errors(formDeces) }}
 
                 {% form_theme formDeces 'form-theme.html.twig' %}
 
-				<h1 id="deces">Décès</h1>
-				<div class="form-space">
-                    {{ form_row(formDeces.date, {'attr': {'class': 'input js-datepicker'} }) }}
-                    <div class="def">
-                        <span>Définition de la cause initiale du décès :</span>
-                        maladie ou traumatisme étant à l’origine de la séquence des événements morbides ayant entraîné la mort.
-                    </div>
-                    <div class="form-space"></div>
-                    {{ form_row(formDeces.cause, {'attr': {'class': 'input '} }) }}
-                    {{ form_row(formDeces.codage, {'attr': {'class': 'input '} }) }}
-				</div>
+				<h1 id="suivi">Suivi</h1>
 
-				{{ form_row(formDeces.save, {'attr': {'class': 'form-btn'} }) }}
-
-                {{ form_row(formDeces._token) }}
-                {{ form_end(formDeces, {'render_rest' : false}) }}
 			</section>
 		</main>
 
@@ -935,7 +1091,7 @@
             }
         }).on('click.rs.jquery.bootgrid', function (e, cols, row, target) {
             if (typeof row != "undefined")
-                redirect(row.utilisateur);
+                redirect(row.fieldId);
         }).on("loaded.rs.jquery.bootgrid", function() {
             $('table tr td:nth-child(4)').each(function() {
                 $(this).html($(this).text().replace(/\[(.*?)\]/g, "<b class='history-markup'>$1</b>"));
@@ -948,7 +1104,7 @@
     
             let pathArray = window.location.pathname.split("/");
             let url = window.location.protocol + "//" + window.location.host;
-            for (let i = 0; i < pathArray.length - 1; i++) 
+            for (let i = 0; i < pathArray.length - 2; i++) 
                 url += pathArray[i] + "/";
             window.location.assign(url + {{ patient.id }} + "/history/" + id);
         };
@@ -1228,15 +1384,18 @@
         })
 
         function isTabAvailable(tab) {
+            let ret = false;
             $('.tabbed li').each(function() {
+                console.log($(this).attr('name'), tab, $(this).attr('name') === tab);
                 if ($(this).attr('name') === tab)
-                    return true;
+                    ret = true;
             })
-            return false;
+            return ret;
         }
 
         let tabSelected = localStorage.getItem('tabSelected');
-        if (tabSelected === null || isTabAvailable(tabSelected)) {
+        console.log(isTabAvailable(tabSelected))
+        if (tabSelected === null || !isTabAvailable(tabSelected)) {
             tabSelected = $('.tabbed li').eq(0).attr('name');
         }
         selectTab(tabSelected);
@@ -1244,7 +1403,7 @@
         $('ul.protocole-list').on('click', 'li a', function() {
             let tab = $(this).attr('name')
             selectTab(tab);
-            scrollToc('#protocole');
+            scrollToc('#examen');
         })
 
         function selectTab(tab) {

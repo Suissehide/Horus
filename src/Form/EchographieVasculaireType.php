@@ -362,34 +362,7 @@ class EchographieVasculaireType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('pressionSystolique', IntegerType::class, array(
-                'label' => 'Pression systolique',
-                'attr' => array(
-                    'unity' => 'mmHg',
-                    'data-min' => 0,
-                    'data-max' => 0,
-                ),
-                'required' => false,
-            ))
-            ->add('pressionDiastolique', IntegerType::class, array(
-                'label' => 'Pression diastolique',
-                'attr' => array(
-                    'unity' => 'mmHg',
-                    'data-min' => 0,
-                    'data-max' => 0,
-                ),
-                'required' => false,
-            ))
-            ->add('frequenceCardiaque', IntegerType::class, array(
-                'label' => 'Fréquence cardiaque',
-                'attr' => array(
-                    'unity' => 'btms/min.',
-                    'data-min' => 0,
-                    'data-max' => 0,
-                ),
-                'required' => false,
-            ))
-            ->add('velociteOndePouls', IntegerType::class, array(
+            ->add('vitesseOndePouls', IntegerType::class, array(
                 'label' => 'Vélocité de l\'onde pouls',
                 'attr' => array(
                     'unity' => 'm/sec.',

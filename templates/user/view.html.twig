@@ -16,21 +16,25 @@
 		</div>
 
 		<div class="container-form">
-
+			<div class="btn-block">
+				<a type="button" class="btn" onclick="history.back(-1)">
+					<i aria-hidden="true" class="fa fa-arrow-left"></i>
+					Retour
+				</a>
+			</div>
+			<div class="margin-space"></div>
 			<main class="flex-row">
-				<section class="flex-2">
+				<section class="">
 					<h3>Informations générales</h3>
 
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<div class="input-group">
-								<label>Email</label>
-								<p class="input-text">{{ user.email }}</p>
+								<label>Nom</label>
+								<p class="input-text">{{ user.nom }}</p>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<div class="input-group">
 								<label>Prenom</label>
 								<p class="input-text">{{ user.prenom }}</p>
@@ -38,17 +42,15 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<div class="input-group">
-								<label>Nom</label>
-								<p class="input-text">{{ user.nom }}</p>
+								<label>Email</label>
+								<p class="input-text">{{ user.email }}</p>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-6">
                             <div class="input-group">
-								<label>Roles</label>
+								<label>Role</label>
                                 <ul>
                                     {% for role in user.roles %}
                                         {% if role == 'ROLE_ADMIN' %}
@@ -63,12 +65,6 @@
                             </div>
 						</div>
 					</div>
-
-                    <div class="button-block">
-                        <a type="button" class="btn" onclick="history.back(-1)">
-                            <i aria-hidden="true" class="fa fa-arrow-left"></i>Retour</a>
-                    </div>
-
 				</section>
 			</main>
 

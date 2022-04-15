@@ -172,6 +172,21 @@ class BFR
      */
     private $activitePhysique;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $tabagisme;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $dateArret;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nombrePaquetsAn;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -545,6 +560,42 @@ class BFR
     public function setActivitePhysique(?string $activitePhysique): self
     {
         $this->activitePhysique = $activitePhysique;
+
+        return $this;
+    }
+
+    public function getTabagisme(): ?string
+    {
+        return $this->tabagisme;
+    }
+
+    public function setTabagisme(?string $tabagisme): self
+    {
+        $this->tabagisme = $tabagisme;
+
+        return $this;
+    }
+
+    public function getDateArret(): ?\DateTimeInterface
+    {
+        return $this->dateArret;
+    }
+
+    public function setDateArret(?\DateTimeInterface $dateArret): self
+    {
+        $this->dateArret = $dateArret;
+
+        return $this;
+    }
+
+    public function getNombrePaquetsAn(): ?int
+    {
+        return $this->nombrePaquetsAn;
+    }
+
+    public function setNombrePaquetsAn(?int $nombrePaquetsAn): self
+    {
+        $this->nombrePaquetsAn = $nombrePaquetsAn;
 
         return $this;
     }

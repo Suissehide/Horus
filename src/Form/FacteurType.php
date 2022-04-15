@@ -6,9 +6,7 @@ use App\Entity\Facteur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,9 +16,32 @@ class FacteurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('risqueHTA', CheckboxType::class, array(
-                'label' => ' ',
-                'required' => false
+            ->add('antecedentFamiliaux', ChoiceType::class, array(
+                'label' => 'Antécédent familiaux',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
+            ))
+
+            ->add('risqueHTA', ChoiceType::class, array(
+                'label' => 'Réponse',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
             ))
             ->add('depuisHTA', IntegerType::class, array(
                 'label' => ' ',
@@ -31,14 +52,32 @@ class FacteurType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('traiteHTA', CheckboxType::class, array(
-                'label' => ' ',
-                'required' => false
+            ->add('traiteHTA', ChoiceType::class, array(
+                'label' => 'Réponse',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
             ))
 
-            ->add('risqueDiabete', CheckboxType::class, array(
-                'label' => ' ',
-                'required' => false
+            ->add('risqueDiabete', ChoiceType::class, array(
+                'label' => 'Réponse',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
             ))
             ->add('depuisDiabete', IntegerType::class, array(
                 'label' => ' ',
@@ -49,14 +88,32 @@ class FacteurType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('traiteDiabete', CheckboxType::class, array(
-                'label' => ' ',
-                'required' => false
+            ->add('traiteDiabete', ChoiceType::class, array(
+                'label' => 'Réponse',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
             ))
 
-            ->add('risqueHypercholesterolemie', CheckboxType::class, array(
-                'label' => ' ',
-                'required' => false
+            ->add('risqueHypercholesterolemie', ChoiceType::class, array(
+                'label' => 'Réponse',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
             ))
             ->add('depuisHypercholesterolemie', IntegerType::class, array(
                 'label' => ' ',
@@ -67,14 +124,32 @@ class FacteurType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('traiteHypercholesterolemie', CheckboxType::class, array(
-                'label' => ' ',
-                'required' => false
+            ->add('traiteHypercholesterolemie', ChoiceType::class, array(
+                'label' => 'Réponse',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
             ))
 
-            ->add('risqueHypertriglyceridemie', CheckboxType::class, array(
-                'label' => ' ',
-                'required' => false
+            ->add('risqueHypertriglyceridemie', ChoiceType::class, array(
+                'label' => 'Réponse',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
             ))
             ->add('depuisHypertriglyceridemie', IntegerType::class, array(
                 'label' => ' ',
@@ -85,29 +160,27 @@ class FacteurType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('traiteHypertriglyceridemie', CheckboxType::class, array(
-                'label' => ' ',
-                'required' => false
+            ->add('traiteHypertriglyceridemie', ChoiceType::class, array(
+                'label' => 'Réponse',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
             ))
 
-            ->add('obesite', CheckboxType::class, array(
-                'label' => 'Obésité',
-                'required' => false
-            ))
-            ->add('alcoolisme', CheckboxType::class, array(
-                'label' => 'Alcoolisme',
-                'required' => false
-            ))
-            ->add('sevre', CheckboxType::class, array(
-                'label' => 'Sevré',
-                'required' => false
-            ))
             ->add('tabagisme', ChoiceType::class, array(
                 'label' => 'État',
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => false,
                 'choices' => array(
+                    '' => '',
                     'Non fumeur' => 'Non fumeur',
                     'Ancien fumeur' => 'Ancien fumeur',
                     'Fumeur' => 'Fumeur',
@@ -135,9 +208,55 @@ class FacteurType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('antecedentFamiliaux', CheckboxType::class, array(
-                'label' => 'Antécédent familiaux',
-                'required' => false
+
+            ->add('obesite', ChoiceType::class, array(
+                'label' => 'État',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
+            ))
+            ->add('alcoolisme', ChoiceType::class, array(
+                'label' => 'État',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
+            ))
+            ->add('sevre', ChoiceType::class, array(
+                'label' => 'Sevré',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
+            ))
+
+            ->add('cannabis', ChoiceType::class, array(
+                'label' => 'État',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
             ))
 
             ->add('save', SubmitType::class, array('label' => 'Sauvegarder'))

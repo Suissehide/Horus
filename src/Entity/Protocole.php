@@ -24,12 +24,6 @@ class Protocole
     private $fiches = [];
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\MedicamentsEntree", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
-    private $medicamentsEntree;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\AngioplastiePontage", cascade={"persist", "remove"})
      * @Groups({"advancement", "export"})
      */
@@ -48,28 +42,46 @@ class Protocole
     private $catheterisation;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Echocardiographie", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\CoronaireAngioplastie", cascade={"persist", "remove"})
      * @Groups({"advancement", "export"})
      */
-    private $echocardiographie;
+    private $coronaireAngioplastie;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Echographie", cascade={"persist", "remove"})
+     * @Groups({"advancement", "export"})
+     */
+    private $echographie;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\EchographieCardiaque", cascade={"persist", "remove"})
+     * @Groups({"advancement", "export"})
+     */
+    private $echographieCardiaque;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\EchographieVasculaire", cascade={"persist", "remove"})
      * @Groups({"advancement", "export"})
      */
     private $echographieVasculaire;
-    
+
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\NeuroImagerie", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\MedicamentsEntree", cascade={"persist", "remove"})
      * @Groups({"advancement", "export"})
      */
-    private $neuroImagerie;
+    private $medicamentsEntree;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\NeuroPsychologie", cascade={"persist", "remove"})
      * @Groups({"advancement", "export"})
      */
     private $neuroPsychologie;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Scintigraphie", cascade={"persist", "remove"})
+     * @Groups({"advancement", "export"})
+     */
+    private $scintigraphie;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\TestEffort", cascade={"persist", "remove"})
@@ -148,14 +160,38 @@ class Protocole
         return $this;
     }
 
-    public function getEchocardiographie(): ?Echocardiographie
+    public function getCoronaireAngioplastie(): ?CoronaireAngioplastie
     {
-        return $this->echocardiographie;
+        return $this->coronaireAngioplastie;
     }
 
-    public function setEchocardiographie(?Echocardiographie $echocardiographie): self
+    public function setCoronaireAngioplastie(?CoronaireAngioplastie $coronaireAngioplastie): self
     {
-        $this->echocardiographie = $echocardiographie;
+        $this->coronaireAngioplastie = $coronaireAngioplastie;
+
+        return $this;
+    }
+
+    public function getEchographie(): ?Echographie
+    {
+        return $this->echographie;
+    }
+
+    public function setEchographie(?Echographie $echographie): self
+    {
+        $this->echographie = $echographie;
+
+        return $this;
+    }
+
+    public function getEchographieCardiaque(): ?EchographieCardiaque
+    {
+        return $this->echographieCardiaque;
+    }
+
+    public function setEchographieCardiaque(?EchographieCardiaque $echographieCardiaque): self
+    {
+        $this->echographieCardiaque = $echographieCardiaque;
 
         return $this;
     }
@@ -172,18 +208,6 @@ class Protocole
         return $this;
     }
 
-    public function getNeuroImagerie(): ?NeuroImagerie
-    {
-        return $this->neuroImagerie;
-    }
-
-    public function setNeuroImagerie(?NeuroImagerie $neuroImagerie): self
-    {
-        $this->neuroImagerie = $neuroImagerie;
-
-        return $this;
-    }
-
     public function getNeuroPsychologie(): ?NeuroPsychologie
     {
         return $this->neuroPsychologie;
@@ -192,6 +216,18 @@ class Protocole
     public function setNeuroPsychologie(?NeuroPsychologie $neuroPsychologie): self
     {
         $this->neuroPsychologie = $neuroPsychologie;
+
+        return $this;
+    }
+
+    public function getScintigraphie(): ?Scintigraphie
+    {
+        return $this->scintigraphie;
+    }
+
+    public function setScintigraphie(?Scintigraphie $scintigraphie): self
+    {
+        $this->scintigraphie = $scintigraphie;
 
         return $this;
     }

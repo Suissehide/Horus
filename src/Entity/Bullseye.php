@@ -20,7 +20,7 @@ class Bullseye
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity=Segment::class, mappedBy="bullseye", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity=Segment::class, mappedBy="bullseye", cascade={"persist", "remove"})
      */
     private $segments;
 

@@ -18,7 +18,7 @@ class Facteur
     private $id;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $risqueHTA;
 
@@ -28,12 +28,12 @@ class Facteur
     private $depuisHTA;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $traiteHTA;
 
     /**
-     * @ORM\Column(type="boolean", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $risqueDiabete;
 
@@ -43,12 +43,12 @@ class Facteur
     private $depuisDiabete;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $traiteDiabete;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $risqueHypercholesterolemie;
 
@@ -58,12 +58,12 @@ class Facteur
     private $depuisHypercholesterolemie;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $traiteHypercholesterolemie;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $risqueHypertriglyceridemie;
 
@@ -73,22 +73,22 @@ class Facteur
     private $depuisHypertriglyceridemie;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $traiteHypertriglyceridemie;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $obesite;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $alcoolisme;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $sevre;
 
@@ -108,21 +108,26 @@ class Facteur
     private $nombrePaquetsAn;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $antecedentFamiliaux;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $cannabis;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getRisqueHTA(): ?bool
+    public function getRisqueHTA(): ?string
     {
         return $this->risqueHTA;
     }
 
-    public function setRisqueHTA(?bool $risqueHTA): self
+    public function setRisqueHTA(?string $risqueHTA): self
     {
         $this->risqueHTA = $risqueHTA;
 
@@ -141,24 +146,24 @@ class Facteur
         return $this;
     }
 
-    public function getTraiteHTA(): ?bool
+    public function getTraiteHTA(): ?string
     {
         return $this->traiteHTA;
     }
 
-    public function setTraiteHTA(?bool $traiteHTA): self
+    public function setTraiteHTA(?string $traiteHTA): self
     {
         $this->traiteHTA = $traiteHTA;
 
         return $this;
     }
 
-    public function getRisqueDiabete(): ?bool
+    public function getRisqueDiabete(): ?string
     {
         return $this->risqueDiabete;
     }
 
-    public function setRisqueDiabete(?bool $risqueDiabete): self
+    public function setRisqueDiabete(?string $risqueDiabete): self
     {
         $this->risqueDiabete = $risqueDiabete;
 
@@ -177,24 +182,24 @@ class Facteur
         return $this;
     }
 
-    public function getTraiteDiabete(): ?bool
+    public function getTraiteDiabete(): ?string
     {
         return $this->traiteDiabete;
     }
 
-    public function setTraiteDiabete(?bool $traiteDiabete): self
+    public function setTraiteDiabete(?string $traiteDiabete): self
     {
         $this->traiteDiabete = $traiteDiabete;
 
         return $this;
     }
 
-    public function getRisqueHypercholesterolemie(): ?bool
+    public function getRisqueHypercholesterolemie(): ?string
     {
         return $this->risqueHypercholesterolemie;
     }
 
-    public function setRisqueHypercholesterolemie(?bool $risqueHypercholesterolemie): self
+    public function setRisqueHypercholesterolemie(?string $risqueHypercholesterolemie): self
     {
         $this->risqueHypercholesterolemie = $risqueHypercholesterolemie;
 
@@ -213,24 +218,24 @@ class Facteur
         return $this;
     }
 
-    public function getTraiteHypercholesterolemie(): ?bool
+    public function getTraiteHypercholesterolemie(): ?string
     {
         return $this->traiteHypercholesterolemie;
     }
 
-    public function setTraiteHypercholesterolemie(?bool $traiteHypercholesterolemie): self
+    public function setTraiteHypercholesterolemie(?string $traiteHypercholesterolemie): self
     {
         $this->traiteHypercholesterolemie = $traiteHypercholesterolemie;
 
         return $this;
     }
 
-    public function getRisqueHypertriglyceridemie(): ?bool
+    public function getRisqueHypertriglyceridemie(): ?string
     {
         return $this->risqueHypertriglyceridemie;
     }
 
-    public function setRisqueHypertriglyceridemie(?bool $risqueHypertriglyceridemie): self
+    public function setRisqueHypertriglyceridemie(?string $risqueHypertriglyceridemie): self
     {
         $this->risqueHypertriglyceridemie = $risqueHypertriglyceridemie;
 
@@ -249,48 +254,48 @@ class Facteur
         return $this;
     }
 
-    public function getTraiteHypertriglyceridemie(): ?bool
+    public function getTraiteHypertriglyceridemie(): ?string
     {
         return $this->traiteHypertriglyceridemie;
     }
 
-    public function setTraiteHypertriglyceridemie(?bool $traiteHypertriglyceridemie): self
+    public function setTraiteHypertriglyceridemie(?string $traiteHypertriglyceridemie): self
     {
         $this->traiteHypertriglyceridemie = $traiteHypertriglyceridemie;
 
         return $this;
     }
 
-    public function getObesite(): ?bool
+    public function getObesite(): ?string
     {
         return $this->obesite;
     }
 
-    public function setObesite(?bool $obesite): self
+    public function setObesite(?string $obesite): self
     {
         $this->obesite = $obesite;
 
         return $this;
     }
 
-    public function getAlcoolisme(): ?bool
+    public function getAlcoolisme(): ?string
     {
         return $this->alcoolisme;
     }
 
-    public function setAlcoolisme(?bool $alcoolisme): self
+    public function setAlcoolisme(?string $alcoolisme): self
     {
         $this->alcoolisme = $alcoolisme;
 
         return $this;
     }
 
-    public function getSevre(): ?bool
+    public function getSevre(): ?string
     {
         return $this->sevre;
     }
 
-    public function setSevre(?bool $sevre): self
+    public function setSevre(?string $sevre): self
     {
         $this->sevre = $sevre;
 
@@ -333,14 +338,26 @@ class Facteur
         return $this;
     }
 
-    public function getAntecedentFamiliaux(): ?bool
+    public function getAntecedentFamiliaux(): ?string
     {
         return $this->antecedentFamiliaux;
     }
 
-    public function setAntecedentFamiliaux(?bool $antecedentFamiliaux): self
+    public function setAntecedentFamiliaux(?string $antecedentFamiliaux): self
     {
         $this->antecedentFamiliaux = $antecedentFamiliaux;
+
+        return $this;
+    }
+
+    public function getCannabis(): ?string
+    {
+        return $this->cannabis;
+    }
+
+    public function setCannabis(?string $cannabis): self
+    {
+        $this->cannabis = $cannabis;
 
         return $this;
     }

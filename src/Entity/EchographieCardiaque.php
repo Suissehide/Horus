@@ -2,15 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\EchocardiographieRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\EchographieCardiaqueRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EchocardiographieRepository::class)
+ * @ORM\Entity(repositoryClass=EchographieCardiaqueRepository::class)
  */
-class Echocardiographie
+class EchographieCardiaque
 {
     /**
      * @ORM\Id
@@ -75,11 +73,6 @@ class Echocardiographie
     private $basalIschemieLocation;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Bullseye", cascade={"persist", "remove"}, fetch="EAGER")
-     */
-    private $basalBullseye;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $stressEchographie;
@@ -103,11 +96,6 @@ class Echocardiographie
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $stressIschemieLocation;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Bullseye", cascade={"persist", "remove"}, fetch="EAGER")
-     */
-    private $stressBullseye;
 
     public function getId(): ?int
     {
@@ -230,30 +218,6 @@ class Echocardiographie
     public function setStressIschemieLocation(?string $stressIschemieLocation): self
     {
         $this->stressIschemieLocation = $stressIschemieLocation;
-
-        return $this;
-    }
-
-    public function getBasalBullseye(): ?Bullseye
-    {
-        return $this->basalBullseye;
-    }
-
-    public function setBasalBullseye(?Bullseye $basalBullseye): self
-    {
-        $this->basalBullseye = $basalBullseye;
-
-        return $this;
-    }
-
-    public function getStressBullseye(): ?Bullseye
-    {
-        return $this->stressBullseye;
-    }
-
-    public function setStressBullseye(?Bullseye $stressBullseye): self
-    {
-        $this->stressBullseye = $stressBullseye;
 
         return $this;
     }

@@ -38,6 +38,7 @@
 {% block checkbox_widget %}
         <div class="radio-container">
             <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+
             {% if useLabel|default(false) %}
                 {{ form_label(form, null, {'label': useLabel}) }}
             {% else %}
@@ -50,7 +51,11 @@
         <div class="radio-container">
             <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
                     
-            {{ form_label(form, null) }}
+            {% if useLabel|default(false) %}
+                {{ form_label(form, null, {'label': useLabel}) }}
+            {% else %}
+                {{ form_label(form, null) }}
+            {% endif %}
         </div>
 {% endblock radio_widget %}
 

@@ -14,7 +14,6 @@ use App\Entity\Erreur;
 use App\Entity\Letter;
 use App\Entity\Medicament;
 use App\Entity\MedicamentsEntree;
-use App\Entity\NeuroImagerie;
 use App\Entity\NeuroPsychologie;
 use App\Entity\Patient;
 use App\Entity\Segment;
@@ -30,8 +29,9 @@ use App\Form\EchocardiographieType;
 use App\Form\EchographieVasculaireType;
 use App\Form\FacteurType;
 use App\Form\GeneralType;
+use App\Form\AntecedentCardiovasculaireType;
+use App\Form\InformationType;
 use App\Form\MedicamentsEntreeType;
-use App\Form\NeuroImagerieType;
 use App\Form\NeuroPsychologieType;
 use App\Form\PatientType;
 use App\Form\TestEffortType;
@@ -99,7 +99,6 @@ class PatientController extends AbstractController
             $this->echocardiographie_create($patient);
             $patient->getProtocole()->setEchographieVasculaire(new EchographieVasculaire());
             $patient->getProtocole()->setMedicamentsEntree(new MedicamentsEntree());
-            $patient->getProtocole()->setNeuroImagerie(new NeuroImagerie());
             $patient->getProtocole()->setNeuroPsychologie(new NeuroPsychologie());
             $patient->getProtocole()->setTestEffort(new TestEffort());
             $patient->getProtocole()->setVisite(new Visite());
@@ -107,7 +106,7 @@ class PatientController extends AbstractController
             $em->persist($patient);
             $em->flush();
 
-            $this->addErreur($patient->getId(), $patient->getCode(), 'notice', 'Création du patient ' . $patient->getCode(), true);
+            $this->addErreur($patient->getId(), $patient->getGeneral()->getNom(), 'notice', 'Création du patient ' . $patient->getGeneral()->getNom(), true);
             return $this->redirectToRoute('patient_view', ['id' => $patient->getId()]);
         }
         return $this->render('patient/create.html.twig', [
@@ -217,6 +216,58 @@ class PatientController extends AbstractController
             return $this->redirect($request->getUri());
         }
 
+        #========== ANTECEDENT CARDIOVASCULAIRE ==========#
+        $antecedentCardiovasculaire = $patient->getAntecedentCardiovasculaire();
+        $formAntecedentCardiovasculaire = $this->createForm(AntecedentCardiovasculaireType::class, $antecedentCardiovasculaire);
+
+        /* GENERATE ERREUR */
+        $this->generateErreur($patient->getId(), $formAntecedentCardiovasculaire, $oldArray, 'antecedentCardiovasculaire', 'antecedentCardiovasculaire');
+
+        $formAntecedentCardiovasculaire->handleRequest($request);
+        if ($formAntecedentCardiovasculaire->isSubmitted() && $formAntecedentCardiovasculaire->isValid()) {
+
+            /* SERIALISATION */
+            $antecedentCardiovasculaireArray = $this->serializeEntity($formAntecedentCardiovasculaire->getData());
+
+            /* SPECIAL ERROR */
+
+            /* SEARCH DIFF */
+            $this->searchDiff($patient, $oldArray['antecedentCardiovasculaire'], $antecedentCardiovasculaireArray, 'antecedentCardiovasculaire');
+
+            $patient = $formAntecedentCardiovasculaire->getData();
+            $em->flush();
+
+            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
+
+            return $this->redirect($request->getUri());
+        }
+
+        #========== INFORMATION ==========#
+        $information = $patient->getInformation();
+        $formInformation = $this->createForm(InformationType::class, $information);
+
+        /* GENERATE ERREUR */
+        $this->generateErreur($patient->getId(), $formInformation, $oldArray, 'information', 'information');
+
+        $formInformation->handleRequest($request);
+        if ($formInformation->isSubmitted() && $formInformation->isValid()) {
+
+            /* SERIALISATION */
+            $informationArray = $this->serializeEntity($formInformation->getData());
+
+            /* SPECIAL ERROR */
+
+            /* SEARCH DIFF */
+            $this->searchDiff($patient, $oldArray['information'], $informationArray, 'information');
+
+            $patient = $formInformation->getData();
+            $em->flush();
+
+            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
+
+            return $this->redirect($request->getUri());
+        }
+
         #========== FACTEUR ==========#
         $facteur = $patient->getFacteur();
         $formFacteur = $this->createForm(FacteurType::class, $facteur);
@@ -236,37 +287,6 @@ class PatientController extends AbstractController
             $this->searchDiff($patient, $oldArray['facteur'], $facteurArray, 'facteur');
 
             $patient = $formFacteur->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
-        #========== DECES ==========#
-        $deces = $patient->getDeces();
-        if (!$deces) {
-            $patient->setDeces(new Deces());
-            $em->persist($patient);
-            $em->flush();
-        }
-        $formDeces = $this->createForm(DecesType::class, $deces);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formDeces, $oldArray, 'deces', 'deces');
-
-        $formDeces->handleRequest($request);
-        if ($formDeces->isSubmitted() && $formDeces->isValid()) {
-
-            /* SERIALISATION */
-            $decesArray = $this->serializeEntity($formDeces->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['deces'], $decesArray, 'deces');
-
-            $patient = $formDeces->getData();
             $em->flush();
 
             $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
@@ -430,32 +450,6 @@ class PatientController extends AbstractController
             return $this->redirect($request->getUri());
         }
 
-        #========== NEURO IMAGERIE ==========#
-        $neuroImagerie = $patient->getProtocole()->getNeuroImagerie();
-        $formNeuroImagerie = $this->createForm(NeuroImagerieType::class, $neuroImagerie);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formNeuroImagerie, $oldArray, 'neuroImagerie', 'neuroImagerie');
-
-        $formNeuroImagerie->handleRequest($request);
-        if ($formNeuroImagerie->isSubmitted() && $formNeuroImagerie->isValid()) {
-
-            /* SERIALISATION */
-            $facteurArray = $this->serializeEntity($formNeuroImagerie->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['protocole']['neuroImagerie'], $facteurArray, 'neuroImagerie');
-
-            $patient = $formNeuroImagerie->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
         #========== NEURO PSYCHOLOGIE ==========#
         $neuroPsychologie = $patient->getProtocole()->getNeuroPsychologie();
         $formNeuroPsychologie = $this->createForm(NeuroPsychologieType::class, $neuroPsychologie);
@@ -545,6 +539,9 @@ class PatientController extends AbstractController
             'date' => date("d/m/Y"),
 
             'formGeneral' => $formGeneral->createView(),
+            'formVisite' => $formVisite->createView(),
+            'formAntecedentCardiovasculaire' => $formAntecedentCardiovasculaire->createView(),
+            'formInformation' => $formInformation->createView(),
             'formFacteur' => $formFacteur->createView(),
             'formDeces' => $formDeces->createView(),
 
@@ -554,7 +551,6 @@ class PatientController extends AbstractController
             'formEchocardiographie' => $formEchocardiographie->createView(),
             'formEchographieVasculaire' => $formEchographieVasculaire->createView(),
             'formMedicamentsEntree' => $formMedicamentsEntree->createView(),
-            'formNeuroImagerie' => $formNeuroImagerie->createView(),
             'formNeuroPsychologie' => $formNeuroPsychologie->createView(),
             'formTestEffort' => $formTestEffort->createView(),
             'formVisite' => $formVisite->createView(),
