@@ -477,6 +477,31 @@ input[type='checkbox'].checkbox-round+span {
     cursor: not-allowed !important;
 }
 
+/* QCM
+========================================================================== */
+.qcm-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--persian-indigo);
+    margin-bottom: 16px;
+}
+
+.qcm-question {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    overflow-y: auto;
+    height: 42px;
+    font-family: Ubuntu-Bold;
+    font-size: 14px;
+    margin: 0;
+}
+
+.qcm-response {
+    display: flex;
+}
+
 /* Letter
 ========================================================================== */
 .letter__content {
@@ -987,6 +1012,7 @@ input[type='checkbox'].checkbox-round+span {
     flex: 1;
     overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .toc ul li a, .toc ul li button {

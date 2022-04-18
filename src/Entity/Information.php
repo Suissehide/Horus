@@ -83,9 +83,9 @@ class Information
     private $troncCommun;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="array", nullable=true)
      */
-    private $traitement;
+    private $traitement = [];
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -283,12 +283,12 @@ class Information
         return $this;
     }
 
-    public function getTraitement(): ?string
+    public function getTraitement(): ?array
     {
         return $this->traitement;
     }
 
-    public function setTraitement(?string $traitement): self
+    public function setTraitement(?array $traitement): self
     {
         $this->traitement = $traitement;
 

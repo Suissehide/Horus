@@ -308,7 +308,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     color: var(--persian-indigo);
     background-color: #e6e6e6;
     font-size: 14px;
-    height: 42px;
+    min-height: 42px;
     line-height: 42px;
     padding: 0 15px;
     border-radius: 3px;
@@ -499,20 +499,20 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     transition: background-color 0.24s linear;
 }
 
-.radio-row[type="checkbox"]:not(:checked), .radio-row[type="checkbox"]:checked {
+.radio-row [type="checkbox"]:not(:checked), .radio-row [type="checkbox"]:checked {
     position: absolute;
     left: 0;
     opacity: 0.01;
 }
 
-.radio-row[type="checkbox"]:not(:checked)+label, .radio-row[type="checkbox"]:checked+label {
+.radio-row [type="checkbox"]:not(:checked)+label, .radio-row [type="checkbox"]:checked+label {
     position: relative;
     padding-left: 2.3em;
     cursor: pointer;
     background-color: #e6e6e6;
 }
 
-.radio-row[type="checkbox"]:not(:checked)+label:before, .radio-row[type="checkbox"]:checked+label:before {
+.radio-row [type="checkbox"]:not(:checked)+label:before, .radio-row [type="checkbox"]:checked+label:before {
     content: '';
     position: absolute;
     left: 0;
@@ -527,24 +527,24 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     transition: all .275s;
 }
 
-.radio-row[type="checkbox"]:not(:checked)+label:after, .radio-row[type="checkbox"]:checked+label:after {
+.radio-row [type="checkbox"]:not(:checked)+label:after, .radio-row [type="checkbox"]:checked+label:after {
     content: '✓';
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: .0em;
-    font-size: 1.6em;
+    left: 0.2em;
+    font-size: 1.2em;
     color: var(--blue-green);
     line-height: 0;
     transition: all .2s;
 }
 
-.radio-row[type="checkbox"]:not(:checked)+label:after {
+.radio-row [type="checkbox"]:not(:checked)+label:after {
     opacity: 0;
     transform: scale(0) rotate(45deg);
 }
 
-.radio-row[type="checkbox"]:checked+label:after {
+.radio-row [type="checkbox"]:checked+label:after {
     opacity: 1;
     transform: scale(1) rotate(0);
 }
@@ -552,8 +552,8 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
 .radio-row {
     display: flex;
     position: relative;
-    flex-flow: row;
-    flex: 1;
+    flex-flow: row wrap;
+    height: auto;
 }
 
 .radio-container {
@@ -563,7 +563,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 20px 0 0;
     background-color: #e6e6e6;
     height: 42px;
     line-height: 42px;

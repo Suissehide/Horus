@@ -1,0 +1,27 @@
+<h1 id="antecedentCardiovasculaire">Antécédent cardiovasculaire</h1>
+
+<div class="form-space">
+	{{ form_widget(form.antecedentCardiovasculaire.IDM_SCA, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.angorStable, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.angioplastieCoronaire, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.pontageCoronaire, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.insuffisanceCardiaque, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.AVC, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.AIT, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.endarteriectomieCarotidienne, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.arteriteMembresInferieurs, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.angioplastiePeripherique, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.pontagePeripherique, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.antecedentFibrillationAuriculaire, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.antecedentInsuffisanceCardiaque, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.antecedentCardiovasculaire.valvulopathie, {'attr': {'class': 'input radio-row'} }) }}
+</div>
+
+<h3 id="neuroImagerie">Neuro-imagerie</h3>
+<div class="form-space">
+	{{ form_row(form.antecedentCardiovasculaire.localisation, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.antecedentCardiovasculaire.taille, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.antecedentCardiovasculaire.mecanisme, {'attr': {'class': 'input'} }) }}
+</div>
+
+{{ form_row(form.antecedentCardiovasculaire.save, {'attr': {'class': 'form-btn'} }) }}

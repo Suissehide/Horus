@@ -1,0 +1,101 @@
+<h1 id="facteur">Facteurs de risques initiaux</h1>
+
+<div class="radio-row">
+	{{ form_row(form.facteur.antecedentFamiliaux, {'attr': {'class': 'input radio-row'} }) }}
+</div>
+
+<div class="margin-space"></div>
+
+<div class="form-space">
+	<div class="flex-table">
+		<div class="col-flex-1">&nbsp;</div>
+		<div class="col-flex-2">Risques</div>
+		<div class="col-flex-3">Depuis</div>
+		<div class="col-flex-2">Traité</div>
+	</div>
+	<div class="flex-table">
+		<div class="col-flex-1">HTA</div>
+		<div class="col-flex-2 radio-row no-label">
+			{{ form_row(form.facteur.risqueHTA, {'attr': {'class': 'input radio-row'} }) }}
+		</div>
+		<div class="col-flex-3">
+			{{ form_row(form.facteur.depuisHTA, {'attr': {'class': 'input'}, 'useStyle': true}) }}
+		</div>
+		<div class="col-flex-2 radio-row no-label">
+			{{ form_row(form.facteur.traiteHTA, {'attr': {'class': 'input radio-row'} }) }}
+		</div>
+	</div>
+	<div class="flex-table">
+		<div class="col-flex-1">Diabète</div>
+		<div class="col-flex-2 radio-row no-label">
+			{{ form_row(form.facteur.risqueDiabete, {'attr': {'class': 'input radio-row'} }) }}
+		</div>
+		<div class="col-flex-3">
+			{{ form_row(form.facteur.depuisDiabete, {'attr': {'class': 'input'}, 'useStyle': true}) }}
+		</div>
+		<div class="col-flex-2 radio-row no-label">
+			{{ form_row(form.facteur.traiteDiabete, {'attr': {'class': 'input radio-row'} }) }}
+		</div>
+	</div>
+	<div class="flex-table">
+		<div class="col-flex-1">Hypercholestérolémie</div>
+		<div class="col-flex-2 radio-row no-label">
+			{{ form_row(form.facteur.risqueHypercholesterolemie, {'attr': {'class': 'input radio-row'} }) }}
+		</div>
+		<div class="col-flex-3">
+			{{ form_row(form.facteur.depuisHypercholesterolemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}
+		</div>
+		<div class="col-flex-2 radio-row no-label">
+			{{ form_row(form.facteur.traiteHypercholesterolemie, {'attr': {'class': 'input radio-row'} }) }}
+		</div>
+	</div>
+	<div class="flex-table">
+		<div class="col-flex-1">Hypertriglycéridèmie</div>
+		<div class="col-flex-2 radio-row no-label">
+			{{ form_row(form.facteur.risqueHypertriglyceridemie, {'attr': {'class': 'input radio-row'} }) }}
+		</div>
+		<div class="col-flex-3">
+			{{ form_row(form.facteur.depuisHypertriglyceridemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}
+		</div>
+		<div class="col-flex-2 radio-row no-label">
+			{{ form_row(form.facteur.traiteHypertriglyceridemie, {'attr': {'class': 'input radio-row'} }) }}
+		</div>
+	</div>
+
+	<div class="margin-space"></div>
+	<h5>Tabagisme</h5>
+	<div class="flex-wrap">
+		<div class="flex-1">
+			{{ form_row(form.facteur.tabagisme, {'attr': {'class': 'input'} }) }}
+		</div>
+		<div class="flex-1">
+			{{ form_row(form.facteur.dateArret, {'attr': {'class': 'input js-datepicker'} }) }}
+		</div>
+		<div class="flex-1">
+			{{ form_row(form.facteur.nombrePaquetsAn, {'attr': {'class': 'input radio-row'} }) }}
+		</div>
+	</div>
+
+	<h5>Obésité</h5>
+	<div>
+		{{ form_row(form.facteur.obesite, {'attr': {'class': 'input radio-row'} }) }}
+	</div>
+
+	<h5>Alcoolisme</h5>
+	<div class="flex-wrap">
+		<div class="flex-1">
+			{{ form_row(form.facteur.alcoolisme, {'attr': {'class': 'input radio-row'} }) }}
+		</div>
+		<div class="flex-1">
+			{{ form_row(form.facteur.sevre, {'attr': {'class': 'input radio-row'} }) }}
+		</div>
+	</div>
+
+	<h5>Cannabis</h5>
+	<div class="radio-row">
+		{{ form_row(form.facteur.cannabis, {'attr': {'class': 'input radio-row'} }) }}
+	</div>
+
+</div>
+
+{{ form_row(form.facteur.save, {'attr': {'class': 'form-btn'} }) }}

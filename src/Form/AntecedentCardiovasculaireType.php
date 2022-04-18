@@ -24,6 +24,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('angorStable', ChoiceType::class, array(
@@ -36,6 +37,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('angioplastieCoronaire', ChoiceType::class, array(
@@ -48,6 +50,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('pontageCoronaire', ChoiceType::class, array(
@@ -60,6 +63,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('insuffisanceCardiaque', ChoiceType::class, array(
@@ -72,6 +76,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('AVC', ChoiceType::class, array(
@@ -84,6 +89,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('AIT', ChoiceType::class, array(
@@ -96,6 +102,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('endarteriectomieCarotidienne', ChoiceType::class, array(
@@ -108,6 +115,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('arteriteMembresInferieurs', ChoiceType::class, array(
@@ -120,6 +128,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('angioplastiePeripherique', ChoiceType::class, array(
@@ -132,6 +141,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('pontagePeripherique', ChoiceType::class, array(
@@ -144,6 +154,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('antecedentFibrillationAuriculaire', ChoiceType::class, array(
@@ -156,6 +167,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('antecedentInsuffisanceCardiaque', ChoiceType::class, array(
@@ -168,6 +180,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('valvulopathie', ChoiceType::class, array(
@@ -180,6 +193,7 @@ class AntecedentCardiovasculaireType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
 

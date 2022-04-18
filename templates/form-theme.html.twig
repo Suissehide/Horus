@@ -36,21 +36,22 @@
 {% endblock choice_widget_expanded %}
 
 {% block checkbox_widget %}
+    <div class="radio-row">
         <div class="radio-container">
             <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-
             {% if useLabel|default(false) %}
                 {{ form_label(form, null, {'label': useLabel}) }}
             {% else %}
                 {{ form_label(form, null) }}
             {% endif %}
         </div>
+    </div>
 {% endblock checkbox_widget %}
 
 {% block radio_widget %}
         <div class="radio-container">
             <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-                    
+                          
             {% if useLabel|default(false) %}
                 {{ form_label(form, null, {'label': useLabel}) }}
             {% else %}
@@ -142,3 +143,42 @@
         </div>
     {% endif %}
 {% endblock number_widget %}
+
+{% block _patient_antecedentCardiovasculaire_qcm_type_widget %}
+    {{ block('qcm_widget_special') }}
+{% endblock _patient_antecedentCardiovasculaire_qcm_type_widget %}
+
+{% block _patient_information_qcm_type_widget %}
+    {{ block('qcm_widget_special') }}
+{% endblock _patient_information_qcm_type_widget %}
+
+{% block qcm_widget_special %}
+    <div class="qcm-row">
+        <div class="qcm-question">
+            {{ label | raw }}
+        </div>
+        <div class="qcm-response">
+            <div {{ block('widget_container_attributes') }}>
+                {% for child in form %}
+                    {{ form_widget(child) }}
+                {% endfor %}
+            </div>
+            <button class="history"><div class="history-icon"></div></button>
+        </div>
+        {{ form_errors(form) }}
+    </div>
+{% endblock qcm_widget_special %}
+
+
+
+{% block qcm_widget %}
+    <div class="flex">
+        <div {{ block('widget_container_attributes') }}>
+            {% for child in form %}
+                {{ form_widget(child) }}
+            {% endfor %}
+        </div>
+        <button class="history"><div class="history-icon"></div></button>
+    </div>
+    {{ form_errors(form) }}
+{% endblock qcm_widget %}

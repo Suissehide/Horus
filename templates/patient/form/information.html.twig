@@ -1,0 +1,48 @@
+<h1 id="information">Information sur l'événement cardiovasculaire</h1>
+
+<h3 id="infarctusMyocarde">Type d'infarctus du myocarde</h3>
+<div class="form-space">
+	{{ form_widget(form.information.susDecalage, {'attr': {'class': 'input radio-row'} }) }}
+
+	<div class="margin-space"></div>
+	<h5>Territoire atteint</h5>
+	{{ form_widget(form.information.anterieur, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.septoApical, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.lateral, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.inferieurPosterieur, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.sansTerritoire, {'attr': {'class': 'input radio-row'} }) }}
+
+	<div class="margin-space"></div>
+	<h5>Coronarographie (sténose > 50%)</h5>
+	{{ form_widget(form.information.IVA, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.CD, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.Cx, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.marginale, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.diagonale, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.pontage, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.troncCommun, {'attr': {'class': 'input radio-row'} }) }}
+</div>
+
+<div class="margin-space"></div>
+<h5>Traitement à la phase aiguë</h5>
+<div class="form-space">
+	{{ form_row(form.information.traitement, {'attr': {'class': 'input radio-row'} }) }}
+</div>
+
+<div class="margin-space"></div>
+<h5>Complications immédiates</h5>
+<div class="form-space">
+	{{ form_widget(form.information.troubleRythmeVentriculaire, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.insuffisanceCardiaque, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.pericardite, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.complicationMecanique, {'attr': {'class': 'input radio-row'} }) }}
+</div>
+
+<h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
+<div class="form-space">
+	{{ form_row(form.information.localisation, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.information.taille, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.information.mecanisme, {'attr': {'class': 'input'} }) }}
+</div>
+
+{{ form_row(form.information.save, {'attr': {'class': 'form-btn'} }) }}

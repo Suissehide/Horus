@@ -150,246 +150,34 @@
                 </div>
             </section>
 
+            {{ form_start(form, {'attr': {'class': 'form validate-form'} }) }}
+            {{ form_errors(form) }}
+
+            {% form_theme form 'form-theme.html.twig' %}
+
+            {# {{ dump(form) }} #}
+
 			{#========== GENERAL ==========#}
 			<section class="slide" id="tab-general">
-                {{ form_start(formGeneral, {'attr': {'class': 'form validate-form'} }) }}
-                {{ form_errors(formGeneral) }}
-
-                {% form_theme formGeneral 'form-theme.html.twig' %}
-
-				<h1 id="general">Informations générales</h1>
-
-				<h3 id="identification">Identification</h3>
-				<div class="form-space">
-					    {{ form_row(formGeneral.civilite, {'attr': {'class': 'input'} }) }}
-                        <div class="flex-nowrap">
-                            {{ form_row(formGeneral.prenom, {'attr': {'class': 'input'} }) }}
-                            {{ form_row(formGeneral.nom, {'attr': {'class': 'input'} }) }}
-                        </div>
-                        {{ form_row(formGeneral.nomNaissance, {'attr': {'class': 'input'} }) }}
-                        {{ form_row(formGeneral.dateNaissance, {'attr': {'class': 'input js-datepicker'} }) }}
-                        {{ form_row(formGeneral.sexe, {'attr': {'class': 'input radio-row'} }) }}
-				</div>
-
-                <h3 id="complement">Complément</h3>
-				<div class="form-space">
-                    {{ form_row(formGeneral.profession, {'attr': {'class': 'input'} }) }}
-                    {{ form_row(formGeneral.statutActuel, {'attr': {'class': 'input'} }) }}
-                    {{ form_row(formGeneral.niveauEtude, {'attr': {'class': 'input'} }) }}
-                </div>
-
-				{{ form_row(formGeneral.save, {'attr': {'class': 'form-btn'} }) }}
-
-                {{ form_row(formGeneral._token) }}
-                {{ form_end(formGeneral, {'render_rest' : false}) }}
+                {% include 'patient/form/general.html.twig' with form %}
 			</section>
 
 
 			{#========== ANTECEDENT CARDIOVASCULAIRE ==========#}
 			<section class="slide" id="tab-antecedentCardiovasculaire">
-                {{ form_start(formAntecedentCardiovasculaire, {'attr': {'class': 'form validate-form'} }) }}
-                {{ form_errors(formAntecedentCardiovasculaire) }}
-
-                {% form_theme formAntecedentCardiovasculaire 'form-theme.html.twig' %}
-
-				<h1 id="antecedentCardiovasculaire">Antécédent cardiovasculaire</h1>
-
-				<div class="form-space">
-                    {{ form_row(formAntecedentCardiovasculaire.IDM_SCA, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.angorStable, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.angioplastieCoronaire, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.pontageCoronaire, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.insuffisanceCardiaque, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.AVC, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.AIT, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.endarteriectomieCarotidienne, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.arteriteMembresInferieurs, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.angioplastiePeripherique, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.pontagePeripherique, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.antecedentFibrillationAuriculaire, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.antecedentInsuffisanceCardiaque, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formAntecedentCardiovasculaire.valvulopathie, {'attr': {'class': 'input radio-row'} }) }}
-				</div>
-
-				{{ form_row(formAntecedentCardiovasculaire.save, {'attr': {'class': 'form-btn'} }) }}
-
-                {{ form_row(formAntecedentCardiovasculaire._token) }}
-                {{ form_end(formAntecedentCardiovasculaire, {'render_rest' : false}) }}
-			</section>
-
+                {% include 'patient/form/antecedent_cardiovasculaire.html.twig' with form %}
+            </section>
 
             {#========== INFORMATION ==========#}
-			<section class="slide" id="tab-information">
-                {{ form_start(formInformation, {'attr': {'class': 'form validate-form'} }) }}
-                {{ form_errors(formInformation) }}
+            <section class="slide" id="tab-information">
+			    {% include 'patient/form/information.html.twig' with form %}
+            </section>
 
-                {% form_theme formInformation 'form-theme.html.twig' %}
-
-				<h1 id="information">Information sur l'événement cardiovasculaire</h1>
-
-				<h3 id="infarctusMyocarde">Type d'infarctus du myocarde</h3>
-				<div class="form-space">
-                    {{ form_row(formInformation.susDecalage, {'attr': {'class': 'input radio-row'} }) }}
-
-                    <div class="margin-space"></div>
-                    <h5>Territoire atteint</h5>
-                    {{ form_row(formInformation.anterieur, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.septoApical, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.lateral, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.inferieurPosterieur, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.sansTerritoire, {'attr': {'class': 'input radio-row'} }) }}
-
-                    <div class="margin-space"></div>
-                    <h5>Coronarographie (sténose > 50%)</h5>
-                    {{ form_row(formInformation.IVA, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.CD, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.Cx, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.marginale, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.diagonale, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.pontage, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.troncCommun, {'attr': {'class': 'input radio-row'} }) }}
-                </div>
-
-                <div class="margin-space"></div>
-                <h5>Type d'infarctus du myocarde</h5>
-				<div class="form-space">
-                    {{ form_row(formInformation.traitement, {'attr': {'class': 'input radio-row'} }) }}
-                </div>
-
-                <div class="margin-space"></div>
-                <h5>Complications immédiates</h5>
-				<div class="form-space">
-                    {{ form_row(formInformation.troubleRythmeVentriculaire, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.insuffisanceCardiaque, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.pericardite, {'attr': {'class': 'input radio-row'} }) }}
-                    {{ form_row(formInformation.complicationMecanique, {'attr': {'class': 'input radio-row'} }) }}
-                </div>
-
-				<h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
-				<div class="form-space">
-                    {{ form_row(formInformation.localisation, {'attr': {'class': 'input'} }) }}
-                    {{ form_row(formInformation.taille, {'attr': {'class': 'input'} }) }}
-                    {{ form_row(formInformation.mecanisme, {'attr': {'class': 'input'} }) }}
-                </div>
-
-				{{ form_row(formInformation.save, {'attr': {'class': 'form-btn'} }) }}
-
-                {{ form_row(formInformation._token) }}
-                {{ form_end(formInformation, {'render_rest' : false}) }}
-			</section>
 
 			{#========== FACTEUR ==========#}
 			<section class="slide" id="tab-facteur">
-                {{ form_start(formFacteur, {'attr': {'class': 'form validate-form'} }) }}
-                {{ form_errors(formFacteur) }}
-
-                {% form_theme formFacteur 'form-theme.html.twig' %}
-
-				<h1 id="facteur">Facteurs de risques initiaux</h1>
-     
-                <div class="radio-row">
-                    {{ form_row(formFacteur.antecedentFamiliaux, {'attr': {'class': 'input radio-row'} }) }}
-                </div>
-
-                <div class="margin-space"></div>
-
-				<div class="form-space">
-                    <div class="flex-table">
-                        <div class="col-flex-1">&nbsp;</div>
-                        <div class="col-flex-2">Risques</div>
-                        <div class="col-flex-3">Depuis</div>
-                        <div class="col-flex-2">Traité</div>
-                    </div>
-                    <div class="flex-table">
-                        <div class="col-flex-1">HTA</div>
-                        <div class="col-flex-2 radio-row no-label">
-                            {{ form_row(formFacteur.risqueHTA, {'attr': {'class': 'input radio-row'} }) }}
-                        </div>
-                        <div class="col-flex-3">
-                            {{ form_row(formFacteur.depuisHTA, {'attr': {'class': 'input'}, 'useStyle': true}) }}
-                        </div>
-                        <div class="col-flex-2 radio-row no-label">
-                            {{ form_row(formFacteur.traiteHTA, {'attr': {'class': 'input radio-row'} }) }}
-                        </div>
-                    </div>
-                    <div class="flex-table">
-                        <div class="col-flex-1">Diabète</div>
-                        <div class="col-flex-2 radio-row no-label">
-                            {{ form_row(formFacteur.risqueDiabete, {'attr': {'class': 'input radio-row'} }) }}
-                        </div>
-                        <div class="col-flex-3">
-                            {{ form_row(formFacteur.depuisDiabete, {'attr': {'class': 'input'}, 'useStyle': true}) }}
-                        </div>
-                        <div class="col-flex-2 radio-row no-label">
-                            {{ form_row(formFacteur.traiteDiabete, {'attr': {'class': 'input radio-row'} }) }}
-                        </div>
-                    </div>
-                    <div class="flex-table">
-                        <div class="col-flex-1">Hypercholestérolémie</div>
-                        <div class="col-flex-2 radio-row no-label">
-                            {{ form_row(formFacteur.risqueHypercholesterolemie, {'attr': {'class': 'input radio-row'} }) }}
-                        </div>
-                        <div class="col-flex-3">
-                            {{ form_row(formFacteur.depuisHypercholesterolemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}
-                        </div>
-                        <div class="col-flex-2 radio-row no-label">
-                            {{ form_row(formFacteur.traiteHypercholesterolemie, {'attr': {'class': 'input radio-row'} }) }}
-                        </div>
-                    </div>
-                    <div class="flex-table">
-                        <div class="col-flex-1">Hypertriglycéridèmie</div>
-                        <div class="col-flex-2 radio-row no-label">
-                            {{ form_row(formFacteur.risqueHypertriglyceridemie, {'attr': {'class': 'input radio-row'} }) }}
-                        </div>
-                        <div class="col-flex-3">
-                            {{ form_row(formFacteur.depuisHypertriglyceridemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}
-                        </div>
-                        <div class="col-flex-2 radio-row no-label">
-                            {{ form_row(formFacteur.traiteHypertriglyceridemie, {'attr': {'class': 'input radio-row'} }) }}
-                        </div>
-                    </div>
-
-                    <div class="margin-space"></div>
-                    <h5>Tabagisme</h5>
-                    <div class="flex-wrap">
-                        <div class="flex-1">
-                            {{ form_row(formFacteur.tabagisme, {'attr': {'class': 'input'} }) }}
-                        </div>
-                        <div class="flex-1">
-                            {{ form_row(formFacteur.dateArret, {'attr': {'class': 'input js-datepicker'} }) }}
-                        </div>
-                        <div class="flex-1">
-                            {{ form_row(formFacteur.nombrePaquetsAn, {'attr': {'class': 'input radio-row'} }) }}
-                        </div>
-                    </div>
-
-                    <h5>Obésité</h5>
-                    <div>
-                        {{ form_row(formFacteur.obesite, {'attr': {'class': 'input radio-row'} }) }}
-                    </div>
-
-                    <h5>Alcoolisme</h5>
-                    <div class="flex-wrap">
-                        <div class="flex-1">
-                            {{ form_row(formFacteur.alcoolisme, {'attr': {'class': 'input radio-row'} }) }}
-                        </div>
-                        <div class="flex-1">
-                            {{ form_row(formFacteur.sevre, {'attr': {'class': 'input radio-row'} }) }}
-                        </div>
-                    </div>
-
-                    <h5>Cannabis</h5>
-                    <div class="radio-row">
-                        {{ form_row(formFacteur.cannabis, {'attr': {'class': 'input radio-row'} }) }}
-                    </div>
-
-                </div>
-
-				{{ form_row(formFacteur.save, {'attr': {'class': 'form-btn'} }) }}
-
-                {{ form_row(formFacteur._token) }}
-                {{ form_end(formFacteur, {'render_rest' : false}) }}
-			</section>
+                {% include 'patient/form/facteur.html.twig' with form %}
+            </section>
 
             {#========== EXAMEN ==========#}
             <section class="slide" id="tab-examen">
@@ -466,7 +254,7 @@
                 <ul class="tab-list">
 					<li class="tab-content" name="angioplastiePontage">
                         {#========== Angioplastie et pontage ==========#}
-                        <div id="examen-angioplastie-pontage">
+                        {# <div id="examen-angioplastie-pontage">
                             {{ form_start(formAngioplastiePontage, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formAngioplastiePontage) }}
 
@@ -498,111 +286,19 @@
 
                             {{ form_row(formAngioplastiePontage._token) }}
                             {{ form_end(formAngioplastiePontage, {'render_rest' : false}) }}
-                        </div>
+                        </div> #}
                     </li>
 
                     <li class="tab-content" name="bfr">
-                        {#========== BRF ==========#}
+                        {#========== Bilan biologique et risque (BRF) ==========#}
                         <div id="examen-bfr">
-                            {{ form_start(formBFR, {'attr': {'class': 'form validate-form'} }) }}
-                            {{ form_errors(formBFR) }}
-
-                            {% form_theme formBFR 'form-theme.html.twig' %}
-
-                            <h1 id="bfr">Bilan biologique et risque</h1>
-                            <h3 id="biometrie">Biométrie</h3>
-                            <div class="form-space">
-                                {{ form_row(formBFR.taille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                                {{ form_row(formBFR.poids, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                                {{ form_row(formBFR.tourTaille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                            
-                                <div class="wrap-input">
-                                    <label for="bfr_IMC">
-                                        <span></span>
-                                        <em>IMC</em>
-                                    </label>
-                                    <div class="flex">
-                                        <div class="form-input">
-                                            <input disabled type="number" id="bfr_IMC" name="bfr[IMC]" unity="" data-min="0" data-max="0" class="input">
-                                            <span class="focus-input"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h3 id="tensionArterielle">Tension artérielle</h3>
-                            <div class="form-space flex-nowrap">
-                                {{ form_row(formBFR.tensionArterielleJour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                                {{ form_row(formBFR.tensionArterielleNuit, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-                            </div>
-
-                            <h3 id="dyslipidemie">Dyslipidémie</h3>
-                            <div class="form-space flex-2">
-                                {{ form_row(formBFR.cholesterolTotal, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.triglicerides, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.HDLC, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.LDLC, {'attr': {'class': 'input'} }) }}
-                            </div>
-
-                            <h3 id="activite-physique">Tabagisme</h3>
-                            <div class="form-space">
-                                {{ form_row(formBFR.tabagisme, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.dateArret, {'attr': {'class': 'input js-datepicker'} }) }}
-                                {{ form_row(formBFR.nombrePaquetsAn, {'attr': {'class': 'input'} }) }}
-                            </div>
-
-                            <h3 id="diabete">Diabète</h3>
-                            <div class="form-space flex-2">
-                                {{ form_row(formBFR.glycemieAjeun, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.glycemiePostPrandiale, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.Hba1c, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.neuropathieClinique, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.fondOeil, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.neuroesthesiometriePiedDroit, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.neuroesthesiometriePiedGauche, {'attr': {'class': 'input'} }) }}
-                            </div>
-
-                            <h3 id="bilan-renal">Bilan rénal</h3>
-                            <div class="form-space flex-2">
-                                {{ form_row(formBFR.proteinurie, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.microAlbuminurie, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.creatinine, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.clairence, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.homoCysBasale, {'attr': {'class': 'input'} }) }}
-                            </div>
-
-                            <h3 id="bilan-hepatique">Bilan hépatique</h3>
-                            <div class="form-space flex-2">
-                                {{ form_row(formBFR.transaminasesASAT, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.transaminasesALAT, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.gamma, {'attr': {'class': 'input'} }) }}
-                            </div>
-
-                            <h3 id="facteur-thrombogeniques">Facteur thrombogéniques</h3>
-                            <div class="form-space flex-2">
-                                {{ form_row(formBFR.fibrinogene, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.CRP, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.VS, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.plaquettes, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.globulesBlancs, {'attr': {'class': 'input'} }) }}
-                                {{ form_row(formBFR.hemoglobine, {'attr': {'class': 'input'} }) }}
-                            </div>
-
-                            <h3 id="activite-physique">Activité physique</h3>
-                            <div class="form-space">
-                                {{ form_row(formBFR.activitePhysique, {'attr': {'class': 'input'} }) }}
-                            </div>
-
-                            {{ form_row(formBFR.save, {'attr': {'class': 'form-btn'} }) }}
-
-                            {{ form_row(formBFR._token) }}
-                            {{ form_end(formBFR, {'render_rest' : false}) }}
+                            {% include 'patient/form/examens/bilan_biologique_risque.html.twig' with form %}
                         </div>
                     </li>
 
                     <li class="tab-content" name="catheterisation">
                         {#========== Catheterisation ==========#}
-                        <div id="examen-catheterisation">
+                        {# <div id="examen-catheterisation">
                             {{ form_start(formCatheterisation, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formCatheterisation) }}
 
@@ -638,12 +334,12 @@
 
                             {{ form_row(formCatheterisation._token) }}
                             {{ form_end(formCatheterisation, {'render_rest' : false}) }}
-                        </div>
+                        </div> #}
                     </li>
 
                     <li class="tab-content" name="coronaireAngiosplatie">
                         {#========== Coronaire & Angioplastie ==========#}
-                        <div id="examen-coronaire-angioplastie">
+                        {# <div id="examen-coronaire-angioplastie">
                             {{ form_start(formCoronaireAngiosplatie, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formCoronaireAngiosplatie) }}
 
@@ -683,12 +379,12 @@
 
                             {{ form_row(formCoronaireAngiosplatie._token) }}
                             {{ form_end(formCoronaireAngiosplatie, {'render_rest' : false}) }}
-                        </div>
+                        </div> #}
                     </li>
 
                     <li class="tab-content" name="echocardiographie">
                         {#========== Échographie cardiaque ==========#}
-                        <div id="examen-echocardiographie">
+                        {# <div id="examen-echocardiographie">
                             {{ form_start(formEchocardiographie, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formEchocardiographie) }}
 
@@ -750,12 +446,12 @@
 
                             {{ form_row(formEchocardiographie._token) }}
                             {{ form_end(formEchocardiographie, {'render_rest' : false}) }}
-                        </div>
+                        </div> #}
                     </li>
 
                     <li class="tab-content" name="echographieVasculaire">
                         {#========== Échographie vasculaire ==========#}
-                        <div id="examen-echographie-vasculaire">
+                        {# <div id="examen-echographie-vasculaire">
                             {{ form_start(formEchographieVasculaire, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formEchographieVasculaire) }}
 
@@ -812,12 +508,12 @@
 
                             {{ form_row(formEchographieVasculaire._token) }}
                             {{ form_end(formEchographieVasculaire, {'render_rest' : false}) }}
-                        </div>
+                        </div> #}
                     </li>
 
                     <li class="tab-content" name="medicaments">
                         {#========== Médicaments ==========#}
-                        <div id="examen-medicaments">
+                        {# <div id="examen-medicaments">
                             {{ form_start(formMedicamentsEntree, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formMedicamentsEntree) }}
 
@@ -873,12 +569,12 @@
 
                             {{ form_row(formMedicamentsEntree._token) }}
                             {{ form_end(formMedicamentsEntree, {'render_rest' : false}) }}
-                        </div>
+                        </div> #}
                     </li>
 
                     <li class="tab-content" name="neuroImagerie">
                         {#========== NeuroImagerie ==========#}
-                        <div id="examen-neuro-imagerie">
+                        {# <div id="examen-neuro-imagerie">
                             {{ form_start(formNeuroImagerie, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formNeuroImagerie) }}
 
@@ -895,12 +591,12 @@
 
                             {{ form_row(formNeuroImagerie._token) }}
                             {{ form_end(formNeuroImagerie, {'render_rest' : false}) }}
-                        </div>
+                        </div> #}
                     </li>
 
                     <li class="tab-content" name="neuroPsychologie">
                         {#========== NeuroPsychologie ==========#}
-                        <div id="examen-neuro-psychologie">
+                        {# <div id="examen-neuro-psychologie">
                             {{ form_start(formNeuroPsychologie, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formNeuroPsychologie) }}
 
@@ -927,12 +623,12 @@
 
                             {{ form_row(formNeuroPsychologie._token) }}
                             {{ form_end(formNeuroPsychologie, {'render_rest' : false}) }}
-                        </div>
+                        </div> #}
                     </li>
 
                     <li class="tab-content" name="testsEffort">
                         {#========== Test d'effort ==========#}
-                        <div id="examen-testsEffort">
+                        {# <div id="examen-testsEffort">
                             {{ form_start(formTestEffort, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formTestEffort) }}
 
@@ -970,12 +666,12 @@
 
                             {{ form_row(formTestEffort._token) }}
                             {{ form_end(formTestEffort, {'render_rest' : false}) }}
-                        </div>
+                        </div> #}
                     </li>
 
                     <li class="tab-content" name="visite">
                         {#========== Visite ==========#}
-                        <div id="examen-visite">
+                        {# <div id="examen-visite">
                             {{ form_start(formVisite, {'attr': {'class': 'form validate-form'} }) }}
                             {{ form_errors(formVisite) }}
 
@@ -990,23 +686,21 @@
 
                             {{ form_row(formVisite._token) }}
                             {{ form_end(formVisite, {'render_rest' : false}) }}
-                        </div>
+                        </div> #}
                     </li>
                 </ul>
-
-
             </section>
 
 			{#========== SUIVI ==========#}
 			<section class="slide" id="tab-suivi">
-                {{ form_start(formDeces, {'attr': {'class': 'form validate-form'} }) }}
-                {{ form_errors(formDeces) }}
-
-                {% form_theme formDeces 'form-theme.html.twig' %}
 
 				<h1 id="suivi">Suivi</h1>
 
 			</section>
+
+            
+            {{ form_row(form._token) }}
+            {{ form_end(form, {'render_rest' : false}) }}
 		</main>
 
 		<div class="cd-top js-cd-top">

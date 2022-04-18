@@ -1,0 +1,22 @@
+<h1 id="general">Informations générales</h1>
+
+<h3 id="identification">Identification</h3>
+<div class="form-space">
+	{{ form_row(form.general.civilite, {'attr': {'class': 'input'} }) }}
+	<div class="flex-nowrap">
+		{{ form_row(form.general.prenom, {'attr': {'class': 'input'} }) }}
+		{{ form_row(form.general.nom, {'attr': {'class': 'input'} }) }}
+	</div>
+	{{ form_row(form.general.nomNaissance, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.general.dateNaissance, {'attr': {'class': 'input js-datepicker'} }) }}
+	{{ form_row(form.general.sexe, {'attr': {'class': 'input radio-row'} }) }}
+</div>
+
+<h3 id="complement">Complément</h3>
+<div class="form-space">
+	{{ form_row(form.general.profession, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.general.statutActuel, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.general.niveauEtude, {'attr': {'class': 'input'} }) }}
+</div>
+
+{{ form_row(form.general.save, {'attr': {'class': 'form-btn'} }) }}

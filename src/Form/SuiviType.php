@@ -124,12 +124,12 @@ class SuiviType extends AbstractType
                 'by_reference' => false,
             ))
 
-            ->add('traitement', CollectionType::class, array(
-                'entry_type' => QcmType::class,
-                'entry_options' => array('label' => false),
-                'allow_add' => true,
-                'by_reference' => false,
-            ))
+            // ->add('traitement', CollectionType::class, array(
+            //     'entry_type' => QcmType::class,
+            //     'entry_options' => array('label' => false),
+            //     'allow_add' => true,
+            //     'by_reference' => false,
+            // ))
 
             ->add('crp', NumberType::class, array(
                 'label' => 'CRP ultra-sensible',

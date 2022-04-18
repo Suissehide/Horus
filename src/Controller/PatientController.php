@@ -2,40 +2,27 @@
 
 namespace App\Controller;
 
+use App\Entity\Patient;
+use App\Entity\General;
+
 use App\Entity\AngioplastiePontage;
 use App\Entity\BFR;
 use App\Entity\Catheterisation;
-use App\Entity\Deces;
-use App\Entity\Echocardiographie;
+use App\Entity\EchographieCardiaque;
 use App\Entity\EchographieVasculaire;
 use App\Entity\Facteur;
-use App\Entity\General;
-use App\Entity\Erreur;
-use App\Entity\Letter;
 use App\Entity\Medicament;
 use App\Entity\MedicamentsEntree;
 use App\Entity\NeuroPsychologie;
-use App\Entity\Patient;
-use App\Entity\Segment;
 use App\Entity\TestEffort;
 use App\Entity\Visite;
-use App\Entity\Bullseye;
 
-use App\Form\AngioplastiePontageType;
-use App\Form\BFRType;
-use App\Form\CatheterisationType;
-use App\Form\DecesType;
-use App\Form\EchocardiographieType;
-use App\Form\EchographieVasculaireType;
-use App\Form\FacteurType;
-use App\Form\GeneralType;
-use App\Form\AntecedentCardiovasculaireType;
-use App\Form\InformationType;
-use App\Form\MedicamentsEntreeType;
-use App\Form\NeuroPsychologieType;
+use App\Entity\Segment;
+use App\Entity\Bullseye;
+use App\Entity\Letter;
+use App\Entity\Erreur;
+
 use App\Form\PatientType;
-use App\Form\TestEffortType;
-use App\Form\VisiteType;
 use App\Repository\ErreurRepository;
 
 use DateTime;
@@ -49,6 +36,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Doctrine\ORM\EntityManagerInterface;
 
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -61,9 +49,15 @@ class PatientController extends AbstractController
      */
     private $security;
 
-    public function __construct(Security $security)
+    /**
+     * @var DoctrineManager
+     */
+    private $em;
+
+    public function __construct(Security $security, EntityManagerInterface $entityManager)
     {
-       $this->security = $security;
+        $this->security = $security;
+        $this->em = $entityManager;
     }
 
     /**
@@ -71,7 +65,6 @@ class PatientController extends AbstractController
      */
     public function patient_add(Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
         $patient = new Patient();
         $form = $this->createForm(PatientType::class, $patient);
 
@@ -84,7 +77,7 @@ class PatientController extends AbstractController
                 case 'Ensemble 1':
                     $patient->getProtocole()->setFiches(['bfr', 'testsEffort']);
                     break;
-                
+
                 case 'Ensemble 2':
                     $patient->getProtocole()->setFiches(['echocardiographie', 'neuroPsychologie', 'visite']);
                     break;
@@ -96,15 +89,15 @@ class PatientController extends AbstractController
             $patient->getProtocole()->setAngioplastiePontage(new AngioplastiePontage());
             $patient->getProtocole()->setBFR(new BFR());
             $patient->getProtocole()->setCatheterisation(new Catheterisation());
-            $this->echocardiographie_create($patient);
+            $patient->getProtocole()->setEchographieCardiaque(new EchographieCardiaque());
             $patient->getProtocole()->setEchographieVasculaire(new EchographieVasculaire());
             $patient->getProtocole()->setMedicamentsEntree(new MedicamentsEntree());
             $patient->getProtocole()->setNeuroPsychologie(new NeuroPsychologie());
             $patient->getProtocole()->setTestEffort(new TestEffort());
             $patient->getProtocole()->setVisite(new Visite());
 
-            $em->persist($patient);
-            $em->flush();
+            $this->em->persist($patient);
+            $this->em->flush();
 
             $this->addErreur($patient->getId(), $patient->getGeneral()->getNom(), 'notice', 'Création du patient ' . $patient->getGeneral()->getNom(), true);
             return $this->redirectToRoute('patient_view', ['id' => $patient->getId()]);
@@ -114,24 +107,6 @@ class PatientController extends AbstractController
             'controller_name' => 'PatientController',
             'form' => $form->createView(),
         ]);
-    }
-
-    private function echocardiographie_create(Patient $patient)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $echocardiographie = new Echocardiographie();
-
-        $bullseyes = new Bullseye();
-        for ($i = 0; $i < 16; $i++) { $bullseyes->addSegment(new Segment()); }
-        $echocardiographie->setBasalBullseye($bullseyes);
-
-        $bullseyes = new Bullseye();
-        for ($i = 0; $i < 16; $i++) { $bullseyes->addSegment(new Segment()); }
-        $echocardiographie->setStressBullseye($bullseyes);
-
-        $em->persist($echocardiographie);
-        $em->flush();
-        $patient->getProtocole()->setEchocardiographie($echocardiographie);
     }
 
     /**
@@ -187,315 +162,27 @@ class PatientController extends AbstractController
      */
     public function patient_index(Patient $patient, Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
         $oldArray = $this->serializeEntity($patient);
 
-        #========== GENERAL ==========#
-        $general = $patient->getGeneral();
-        $formGeneral = $this->createForm(GeneralType::class, $general);
+        #========== PATIENT ==========#
+        $form = $this->createForm(PatientType::class, $patient);
 
         /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formGeneral, $oldArray, 'general', 'general');
+        // $this->generateErreur($patient->getId(), $form, $oldArray, 'patient', 'patient');
 
-        $formGeneral->handleRequest($request);
-        if ($formGeneral->isSubmitted() && $formGeneral->isValid()) {
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
 
             /* SERIALISATION */
-            $generalArray = $this->serializeEntity($formGeneral->getData());
+            $patientArray = $this->serializeEntity($form->getData());
 
             /* SPECIAL ERROR */
 
             /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['general'], $generalArray, 'general');
+            // $this->searchDiff($patient, $oldArray['patient'], $patientArray, 'patient');
 
-            $patient = $formGeneral->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
-        #========== ANTECEDENT CARDIOVASCULAIRE ==========#
-        $antecedentCardiovasculaire = $patient->getAntecedentCardiovasculaire();
-        $formAntecedentCardiovasculaire = $this->createForm(AntecedentCardiovasculaireType::class, $antecedentCardiovasculaire);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formAntecedentCardiovasculaire, $oldArray, 'antecedentCardiovasculaire', 'antecedentCardiovasculaire');
-
-        $formAntecedentCardiovasculaire->handleRequest($request);
-        if ($formAntecedentCardiovasculaire->isSubmitted() && $formAntecedentCardiovasculaire->isValid()) {
-
-            /* SERIALISATION */
-            $antecedentCardiovasculaireArray = $this->serializeEntity($formAntecedentCardiovasculaire->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['antecedentCardiovasculaire'], $antecedentCardiovasculaireArray, 'antecedentCardiovasculaire');
-
-            $patient = $formAntecedentCardiovasculaire->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
-        #========== INFORMATION ==========#
-        $information = $patient->getInformation();
-        $formInformation = $this->createForm(InformationType::class, $information);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formInformation, $oldArray, 'information', 'information');
-
-        $formInformation->handleRequest($request);
-        if ($formInformation->isSubmitted() && $formInformation->isValid()) {
-
-            /* SERIALISATION */
-            $informationArray = $this->serializeEntity($formInformation->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['information'], $informationArray, 'information');
-
-            $patient = $formInformation->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
-        #========== FACTEUR ==========#
-        $facteur = $patient->getFacteur();
-        $formFacteur = $this->createForm(FacteurType::class, $facteur);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formFacteur, $oldArray, 'facteur', 'facteur');
-
-        $formFacteur->handleRequest($request);
-        if ($formFacteur->isSubmitted() && $formFacteur->isValid()) {
-
-            /* SERIALISATION */
-            $facteurArray = $this->serializeEntity($formFacteur->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['facteur'], $facteurArray, 'facteur');
-
-            $patient = $formFacteur->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
-        #========== ANGIOPLASTIE PONTAGE ==========#
-        $angioplastiePontage = $patient->getProtocole()->getAngioplastiePontage();
-        $formAngioplastiePontage = $this->createForm(AngioplastiePontageType::class, $angioplastiePontage);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formAngioplastiePontage, $oldArray, 'angioplastiePontage', 'angioplastiePontage');
-
-        $formAngioplastiePontage->handleRequest($request);
-        if ($formAngioplastiePontage->isSubmitted() && $formAngioplastiePontage->isValid()) {
-
-            /* SERIALISATION */
-            $facteurArray = $this->serializeEntity($formAngioplastiePontage->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['protocole']['angioplastiePontage'], $facteurArray, 'angioplastiePontage');
-
-            $patient = $formAngioplastiePontage->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
-        #========== BFR ==========#
-        $BFR = $patient->getProtocole()->getBFR();
-        $formBFR = $this->createForm(BFRType::class, $BFR);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formBFR, $oldArray, 'bFR', 'bFR');
-
-        $formBFR->handleRequest($request);
-        if ($formBFR->isSubmitted() && $formBFR->isValid()) {
-
-            /* SERIALISATION */
-            $facteurArray = $this->serializeEntity($formBFR->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['protocole']['bFR'], $facteurArray, 'bFR');
-
-            $patient = $formBFR->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
-        #========== CATHETERISATION ==========#
-        $catheterisation = $patient->getProtocole()->getCatheterisation();
-        $formCatheterisation = $this->createForm(CatheterisationType::class, $catheterisation);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formCatheterisation, $oldArray, 'catheterisation', 'catheterisation');
-
-        $formCatheterisation->handleRequest($request);
-        if ($formCatheterisation->isSubmitted() && $formCatheterisation->isValid()) {
-
-            /* SERIALISATION */
-            $facteurArray = $this->serializeEntity($formCatheterisation->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['protocole']['catheterisation'], $facteurArray, 'catheterisation');
-
-            $patient = $formCatheterisation->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
-        #========== ECHOCARDIOGRAPHIE ==========#
-        $echocardiographie = $patient->getProtocole()->getEchocardiographie();
-        $formEchocardiographie = $this->createForm(EchocardiographieType::class, $echocardiographie);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formEchocardiographie, $oldArray, 'echocardiographie', 'echocardiographie');
-
-        $formEchocardiographie->handleRequest($request);
-        if ($formEchocardiographie->isSubmitted() && $formEchocardiographie->isValid()) {
-
-            /* SERIALISATION */
-            $facteurArray = $this->serializeEntity($formEchocardiographie->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['protocole']['echocardiographie'], $facteurArray, 'echocardiographie');
-
-            $patient = $formEchocardiographie->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
-        #========== ECHOGRAPHIE VASCULAIRE ==========#
-        $echographieVasculaire = $patient->getProtocole()->getEchographieVasculaire();
-        $formEchographieVasculaire = $this->createForm(EchographieVasculaireType::class, $echographieVasculaire);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formEchographieVasculaire, $oldArray, 'echographieVasculaire', 'echographieVasculaire');
-
-        $formEchographieVasculaire->handleRequest($request);
-        if ($formEchographieVasculaire->isSubmitted() && $formEchographieVasculaire->isValid()) {
-
-            /* SERIALISATION */
-            $facteurArray = $this->serializeEntity($formEchographieVasculaire->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['protocole']['echographieVasculaire'], $facteurArray, 'echographieVasculaire');
-
-            $patient = $formEchographieVasculaire->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
-        #========== MEDICAMENTS A L ENTREE ==========#
-        $medicamentsEntree = $patient->getProtocole()->getMedicamentsEntree();
-        $formMedicamentsEntree = $this->createForm(MedicamentsEntreeType::class, $medicamentsEntree);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formMedicamentsEntree, $oldArray, 'medicamentsEntree', 'medicamentsEntree');
-
-        $formMedicamentsEntree->handleRequest($request);
-        if ($formMedicamentsEntree->isSubmitted() && $formMedicamentsEntree->isValid()) {
-
-            /* SERIALISATION */
-            $facteurArray = $this->serializeEntity($formMedicamentsEntree->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['protocole']['medicamentsEntree'], $facteurArray, 'medicamentsEntree');
-
-            $patient = $formMedicamentsEntree->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
-        #========== NEURO PSYCHOLOGIE ==========#
-        $neuroPsychologie = $patient->getProtocole()->getNeuroPsychologie();
-        $formNeuroPsychologie = $this->createForm(NeuroPsychologieType::class, $neuroPsychologie);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formNeuroPsychologie, $oldArray, 'neuroPsychologie', 'neuroPsychologie');
-
-        $formNeuroPsychologie->handleRequest($request);
-        if ($formNeuroPsychologie->isSubmitted() && $formNeuroPsychologie->isValid()) {
-
-            /* SERIALISATION */
-            $facteurArray = $this->serializeEntity($formNeuroPsychologie->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['protocole']['neuroPsychologie'], $facteurArray, 'neuroPsychologie');
-
-            $patient = $formNeuroPsychologie->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
-        }
-
-        #========== TEST EFFORT ==========#
-        $testEffort = $patient->getProtocole()->getTestEffort();
-        $formTestEffort = $this->createForm(TestEffortType::class, $testEffort);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formTestEffort, $oldArray, 'testEffort', 'testEffort');
-
-        $formTestEffort->handleRequest($request);
-        if ($formTestEffort->isSubmitted() && $formTestEffort->isValid()) {
-
-            /* SERIALISATION */
-            $facteurArray = $this->serializeEntity($formTestEffort->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['protocole']['testEffort'], $facteurArray, 'testEffort');
-
-            $patient = $formTestEffort->getData();
-            $em->flush();
+            $patient = $form->getData();
+            $this->em->flush();
 
             $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
 
@@ -506,31 +193,8 @@ class PatientController extends AbstractController
         $visite = $patient->getProtocole()->getVisite();
         if (!$visite) {
             $patient->getProtocole()->setVisite(new Visite());
-            $em->persist($patient);
-            $em->flush();
-        }
-        $formVisite = $this->createForm(VisiteType::class, $visite);
-
-        /* GENERATE ERREUR */
-        $this->generateErreur($patient->getId(), $formVisite, $oldArray, 'visite', 'visite');
-
-        $formVisite->handleRequest($request);
-        if ($formVisite->isSubmitted() && $formVisite->isValid()) {
-
-            /* SERIALISATION */
-            $facteurArray = $this->serializeEntity($formVisite->getData());
-
-            /* SPECIAL ERROR */
-
-            /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray['protocole']['visite'], $facteurArray, 'visite');
-
-            $patient = $formVisite->getData();
-            $em->flush();
-
-            $this->addFlash('notice', 'Vos modifications ont été enregistré avec succès');
-
-            return $this->redirect($request->getUri());
+            $this->em->persist($patient);
+            $this->em->flush();
         }
 
         return $this->render('patient/index.html.twig', [
@@ -538,22 +202,7 @@ class PatientController extends AbstractController
             'patient' => $patient,
             'date' => date("d/m/Y"),
 
-            'formGeneral' => $formGeneral->createView(),
-            'formVisite' => $formVisite->createView(),
-            'formAntecedentCardiovasculaire' => $formAntecedentCardiovasculaire->createView(),
-            'formInformation' => $formInformation->createView(),
-            'formFacteur' => $formFacteur->createView(),
-            'formDeces' => $formDeces->createView(),
-
-            'formAngioplastiePontage' => $formAngioplastiePontage->createView(),
-            'formBFR' => $formBFR->createView(),
-            'formCatheterisation' => $formCatheterisation->createView(),
-            'formEchocardiographie' => $formEchocardiographie->createView(),
-            'formEchographieVasculaire' => $formEchographieVasculaire->createView(),
-            'formMedicamentsEntree' => $formMedicamentsEntree->createView(),
-            'formNeuroPsychologie' => $formNeuroPsychologie->createView(),
-            'formTestEffort' => $formTestEffort->createView(),
-            'formVisite' => $formVisite->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -625,17 +274,13 @@ class PatientController extends AbstractController
                 } else if ($oldArray[$key]['timestamp'] !== $value['timestamp']) {
                     $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . date('d/m/Y', $oldArray[$key]['timestamp']) . '] en [' . date('d/m/Y', $value['timestamp']) . ']', true);
                 }
-            }
-            else if ($oldArray[$key] !== $value && $key === 'medicaments') {
+            } else if ($oldArray[$key] !== $value && $key === 'medicaments') {
                 $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key], 'name') . '] en [' . $this->checkEmpty($value, 'name') . ']', true);
-            }
-            else if ($oldArray[$key] !== $value && ($key === 'stressBullseye' || $key === 'basalBullseye') && $this->array_diff_depth($oldArray[$key]['segments'], $value['segments'], 'segment')) {
+            } else if ($oldArray[$key] !== $value && ($key === 'stressBullseye' || $key === 'basalBullseye') && $this->array_diff_depth($oldArray[$key]['segments'], $value['segments'], 'segment')) {
                 $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]['segments'], 'segment') . '] en [' . $this->checkEmpty($value['segments'], 'segment') . ']', true);
-            }
-            else if ($oldArray[$key] !== $value && is_array($value) && !empty(array_diff_assoc($oldArray[$key], $value))) {
+            } else if ($oldArray[$key] !== $value && is_array($value) && !empty(array_diff_assoc($oldArray[$key], $value))) {
                 $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
-            }
-            else if ($oldArray[$key] !== $value && !is_array($value)) {
+            } else if ($oldArray[$key] !== $value && !is_array($value)) {
                 $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
             }
 
@@ -656,8 +301,7 @@ class PatientController extends AbstractController
 
     private function generateErreur($patientId, formInterface $form, $array, $start, $path)
     {
-        $em = $this->getDoctrine()->getManager();
-        $erreurs = $em->getRepository(Erreur::class)->getLastErreur($patientId);
+        $erreurs = $this->em->getRepository(Erreur::class)->getLastErreur($patientId);
 
         if (!isset($array[$start])) {
             return;
@@ -691,8 +335,7 @@ class PatientController extends AbstractController
 
     private function addErreur($patientId, $fieldId, $etat, $message, bool $user)
     {
-        $em = $this->getDoctrine()->getManager();
-        $patient = $em->getRepository(Patient::class)->find($patientId);
+        $patient = $this->em->getRepository(Patient::class)->find($patientId);
         $createdAt = new DateTime("now", new DateTimeZone('Europe/Paris'));
 
         $erreur = new Erreur();
@@ -703,8 +346,8 @@ class PatientController extends AbstractController
         $erreur->setUtilisateur($user ? $this->security->getUser()->getEmail() : 'Système');
 
         $patient->addErreur($erreur);
-        $em->persist($erreur);
-        $em->flush();
+        $this->em->persist($erreur);
+        $this->em->flush();
     }
 
     /**
@@ -730,13 +373,12 @@ class PatientController extends AbstractController
      */
     public function letter(Patient $patient): Response
     {
-        $em = $this->getDoctrine()->getManager();
-        $letter = $em->getRepository(Letter::class)->findOneBy([]);
-        $letter = $em->getRepository(Letter::class)->findOneBy([]);
+        $letter = $this->em->getRepository(Letter::class)->findOneBy([]);
+        $letter = $this->em->getRepository(Letter::class)->findOneBy([]);
         if (!$letter) {
             $letter = new Letter();
-            $em->persist($letter);
-            $em->flush();
+            $this->em->persist($letter);
+            $this->em->flush();
         }
 
         $jsonPatient = $this->serializeEntity($patient, 'json');
@@ -755,9 +397,8 @@ class PatientController extends AbstractController
     public function patient_delete(Request $request, Patient $patient): Response
     {
         if ($this->isCsrfTokenValid('delete' . $patient->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($patient);
-            $em->flush();
+            $this->em->remove($patient);
+            $this->em->flush();
 
             $this->addFlash('notice', 'Le patient a été supprimé avec succès');
         }
@@ -770,8 +411,6 @@ class PatientController extends AbstractController
      */
     public function medicament_entree_add(Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
         if ($request->isXmlHttpRequest()) {
             $patientId = $request->request->get('patient');
             $medicamentId = $request->request->get('medicament');
@@ -780,7 +419,7 @@ class PatientController extends AbstractController
             $medicament = $this->getDoctrine()->getRepository(Medicament::class)->find($medicamentId);
             $patient->getProtocole()->getMedicamentsEntree()->addMedicament($medicament);
 
-            $em->flush();
+            $this->em->flush();
 
             return new JsonResponse(true);
         }
@@ -791,8 +430,6 @@ class PatientController extends AbstractController
      */
     public function medicament_entree_delete(Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
         if ($request->isXmlHttpRequest()) {
             $patientId = $request->request->get('patient');
             $medicamentId = $request->request->get('medicament');
@@ -801,7 +438,7 @@ class PatientController extends AbstractController
             $medicament = $this->getDoctrine()->getRepository(Medicament::class)->find($medicamentId);
 
             $patient->getProtocole()->getMedicamentsEntree()->removeMedicament($medicament);
-            $em->flush();
+            $this->em->flush();
 
             return new JsonResponse(true);
         }

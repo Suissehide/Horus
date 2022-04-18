@@ -24,6 +24,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('anterieur', ChoiceType::class, array(
@@ -36,6 +37,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('septoApical', ChoiceType::class, array(
@@ -48,6 +50,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('lateral', ChoiceType::class, array(
@@ -60,6 +63,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('inferieurPosterieur', ChoiceType::class, array(
@@ -72,6 +76,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('sansTerritoire', ChoiceType::class, array(
@@ -84,6 +89,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('IVA', ChoiceType::class, array(
@@ -96,6 +102,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('CD', ChoiceType::class, array(
@@ -108,6 +115,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('Cx', ChoiceType::class, array(
@@ -120,6 +128,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('marginale', ChoiceType::class, array(
@@ -132,6 +141,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('diagonale', ChoiceType::class, array(
@@ -144,6 +154,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('pontage', ChoiceType::class, array(
@@ -156,6 +167,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('troncCommun', ChoiceType::class, array(
@@ -168,6 +180,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
 
@@ -197,6 +210,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('insuffisanceCardiaque', ChoiceType::class, array(
@@ -209,6 +223,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('pericardite', ChoiceType::class, array(
@@ -221,6 +236,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
             ->add('complicationMecanique', ChoiceType::class, array(
@@ -233,6 +249,7 @@ class InformationType extends AbstractType
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
                 ),
+                'block_name' => 'qcm_type',
                 'required' => false,
             ))
 
