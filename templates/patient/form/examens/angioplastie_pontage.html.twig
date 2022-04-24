@@ -1,0 +1,23 @@
+<h1 id="angioplastie-pontage">Angioplastie et pontage</h1>
+<h3 id="coronaires">Schémas coronaires</h3>
+<div class="coronaire">
+	{{ form_row(form.protocole.angioplastiePontage.segment1, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+	{{ form_row(form.protocole.angioplastiePontage.segment2, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+	{{ form_row(form.protocole.angioplastiePontage.segment3, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+
+	{{ form_row(form.protocole.angioplastiePontage.troncCommun, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+	{{ form_row(form.protocole.angioplastiePontage.ivaProximal, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+	{{ form_row(form.protocole.angioplastiePontage.diagonal, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+	{{ form_row(form.protocole.angioplastiePontage.ivaMoyenne, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+	{{ form_row(form.protocole.angioplastiePontage.circonflexeProximale, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+	{{ form_row(form.protocole.angioplastiePontage.postrolLateral, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+</div>
+
+<h3 id="pont">Schémas ponts</h3>
+<div class="form-space pont">
+	{{ form_row(form.protocole.angioplastiePontage.pontSaphenesGauche, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+	{{ form_row(form.protocole.angioplastiePontage.pontSaphenesDroit, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+	{{ form_row(form.protocole.angioplastiePontage.pontMammaire, {'attr': {'class': 'input radio-row'}, 'useLabel': 'Stent' }) }}
+</div>
+
+{{ form_row(form.protocole.angioplastiePontage.save, {'attr': {'class': 'form-btn'} }) }}

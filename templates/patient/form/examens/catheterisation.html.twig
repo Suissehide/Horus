@@ -1,0 +1,27 @@
+<h1 id="catheterisation">Cathétérisation</h1>
+<h3 id="coronaires">Schémas coronaires</h3>
+<div class="coronaire">
+	{{ form_row(form.protocole.catheterisation.segment1, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.catheterisation.segment2, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.catheterisation.segment3, {'attr': {'class': 'input'} }) }}
+
+	{{ form_row(form.protocole.catheterisation.troncCommun, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.catheterisation.ivaProximal, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.catheterisation.diagonal, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.catheterisation.ivaMoyenne, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.catheterisation.circonflexeProximale, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.catheterisation.postrolLateral, {'attr': {'class': 'input'} }) }}
+</div>
+
+<h3 id="pont">Schémas ponts</h3>
+<div class="form-space pont">
+	{{ form_row(form.protocole.catheterisation.pontSaphenesGauche, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.catheterisation.pontSaphenesDroit, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.catheterisation.pontMammaire, {'attr': {'class': 'input'} }) }}
+</div>
+<div class="flex-nowrap">
+	{{ form_row(form.protocole.catheterisation.FEVentriculographie, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.catheterisation.FEIsotopique, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+</div>
+
+{{ form_row(form.protocole.catheterisation.save, {'attr': {'class': 'form-btn'} }) }}

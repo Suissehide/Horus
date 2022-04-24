@@ -51,7 +51,6 @@
 {% block radio_widget %}
         <div class="radio-container">
             <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-                          
             {% if useLabel|default(false) %}
                 {{ form_label(form, null, {'label': useLabel}) }}
             {% else %}

@@ -21,8 +21,13 @@ use App\Entity\Segment;
 use App\Entity\Bullseye;
 use App\Entity\Letter;
 use App\Entity\Erreur;
+use App\Entity\QCM;
+use App\Entity\BMQ;
 
 use App\Form\PatientType;
+
+use App\Constant\FormConstants;
+
 use App\Repository\ErreurRepository;
 
 use DateTime;
@@ -91,10 +96,11 @@ class PatientController extends AbstractController
             $patient->getProtocole()->setCatheterisation(new Catheterisation());
             $patient->getProtocole()->setEchographieCardiaque(new EchographieCardiaque());
             $patient->getProtocole()->setEchographieVasculaire(new EchographieVasculaire());
-            $patient->getProtocole()->setMedicamentsEntree(new MedicamentsEntree());
+            
             $patient->getProtocole()->setNeuroPsychologie(new NeuroPsychologie());
             $patient->getProtocole()->setTestEffort(new TestEffort());
             $patient->getProtocole()->setVisite(new Visite());
+            $this->createMedicamentsEntree($patient);
 
             $this->em->persist($patient);
             $this->em->flush();
@@ -107,6 +113,30 @@ class PatientController extends AbstractController
             'controller_name' => 'PatientController',
             'form' => $form->createView(),
         ]);
+    }
+
+    private function createMedicamentsEntree(Patient $patient)
+    {
+        $medicamentsEntree = new MedicamentsEntree();
+
+        foreach (FormConstants::VERBATIMS_VECU as $name) {
+            $qcm = new QCM();
+            $medicamentsEntree->addVerbatim($qcm);
+        }
+
+        foreach (FormConstants::VERBATIMS_SANTE as $name) {
+            $qcm = new QCM();
+            $medicamentsEntree->addVerbatimsSante($qcm);
+        }
+
+        foreach (FormConstants::QUESTIONNAIRE as $name) {
+            $qcm = new QCM();
+            $medicamentsEntree->addQuestionnaire($qcm);
+        }
+
+        $this->em->persist($medicamentsEntree);
+        $this->em->flush();
+        $patient->getProtocole()->setMedicamentsEntree($medicamentsEntree);
     }
 
     /**
@@ -168,7 +198,7 @@ class PatientController extends AbstractController
         $form = $this->createForm(PatientType::class, $patient);
 
         /* GENERATE ERREUR */
-        // $this->generateErreur($patient->getId(), $form, $oldArray, 'patient', 'patient');
+        $this->generateErreur($patient->getId(), $form, $oldArray, 'patient', 'patient');
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -179,7 +209,7 @@ class PatientController extends AbstractController
             /* SPECIAL ERROR */
 
             /* SEARCH DIFF */
-            // $this->searchDiff($patient, $oldArray['patient'], $patientArray, 'patient');
+            // $this->searchDiff($patient, $oldArray, $patientArray, 'patient');
 
             $patient = $form->getData();
             $this->em->flush();
@@ -287,13 +317,13 @@ class PatientController extends AbstractController
             // else if (is_array($oldArray[$start][$key]) && array_key_exists('timestamp', $oldArray[$start][$key]) && !is_array($value)) {
             //     $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . date('d/m/Y', $oldArray[$start][$key]['timestamp']) . '] en [(vide)]', true);
             // }
-            // else if (is_array($value) && array_key_exists('reponse', $value) && $oldArray[$start][$key]['reponse'] !== $value['reponse']) {
-            //     $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) . '_reponse', 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$start][$key]['reponse']) . '] en [' . $this->checkEmpty($value['reponse']) . ']', true);
+            // else if (is_array($value) && array_key_exists('response', $value) && $oldArray[$start][$key]['response'] !== $value['response']) {
+            //     $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) . '_response', 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$start][$key]['response']) . '] en [' . $this->checkEmpty($value['response']) . ']', true);
             // }
             // else if (is_array($value) && ('alimentation' === $key || 'traitementPhaseAigue' === $key) && !empty(array_diff($oldArray[$start][$key], $value))) {
             //     $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$start][$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
             // }
-            // else if (is_array($value) && !array_key_exists('timestamp', $value) && !array_key_exists('reponse', $value) && ('alimentation' !== $key && 'traitementPhaseAigue' !== $key)) {
+            // else if (is_array($value) && !array_key_exists('timestamp', $value) && !array_key_exists('response', $value) && ('alimentation' !== $key && 'traitementPhaseAigue' !== $key)) {
             //     $this->searchDiff($patient, $oldArray[$start], $newArray[$key], $key, $path . '_' . $this->formatKey($key));
             // }
         }
@@ -308,11 +338,11 @@ class PatientController extends AbstractController
         }
 
         foreach ($array[$start] as $key => $value) {
-            if (is_array($value) && !array_key_exists('timestamp', $value) && !array_key_exists('reponse', $value) && ('alimentation' !== $key && 'traitementPhaseAigue' !== $key)) {
+            if (is_array($value) && !array_key_exists('timestamp', $value) && !array_key_exists('response', $value) && ('alimentation' !== $key && 'traitementPhaseAigue' !== $key)) {
                 $this->generateErreur($patientId, $form, $array[$start], $key, $path . '_' . $this->formatKey($key));
             }
-            if (is_array($value) && array_key_exists('reponse', $value)) {
-                $key = $key . '_reponse';
+            if (is_array($value) && array_key_exists('response', $value)) {
+                $key = $key . '_response';
             }
 
             foreach ($erreurs as $erreur) {

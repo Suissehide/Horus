@@ -13,7 +13,7 @@ class QCMType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('reponse', ChoiceType::class, array(
+            ->add('response', ChoiceType::class, array(
                 'label' => 'Réponse',
                 'expanded' => true,
                 'multiple' => false,

@@ -30,7 +30,7 @@ class MedicamentsEntree
     private $NbMedicamentSemaine;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $DelaiSousTraitement;
 
@@ -40,9 +40,9 @@ class MedicamentsEntree
     private $pilulier;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="array", nullable=true)
      */
-    private $gestionMedicaments;
+    private $gestionMedicaments = [];
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -60,9 +60,9 @@ class MedicamentsEntree
     private $scoreMasCard;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="array", nullable=true)
      */
-    private $problemes;
+    private $problemes = [];
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -85,7 +85,11 @@ class MedicamentsEntree
     private $verbatimsMedicaments;
 
     /**
-     * @ORM\OneToOne(targetEntity=Pack::class, cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="medicaments_entree_qcm_verbatims",
+     *      joinColumns={@ORM\JoinColumn(name="verbatims_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="qcm_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}
+     *      )
      */
     private $verbatims;
 
@@ -95,7 +99,11 @@ class MedicamentsEntree
     private $verbatimsApportSante;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="medicaments_entree_qcm_verbatims_sante",
+     *      joinColumns={@ORM\JoinColumn(name="verbatims_sante_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="qcm_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}
+     *      )
      */
     private $verbatimsSante;
 
@@ -105,12 +113,19 @@ class MedicamentsEntree
     private $vecuTraitement;
 
     /**
-     * @ORM\OneToOne(targetEntity=pack::class, cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="medicaments_entree_qcm_questionnaire",
+     *      joinColumns={@ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="qcm_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}
+     *      )
      */
     private $questionnaire;
 
     public function __construct()
     {
+        $this->verbatims = new ArrayCollection();
+        $this->verbatimsSante = new ArrayCollection();
+        $this->questionnaire = new ArrayCollection();
         $this->medicaments = new ArrayCollection();
     }
 
@@ -160,7 +175,7 @@ class MedicamentsEntree
         return $this->DelaiSousTraitement;
     }
 
-    public function setDelaiSousTraitement(int $DelaiSousTraitement): self
+    public function setDelaiSousTraitement(?int $DelaiSousTraitement): self
     {
         $this->DelaiSousTraitement = $DelaiSousTraitement;
 
@@ -179,12 +194,12 @@ class MedicamentsEntree
         return $this;
     }
 
-    public function getGestionMedicaments(): ?string
+    public function getGestionMedicaments(): ?array
     {
         return $this->gestionMedicaments;
     }
 
-    public function setGestionMedicaments(?string $gestionMedicaments): self
+    public function setGestionMedicaments(?array $gestionMedicaments): self
     {
         $this->gestionMedicaments = $gestionMedicaments;
 
@@ -227,12 +242,12 @@ class MedicamentsEntree
         return $this;
     }
 
-    public function getProblemes(): ?string
+    public function getProblemes(): ?array
     {
         return $this->problemes;
     }
 
-    public function setProblemes(?string $problemes): self
+    public function setProblemes(?array $problemes): self
     {
         $this->problemes = $problemes;
 
@@ -287,14 +302,26 @@ class MedicamentsEntree
         return $this;
     }
 
-    public function getVerbatims(): ?Pack
+    /**
+     * @return Collection<int, QCM>
+     */
+    public function getVerbatims(): Collection
     {
         return $this->verbatims;
     }
 
-    public function setVerbatims(?Pack $verbatims): self
+    public function addVerbatim(QCM $verbatim): self
     {
-        $this->verbatims = $verbatims;
+        if (!$this->verbatims->contains($verbatim)) {
+            $this->verbatims[] = $verbatim;
+        }
+
+        return $this;
+    }
+
+    public function removeVerbatim(QCM $verbatim): self
+    {
+        $this->verbatims->removeElement($verbatim);
 
         return $this;
     }
@@ -311,14 +338,28 @@ class MedicamentsEntree
         return $this;
     }
 
-    public function getVerbatimsSante(): ?string
+    /**
+     * @return Collection<int, QCM>
+     */
+    public function getVerbatimsSante(): Collection
     {
         return $this->verbatimsSante;
     }
 
-    public function setVerbatimsSante(?string $verbatimsSante): self
+    public function addVerbatimsSante(QCM $verbatimsSante): self
     {
-        $this->verbatimsSante = $verbatimsSante;
+        if (!$this->verbatimsSante->contains($verbatimsSante)) {
+            $this->verbatimsSante[] = $verbatimsSante;
+        }
+
+        return $this;
+    }
+
+    public function removeVerbatimsSante(QCM $verbatimsSante): self
+    {
+        if ($this->verbatimsSante->contains($verbatimsSante)) {
+            $this->verbatimsSante->removeElement($verbatimsSante);
+        }
 
         return $this;
     }
@@ -335,14 +376,28 @@ class MedicamentsEntree
         return $this;
     }
 
-    public function getQuestionnaire(): ?pack
+    /**
+     * @return Collection<int, QCM>
+     */
+    public function getQuestionnaire(): Collection
     {
         return $this->questionnaire;
     }
 
-    public function setQuestionnaire(?pack $questionnaire): self
+    public function addQuestionnaire(QCM $questionnaire): self
     {
-        $this->questionnaire = $questionnaire;
+        if (!$this->questionnaire->contains($questionnaire)) {
+            $this->questionnaire[] = $questionnaire;
+        }
+
+        return $this;
+    }
+
+    public function removeQuestionnaire(QCM $questionnaire): self
+    {
+        if ($this->questionnaire->contains($questionnaire)) {
+            $this->questionnaire->removeElement($questionnaire);
+        }
 
         return $this;
     }

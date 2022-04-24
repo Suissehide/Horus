@@ -1,0 +1,109 @@
+<h1 id="medicaments">Médicaments</h1>
+
+<h3 id="description">Description</h3>
+<div class="form-space">
+	{{ form_row(form.protocole.medicamentsEntree.NbMedicamentSemaine, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.medicamentsEntree.DelaiSousTraitement, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+
+	{{ form_row(form.protocole.medicamentsEntree.pilulier, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_row(form.protocole.medicamentsEntree.gestionMedicaments, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_row(form.protocole.medicamentsEntree.satisfaction, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_row(form.protocole.medicamentsEntree.ConnaissanceDureeTraitement, {'attr': {'class': 'input radio-row'} }) }}
+
+	{{ form_row(form.protocole.medicamentsEntree.scoreMasCard, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	<div class="sub">
+		{{ form_row(form.protocole.medicamentsEntree.problemes, {'attr': {'class': 'input radio-row'} }) }}
+		{{ form_row(form.protocole.medicamentsEntree.remarques, {'attr': {'class': 'input'} }) }}
+	</div>
+
+	{{ form_row(form.protocole.medicamentsEntree.effetIndesirable, {'attr': {'class': 'input radio-row'} }) }}
+	<div class="sub">
+		{{ form_row(form.protocole.medicamentsEntree.lequel, {'attr': {'class': 'input'} }) }}
+	</div>
+
+	{{ form_row(form.protocole.medicamentsEntree.verbatimsMedicaments, {'attr': {'class': 'input'} }) }}
+
+	<div class="qcm">
+		{% for qcm in form.protocole.medicamentsEntree.verbatims %}
+			<div class="qcm-row">
+				<div class="qcm-question">
+					test
+				</div>
+				<div class="qcm-response">
+					<div class="wrap-input qcm-flex">
+						{{ form_widget(qcm.response, {'attr': {'class': 'input radio-row'} }) }}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+	{{ form_row(form.protocole.medicamentsEntree.verbatimsApportSante, {'attr': {'class': 'input'} }) }}
+
+	<div class="qcm">
+		{% for qcm in form.protocole.medicamentsEntree.verbatimsSante %}
+			<div class="qcm-row">
+				<div class="qcm-question">
+					test
+				</div>
+				<div class="qcm-response">
+					<div class="wrap-input qcm-flex">
+						{{ form_widget(qcm.response, {'attr': {'class': 'input radio-row'} }) }}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+	{{ form_row(form.protocole.medicamentsEntree.vecuTraitement, {'attr': {'class': 'input radio-row'} }) }}
+
+	<div class="qcm">
+		{% for qcm in form.protocole.medicamentsEntree.questionnaire %}
+			<div class="qcm-row">
+				<div class="qcm-question">
+					test
+				</div>
+				<div class="qcm-response">
+					<div class="wrap-input qcm-flex">
+						{{ form_widget(qcm.response, {'attr': {'class': 'input radio-row'} }) }}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+</div>
+
+<h3 id="complement">Médicaments</h3>
+<div class="btn-bar">
+	<a href="{{ path('medicament') }}" class="form-btn">
+		<i aria-hidden="true" class="fa fa-cog"></i>
+		Gérer la liste des médicaments
+	</a>
+</div>
+
+<div class="margin-space"></div>
+
+<div class="form-space">
+	<div class="medicaments__list">
+		{% for medicament in patient.protocole.medicamentsEntree.medicaments %}
+			<div data-id='{{ medicament.id }}' class='medicament'>
+				{{ medicament.name }}
+				<span class="delete">
+					<i class="fa fa-times"></i>
+				</span>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+<div class="form-space">
+	<div class="btn-bar">
+		<select class="js-medicaments-ajax"></select>
+		<button type="button" class="btn add-medicament" data-collection-holder-class="medicaments">
+			<i class="fa fa-plus"></i>
+			Ajouter un médicaments
+		</button>
+	</div>
+</div>
+
+{{ form_row(form.protocole.medicamentsEntree.save, {'attr': {'class': 'form-btn'} }) }}

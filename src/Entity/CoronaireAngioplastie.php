@@ -35,7 +35,7 @@ class CoronaireAngioplastie
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $stenosePostrolLaterale;
+    private $stenosePosterolateral;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -65,7 +65,7 @@ class CoronaireAngioplastie
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
      */
-    private $ffrPostrolLaterale;
+    private $ffrPosterolateral;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
@@ -95,7 +95,7 @@ class CoronaireAngioplastie
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
      */
-    private $cmrPostrolLaterale;
+    private $cmrPosterolateral;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
@@ -125,7 +125,7 @@ class CoronaireAngioplastie
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
      */
-    private $imrPostrolLaterale;
+    private $imrPosterolateral;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
@@ -155,7 +155,7 @@ class CoronaireAngioplastie
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $angioplastiePostrolLaterale;
+    private $angioplastiePosterolateral;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -185,7 +185,7 @@ class CoronaireAngioplastie
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $coroscannerPostrolLaterale;
+    private $coroscannerPosterolateral;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -243,14 +243,14 @@ class CoronaireAngioplastie
         return $this;
     }
 
-    public function getStenosePostrolLaterale(): ?string
+    public function getStenosePosterolateral(): ?string
     {
-        return $this->stenosePostrolLaterale;
+        return $this->stenosePosterolateral;
     }
 
-    public function setStenosePostrolLaterale(?string $stenosePostrolLaterale): self
+    public function setStenosePosterolateral(?string $stenosePosterolateral): self
     {
-        $this->stenosePostrolLaterale = $stenosePostrolLaterale;
+        $this->stenosePosterolateral = $stenosePosterolateral;
 
         return $this;
     }
@@ -315,14 +315,14 @@ class CoronaireAngioplastie
         return $this;
     }
 
-    public function getFfrPostrolLaterale(): ?string
+    public function getFfrPosterolateral(): ?string
     {
-        return $this->ffrPostrolLaterale;
+        return $this->ffrPosterolateral;
     }
 
-    public function setFfrPostrolLaterale(?string $ffrPostrolLaterale): self
+    public function setFfrPosterolateral(?string $ffrPosterolateral): self
     {
-        $this->ffrPostrolLaterale = $ffrPostrolLaterale;
+        $this->ffrPosterolateral = $ffrPosterolateral;
 
         return $this;
     }
@@ -387,14 +387,14 @@ class CoronaireAngioplastie
         return $this;
     }
 
-    public function getCmrPostrolLaterale(): ?string
+    public function getCmrPosterolateral(): ?string
     {
-        return $this->cmrPostrolLaterale;
+        return $this->cmrPosterolateral;
     }
 
-    public function setCmrPostrolLaterale(?string $cmrPostrolLaterale): self
+    public function setCmrPosterolateral(?string $cmrPosterolateral): self
     {
-        $this->cmrPostrolLaterale = $cmrPostrolLaterale;
+        $this->cmrPosterolateral = $cmrPosterolateral;
 
         return $this;
     }
@@ -459,14 +459,14 @@ class CoronaireAngioplastie
         return $this;
     }
 
-    public function getImrPostrolLaterale(): ?string
+    public function getImrPosterolateral(): ?string
     {
-        return $this->imrPostrolLaterale;
+        return $this->imrPosterolateral;
     }
 
-    public function setImrPostrolLaterale(?string $imrPostrolLaterale): self
+    public function setImrPosterolateral(?string $imrPosterolateral): self
     {
-        $this->imrPostrolLaterale = $imrPostrolLaterale;
+        $this->imrPosterolateral = $imrPosterolateral;
 
         return $this;
     }
@@ -531,14 +531,14 @@ class CoronaireAngioplastie
         return $this;
     }
 
-    public function getAngioplastiePostrolLaterale(): ?string
+    public function getAngioplastiePosterolateral(): ?string
     {
-        return $this->angioplastiePostrolLaterale;
+        return $this->angioplastiePosterolateral;
     }
 
-    public function setAngioplastiePostrolLaterale(?string $angioplastiePostrolLaterale): self
+    public function setAngioplastiePosterolateral(?string $angioplastiePosterolateral): self
     {
-        $this->angioplastiePostrolLaterale = $angioplastiePostrolLaterale;
+        $this->angioplastiePosterolateral = $angioplastiePosterolateral;
 
         return $this;
     }
@@ -603,14 +603,14 @@ class CoronaireAngioplastie
         return $this;
     }
 
-    public function getCoroscannerPostrolLaterale(): ?string
+    public function getCoroscannerPosterolateral(): ?string
     {
-        return $this->coroscannerPostrolLaterale;
+        return $this->coroscannerPosterolateral;
     }
 
-    public function setCoroscannerPostrolLaterale(?string $coroscannerPostrolLaterale): self
+    public function setCoroscannerPosterolateral(?string $coroscannerPosterolateral): self
     {
-        $this->coroscannerPostrolLaterale = $coroscannerPostrolLaterale;
+        $this->coroscannerPosterolateral = $coroscannerPosterolateral;
 
         return $this;
     }

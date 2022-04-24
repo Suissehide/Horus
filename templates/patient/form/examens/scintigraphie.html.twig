@@ -1,0 +1,64 @@
+<h1 id="scintigraphie">Scintigraphie</h1>
+<div class="form-space">
+	<div class="table">
+		<div class="theader">
+			<div class="tr">
+				<div></div>
+				<div>Débit</div>
+				<div></div>
+				<div> </div>
+				<div>Analyse visuelle</div>
+				<div></div>
+			</div>
+			<div class="tr">
+				<div></div>
+				<div>Repos</div>
+				<div>Régadénoson</div>
+				<div>Réserve</div>
+				<div>Repos</div>
+				<div>Régadénoson</div>
+			</div>
+		</div>
+		<div class="tbody">
+			<div class="tr">
+				<div class="row-header">IVA</div>
+				<div>{{ form_row(form.protocole.scintigraphie.reposDebitIVA, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.regadenosonDebitIVA, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.reserveIVA, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.reposAnalyseVisuelleIVA, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.regadenosonAnalyseVisuelleIVA, {'attr': {'class': 'input'} }) }}</div>
+			</div>
+			<div class="tr">
+				<div class="row-header">CX</div>
+				<div>{{ form_row(form.protocole.scintigraphie.reposDebitCX, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.regadenosonDebitCX, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.reserveCX, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.reposAnalyseVisuelleCX, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.regadenosonAnalyseVisuelleCX, {'attr': {'class': 'input'} }) }}</div>
+			</div>
+			<div class="tr">
+				<div class="row-header">CD</div>
+				<div>{{ form_row(form.protocole.scintigraphie.reposDebitCD, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.regadenosonDebitCD, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.reserveCD, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.reposAnalyseVisuelleCD, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.regadenosonAnalyseVisuelleCD, {'attr': {'class': 'input'} }) }}</div>
+			</div>
+			<div class="tr">
+				<div class="row-header">Total</div>
+				<div>{{ form_row(form.protocole.scintigraphie.reposDebitTotal, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.regadenosonDebitTotal, {'attr': {'class': 'input'} }) }}</div>
+				<div>{{ form_row(form.protocole.scintigraphie.reserveTotal, {'attr': {'class': 'input'} }) }}</div>
+				<div></div>
+				<div></div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="form-space">
+	{{ form_row(form.protocole.scintigraphie.fractionEjection, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+</div>
+
+{{ form_row(form.protocole.scintigraphie.save, {'attr': {'class': 'form-btn'} }) }}

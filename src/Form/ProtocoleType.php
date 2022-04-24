@@ -26,8 +26,6 @@ class ProtocoleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fiches')
-
             ->add('angioplastiePontage', AngioplastiePontageType::class, array(
                 'label' => 'Angioplastie Pontage'
             ))

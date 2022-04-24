@@ -1,0 +1,53 @@
+<h1 id="echocardiographie">Échocardiographie</h1>
+<div class="form-space">
+	{{ form_row(form.protocole.echographieCardiaque.date, {'attr': {'class': 'input js-datepicker'} }) }}
+	<div class="flex-nowrap">
+		{{ form_row(form.protocole.echographieCardiaque.fcRepos, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+		{{ form_row(form.protocole.echographieCardiaque.fcMax, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	</div>
+	{{ form_row(form.protocole.echographieCardiaque.rythmeCardiaque, {'attr': {'class': 'input'} }) }}
+	<div class="flex-nowrap">
+		{{ form_row(form.protocole.echographieCardiaque.taSystoliqueRepos, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+		{{ form_row(form.protocole.echographieCardiaque.taSystoliquePic, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	</div>
+</div>
+
+<h3 id="basal">Basal</h3>
+<div class="form-space">
+	{{ form_row(form.protocole.echographieCardiaque.basalEchographie, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.echographieCardiaque.basalFMTPercent, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.echographieCardiaque.basalResult, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.echographieCardiaque.basalNumberSegment, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.echographieCardiaque.basalIschemieLocation, {'attr': {'class': 'input'} }) }}
+</div>
+{# <div class="echo">
+	{% for segment in form.protocole.echographieCardiaque.basalBullseye.segments %}
+		{% set counter = ( counter | default(0) ) + 1 %}
+		<div class="segment">
+			<div class="wrap-input">
+				{{ form_widget(segment.segment, {'attr': {'class': 'input js-unity', 'placeholder': counter}, 'useStyle': false }) }}
+			</div>
+		</div>
+	{% endfor %}
+</div> #}
+
+<h3 id="stress">Stress</h3>
+<div class="form-space">
+	{{ form_row(form.protocole.echographieCardiaque.stressEchographie, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.echographieCardiaque.stressFMTPercent, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.echographieCardiaque.stressResult, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.echographieCardiaque.stressNumberSegment, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.echographieCardiaque.stressIschemieLocation, {'attr': {'class': 'input'} }) }}
+</div>
+{# <div class="echo">
+	{% for segment in form.protocole.echographieCardiaque.stressBullseye.segments %}
+		{% set counter = ( counter | default(0) ) + 1 %}
+		<div class="segment">
+			<div class="wrap-input">
+				{{ form_widget(segment.segment, {'attr': {'class': 'input js-unity', 'placeholder': counter}, 'useStyle': false }) }}
+			</div>
+		</div>
+	{% endfor %}
+</div> #}
+
+{{ form_row(form.protocole.echographieCardiaque.save, {'attr': {'class': 'form-btn'} }) }}

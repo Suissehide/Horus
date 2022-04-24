@@ -1,0 +1,29 @@
+<h1 id="testsEffort">Définition des tests d'effort</h1>
+<div class="form-space">
+	<div class="flex-nowrap">
+		{{ form_row(form.protocole.testEffort.maquille, {'attr': {'class': 'input radio-row'} }) }}
+		{{ form_row(form.protocole.testEffort.type, {'attr': {'class': 'input radio-row'} }) }}
+	</div>
+
+	<div class="separator-space"></div>
+
+	{{ form_row(form.protocole.testEffort.duree, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.testEffort.watts, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+
+	<div class="separator-space"></div>
+
+	<div class="flex-nowrap">
+		{{ form_row(form.protocole.testEffort.frequenceMax, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+		{{ form_row(form.protocole.testEffort.frequenceMaxPercent, {'attr': {'class': 'input'} }) }}
+	</div>
+	<div class="flex-nowrap">
+		{{ form_row(form.protocole.testEffort.TASRepos, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+		{{ form_row(form.protocole.testEffort.TASEffort, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	</div>
+	<div class="flex-nowrap">
+		{{ form_row(form.protocole.testEffort.ECGModifie, {'attr': {'class': 'input'} }) }}
+		{{ form_row(form.protocole.testEffort.mesure, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	</div>
+</div>
+
+{{ form_row(form.protocole.testEffort.save, {'attr': {'class': 'form-btn'} }) }}

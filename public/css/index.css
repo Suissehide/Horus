@@ -51,6 +51,10 @@
     flex: 1;
 }
 
+.sub {
+    padding-left: 32px;
+}
+
 /* 
 ========================================================================== */
 
@@ -62,6 +66,8 @@
 }
 
 .container-form {
+    /* max-width: 1080px; */
+    /* margin: 0 auto; */
     width: 100%;
     padding: 50px 0px 55px 0px;
 }
@@ -115,6 +121,11 @@ ul.tabbed li {
     transition: all 250ms ease;
     margin-bottom: 5px;
     user-select: none;
+    border-right: 1px solid #cacaca;
+}
+
+ul.tabbed li:last-child {
+    border-right: none;
 }
 
 ul.tabbed li.active {
@@ -144,6 +155,7 @@ ul.tabbed li:last-child {
 }
 
 .main.reduce {
+    overflow-x: hidden;
     padding-left: calc(55px + 15px);
 }
 
@@ -156,11 +168,11 @@ ul.tabbed li:last-child {
 
 .hero-header {
     width: 100%;
-    padding: 0 25px 40px;
+    padding: 0 25px 30px;
 }
 
 .hero-title {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .hero-center {
@@ -172,11 +184,11 @@ ul.tabbed li:last-child {
 .slide {
     position: relative;
     display: none;
-    padding-top: 50px;
 }
 
 .slide h1 {
     position: relative;
+    padding-top: 30px;
     margin-bottom: 50px;
     font-size: 32px;
 }
@@ -349,7 +361,7 @@ ul.tabbed li:last-child {
     z-index: 0;
     height: 100%;
     background: url(../assets/images/history.svg) center no-repeat;
-    background-size: 55%;
+    background-size: 48%;
     width: 42px;
     transition: cubic-bezier(1, 0, 0, 1) 0.2s;
 }
@@ -361,18 +373,19 @@ ul.tabbed li:last-child {
 .etiquettes__list {
     display: flex;
     flex-flow: row wrap;
+    gap: 5px;
 }
 
 .medicaments__list {
     display: flex;
     flex-flow: column;
+    gap: 5px;
 }
 
 .etiquette, .medicament {
     width: fit-content;
     color: #f4f9f7;
     padding: 3px 15px;
-    margin: 5px 5px;
     display: inline;
     padding: 5px 8px;
     border-radius: 0;
@@ -477,8 +490,49 @@ input[type='checkbox'].checkbox-round+span {
     cursor: not-allowed !important;
 }
 
+.theader {
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--persian-indigo);
+    font-weight: bold;
+}
+
+.tr {
+    display: flex;
+    gap: 15px;
+}
+
+.tr > div {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.theader .tr > div {
+    padding-left: 10px;
+    border-left: 0.1em solid var(--persian-indigo);
+    word-break: break-word;
+}
+
+.theader .tr > div:empty { 
+    border: none;
+}
+
+.tr .row-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    font-weight: bold;
+    word-break: break-word;
+}
+
 /* QCM
 ========================================================================== */
+
+.qcm {
+    column-count: 2;
+    column-gap: 40px;
+}
+
 .qcm-row {
     width: 100%;
     display: flex;
@@ -978,7 +1032,7 @@ input[type='checkbox'].checkbox-round+span {
     z-index: 100;
     position: absolute;
     left: 0px;
-    top: 20px;
+    top: -1px;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 30%;

@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class CoronaireAngioplastieType extends AbstractType
 {
@@ -16,7 +17,7 @@ class CoronaireAngioplastieType extends AbstractType
     {
         $builder
             ->add('stenoseIVA', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -30,7 +31,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('stenoseDiagonale', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -44,7 +45,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('stenoseCirconflexe', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -57,8 +58,8 @@ class CoronaireAngioplastieType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('stenosePostrolLaterale', ChoiceType::class, array(
-                'label' => '',
+            ->add('stenosePosterolateral', ChoiceType::class, array(
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -72,7 +73,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('stenoseCoronaireDroite', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -86,7 +87,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('stenosePontage', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -102,7 +103,7 @@ class CoronaireAngioplastieType extends AbstractType
 
 
             ->add('ffrIVA', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -112,7 +113,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('ffrDiagonale', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -122,7 +123,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('ffrCirconflexe', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -131,8 +132,8 @@ class CoronaireAngioplastieType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('ffrPostrolLaterale', NumberType::class, array(
-                'label' => '',
+            ->add('ffrPosterolateral', NumberType::class, array(
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -142,7 +143,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('ffrCoronaireDroite', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -152,7 +153,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('ffrPontage', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -164,7 +165,7 @@ class CoronaireAngioplastieType extends AbstractType
 
 
             ->add('cmrIVA', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -174,7 +175,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('cmrDiagonale', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -184,7 +185,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('cmrCirconflexe', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -193,8 +194,8 @@ class CoronaireAngioplastieType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('cmrPostrolLaterale', NumberType::class, array(
-                'label' => '',
+            ->add('cmrPosterolateral', NumberType::class, array(
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -204,7 +205,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('cmrCoronaireDroite', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -214,7 +215,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('cmrPontage', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -226,7 +227,7 @@ class CoronaireAngioplastieType extends AbstractType
 
 
             ->add('imrIVA', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -236,7 +237,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('imrDiagonale', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -246,7 +247,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('imrCirconflexe', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -255,8 +256,8 @@ class CoronaireAngioplastieType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('imrPostrolLaterale', NumberType::class, array(
-                'label' => '',
+            ->add('imrPosterolateral', NumberType::class, array(
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -266,7 +267,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('imrCoronaireDroite', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -276,7 +277,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('imrPontage', NumberType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -288,7 +289,7 @@ class CoronaireAngioplastieType extends AbstractType
 
 
             ->add('angioplastieIVA', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -298,7 +299,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('angioplastieDiagonale', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -308,7 +309,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('angioplastieCirconflexe', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -317,8 +318,8 @@ class CoronaireAngioplastieType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('angioplastiePostrolLaterale', ChoiceType::class, array(
-                'label' => '',
+            ->add('angioplastiePosterolateral', ChoiceType::class, array(
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -328,7 +329,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('angioplastieCoronaireDroite', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -338,7 +339,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('angioplastiePontage', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -350,7 +351,7 @@ class CoronaireAngioplastieType extends AbstractType
 
 
             ->add('coroscannerIVA', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -364,7 +365,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('coroscannerDiagonale', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -378,7 +379,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('coroscannerCirconflexe', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -391,8 +392,8 @@ class CoronaireAngioplastieType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('coroscannerPostrolLaterale', ChoiceType::class, array(
-                'label' => '',
+            ->add('coroscannerPosterolateral', ChoiceType::class, array(
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -406,7 +407,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('coroscannerCoronaireDroite', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -420,7 +421,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
             ->add('coroscannerPontage', ChoiceType::class, array(
-                'label' => '',
+                'label' => ' ',
                 'placeholder' => '',
                 'choices' => array(
                     '' => '',
@@ -444,6 +445,8 @@ class CoronaireAngioplastieType extends AbstractType
                 ),
                 'required' => false,
             ))
+
+            ->add('save', SubmitType::class, array('label' => 'Sauvegarder'))
         ;
     }
 
