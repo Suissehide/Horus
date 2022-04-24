@@ -139,20 +139,22 @@ class MedicamentsEntreeType extends AbstractType
             ->add('verbatims', CollectionType::class, array(
                 'entry_type' => QCMType::class,
                 'entry_options' => array('label' => false),
-                'allow_add' => true,
+                'allow_add' => false,
                 'by_reference' => false,
+                'block_name' => 'qcm_type',
             ))
 
             ->add('verbatimsApportSante', TextareaType::class, array(
-                'label' => 'Verbatims apporrt des médicaments pour la santé',
+                'label' => 'Verbatims apport des médicaments pour la santé',
                 'required' => false,
             ))
 
             ->add('verbatimsSante', CollectionType::class, array(
                 'entry_type' => QCMType::class,
                 'entry_options' => array('label' => false),
-                'allow_add' => true,
+                'allow_add' => false,
                 'by_reference' => false,
+                'block_name' => 'qcm_type',
             ))
 
             ->add('vecuTraitement', ChoiceType::class, array(
@@ -169,10 +171,11 @@ class MedicamentsEntreeType extends AbstractType
             ))
 
             ->add('questionnaire', CollectionType::class, array(
-                'entry_type' => QCMType::class,
+                'entry_type' => BMQType::class,
                 'entry_options' => array('label' => false),
-                'allow_add' => true,
+                'allow_add' => false,
                 'by_reference' => false,
+                'block_name' => 'qcm_type',
             ))
 
             // ->add('medicaments', CollectionType::class, [

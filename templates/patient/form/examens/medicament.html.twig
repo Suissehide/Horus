@@ -23,14 +23,15 @@
 
 	{{ form_row(form.protocole.medicamentsEntree.verbatimsMedicaments, {'attr': {'class': 'input'} }) }}
 
+	<label><em>Verbatims vécu</em></label>
 	<div class="qcm">
 		{% for qcm in form.protocole.medicamentsEntree.verbatims %}
 			<div class="qcm-row">
 				<div class="qcm-question">
-					test
+					{{constants_verbatims_vecu[ loop.index0 ]}}
 				</div>
 				<div class="qcm-response">
-					<div class="wrap-input qcm-flex">
+					<div class="qcm-flex">
 						{{ form_widget(qcm.response, {'attr': {'class': 'input radio-row'} }) }}
 					</div>
 				</div>
@@ -40,14 +41,15 @@
 
 	{{ form_row(form.protocole.medicamentsEntree.verbatimsApportSante, {'attr': {'class': 'input'} }) }}
 
+	<label><em>Verbatims santé</em></label>
 	<div class="qcm">
 		{% for qcm in form.protocole.medicamentsEntree.verbatimsSante %}
 			<div class="qcm-row">
 				<div class="qcm-question">
-					test
+					{{constants_verbatims_sante[ loop.index0 ]}}
 				</div>
 				<div class="qcm-response">
-					<div class="wrap-input qcm-flex">
+					<div class="qcm-flex">
 						{{ form_widget(qcm.response, {'attr': {'class': 'input radio-row'} }) }}
 					</div>
 				</div>
@@ -57,15 +59,16 @@
 
 	{{ form_row(form.protocole.medicamentsEntree.vecuTraitement, {'attr': {'class': 'input radio-row'} }) }}
 
-	<div class="qcm">
-		{% for qcm in form.protocole.medicamentsEntree.questionnaire %}
+	<label><em>Questionnaire BMQ</em></label>
+	<div class="bmq">
+		{% for bmq in form.protocole.medicamentsEntree.questionnaire %}
 			<div class="qcm-row">
 				<div class="qcm-question">
-					test
+					{{constants_questionnaire[ loop.index0 ]}}
 				</div>
 				<div class="qcm-response">
-					<div class="wrap-input qcm-flex">
-						{{ form_widget(qcm.response, {'attr': {'class': 'input radio-row'} }) }}
+					<div class="qcm-flex">
+						{{ form_widget(bmq.response, {'attr': {'class': 'input radio-row'}, 'useLabel': ' ' }) }}
 					</div>
 				</div>
 			</div>

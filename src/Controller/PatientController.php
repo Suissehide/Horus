@@ -130,8 +130,8 @@ class PatientController extends AbstractController
         }
 
         foreach (FormConstants::QUESTIONNAIRE as $name) {
-            $qcm = new QCM();
-            $medicamentsEntree->addQuestionnaire($qcm);
+            $bmq = new BMQ();
+            $medicamentsEntree->addQuestionnaire($bmq);
         }
 
         $this->em->persist($medicamentsEntree);
@@ -233,6 +233,9 @@ class PatientController extends AbstractController
             'date' => date("d/m/Y"),
 
             'form' => $form->createView(),
+            'constants_verbatims_vecu' => FormConstants::VERBATIMS_VECU,
+            'constants_verbatims_sante' => FormConstants::VERBATIMS_SANTE,
+            'constants_questionnaire' => FormConstants::QUESTIONNAIRE
         ]);
     }
 

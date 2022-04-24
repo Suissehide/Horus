@@ -113,10 +113,10 @@ class MedicamentsEntree
     private $vecuTraitement;
 
     /**
-     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="medicaments_entree_qcm_questionnaire",
+     * @ORM\ManyToMany(targetEntity=BMQ::class, cascade={"persist", "remove"})
+     * @ORM\JoinTable(name="medicaments_entree_bmq_questionnaire",
      *      joinColumns={@ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="qcm_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="bmq_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}
      *      )
      */
     private $questionnaire;
@@ -377,14 +377,14 @@ class MedicamentsEntree
     }
 
     /**
-     * @return Collection<int, QCM>
+     * @return Collection<int, BMQ>
      */
     public function getQuestionnaire(): Collection
     {
         return $this->questionnaire;
     }
 
-    public function addQuestionnaire(QCM $questionnaire): self
+    public function addQuestionnaire(BMQ $questionnaire): self
     {
         if (!$this->questionnaire->contains($questionnaire)) {
             $this->questionnaire[] = $questionnaire;
@@ -393,7 +393,7 @@ class MedicamentsEntree
         return $this;
     }
 
-    public function removeQuestionnaire(QCM $questionnaire): self
+    public function removeQuestionnaire(BMQ $questionnaire): self
     {
         if ($this->questionnaire->contains($questionnaire)) {
             $this->questionnaire->removeElement($questionnaire);

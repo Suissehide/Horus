@@ -556,6 +556,8 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     position: relative;
     flex-flow: row wrap;
     height: auto;
+    gap: 15px;
+    /* padding: 0 15px; */
 }
 
 .radio-container {
@@ -564,7 +566,6 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     flex-direction: row;
     justify-content: left;
     align-items: center;
-    padding: 0 20px 0 0;
     background-color: #e6e6e6;
     height: 42px;
     line-height: 42px;
@@ -937,6 +938,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     padding-left: 80px;
     z-index: 0;
     height: 100%;
+    overflow-x: hidden;
 }
 
 /* ScrollTop

@@ -502,18 +502,18 @@ input[type='checkbox'].checkbox-round+span {
     gap: 15px;
 }
 
-.tr > div {
+.tr>div {
     width: 100%;
     box-sizing: border-box;
 }
 
-.theader .tr > div {
+.theader .tr>div {
     padding-left: 10px;
     border-left: 0.1em solid var(--persian-indigo);
     word-break: break-word;
 }
 
-.theader .tr > div:empty { 
+.theader .tr>div:empty {
     border: none;
 }
 
@@ -531,6 +531,12 @@ input[type='checkbox'].checkbox-round+span {
 .qcm {
     column-count: 2;
     column-gap: 40px;
+}
+
+@media screen and (max-width: 1400px) {
+    .qcm {
+        column-count: 1;
+    }
 }
 
 .qcm-row {

@@ -39,8 +39,12 @@
     <div class="radio-row">
         <div class="radio-container">
             <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-            {% if useLabel|default(false) %}
-                {{ form_label(form, null, {'label': useLabel}) }}
+            {% if useLabel is defined and useLabel is not null %}
+                {% if useLabel is not empty %}
+                    {{ form_label(form, null, {'label': useLabel}) }}
+                {% else %}
+                    &nbsp;
+                {% endif %}
             {% else %}
                 {{ form_label(form, null) }}
             {% endif %}
@@ -49,14 +53,18 @@
 {% endblock checkbox_widget %}
 
 {% block radio_widget %}
-        <div class="radio-container">
-            <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
-            {% if useLabel|default(false) %}
+    <div class="radio-container">
+        <input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+        {% if useLabel is defined and useLabel is not null %}
+            {% if useLabel is not empty %}
                 {{ form_label(form, null, {'label': useLabel}) }}
             {% else %}
-                {{ form_label(form, null) }}
+                &nbsp; toto
             {% endif %}
-        </div>
+        {% else %}
+            {{ form_label(form, null) }}
+        {% endif %}
+    </div>
 {% endblock radio_widget %}
 
 {% block form_row %}
@@ -170,11 +178,19 @@
 
 
 
+{% block _patient_protocole_medicamentsEntree_qcm_type_entry_response_widget %}
+    {{ block('qcm_widget') }}
+{% endblock _patient_protocole_medicamentsEntree_qcm_type_entry_response_widget %}
+
 {% block qcm_widget %}
     <div class="flex">
         <div {{ block('widget_container_attributes') }}>
-            {% for child in form %}
-                {{ form_widget(child) }}
+            {% for child in form|filter(child => not child.rendered) %}
+                {% if useLabel is defined %}
+                    {{ form_widget(child, {'label': useLabel}) }}
+                {% else %}
+                    {{ form_widget(child) }}
+                {% endif %}
             {% endfor %}
         </div>
         <button class="history"><div class="history-icon"></div></button>
