@@ -75,7 +75,7 @@ class Suivi
     private $alimentation = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity=Qcm::class, cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist"})
      * @Groups({"advancement", "export"})
      * @ORM\JoinTable(name="donnee_qcm_facteurs",
      *      joinColumns={@ORM\JoinColumn(name="facteurs_id", referencedColumnName="id", onDelete="CASCADE")},
@@ -85,7 +85,7 @@ class Suivi
     private $facteurs;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Qcm::class, cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist"})
      * @Groups({"advancement", "export"})
      * @ORM\JoinTable(name="donnee_qcm_traitement",
      *      joinColumns={@ORM\JoinColumn(name="traitement_id", referencedColumnName="id", onDelete="CASCADE")},
@@ -199,7 +199,6 @@ class Suivi
 
     /**
      * @ORM\ManyToMany(targetEntity=Gene::class, cascade={"persist"})
-     * @ORM\OrderBy({"nom" = "ASC"})
      * @Groups({"advancement", "export"})
      */
     private $genes;
@@ -270,6 +269,11 @@ class Suivi
      * @Groups({"advancement", "export"})
      */
     private $ips;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="suivis")
+     */
+    private $patient;
 
     public function __construct()
     {
@@ -392,14 +396,14 @@ class Suivi
     }
 
     /**
-     * @return Collection|Qcm[]
+     * @return Collection|QCM[]
      */
     public function getFacteurs(): Collection
     {
         return $this->facteurs;
     }
 
-    public function addFacteur(Qcm $facteur): self
+    public function addFacteur(QCM $facteur): self
     {
         if (!$this->facteurs->contains($facteur)) {
             $this->facteurs[] = $facteur;
@@ -408,7 +412,7 @@ class Suivi
         return $this;
     }
 
-    public function removeFacteur(Qcm $facteur): self
+    public function removeFacteur(QCM $facteur): self
     {
         if ($this->facteurs->contains($facteur)) {
             $this->facteurs->removeElement($facteur);
@@ -418,14 +422,14 @@ class Suivi
     }
 
     /**
-     * @return Collection|Qcm[]
+     * @return Collection|QCM[]
      */
     public function getTraitement(): Collection
     {
         return $this->traitement;
     }
 
-    public function addTraitement(Qcm $traitement): self
+    public function addTraitement(QCM $traitement): self
     {
         if (!$this->traitement->contains($traitement)) {
             $this->traitement[] = $traitement;
@@ -434,7 +438,7 @@ class Suivi
         return $this;
     }
 
-    public function removeTraitement(Qcm $traitement): self
+    public function removeTraitement(QCM $traitement): self
     {
         if ($this->traitement->contains($traitement)) {
             $this->traitement->removeElement($traitement);
@@ -813,6 +817,18 @@ class Suivi
     public function setIps(?string $ips): self
     {
         $this->ips = $ips;
+
+        return $this;
+    }
+
+    public function getPatient(): ?Patient
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?Patient $patient): self
+    {
+        $this->patient = $patient;
 
         return $this;
     }

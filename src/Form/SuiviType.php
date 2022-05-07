@@ -28,6 +28,7 @@ class SuiviType extends AbstractType
                     'class' => 'datepicker',
                     'autocomplete' => 'off',
                 ],
+                'html5' => false,
                 'required' => false,
             ))
             ->add('recidive', ChoiceType::class, array(
@@ -51,6 +52,7 @@ class SuiviType extends AbstractType
                     'class' => 'datepicker',
                     'autocomplete' => 'off',
                 ],
+                'html5' => false,
                 'required' => false,
             ))
             ->add('type', ChoiceType::class, array(
@@ -118,18 +120,20 @@ class SuiviType extends AbstractType
             ))
 
             ->add('facteurs', CollectionType::class, array(
-                'entry_type' => QcmType::class,
+                'entry_type' => QCMType::class,
                 'entry_options' => array('label' => false),
                 'allow_add' => true,
                 'by_reference' => false,
+                'block_name' => 'qcm_type',
             ))
 
-            // ->add('traitement', CollectionType::class, array(
-            //     'entry_type' => QcmType::class,
-            //     'entry_options' => array('label' => false),
-            //     'allow_add' => true,
-            //     'by_reference' => false,
-            // ))
+            ->add('traitement', CollectionType::class, array(
+                'entry_type' => QCMType::class,
+                'entry_options' => array('label' => false),
+                'allow_add' => true,
+                'by_reference' => false,
+                'block_name' => 'qcm_type',
+            ))
 
             ->add('crp', NumberType::class, array(
                 'label' => 'CRP ultra-sensible',

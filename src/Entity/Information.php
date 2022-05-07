@@ -85,7 +85,7 @@ class Information
     /**
      * @ORM\Column(type="array", nullable=true)
      */
-    private $traitement = [];
+    private $traitementPhaseAigue = [];
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -283,14 +283,14 @@ class Information
         return $this;
     }
 
-    public function getTraitement(): ?array
+    public function getTraitementPhaseAigue(): ?array
     {
-        return $this->traitement;
+        return $this->traitementPhaseAigue;
     }
 
-    public function setTraitement(?array $traitement): self
+    public function setTraitementPhaseAigue(?array $traitementPhaseAigue): self
     {
-        $this->traitement = $traitement;
+        $this->traitementPhaseAigue = $traitementPhaseAigue;
 
         return $this;
     }

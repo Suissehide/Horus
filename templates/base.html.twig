@@ -24,10 +24,10 @@
 	</head>
 	<body>
 		{# ======= flashbag ======= #}
-		<div class="row">
-			{% if app.request.hasPreviousSession %}
-				{% set top = 11 %}
-				{% for label, messages in app.flashes %}
+		{% if app.request.hasPreviousSession %}
+			{% set top = 11 %}
+			{% for label, messages in app.flashes %}
+				<div class="row">
 					{% for message in messages %}
 						<div class="toast toast--{% if label == 'notice' %}green{% elseif label == 'info' %}blue{% elseif label == 'error' %}yellow{% endif %}" style="top:{{ top }}px;">
 							<div class="toast__icon">
@@ -54,9 +54,9 @@
 						</div>
 						{% set top = top + 99 %}
 					{% endfor %}
-				{% endfor %}
-			{% endif %}
-		</div>
+				</div>
+			{% endfor %}
+		{% endif %}
 
 		{% block body %}{% endblock %}
 

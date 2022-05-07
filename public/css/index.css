@@ -66,8 +66,6 @@
 }
 
 .container-form {
-    /* max-width: 1080px; */
-    /* margin: 0 auto; */
     width: 100%;
     padding: 50px 0px 55px 0px;
 }
@@ -144,6 +142,10 @@ ul.tabbed li:last-child {
     border-bottom-right-radius: 3px;
 }
 
+ul.tabbed li i {
+    margin-right: 10px;
+}
+
 /* Patient
 ========================================================================== */
 
@@ -152,10 +154,11 @@ ul.tabbed li:last-child {
     padding-right: 15px;
     padding-left: calc(30% + 15px);
     transition: ease 0.2s;
+    overflow-x: clip;
 }
 
 .main.reduce {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     padding-left: calc(55px + 15px);
 }
 
@@ -416,6 +419,31 @@ ul.tabbed li:last-child {
     border-left: 2px solid var(--blue-green);
 }
 
+.alimentation {
+    margin-bottom: 16px;
+}
+
+.alimentation span {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-left: 2px #333 solid;
+}
+
+.alimentation span.green {
+    border-color: #55D6BE;
+    color: #55D6BE;
+}
+
+.alimentation span.orange {
+    border-color: orange;
+    color: orange;
+}
+
+.alimentation span.red {
+    border-color: #D63B53;
+    color: #D63B53;
+}
+
 /* User
 ========================================================================== */
 
@@ -490,53 +518,43 @@ input[type='checkbox'].checkbox-round+span {
     cursor: not-allowed !important;
 }
 
-.theader {
-    padding-bottom: 8px;
-    margin-bottom: 8px;
-    border-bottom: 1px solid var(--persian-indigo);
-    font-weight: bold;
+.table-container {
+    margin: 0 -10px;
 }
 
-.tr {
-    display: flex;
-    gap: 15px;
-}
-
-.tr>div {
+.table-custom {
     width: 100%;
-    box-sizing: border-box;
+    border-spacing: 10px;
+    border-collapse: separate;
 }
 
-.theader .tr>div {
-    padding-left: 10px;
-    border-left: 0.1em solid var(--persian-indigo);
+.table-custom .wrap-input, .table-custom label {
+    margin-bottom: 0px;
+}
+
+.table-custom>tbody>tr>td.row-header {
+    vertical-align: middle;
+    padding-right: 10px;
+}
+
+.table-custom thead tr>th {
+    padding: 0 10px 16px;
+    border-left: 1px solid var(--persian-indigo);
     word-break: break-word;
 }
 
-.theader .tr>div:empty {
+.table-custom thead tr>th:empty {
     border: none;
-}
-
-.tr .row-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-    font-weight: bold;
-    word-break: break-word;
 }
 
 /* QCM
 ========================================================================== */
 
 .qcm {
-    column-count: 2;
-    column-gap: 40px;
-}
-
-@media screen and (max-width: 1400px) {
-    .qcm {
-        column-count: 1;
-    }
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "a a";
+    grid-gap: 0 16px;
 }
 
 .qcm-row {
@@ -545,6 +563,13 @@ input[type='checkbox'].checkbox-round+span {
     justify-content: space-between;
     border-bottom: 1px solid var(--persian-indigo);
     margin-bottom: 16px;
+}
+
+@media screen and (max-width: 1400px) {
+    .qcm {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-areas: "a";
+    }
 }
 
 .qcm-question {
@@ -560,6 +585,42 @@ input[type='checkbox'].checkbox-round+span {
 
 .qcm-response {
     display: flex;
+}
+
+.qcm-flex.wrap-input {
+    margin-bottom: 0;
+}
+
+.bmq-response .radio-container {
+    flex: 1;
+    justify-content: center;
+}
+
+.table-custom thead tr>th.bmq-question__header {
+    width: 50%;
+}
+
+.table-custom thead tr>th.bmq-response__header {
+    display: flex;
+    padding-left: 0;
+    padding-right: 0;
+    border: none;
+}
+
+.bmq-response__header>div:not(:last-child) {
+    flex: 1;
+    padding: 0 10px;
+    text-align: center;
+    border-left: 1px solid var(--persian-indigo);
+}
+
+.bmq-response .radio-row {
+    padding: 0;
+    gap: 0;
+}
+
+.bmq-response .radio-container:not(:last-child) {
+    border-right: 1px solid var(--dark-goldenrod);
 }
 
 /* Letter
@@ -581,12 +642,12 @@ input[type='checkbox'].checkbox-round+span {
     margin-left: 15px;
 }
 
-.select2-results__option {
-    text-transform: capitalize;
-}
-
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-color: var(--blue-green-hover);
+}
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    text-transform: initial;
 }
 
 /* Medicament

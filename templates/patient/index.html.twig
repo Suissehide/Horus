@@ -104,10 +104,13 @@
                                 {% if fiche == 'angioplastiePontage' %}<li><a name='angioplastiePontage'>Angioplastie et pontage</a></li>
                                 {% elseif fiche == 'bfr' %}<li><a name='bfr'>Bilan biologique et risque</a></li>
                                 {% elseif fiche == 'catheterisation' %}<li><a name='catheterisation'>Cathétérisation</a></li>
-                                {% elseif fiche == 'echocardiographie' %}<li><a name='echocardiographie'>Échocardiographie</a></li>
+                                {% elseif fiche == 'coronaireAngioplastie' %}<li><a name="coronaireAngioplastie">Coronaire et angioplastie</a></li>
+                                {% elseif fiche == 'echographie' %}<li><a name="echographie">Échographie</a></li>
+                                {% elseif fiche == 'echographieCardiaque' %}<li><a name='echographieCardiaque'>Échographie cardiaque</a></li>
                                 {% elseif fiche == 'echographieVasculaire' %}<li><a name='echographieVasculaire'>Échographie vasculaire</a></li>
                                 {% elseif fiche == 'medicaments' %}<li><a name='medicaments'>Médicaments</a></li>
                                 {% elseif fiche == 'neuroPsychologie' %}<li><a name='neuroPsychologie'>Neuro-psychologie</a></li>
+                                {% elseif fiche == 'scintigraphie' %}<li><a name="scintigraphie">Scintigraphie</a></li>
                                 {% elseif fiche == 'testsEffort' %}<li><a name='testsEffort'>Test d'effort</a></li>
                                 {% elseif fiche == 'visite' %}<li><a name='visite'>Visite</a></li>
                                 {% endif %}
@@ -117,7 +120,7 @@
 					<li>
 						<a href='#suivi'>
 							<div class="menu-title">
-								<i class='fa fa-skull-crossbones'></i>
+								<i class="fa fa-clinic-medical"></i>
 								<div>Suivi</div>
                             </div>
 						</a>
@@ -238,7 +241,7 @@
 
                 <h1 id="examens">Examens paracliniques</h1>
 
-                <ul class="tabbed">
+                <ul class="tabbed tabbed__fiches">
                     {% for fiche in patient.protocole.fiches %}
                         {% if fiche == 'angioplastiePontage' %}<li name="angioplastiePontage">Angioplastie et pontage</li>
                         {% elseif fiche == 'bfr' %}<li name="bfr">Bilan biologique et risque</li>
@@ -259,7 +262,7 @@
                 <ul class="tab-list">
 					<li class="tab-content" name="angioplastiePontage">
                         {#========== Angioplastie et pontage ==========#}
-                        <div id="examen-angioplastie-pontage">
+                        <div id="examen-angioplastiePontage">
                             {% include 'patient/form/examens/angioplastie_pontage.html.twig' with form %}
                         </div>
                     </li>
@@ -280,7 +283,7 @@
 
                     <li class="tab-content" name="coronaireAngioplastie">
                         {#========== Coronaire & Angioplastie ==========#}
-                        <div id="examen-coronaire-angioplastie">
+                        <div id="examen-coronaireAngioplastie">
                             {% include 'patient/form/examens/coronaire_angioplastie.html.twig' with form %}
                         </div>
                     </li>
@@ -294,14 +297,14 @@
 
                     <li class="tab-content" name="echographieCardiaque">
                         {#========== Échographie cardiaque ==========#}
-                        <div id="examen-echographie-cardiaque">
+                        <div id="examen-echographieCardiaque">
                             {% include 'patient/form/examens/echographie_cardiaque.html.twig' with form %}
                         </div>
                     </li>
 
                     <li class="tab-content" name="echographieVasculaire">
                         {#========== Échographie vasculaire ==========#}
-                        <div id="examen-echographie-vasculaire">
+                        <div id="examen-echographieVasculaire">
                             {% include 'patient/form/examens/echographie_vasculaire.html.twig' with form %}
                         </div>
                     </li>
@@ -315,7 +318,7 @@
 
                     <li class="tab-content" name="neuroPsychologie">
                         {#========== NeuroPsychologie ==========#}
-                        <div id="examen-neuro-psychologie">
+                        <div id="examen-neuroPsychologie">
                             {% include 'patient/form/examens/neuro_psychologie.html.twig' with form %}
                         </div>
                     </li>
@@ -345,9 +348,22 @@
 
 			{#========== SUIVI ==========#}
 			<section class="slide" id="tab-suivi">
+				<h1 id="suivi">Liste des suivis</h1>
+                <ul class="tabbed tabbed__suivis">
+                    {% for suivi in patient.suivis %}
+                        <li {%if loop.last %}class="active"{% endif %} name={{"suivi-" ~ loop.index }}>Suivi {{ loop.index }}</li>
+                    {% endfor %}
+                    <li><i class="fas fa-plus"></i>Ajouter un suivi</li>
+                </ul>
 
-				<h1 id="suivi">Suivi</h1>
+                <ul class="tab-list">
+                    {% for suivi in form.suivis %}
+                        <li class="tab-content {%if loop.last %}active{% endif %}" name={{"suivi-" ~ loop.index }}>
+                            {% include 'patient/form/suivi.html.twig' with suivi %}
+                        </li>
+                    {% endfor %}
 
+                </ul>
 			</section>
 
             
@@ -439,7 +455,7 @@
             if (typeof row != "undefined")
                 redirect(row.fieldId);
         }).on("loaded.rs.jquery.bootgrid", function() {
-            $('table tr td:nth-child(4)').each(function() {
+            $('.table tr td:nth-child(4)').each(function() {
                 $(this).html($(this).text().replace(/\[(.*?)\]/g, "<b class='history-markup'>$1</b>"));
             })
         });;
@@ -483,7 +499,7 @@
         $('.history').click(function(event) {
             event.preventDefault(); 
             let patientId = "{{ patient.id }}";
-            let fieldId = $(this).parents('.wrap-input').find('input, select, textarea').attr('id');
+            let fieldId = $(this).parent().find('input, select, textarea').attr('id');
             /* lowercase + add '_' before capital */
             fieldId = fieldId.replace(/([a-z])([A-Z])/g, '$1_$2').trim();
             fieldId = fieldId.toLowerCase();
@@ -502,11 +518,35 @@
         });
 
 
-        /* Fiches */
+        /* 
+        * ALIMENTATION
+        **********************************************************************/
+        function alimentation(nb, item) {
+            ali = item.parents('.wrap-input').next();
+            ali.empty();
+            if (nb >= 4)
+                ali.append('<span class="green">Recommandée (4-5)</span');
+            else if (nb >= 2)
+                ali.append('<span class="orange">Intermédiaire (2-3)</span');
+            else
+                ali.append('<span class="red">Faible (0-1)</span');
+        }
+
+        $('.alimentation-js').each(function() {
+            alimentation($(this).find('input:checked').length, $(this));
+        })
+        $('.alimentation-js input').on('change', function () {
+            alimentation($(this).parents('.alimentation-js').find('input:checked').length, $(this).parents('.alimentation-js'));
+        });
+
+        /* 
+        * FICHES
+        **********************************************************************/
         let fiches = [];
         $.each({{patient.protocole.fiches|json_encode|raw}}, function (index, fiche) {
             fiches[fiches.length] = fiche;
         });
+
         $('#add-fiche').click(function() {
             let fiche = $('#protocole_fiches').val()
             if (!fiche) return;
@@ -521,11 +561,11 @@
                 </li>`
             );
             $('.etiquettes__list').append(t);
-            $('.tabbed').append('<li name="' + fiche + '">' + text + '</li>');
+            $('.tabbed__fiches').append('<li name="' + fiche + '">' + text + '</li>');
             $('.protocole-list').append('<li><a name="' + fiche + '">' + text + '</a></li>');
             $('#protocole_fiches option[value="' + fiche + '"').remove();
             sortList('.etiquettes__list', 'li');
-            sortList('.tabbed', 'li');
+            sortList('.tabbed__fiches', 'li');
             sortList('.protocole-list', 'li', 'a');
             sortList('#protocole_fiches', 'option');
             $('#protocole_fiches option').eq(0).prop('selected', true);
@@ -550,16 +590,16 @@
                 fiches.splice(index, 1);
             }
             $('.etiquette[name="' + fiche + '"]').remove();
-            $('.tabbed li[name="' + fiche + '"]').remove();
+            $('.tabbed__fiches li[name="' + fiche + '"]').remove();
             $('.protocole-list li a[name="' + fiche + '"]').remove();
             $('#protocole_fiches').append('<option value="' + fiche + '">' + text + '</option>')
             sortList('.etiquettes__list', 'li');
-            sortList('.tabbed', 'li');
+            sortList('.tabbed__fiches', 'li');
             sortList('.protocole-list', 'li', 'a');
             sortList('#protocole_fiches', 'option');
             if (fiches.length === 0) clearTab();
             else if (!isTabAvailable(fiche)) {
-                let tab = $('.tabbed li').eq(0).attr('name');
+                let tab = $('.tabbed__fiches li').eq(0).attr('name');
                 selectTab(tab);
             }
 
@@ -583,7 +623,7 @@
             }).appendTo(list);
         }
         sortList('.etiquettes__list', 'li');
-        sortList('.tabbed', 'li');
+        sortList('.tabbed__fiches', 'li');
         sortList('.protocole-list', 'li', 'a');
         sortList('#protocole_fiches', 'option');
         $('#protocole_fiches option').eq(0).prop('selected', true);
@@ -591,7 +631,7 @@
         /* Medicament */
         $('.add-medicament').click(function() {
             let medicament = $('.js-medicaments-ajax').select2('data');
-            if (!medicament) return;
+            if (!medicament || !medicament[0]) return;
             let t = $(
                 `<div class='medicament' data-id='` + medicament[0].id + `'>
                     ` + medicament[0].name + `
@@ -666,6 +706,10 @@
             templateSelection: formatMedSelection
         });
 
+        $(document).on("select2:open", () => {
+            document.querySelector(".select2-container--open .select2-search__field").focus()
+        })
+
         function formatMed(data) {
             if (data.loading) {
                 return data.text;
@@ -723,45 +767,46 @@
 
     <script>
         /* TABBED */
-        $('.tabbed').on('click', 'li', function() {
+        $('.tabbed__fiches, .tabbed__suivis').on('click', 'li', function() {
             if (this.classList.contains('active'))
                 return;
-            selectTab($(this).attr('name'));
+            selectTab(this);
         })
 
         function isTabAvailable(tab) {
             let ret = false;
-            $('.tabbed li').each(function() {
+            $('.tabbed__fiches li').each(function() {
                 if ($(this).attr('name') === tab)
                     ret = true;
             })
             return ret;
         }
 
-        let tabSelected = localStorage.getItem('tabSelected');
-        if (tabSelected === null || !isTabAvailable(tabSelected)) {
-            tabSelected = $('.tabbed li').eq(0).attr('name');
+        let tabNameSelected = localStorage.getItem('tabSelected');
+        let tabSelected = $('.tabbed__fiches li').eq(0);
+        if (tabNameSelected != null && isTabAvailable(tabNameSelected)) {
+            tabSelected = $(".tabbed__fiches li[name='" + tabNameSelected + "']")
         }
         selectTab(tabSelected);
 
         $('ul.protocole-list').on('click', 'li a', function() {
-            let tab = $(this).attr('name')
-            selectTab(tab);
-            scrollToc('#examen');
+            let tab = $(this).attr('name');
+            selectTab($(".tabbed__fiches li[name='" + tab + "']"));
+            scrollToc('#examen-' + tab);
         })
 
-        function selectTab(tab) {
+        function selectTab(obj) {
+            let tab = $(obj).attr('name');
             localStorage.setItem('tabSelected', tab);
-            $(".tab-content").removeClass('active');
-            $(".tabbed li").removeClass('active');
-            $(".tab-content[name='" + tab + "']").addClass('active');
-            $(".tabbed li[name='" + tab + "']").addClass('active');
+            $(obj).parents("ul").next(".tab-list").find(".tab-content").removeClass('active');
+            $(obj).parents("ul").find("li").removeClass('active');
+            $("li[name='" + tab + "']").addClass('active');
         }
 
         function clearTab() {
             localStorage.setItem('tabSelected', null);
             $(".tab-content").removeClass('active');
-            $(".tabbed li").removeClass('active');
+            $(".tabbed__fiches li").removeClass('active');
         }
 
         /* TOC */
@@ -829,8 +874,10 @@
             $(e).parent(".sub-menu").children("ul").slideToggle("100");
         }
 
-        $(window).scroll(function() {
-            onScroll();
+        $(function() {
+            $(window).on('scroll', function () { 
+                onScroll();
+            });
         });
 
         function onScroll() {

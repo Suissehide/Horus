@@ -23,12 +23,14 @@
 
 	{{ form_row(form.protocole.medicamentsEntree.verbatimsMedicaments, {'attr': {'class': 'input'} }) }}
 
-	<label><em>Verbatims vécu</em></label>
+	<label>
+		<em>Verbatims vécu</em>
+	</label>
 	<div class="qcm">
 		{% for qcm in form.protocole.medicamentsEntree.verbatims %}
 			<div class="qcm-row">
 				<div class="qcm-question">
-					{{constants_verbatims_vecu[ loop.index0 ]}}
+					{{constants_labels["MEDICAMENTSENTREE_VERBATIMS_VECU"][ loop.index0 ]}}
 				</div>
 				<div class="qcm-response">
 					<div class="qcm-flex">
@@ -41,12 +43,14 @@
 
 	{{ form_row(form.protocole.medicamentsEntree.verbatimsApportSante, {'attr': {'class': 'input'} }) }}
 
-	<label><em>Verbatims santé</em></label>
+	<label>
+		<em>Verbatims santé</em>
+	</label>
 	<div class="qcm">
 		{% for qcm in form.protocole.medicamentsEntree.verbatimsSante %}
 			<div class="qcm-row">
 				<div class="qcm-question">
-					{{constants_verbatims_sante[ loop.index0 ]}}
+					{{constants_labels["MEDICAMENTSENTREE_VERBATIMS_SANTE"][ loop.index0 ]}}
 				</div>
 				<div class="qcm-response">
 					<div class="qcm-flex">
@@ -59,20 +63,39 @@
 
 	{{ form_row(form.protocole.medicamentsEntree.vecuTraitement, {'attr': {'class': 'input radio-row'} }) }}
 
-	<label><em>Questionnaire BMQ</em></label>
+	<label>
+		<em>Questionnaire BMQ</em>
+	</label>
 	<div class="bmq">
-		{% for bmq in form.protocole.medicamentsEntree.questionnaire %}
-			<div class="qcm-row">
-				<div class="qcm-question">
-					{{constants_questionnaire[ loop.index0 ]}}
-				</div>
-				<div class="qcm-response">
-					<div class="qcm-flex">
-						{{ form_widget(bmq.response, {'attr': {'class': 'input radio-row'}, 'useLabel': ' ' }) }}
-					</div>
-				</div>
-			</div>
-		{% endfor %}
+		<div class="table-container">
+			<table class="table-custom table-bmq">
+				<thead>
+					<th class="bmq-question__header"></th>
+
+					<th class="bmq-response__header" colspan="6">
+						<div>Pas du tout d'accord</div>
+						<div>Plutôt pas d'accord</div>
+						<div>Ni en désaccord, ni d'accord</div>
+						<div>Plutôt d'accord</div>
+						<div>Tout à fait d'accord</div>
+						<div style="width: 42px"></div>
+					</th>
+				</thead>
+
+				<tbody>
+					{% for bmq in form.protocole.medicamentsEntree.questionnaire %}
+						<tr>
+							<td class="qcm-question">
+								{{constants_labels["MEDICAMENTSENTREE_QUESTIONNAIRE"][ loop.index0 ]}}
+							</td>
+							<td class="bmq-response" colspan="6">
+								{{ form_widget(bmq.response, {'attr': {'class': 'input radio-row'}, 'useLabel': ' ' }) }}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 </div>

@@ -7,59 +7,43 @@
 <div class="margin-space"></div>
 
 <div class="form-space">
-	<div class="flex-table">
-		<div class="col-flex-1">&nbsp;</div>
-		<div class="col-flex-2">Risques</div>
-		<div class="col-flex-3">Depuis</div>
-		<div class="col-flex-2">Traité</div>
-	</div>
-	<div class="flex-table">
-		<div class="col-flex-1">HTA</div>
-		<div class="col-flex-2 radio-row no-label">
-			{{ form_row(form.facteur.risqueHTA, {'attr': {'class': 'input radio-row'} }) }}
-		</div>
-		<div class="col-flex-3">
-			{{ form_row(form.facteur.depuisHTA, {'attr': {'class': 'input'}, 'useStyle': true}) }}
-		</div>
-		<div class="col-flex-2 radio-row no-label">
-			{{ form_row(form.facteur.traiteHTA, {'attr': {'class': 'input radio-row'} }) }}
-		</div>
-	</div>
-	<div class="flex-table">
-		<div class="col-flex-1">Diabète</div>
-		<div class="col-flex-2 radio-row no-label">
-			{{ form_row(form.facteur.risqueDiabete, {'attr': {'class': 'input radio-row'} }) }}
-		</div>
-		<div class="col-flex-3">
-			{{ form_row(form.facteur.depuisDiabete, {'attr': {'class': 'input'}, 'useStyle': true}) }}
-		</div>
-		<div class="col-flex-2 radio-row no-label">
-			{{ form_row(form.facteur.traiteDiabete, {'attr': {'class': 'input radio-row'} }) }}
-		</div>
-	</div>
-	<div class="flex-table">
-		<div class="col-flex-1">Hypercholestérolémie</div>
-		<div class="col-flex-2 radio-row no-label">
-			{{ form_row(form.facteur.risqueHypercholesterolemie, {'attr': {'class': 'input radio-row'} }) }}
-		</div>
-		<div class="col-flex-3">
-			{{ form_row(form.facteur.depuisHypercholesterolemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}
-		</div>
-		<div class="col-flex-2 radio-row no-label">
-			{{ form_row(form.facteur.traiteHypercholesterolemie, {'attr': {'class': 'input radio-row'} }) }}
-		</div>
-	</div>
-	<div class="flex-table">
-		<div class="col-flex-1">Hypertriglycéridèmie</div>
-		<div class="col-flex-2 radio-row no-label">
-			{{ form_row(form.facteur.risqueHypertriglyceridemie, {'attr': {'class': 'input radio-row'} }) }}
-		</div>
-		<div class="col-flex-3">
-			{{ form_row(form.facteur.depuisHypertriglyceridemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}
-		</div>
-		<div class="col-flex-2 radio-row no-label">
-			{{ form_row(form.facteur.traiteHypertriglyceridemie, {'attr': {'class': 'input radio-row'} }) }}
-		</div>
+	<div class="table-container">
+		<table class="table-custom">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Risques</th>
+					<th>Depuis</th>
+					<th>Traité</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="row-header">HTA</td>
+					<td>{{ form_row(form.facteur.risqueHTA, {'attr': {'class': 'input radio-row'} }) }}</td>
+					<td>{{ form_row(form.facteur.depuisHTA, {'attr': {'class': 'input'}, 'useStyle': true}) }}</td>
+					<td>{{ form_row(form.facteur.traiteHTA, {'attr': {'class': 'input radio-row'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Diabète</td>
+					<td>{{ form_row(form.facteur.risqueDiabete, {'attr': {'class': 'input radio-row'} }) }}</td>
+					<td>{{ form_row(form.facteur.depuisDiabete, {'attr': {'class': 'input'}, 'useStyle': true}) }}</td>
+					<td>{{ form_row(form.facteur.traiteDiabete, {'attr': {'class': 'input radio-row'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Hypercholestérolémie</td>
+					<td>{{ form_row(form.facteur.risqueHypercholesterolemie, {'attr': {'class': 'input radio-row'} }) }}</td>
+					<td>{{ form_row(form.facteur.depuisHypercholesterolemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}</td>
+					<td>{{ form_row(form.facteur.traiteHypercholesterolemie, {'attr': {'class': 'input radio-row'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Hypertriglycéridèmie</td>
+					<td>{{ form_row(form.facteur.risqueHypertriglyceridemie, {'attr': {'class': 'input radio-row'} }) }}</td>
+					<td>{{ form_row(form.facteur.depuisHypertriglyceridemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}</td>
+					<td>{{ form_row(form.facteur.traiteHypertriglyceridemie, {'attr': {'class': 'input radio-row'} }) }}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
 	<div class="margin-space"></div>

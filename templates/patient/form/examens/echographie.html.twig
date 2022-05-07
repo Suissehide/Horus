@@ -1,34 +1,36 @@
 <h1 id="echographie">Échographie</h1>
 <div class="form-space">
-	<div class="table">
-		<div class="theader">
-			<div class="tr">
-				<div></div>
-				<div>Repos</div>
-				<div>Effort</div>
-				<div>Nombre de segments</div>
-			</div>
-		</div>
-		<div class="tbody">
-			<div class="tr">
-				<div class="row-header">IVA</div>
-				<div>{{ form_row(form.protocole.echographie.reposIVA, {'attr': {'class': 'input'} }) }}</div>
-				<div>{{ form_row(form.protocole.echographie.effortIVA, {'attr': {'class': 'input'} }) }}</div>
-				<div>{{ form_row(form.protocole.echographie.nbSegmentIVA, {'attr': {'class': 'input'} }) }}</div>
-			</div>
-			<div class="tr">
-				<div class="row-header">Diagonale</div>
-				<div>{{ form_row(form.protocole.echographie.reposCX, {'attr': {'class': 'input'} }) }}</div>
-				<div>{{ form_row(form.protocole.echographie.effortCX, {'attr': {'class': 'input'} }) }}</div>
-				<div>{{ form_row(form.protocole.echographie.nbSegmentCX, {'attr': {'class': 'input'} }) }}</div>
-			</div>
-			<div class="tr">
-				<div class="row-header">Circonflexe</div>
-				<div>{{ form_row(form.protocole.echographie.reposCD, {'attr': {'class': 'input'} }) }}</div>
-				<div>{{ form_row(form.protocole.echographie.effortCD, {'attr': {'class': 'input'} }) }}</div>
-				<div>{{ form_row(form.protocole.echographie.nbSegmentCD, {'attr': {'class': 'input'} }) }}</div>
-			</div>
-		</div>
+	<div class="table-container">
+		<table class="table-custom">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Repos</th>
+					<th>Effort</th>
+					<th>Nombre de segments</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="row-header">IVA</td>
+					<td>{{ form_row(form.protocole.echographie.reposIVA, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.echographie.effortIVA, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.echographie.nbSegmentIVA, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Diagonale</td>
+					<td>{{ form_row(form.protocole.echographie.reposCX, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.echographie.effortCX, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.echographie.nbSegmentCX, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Circonflexe</td>
+					<td>{{ form_row(form.protocole.echographie.reposCD, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.echographie.effortCD, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.echographie.nbSegmentCD, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
 

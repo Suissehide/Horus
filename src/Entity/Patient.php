@@ -55,9 +55,15 @@ class Patient
      */
     private $erreurs;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Suivi::class, mappedBy="patient")
+     */
+    private $suivis;
+
     public function __construct()
     {
         $this->erreurs = new ArrayCollection();
+        $this->suivis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,7 +130,7 @@ class Patient
 
         return $this;
     }
-
+    
     /**
      * @return Collection|Erreur[]
      */
@@ -150,6 +156,36 @@ class Patient
             // set the owning side to null (unless already changed)
             if ($erreur->getPatient() === $this) {
                 $erreur->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Suivi>
+     */
+    public function getSuivis(): Collection
+    {
+        return $this->suivis;
+    }
+
+    public function addSuivi(Suivi $suivi): self
+    {
+        if (!$this->suivis->contains($suivi)) {
+            $this->suivis[] = $suivi;
+            $suivi->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSuivi(Suivi $suivi): self
+    {
+        if ($this->suivis->removeElement($suivi)) {
+            // set the owning side to null (unless already changed)
+            if ($suivi->getPatient() === $this) {
+                $suivi->setPatient(null);
             }
         }
 

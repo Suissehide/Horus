@@ -13,6 +13,7 @@ use App\Form\ProtocoleType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class PatientType extends AbstractType
@@ -39,6 +40,11 @@ class PatientType extends AbstractType
             ->add('protocole', ProtocoleType::class, array(
                 'label' => 'Protocole'
             ))
+
+            ->add('suivis', CollectionType::class, [
+                'entry_type' => SuiviType::class,
+                'entry_options' => ['label' => false],
+            ])
 
             ->add('create', SubmitType::class, array('label' => 'Créer'))
         ;

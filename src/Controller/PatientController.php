@@ -2,37 +2,25 @@
 
 namespace App\Controller;
 
-use App\Entity\Patient;
-use App\Entity\General;
+use App\Constant\FormConstants;
 
-use App\Entity\AngioplastiePontage;
-use App\Entity\BFR;
-use App\Entity\Catheterisation;
-use App\Entity\EchographieCardiaque;
-use App\Entity\EchographieVasculaire;
-use App\Entity\Facteur;
+use App\Entity\BMQ;
+use App\Entity\Erreur;
+use App\Entity\Gene;
+use App\Entity\Letter;
 use App\Entity\Medicament;
 use App\Entity\MedicamentsEntree;
-use App\Entity\NeuroPsychologie;
-use App\Entity\TestEffort;
-use App\Entity\Visite;
-
-use App\Entity\Segment;
-use App\Entity\Bullseye;
-use App\Entity\Letter;
-use App\Entity\Erreur;
+use App\Entity\Patient;
 use App\Entity\QCM;
-use App\Entity\BMQ;
+use App\Entity\Suivi;
 
 use App\Form\PatientType;
-
-use App\Constant\FormConstants;
 
 use App\Repository\ErreurRepository;
 
 use DateTime;
 use DateTimeZone;
-
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
@@ -41,8 +29,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
-use Doctrine\ORM\EntityManagerInterface;
-
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -84,23 +70,15 @@ class PatientController extends AbstractController
                     break;
 
                 case 'Ensemble 2':
-                    $patient->getProtocole()->setFiches(['echocardiographie', 'neuroPsychologie', 'visite']);
+                    $patient->getProtocole()->setFiches(['echographieCardiaque', 'neuroPsychologie', 'visite']);
                     break;
 
                 default:
                     break;
             }
 
-            $patient->getProtocole()->setAngioplastiePontage(new AngioplastiePontage());
-            $patient->getProtocole()->setBFR(new BFR());
-            $patient->getProtocole()->setCatheterisation(new Catheterisation());
-            $patient->getProtocole()->setEchographieCardiaque(new EchographieCardiaque());
-            $patient->getProtocole()->setEchographieVasculaire(new EchographieVasculaire());
-            
-            $patient->getProtocole()->setNeuroPsychologie(new NeuroPsychologie());
-            $patient->getProtocole()->setTestEffort(new TestEffort());
-            $patient->getProtocole()->setVisite(new Visite());
             $this->createMedicamentsEntree($patient);
+            $this->createSuivi($patient);
 
             $this->em->persist($patient);
             $this->em->flush();
@@ -115,21 +93,72 @@ class PatientController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/patient/add/suivi", name="patient_add_suivi", methods={"GET", "POST"})
+     */
+    public function patient_add_suivi(Request $request): Response
+    {
+        if ($request->isXmlHttpRequest()) {
+            $patientId = $request->request->get('patientId');
+
+            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
+            $this->createSuivi($patient);
+
+            return new JsonResponse('success!', Response::HTTP_CREATED);
+        }
+        return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @Route("/patient/suivi/add", name="patient_suivi_add", methods={"GET", "POST"})
+     */
+    public function patient_suivi_add(Request $request): Response
+    {
+        if ($request->isXmlHttpRequest()) {
+            $patientId = $request->request->get('patientId');
+
+            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
+            $this->createSuivi($patient);
+            $this->em->flush();
+
+            return new JsonResponse('success!', Response::HTTP_CREATED);
+        }
+        return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @Route("/patient/suivi/delete", name="patient_suivi_delete", methods={"GET", "POST"})
+     */
+    public function patient_suivi_delete(Request $request): Response
+    {
+        if ($request->isXmlHttpRequest()) {
+            $patientId = $request->request->get('patientId');
+            $suiviId = $request->request->get('suiviId');
+
+            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
+            $suivi = $this->getDoctrine()->getRepository(Patient::class)->find($suiviId);
+            $patient->removeSuivi($suivi);
+
+            return new JsonResponse('success!', Response::HTTP_OK);
+        }
+        return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
+    }
+
     private function createMedicamentsEntree(Patient $patient)
     {
         $medicamentsEntree = new MedicamentsEntree();
 
-        foreach (FormConstants::VERBATIMS_VECU as $name) {
+        foreach (FormConstants::LABELS["MEDICAMENTSENTREE_VERBATIMS_VECU"] as $name) {
             $qcm = new QCM();
             $medicamentsEntree->addVerbatim($qcm);
         }
 
-        foreach (FormConstants::VERBATIMS_SANTE as $name) {
+        foreach (FormConstants::LABELS["MEDICAMENTSENTREE_VERBATIMS_SANTE"] as $name) {
             $qcm = new QCM();
             $medicamentsEntree->addVerbatimsSante($qcm);
         }
 
-        foreach (FormConstants::QUESTIONNAIRE as $name) {
+        foreach (FormConstants::LABELS["MEDICAMENTSENTREE_QUESTIONNAIRE"] as $name) {
             $bmq = new BMQ();
             $medicamentsEntree->addQuestionnaire($bmq);
         }
@@ -137,6 +166,31 @@ class PatientController extends AbstractController
         $this->em->persist($medicamentsEntree);
         $this->em->flush();
         $patient->getProtocole()->setMedicamentsEntree($medicamentsEntree);
+    }
+
+    private function createSuivi(Patient $patient)
+    {
+        $suivi = new Suivi();
+
+        foreach (FormConstants::LABELS["SUIVI_FACTEUR"] as $name) {
+            $qcm = new Qcm();
+            $suivi->addFacteur($qcm);
+        }
+
+        foreach (FormConstants::LABELS["SUIVI_TRAITEMENT"] as $name) {
+            $qcm = new Qcm();
+            $suivi->addTraitement($qcm);
+        }
+
+        foreach (FormConstants::LABELS["SUIVI_GENES"] as $name) {
+            $gene = new Gene();
+            $gene->setStatut("Non muté");
+            $suivi->addGene($gene);
+        }
+
+        $this->em->persist($suivi);
+        $this->em->flush();
+        $patient->addSuivi($suivi);
     }
 
     /**
@@ -209,7 +263,7 @@ class PatientController extends AbstractController
             /* SPECIAL ERROR */
 
             /* SEARCH DIFF */
-            // $this->searchDiff($patient, $oldArray, $patientArray, 'patient');
+            $this->searchDiff($patient, $oldArray, $patientArray, 'patient');
 
             $patient = $form->getData();
             $this->em->flush();
@@ -219,23 +273,12 @@ class PatientController extends AbstractController
             return $this->redirect($request->getUri());
         }
 
-        #========== VISITE ==========#
-        $visite = $patient->getProtocole()->getVisite();
-        if (!$visite) {
-            $patient->getProtocole()->setVisite(new Visite());
-            $this->em->persist($patient);
-            $this->em->flush();
-        }
-
         return $this->render('patient/index.html.twig', [
             'controller_name' => 'PatientController',
             'patient' => $patient,
-            'date' => date("d/m/Y"),
 
             'form' => $form->createView(),
-            'constants_verbatims_vecu' => FormConstants::VERBATIMS_VECU,
-            'constants_verbatims_sante' => FormConstants::VERBATIMS_SANTE,
-            'constants_questionnaire' => FormConstants::QUESTIONNAIRE
+            'constants_labels' => FormConstants::LABELS,
         ]);
     }
 
@@ -269,17 +312,19 @@ class PatientController extends AbstractController
         return json_decode($serialized, true);
     }
 
-    private function checkEmpty($x, $path = NULL)
+    private function checkEmpty($x, $path = null)
     {
         if (is_array($x)) {
             $err = '{';
             $num = count($x);
             $i = 0;
             foreach ($x as $key) {
-                if ($path)
+                if ($path) {
                     $err .= $key[$path] ? preg_replace('~\.0+$~', '', $key[$path]) : '(vide)';
-                else
+                } else {
                     $err .= $key;
+                }
+
                 if (++$i != $num) {
                     $err .= ', ';
                 }
@@ -293,7 +338,9 @@ class PatientController extends AbstractController
     private function array_diff_depth($a, $b, $path)
     {
         for ($i = 0; $i < count($a) - 1; $i++) {
-            if ($a[$i][$path] != $b[$i][$path]) return true;
+            if ($a[$i][$path] != $b[$i][$path]) {
+                return true;
+            }
         }
         return false;
     }
@@ -301,35 +348,52 @@ class PatientController extends AbstractController
     private function searchDiff(Patient $patient, $oldArray, $newArray, $path)
     {
         foreach ($newArray as $key => $value) {
-            if (is_array($value) && array_key_exists('timestamp', $value)) {
-                if (!isset($oldArray[$key]['timestamp'])) {
+            if (is_array($value)) {
+                if (array_key_exists('timestamp', $value) && !isset($oldArray[$key]['timestamp'])) {
                     $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [(vide)] en [' . date('d/m/Y', $value['timestamp']) . ']', true);
-                } else if ($oldArray[$key]['timestamp'] !== $value['timestamp']) {
+                } else if (array_key_exists('timestamp', $value) && $oldArray[$key]['timestamp'] !== $value['timestamp']) {
                     $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . date('d/m/Y', $oldArray[$key]['timestamp']) . '] en [' . date('d/m/Y', $value['timestamp']) . ']', true);
+                } else if (array_key_exists('response', $value) && $oldArray[$key]['response'] !== $value['response']) {
+                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) . '_response', 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]['response']) . '] en [' . $this->checkEmpty($value['response']) . ']', true);
+                } else if ($this->isMultipleSelect($key) && !empty(array_diff($oldArray[$key], $value))) {
+                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
+                } else if (!$this->isMultipleSelect($key)) {
+                    $this->searchDiff($patient, $oldArray[$key], $newArray[$key], $path . '_' . $this->formatKey($key));
                 }
-            } else if ($oldArray[$key] !== $value && $key === 'medicaments') {
-                $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key], 'name') . '] en [' . $this->checkEmpty($value, 'name') . ']', true);
-            } else if ($oldArray[$key] !== $value && ($key === 'stressBullseye' || $key === 'basalBullseye') && $this->array_diff_depth($oldArray[$key]['segments'], $value['segments'], 'segment')) {
-                $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]['segments'], 'segment') . '] en [' . $this->checkEmpty($value['segments'], 'segment') . ']', true);
-            } else if ($oldArray[$key] !== $value && is_array($value) && !empty(array_diff_assoc($oldArray[$key], $value))) {
-                $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
-            } else if ($oldArray[$key] !== $value && !is_array($value)) {
-                $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
+            } else {
+                if ($oldArray[$key] !== $value && $key === 'medicaments') {
+                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key], 'name') . '] en [' . $this->checkEmpty($value, 'name') . ']', true);
+                } else if ($oldArray[$key] !== $value && ($key === 'stressBullseye' || $key === 'basalBullseye') && $this->array_diff_depth($oldArray[$key]['segments'], $value['segments'], 'segment')) {
+                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]['segments'], 'segment') . '] en [' . $this->checkEmpty($value['segments'], 'segment') . ']', true);
+                } else if ($oldArray[$key] !== $value) {
+                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
+                }
             }
-
-            // else if (is_array($oldArray[$start][$key]) && array_key_exists('timestamp', $oldArray[$start][$key]) && !is_array($value)) {
-            //     $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . date('d/m/Y', $oldArray[$start][$key]['timestamp']) . '] en [(vide)]', true);
-            // }
-            // else if (is_array($value) && array_key_exists('response', $value) && $oldArray[$start][$key]['response'] !== $value['response']) {
-            //     $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) . '_response', 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$start][$key]['response']) . '] en [' . $this->checkEmpty($value['response']) . ']', true);
-            // }
-            // else if (is_array($value) && ('alimentation' === $key || 'traitementPhaseAigue' === $key) && !empty(array_diff($oldArray[$start][$key], $value))) {
-            //     $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$start][$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
-            // }
-            // else if (is_array($value) && !array_key_exists('timestamp', $value) && !array_key_exists('response', $value) && ('alimentation' !== $key && 'traitementPhaseAigue' !== $key)) {
-            //     $this->searchDiff($patient, $oldArray[$start], $newArray[$key], $key, $path . '_' . $this->formatKey($key));
-            // }
         }
+    }
+
+    private function isMultipleSelect($key)
+    {
+        if (!is_string($key)) return;
+        $field = array("alimentation", "gestionMedicaments", "problemes", "traitementPhaseAigue", "motifs");
+        return in_array($key, $field);
+    }
+
+    private function addErreur($patientId, $fieldId, $etat, $message, bool $user)
+    {
+        $patient = $this->em->getRepository(Patient::class)->find($patientId);
+        $createdAt = new DateTime("now", new DateTimeZone('Europe/Paris'));
+
+        $erreur = new Erreur();
+        $erreur->setDateCreation($createdAt);
+        $erreur->setMessage($message);
+        $erreur->setEtat($etat);
+        $erreur->setFieldId($fieldId);
+        $erreur->setUtilisateur($user ? $this->security->getUser()->getEmail() : 'Système');
+
+        $patient->addErreur($erreur);
+        $this->em->persist($erreur);
+        $this->em->flush();
     }
 
     private function generateErreur($patientId, formInterface $form, $array, $start, $path)
@@ -341,7 +405,7 @@ class PatientController extends AbstractController
         }
 
         foreach ($array[$start] as $key => $value) {
-            if (is_array($value) && !array_key_exists('timestamp', $value) && !array_key_exists('response', $value) && ('alimentation' !== $key && 'traitementPhaseAigue' !== $key)) {
+            if (is_array($value) && !array_key_exists('timestamp', $value) && !array_key_exists('response', $value) && !$this->isMultipleSelect($key)) {
                 $this->generateErreur($patientId, $form, $array[$start], $key, $path . '_' . $this->formatKey($key));
             }
             if (is_array($value) && array_key_exists('response', $value)) {
@@ -364,23 +428,6 @@ class PatientController extends AbstractController
                 }
             }
         }
-    }
-
-    private function addErreur($patientId, $fieldId, $etat, $message, bool $user)
-    {
-        $patient = $this->em->getRepository(Patient::class)->find($patientId);
-        $createdAt = new DateTime("now", new DateTimeZone('Europe/Paris'));
-
-        $erreur = new Erreur();
-        $erreur->setDateCreation($createdAt);
-        $erreur->setEtat($etat);
-        $erreur->setMessage($message);
-        $erreur->setFieldId($fieldId);
-        $erreur->setUtilisateur($user ? $this->security->getUser()->getEmail() : 'Système');
-
-        $patient->addErreur($erreur);
-        $this->em->persist($erreur);
-        $this->em->flush();
     }
 
     /**
@@ -406,7 +453,6 @@ class PatientController extends AbstractController
      */
     public function letter(Patient $patient): Response
     {
-        $letter = $this->em->getRepository(Letter::class)->findOneBy([]);
         $letter = $this->em->getRepository(Letter::class)->findOneBy([]);
         if (!$letter) {
             $letter = new Letter();

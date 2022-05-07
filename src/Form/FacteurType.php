@@ -31,7 +31,7 @@ class FacteurType extends AbstractType
             ))
 
             ->add('risqueHTA', ChoiceType::class, array(
-                'label' => 'Réponse',
+                'label' => ' ',
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => false,
@@ -53,7 +53,7 @@ class FacteurType extends AbstractType
                 'required' => false,
             ))
             ->add('traiteHTA', ChoiceType::class, array(
-                'label' => 'Réponse',
+                'label' => ' ',
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => false,
@@ -67,7 +67,7 @@ class FacteurType extends AbstractType
             ))
 
             ->add('risqueDiabete', ChoiceType::class, array(
-                'label' => 'Réponse',
+                'label' => ' ',
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => false,
@@ -89,7 +89,7 @@ class FacteurType extends AbstractType
                 'required' => false,
             ))
             ->add('traiteDiabete', ChoiceType::class, array(
-                'label' => 'Réponse',
+                'label' => ' ',
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => false,
@@ -103,7 +103,7 @@ class FacteurType extends AbstractType
             ))
 
             ->add('risqueHypercholesterolemie', ChoiceType::class, array(
-                'label' => 'Réponse',
+                'label' => ' ',
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => false,
@@ -125,7 +125,7 @@ class FacteurType extends AbstractType
                 'required' => false,
             ))
             ->add('traiteHypercholesterolemie', ChoiceType::class, array(
-                'label' => 'Réponse',
+                'label' => ' ',
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => false,
@@ -139,7 +139,7 @@ class FacteurType extends AbstractType
             ))
 
             ->add('risqueHypertriglyceridemie', ChoiceType::class, array(
-                'label' => 'Réponse',
+                'label' => ' ',
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => false,
@@ -161,7 +161,7 @@ class FacteurType extends AbstractType
                 'required' => false,
             ))
             ->add('traiteHypertriglyceridemie', ChoiceType::class, array(
-                'label' => 'Réponse',
+                'label' => ' ',
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => false,

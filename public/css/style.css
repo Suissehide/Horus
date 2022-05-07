@@ -55,7 +55,7 @@
 
 html {
     width: 100%;
-    /* overflow-x: hidden; */
+    height: 100%;
 }
 
 body {
@@ -63,10 +63,9 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     font-family: Ubuntu-Regular, sans-serif;
     font-size: 14px;
-    /* overflow: hidden; */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -320,6 +319,11 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     border: 1px solid var(--persian-indigo);
 }
 
+textarea.input {
+    height: 42px;
+    resize: none;
+}
+
 .focus-input {
     position: absolute;
     display: block;
@@ -358,10 +362,6 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 .form-input {
     position: relative;
     flex: 1;
-}
-
-.form-input textarea {
-    resize: none;
 }
 
 label, .col-label, .row-label {
@@ -569,7 +569,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     background-color: #e6e6e6;
     height: 42px;
     line-height: 42px;
-    border-radius: 3px;
+    /* border-radius: 3px; */
 }
 
 .radio-container:last-child {
@@ -936,9 +936,6 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
 
 .navbar-wrapper {
     padding-left: 80px;
-    z-index: 0;
-    height: 100%;
-    overflow-x: hidden;
 }
 
 /* ScrollTop
@@ -966,6 +963,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     white-space: nowrap;
     color: white;
     cursor: pointer !important;
+    transition: none;
 }
 
 .cd-btn .fa {

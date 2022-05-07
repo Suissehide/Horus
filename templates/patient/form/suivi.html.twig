@@ -1,0 +1,126 @@
+<h1 id="information">Suivi</h1>
+
+<div class="form-space">
+	{{ form_row(suivi.dateVisite, {'attr': {'class': 'input js-datepicker'} }) }}
+</div>
+
+<h3 id="recidive">Récidive</h3>
+<div class="form-space">
+	{{ form_row(suivi.recidive, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_row(suivi.dateSurvenue, {'attr': {'class': 'input js-datepicker'} }) }}
+	{{ form_row(suivi.type, {'attr': {'class': 'input'} }) }}
+</div>
+
+<h3 id="clinique">Clinique</h3>
+<div class="form-space">
+	{{ form_row(suivi.dyspnee, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(suivi.douleur, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+</div>
+
+<h3 id="facteur">Facteurs de risque cardiovasculaire</h3>
+<div class="form-space">
+	{{ form_row(suivi.tabac, {'attr': {'class': 'input'} }) }}
+	{{ form_row(suivi.activite, {'attr': {'class': 'input'} }) }}
+	{{ form_row(suivi.alimentation, {'attr': {'class': 'input radio-row alimentation-js'} }) }}
+	<div class="alimentation"></div>
+
+	<div class="qcm">
+		{% for qcm in suivi.facteurs %}
+			<div class="qcm-row">
+				<div class="qcm-question">
+					{{constants_labels["SUIVI_FACTEUR"][ loop.index0 ]}}
+				</div>
+				<div class="qcm-response">
+					<div class="wrap-input qcm-flex">
+						{{ form_widget(qcm.response, {'attr': {'class': 'input radio-row'} }) }}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+<h3 id="place">Traitement mis en place suite à l'évènement cardiovasculaire</h3>
+<div class="form-space">
+	<div class="qcm">
+		{% for qcm in suivi.traitement %}
+			<div class="qcm-row">
+				<div class="qcm-question">
+					{{constants_labels["SUIVI_TRAITEMENT"][ loop.index0 ]}}
+				</div>
+				<div class="qcm-response">
+					<div class="wrap-input qcm-flex">
+						{{ form_widget(qcm.response, {'attr': {'class': 'input radio-row'} }) }}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+<h3 id="biologie2">Biologie</h3>
+<div class="form-space">
+	<h5>Créatininémie</h5>
+	{{ form_row(suivi.creatininemie, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	<h5>Inflammation</h5>
+	{{ form_row(suivi.crp, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+
+	<h5>Bilan lipidique</h5>
+	{{ form_row(suivi.cholesterol, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(suivi.ldl, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(suivi.hdl, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+
+	<h5>HbA1c</h5>
+	{{ form_row(suivi.hba1c, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+
+	<h5>NFS</h5>
+	{{ form_row(suivi.leucocytes, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(suivi.hemoglobine, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(suivi.plaquettes, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(suivi.pnn, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+
+	<div class="separator-space"></div>
+
+	{{ form_row(suivi.IL1B, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(suivi.IL6, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(suivi.IL10, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(suivi.IL18, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(suivi.TNFa, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+</div>
+
+<h3 id="hematopoiese">Hématopoïèse clonale</h3>
+<div class="form-space">
+	{{ form_row(suivi.hematopoiese, {'attr': {'class': 'input radio-row'} }) }}
+
+	{{ form_row(suivi.numberOfMutation, {'attr': {'class': 'input'} }) }}
+
+	<div class="margin-space"></div>
+	<div class="table-container">
+		<table class="table-custom">
+			<thead>
+				<tr>
+					<th>Gène</th>
+					<th>Statut</th>
+					<th>Mutation</th>
+					<th>Fréquence de l’allèle variant</th>
+					<th>Classification</th>
+					<th>Commentaire</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for gene in suivi.genes %}
+					<tr>
+						<th class="row-header">{{constants_labels["SUIVI_GENES"][ loop.index0 ]}}</th>
+						<th>{{ form_row(gene.statut, {'attr': {'class': 'input radio-row'} }) }}</th>
+						<th>{{ form_row(gene.mutation, {'attr': {'class': 'input'} }) }}</th>
+						<th>{{ form_row(gene.frequence, {'attr': {'class': 'input'}, 'useStyle': true }) }}</th>
+						<th>{{ form_row(gene.classification, {'attr': {'class': 'input'} }) }}</th>
+						<th>{{ form_row(gene.commentaire, {'attr': {'class': 'input'} }) }}</th>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+{{ form_row(suivi.save, {'attr': {'class': 'form-btn'} }) }}

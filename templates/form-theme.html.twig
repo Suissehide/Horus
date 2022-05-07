@@ -74,7 +74,7 @@
     {% endif %}
     <div class="wrap-input" {% with {attr: row_attr|default({} )} %} {{ block('attributes') }} {% endwith %}>
         {{ form_label(form) }}
-        <div class="flex{% if errors is not empty %} error-input{% endif %}">
+        <div class="flex {% if errors is not empty %}error-input{% endif %}">
             <div class="form-input">
                 {{ form_widget(form, widget_attr) }}
                 {{ form_help(form) }}
@@ -181,6 +181,11 @@
 {% block _patient_protocole_medicamentsEntree_qcm_type_entry_response_widget %}
     {{ block('qcm_widget') }}
 {% endblock _patient_protocole_medicamentsEntree_qcm_type_entry_response_widget %}
+
+{% block _patient_suivis_entry_qcm_type_entry_response_widget %}
+    {{ block('qcm_widget') }}
+{% endblock _patient_suivis_entry_qcm_type_entry_response_widget %}
+
 
 {% block qcm_widget %}
     <div class="flex">

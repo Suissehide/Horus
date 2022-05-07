@@ -18,7 +18,7 @@ class EchographieCardiaqueType extends AbstractType
     {
         $builder
         ->add('date', DateType::class, array(
-            'label' => 'Date de l\'echocardiographie',
+            'label' => 'Date de l\'échographie cardiaque',
             'widget' => 'single_text',
             'format' => 'dd/MM/yyyy',
             'attr' => [

@@ -185,7 +185,7 @@ class InformationType extends AbstractType
             ))
 
 
-            ->add('traitement', ChoiceType::class, array(
+            ->add('traitementPhaseAigue', ChoiceType::class, array(
                 'label' => 'Traitement à la phase aiguë',
                 'expanded' => true,
                 'multiple' => true,
