@@ -1,4 +1,11 @@
-<h1 id="information">Suivi</h1>
+<div class="flex-suivi">
+	<h1 id="information">Suivi {{index}}</h1>
+
+	<button type="button" class="form-btn btn-danger suivi-delete" data-suivi-id="{{suivi.vars.data.id}}">
+		<i class="fa fa-trash"></i>
+		Supprimer le suivi
+	</button>
+</div>
 
 <div class="form-space">
 	{{ form_row(suivi.dateVisite, {'attr': {'class': 'input js-datepicker'} }) }}

@@ -134,10 +134,12 @@ class PatientController extends AbstractController
         if ($request->isXmlHttpRequest()) {
             $patientId = $request->request->get('patientId');
             $suiviId = $request->request->get('suiviId');
-
+            
             $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
-            $suivi = $this->getDoctrine()->getRepository(Patient::class)->find($suiviId);
+            $suivi = $this->getDoctrine()->getRepository(Suivi::class)->find($suiviId);
             $patient->removeSuivi($suivi);
+            $this->em->remove($suivi);
+            $this->em->flush();
 
             return new JsonResponse('success!', Response::HTTP_OK);
         }
@@ -491,8 +493,8 @@ class PatientController extends AbstractController
     public function medicament_entree_add(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $patientId = $request->request->get('patient');
-            $medicamentId = $request->request->get('medicament');
+            $patientId = $request->request->get('patientId');
+            $medicamentId = $request->request->get('medicamentId');
 
             $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
             $medicament = $this->getDoctrine()->getRepository(Medicament::class)->find($medicamentId);
@@ -510,8 +512,8 @@ class PatientController extends AbstractController
     public function medicament_entree_delete(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $patientId = $request->request->get('patient');
-            $medicamentId = $request->request->get('medicament');
+            $patientId = $request->request->get('patientId');
+            $medicamentId = $request->request->get('medicamentId');
 
             $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
             $medicament = $this->getDoctrine()->getRepository(Medicament::class)->find($medicamentId);

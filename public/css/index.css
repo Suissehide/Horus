@@ -1030,6 +1030,14 @@ input[type='checkbox'].checkbox-round+span {
     right: 90px;
 }
 
+/* Suivi
+========================================================================== */
+.flex-suivi {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 /* ========= SELECT2 ========= */
 

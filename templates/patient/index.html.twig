@@ -353,13 +353,13 @@
                     {% for suivi in patient.suivis %}
                         <li {%if loop.last %}class="active"{% endif %} name={{"suivi-" ~ loop.index }}>Suivi {{ loop.index }}</li>
                     {% endfor %}
-                    <li><i class="fas fa-plus"></i>Ajouter un suivi</li>
+                    <li class="suivi-add"><i class="fas fa-plus"></i>Ajouter un suivi</li>
                 </ul>
 
                 <ul class="tab-list">
                     {% for suivi in form.suivis %}
                         <li class="tab-content {%if loop.last %}active{% endif %}" name={{"suivi-" ~ loop.index }}>
-                            {% include 'patient/form/suivi.html.twig' with suivi %}
+                            {% include 'patient/form/suivi.html.twig' with {'suivi': suivi, 'index': loop.index} %}
                         </li>
                     {% endfor %}
 
@@ -495,7 +495,9 @@
             });
         });
 
-        /* History */
+        /*
+        * HISTORY
+        **********************************************************************/
         $('.history').click(function(event) {
             event.preventDefault(); 
             let patientId = "{{ patient.id }}";
@@ -518,7 +520,7 @@
         });
 
 
-        /* 
+        /*
         * ALIMENTATION
         **********************************************************************/
         function alimentation(nb, item) {
@@ -539,7 +541,7 @@
             alimentation($(this).parents('.alimentation-js').find('input:checked').length, $(this).parents('.alimentation-js'));
         });
 
-        /* 
+        /*
         * FICHES
         **********************************************************************/
         let fiches = [];
@@ -628,8 +630,10 @@
         sortList('#protocole_fiches', 'option');
         $('#protocole_fiches option').eq(0).prop('selected', true);
 
-        /* Medicament */
-        $('.add-medicament').click(function() {
+        /*
+        * MEDICAMENT
+        **********************************************************************/
+        $('.medicament-add').click(function() {
             let medicament = $('.js-medicaments-ajax').select2('data');
             if (!medicament || !medicament[0]) return;
             let t = $(
@@ -648,8 +652,8 @@
                     type: "POST",
                     url: "{{ path('medicament_entree_add') }}",
                     data: {
-                        'medicament': medicament[0].id,
-                        'patient': {{ patient.id }},
+                        'medicamentId': medicament[0].id,
+                        'patientId': {{ patient.id }},
                     },
                     success: function(response) {},
                 });
@@ -657,16 +661,16 @@
         })
 
         $('.medicaments__list').on('click', '.medicament .delete', function() {
-            let medicament = $(this).parent().attr('data-id');
-            $('.medicament[data-id="' + medicament + '"]').remove();
+            let medicamentId = $(this).parent().attr('data-id');
+            $('.medicament[data-id="' + medicamentId + '"]').remove();
             sortMedicamentsList();
 
             $.ajax({
                 type: "POST",
                 url: "{{ path('medicament_entree_delete') }}",
                 data: {
-                    'medicament': medicament,
-                    'patient': {{ patient.id }},
+                    'medicamentId': medicamentId,
+                    'patientId': {{ patient.id }},
                 },
                 success: function(response) {},
             });
@@ -739,7 +743,43 @@
         }
         sortMedicamentsList();
 
-        /* Modifs */
+
+        /*
+        * SUIVI
+        **********************************************************************/
+       $(".suivi-add").on('click', function() {
+            $.ajax({
+                type: "POST",
+                url: "{{ path('patient_suivi_add') }}",
+                data: {
+                    'patientId': {{ patient.id }},
+                },
+                success: function(response) {
+                    location.reload();
+                },
+            });
+       })
+
+        $(".suivi-delete").on('click', function() {
+            let suiviId = $(this).attr('data-suivi-id');
+            $.ajax({
+                type: "POST",
+                url: "{{ path('patient_suivi_delete') }}",
+                data: {
+                    'patientId': {{ patient.id }},
+                    'suiviId': suiviId
+                },
+                success: function(response) {
+                    $('.tab-list .tab-content[name="suivi-' + suiviId + '"]').remove();
+                    $('.tabbed li[name="suivi-' + suiviId + '"]').remove();
+                },
+            });
+       })
+
+
+        /*
+        * Motifs
+        **********************************************************************/
         $(".js-motifs").select2({
             multiple: true,
             width: '100%',
@@ -749,7 +789,9 @@
         });
 
 
-        /* IMC */
+        /* 
+        * IMC
+        **********************************************************************/
         function getIMC(poids, taille) {
             if (poids && taille && taille > 0) {
                 let imc = poids / ((taille * 0.01) * (taille * 0.01));

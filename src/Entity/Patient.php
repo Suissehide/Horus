@@ -56,7 +56,7 @@ class Patient
     private $erreurs;
 
     /**
-     * @ORM\OneToMany(targetEntity=Suivi::class, mappedBy="patient")
+     * @ORM\OneToMany(targetEntity=Suivi::class, mappedBy="patient", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $suivis;
 
