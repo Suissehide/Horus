@@ -26,7 +26,7 @@
 	<label>
 		<em>Verbatims vécu</em>
 	</label>
-	<div class="qcm">
+	<div class="qcm qcm-default">
 		{% for qcm in form.protocole.medicamentsEntree.verbatims %}
 			<div class="qcm-row">
 				<div class="qcm-question">
@@ -46,7 +46,7 @@
 	<label>
 		<em>Verbatims santé</em>
 	</label>
-	<div class="qcm">
+	<div class="qcm qcm-default">
 		{% for qcm in form.protocole.medicamentsEntree.verbatimsSante %}
 			<div class="qcm-row">
 				<div class="qcm-question">
@@ -95,6 +95,13 @@
 					{% endfor %}
 				</tbody>
 			</table>
+		</div>
+		<div class="bmq-results">
+			<h5>Calcul automatique de score : </h5>
+			<div class="result">Nécessité traitements (1 à 5) : <span></span></div>
+			<div class="result">Danger dépendance (6 à 10) : <span></span></div>
+			<div class="result">Croyances médecin (11 à 14) : <span></span></div>
+			<div class="result">Croyances médecin (15 à 18) : <span></span></div>
 		</div>
 	</div>
 

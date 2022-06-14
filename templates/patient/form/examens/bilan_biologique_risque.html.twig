@@ -1,6 +1,6 @@
 <h1 id="bfr">Bilan biologique et risque</h1>
 <h3 id="biometrie">Biométrie</h3>
-<div class="form-space">
+<div class="form-space flex-nowrap">
 	{{ form_row(form.protocole.BFR.taille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	{{ form_row(form.protocole.BFR.poids, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	{{ form_row(form.protocole.BFR.tourTaille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
@@ -20,17 +20,21 @@
 </div>
 
 <h3 id="tensionArterielle">Tension artérielle</h3>
-<div class="form-space flex-nowrap">
-	{{ form_row(form.protocole.BFR.tensionArterielleJour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-	{{ form_row(form.protocole.BFR.tensionArterielleNuit, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+<div class="form-space flex-2">
+	{{ form_row(form.protocole.BFR.tensionArterielleSystoliqueJour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.tensionArterielleDiastoliqueJour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.tensionArterielleSystoliqueNuit, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.tensionArterielleDiastoliqueNuit, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 </div>
+{{ form_row(form.protocole.BFR.HVG, {'attr': {'class': 'input'} }) }}
 
 <h3 id="dyslipidemie">Dyslipidémie</h3>
 <div class="form-space flex-2">
-	{{ form_row(form.protocole.BFR.cholesterolTotal, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.triglicerides, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.HDLC, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.LDLC, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.BFR.cholesterolTotal, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.triglicerides, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.HDLC, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.LDLC, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.scoreDUTCH, {'attr': {'class': 'input'} }) }}
 </div>
 
 <h3 id="activite-physique">Tabagisme</h3>
@@ -50,44 +54,50 @@
 
 <h3 id="diabete">Diabète</h3>
 <div class="form-space flex-2">
-	{{ form_row(form.protocole.BFR.glycemieAjeun, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.glycemiePostPrandiale, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.Hba1c, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.BFR.diabeteType, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.BFR.diabeteDepuis, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.BFR.glycemieAjeun, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.glycemiePostPrandiale, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.Hba1c, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	{{ form_row(form.protocole.BFR.neuropathieClinique, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.protocole.BFR.fondOeil, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.neuroesthesiometriePiedDroit, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.neuroesthesiometriePiedGauche, {'attr': {'class': 'input'} }) }}
 </div>
+<div class="form-space flex-nowrap">
+	{{ form_row(form.protocole.BFR.neuroesthesiometriePiedDroit, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.neuroesthesiometriePiedGauche, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+</div>
+
 
 <h3 id="bilan-renal">Bilan rénal</h3>
 <div class="form-space flex-2">
-	{{ form_row(form.protocole.BFR.proteinurie, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.microAlbuminurie, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.creatinine, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.clairence, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.homoCysBasale, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.BFR.microAlbuminurie, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.creatinine, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.debitFiltrationGlomerulaire, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.BFR.proteinurie, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 </div>
 
 <h3 id="bilan-hepatique">Bilan hépatique</h3>
 <div class="form-space flex-2">
-	{{ form_row(form.protocole.BFR.transaminasesASAT, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.transaminasesALAT, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.gamma, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.BFR.transaminasesASAT, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.transaminasesALAT, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.gamma, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 </div>
 
 <h3 id="facteur-thrombogeniques">Facteur thrombogéniques</h3>
 <div class="form-space flex-2">
-	{{ form_row(form.protocole.BFR.fibrinogene, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.CRP, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.VS, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.plaquettes, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.globulesBlancs, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.BFR.hemoglobine, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.BFR.fibrinogene, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.CRP, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.hemoglobine, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.UGM, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.BFR.plaquettes, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.TSH, {'attr': {'class': 'input'} }) }}
 </div>
 
 <h3 id="activite-physique">Activité physique</h3>
 <div class="form-space">
 	{{ form_row(form.protocole.BFR.activitePhysique, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.BFR.alimentation, {'attr': {'class': 'input radio-row alimentation-js'} }) }}
+	<div class="alimentation"></div>
 </div>
 
 {{ form_row(form.protocole.BFR.save, {'attr': {'class': 'form-btn'} }) }}

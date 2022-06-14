@@ -49,7 +49,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('js/select2.min.js') }}"></script>
+    <script src="{{ asset('js/vendor/select2.min.js') }}"></script>
     <script>
         let patient = {{patient|json_encode|raw}};
 

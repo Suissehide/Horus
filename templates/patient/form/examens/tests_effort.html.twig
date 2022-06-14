@@ -1,4 +1,4 @@
-<h1 id="testsEffort">Définition des tests d'effort</h1>
+<h1 id="testsEffort">Épreuve d'effort</h1>
 <div class="form-space">
 	<div class="flex-nowrap">
 		{{ form_row(form.protocole.testEffort.maquille, {'attr': {'class': 'input radio-row'} }) }}
@@ -13,12 +13,8 @@
 	<div class="separator-space"></div>
 
 	<div class="flex-nowrap">
-		{{ form_row(form.protocole.testEffort.frequenceMax, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+		{{ form_row(form.protocole.testEffort.symptomes, {'attr': {'class': 'input'} }) }}
 		{{ form_row(form.protocole.testEffort.frequenceMaxPercent, {'attr': {'class': 'input'} }) }}
-	</div>
-	<div class="flex-nowrap">
-		{{ form_row(form.protocole.testEffort.TASRepos, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-		{{ form_row(form.protocole.testEffort.TASEffort, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	</div>
 	<div class="flex-nowrap">
 		{{ form_row(form.protocole.testEffort.ECGModifie, {'attr': {'class': 'input'} }) }}

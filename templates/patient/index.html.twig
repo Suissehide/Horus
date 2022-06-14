@@ -17,17 +17,17 @@
 		<!-- Hero -->
 		<section id="tab-profile" class="hero-tabs">
 			<div class="hero-header">
-				<div class="hero-title">
-					<h1 id="profile">
-                        PATIENT 
-                        <span>{{ patient.general.prenom }} {{ patient.general.nom }}</span>
+                <div class="hero-title">
+                    <h1 class="profile">
+                        <div>PATIENT&nbsp;</div>
+                        <div class="profile__name">{{ patient.general.prenom }} {{ patient.general.nom }}</div>
                     </h1>
-				</div>
+                </div>
 
 				<div class="btn-block">
 					<a href="{{ path('index_patient') }}" class="form-btn btn-default">
 						<i aria-hidden="true" class="fa fa-arrow-left"></i>Retour</a>
-                    <a href="{{ path('patient_letter', {id: patient.id}) }}" class="form-btn">
+                    <a href="{{ path('patient_letter_static', {id: patient.id}) }}" class="form-btn">
 						<i aria-hidden="true" class="fa fa-envelope"></i>Lettre</a>
 					{{ include('patient/_delete_form.html.twig') }}
 				</div>
@@ -101,19 +101,18 @@
 						</a>
 						<ul class="protocole-list">
                             {% for fiche in patient.protocole.fiches %}
-                                {% if fiche == 'angioplastiePontage' %}<li><a name='angioplastiePontage'>Angioplastie et pontage</a></li>
-                                {% elseif fiche == 'bfr' %}<li><a name='bfr'>Bilan biologique et risque</a></li>
-                                {% elseif fiche == 'catheterisation' %}<li><a name='catheterisation'>Cathétérisation</a></li>
-                                {% elseif fiche == 'coronaireAngioplastie' %}<li><a name="coronaireAngioplastie">Coronaire et angioplastie</a></li>
-                                {% elseif fiche == 'echographie' %}<li><a name="echographie">Échographie</a></li>
-                                {% elseif fiche == 'echographieCardiaque' %}<li><a name='echographieCardiaque'>Échographie cardiaque</a></li>
-                                {% elseif fiche == 'echographieVasculaire' %}<li><a name='echographieVasculaire'>Échographie vasculaire</a></li>
-                                {% elseif fiche == 'medicaments' %}<li><a name='medicaments'>Médicaments</a></li>
-                                {% elseif fiche == 'neuroPsychologie' %}<li><a name='neuroPsychologie'>Neuro-psychologie</a></li>
-                                {% elseif fiche == 'scintigraphie' %}<li><a name="scintigraphie">Scintigraphie</a></li>
-                                {% elseif fiche == 'testsEffort' %}<li><a name='testsEffort'>Test d'effort</a></li>
-                                {% elseif fiche == 'visite' %}<li><a name='visite'>Visite</a></li>
-                                {% endif %}
+                                {# {% if fiche == 'angioplastiePontage' %}<li><a name='angioplastiePontage'>Angioplastie et pontage</a></li>{% endif %} #}
+                                {% if fiche == 'bfr' %}<li><a name='bfr'>Bilan biologique et risque</a></li>{% endif %}
+                                {# {% if fiche == 'catheterisation' %}<li><a name='catheterisation'>Cathétérisation</a></li>{% endif %} #}
+                                {% if fiche == 'anatomieCoronaire' %}<li><a name="anatomieCoronaire">Anatomie coronaire</a></li>{% endif %}
+                                {% if fiche == 'echographie' %}<li><a name="echographie">Échographie</a></li>{% endif %}
+                                {# {% if fiche == 'echographieCardiaque' %}<li><a name='echographieCardiaque'>Échographie cardiaque</a></li>{% endif %} #}
+                                {% if fiche == 'echographieVasculaire' %}<li><a name='echographieVasculaire'>Échographie vasculaire</a></li>{% endif %}
+                                {% if fiche == 'medicaments' %}<li><a name='medicaments'>Médicaments</a></li>{% endif %}
+                                {% if fiche == 'neuroPsychologie' %}<li><a name='neuroPsychologie'>Neuro-psychologie</a></li>{% endif %}
+                                {% if fiche == 'scintigraphie' %}<li><a name="scintigraphie">Scintigraphie</a></li>{% endif %}
+                                {% if fiche == 'testsEffort' %}<li><a name='testsEffort'>Épreuve d'effort</a></li>{% endif %}
+                                {# {% if fiche == 'visite' %}<li><a name='visite'>Visite</a></li>{% endif %} #}
                             {% endfor %}
 						</ul>
 					</li>
@@ -188,20 +187,18 @@
                     <ul class="etiquettes__list">
                         {% for fiche in patient.protocole.fiches %}
                             <li name={{ fiche }} class='etiquette'>
-                                {% if fiche == 'angioplastiePontage' %}Angioplastie et pontage
-                                {% elseif fiche == 'bfr' %}Bilan biologique et risque
-                                {% elseif fiche == 'catheterisation' %}Cathétérisation
-                                {% elseif fiche == 'coronaireAngioplastie' %}Coronaire et angioplastie
-                                {% elseif fiche == 'echographie' %}Échographie
-                                {% elseif fiche == 'echographieCardiaque' %}Échographie cardiaque
-                                {% elseif fiche == 'echographieVasculaire' %}Échographie vasculaire
-                                {% elseif fiche == 'medicaments' %}Médicaments
-                                {% elseif fiche == 'neuroPsychologie' %}Neuro-psychologie
-                                {% elseif fiche == 'scintigraphie' %}Scintigraphie
-                                {% elseif fiche == 'testsEffort' %}Test d'effort
-                                {% elseif fiche == 'visite' %}Visite
-                                {% else %} {{ fiche }}
-                                {% endif %}
+                                {# {% if fiche == 'angioplastiePontage' %}Angioplastie{% endif %} #}
+                                {% if fiche == 'bfr' %}Bilan biologique et risque{% endif %}
+                                {# {% if fiche == 'catheterisation' %}Cathétérisation{% endif %} #}
+                                {% if fiche == 'anatomieCoronaire' %}Anatomie coronaire{% endif %}
+                                {% if fiche == 'echographie' %}Échographie{% endif %}
+                                {# {% if fiche == 'echographieCardiaque' %}Échographie cardiaque{% endif %} #}
+                                {% if fiche == 'echographieVasculaire' %}Échographie vasculaire{% endif %}
+                                {% if fiche == 'medicaments' %}Médicaments{% endif %}
+                                {% if fiche == 'neuroPsychologie' %}Neuro-psychologie{% endif %}
+                                {% if fiche == 'scintigraphie' %}Scintigraphie{% endif %}
+                                {% if fiche == 'testsEffort' %}Épreuve d'effort{% endif %}
+                                {# {% if fiche == 'visite' %}Visite{% endif %} #}
                                 <span class="delete">
                                     <i class="fa fa-times"></i>
                                 </span>
@@ -220,18 +217,18 @@
                     <div class="flex">
                         <select id="protocole_fiches" name="protocole[fiches]" class="input">
                             <option value=""></option>
-                            {% if "angioplastiePontage" not in patient.protocole.fiches %}<option value="angioplastiePontage">Angioplastie et pontage</option>{% endif %}
+                            {# {% if "angioplastiePontage" not in patient.protocole.fiches %}<option value="angioplastiePontage">Angioplastie</option>{% endif %} #}
                             {% if "bfr" not in patient.protocole.fiches %}<option value="bfr">Bilan biologique et risque</option>{% endif %}
-                            {% if "catheterisation" not in patient.protocole.fiches %}<option value="catheterisation">Cathétérisation</option>{% endif %}
-                            {% if "coronaireAngioplastie" not in patient.protocole.fiches %}<option value="coronaireAngioplastie">Coronaire et angioplastie</option>{% endif %}
+                            {# {% if "catheterisation" not in patient.protocole.fiches %}<option value="catheterisation">Cathétérisation</option>{% endif %} #}
+                            {% if "anatomieCoronaire" not in patient.protocole.fiches %}<option value="anatomieCoronaire">Anatomie coronaire</option>{% endif %}
                             {% if "echographie" not in patient.protocole.fiches %}<option value="echographie">Échographie</option>{% endif %}
-                            {% if "echographieCardiaque" not in patient.protocole.fiches %}<option value="echographieCardiaque">Échographie cardiaque</option>{% endif %}
+                            {# {% if "echographieCardiaque" not in patient.protocole.fiches %}<option value="echographieCardiaque">Échographie cardiaque</option>{% endif %} #}
                             {% if "echographieVasculaire" not in patient.protocole.fiches %}<option value="echographieVasculaire">Échographie vasculaire</option>{% endif %}
                             {% if "medicaments" not in patient.protocole.fiches %}<option value="medicaments">Médicaments</option>{% endif %}
                             {% if "neuroPsychologie" not in patient.protocole.fiches %}<option value="neuroPsychologie">Neuro-psychologie</option>{% endif %}
                             {% if "scintigraphie" not in patient.protocole.fiches %}<option value="scintigraphie">Scintigraphie</option>{% endif %}
-                            {% if "testsEffort" not in patient.protocole.fiches %}<option value="testsEffort">Définition des tests d'effort</option>{% endif %}
-                            {% if "visite" not in patient.protocole.fiches %}<option value="visite">Visite</option>{% endif %}
+                            {% if "testsEffort" not in patient.protocole.fiches %}<option value="testsEffort">Épreuve d'effort</option>{% endif %}
+                            {# {% if "visite" not in patient.protocole.fiches %}<option value="visite">Visite</option>{% endif %} #}
                         </select>
                         <span class="focus-input"></span>
                     </div>
@@ -243,106 +240,113 @@
 
                 <ul class="tabbed tabbed__fiches">
                     {% for fiche in patient.protocole.fiches %}
-                        {% if fiche == 'angioplastiePontage' %}<li name="angioplastiePontage">Angioplastie et pontage</li>
-                        {% elseif fiche == 'bfr' %}<li name="bfr">Bilan biologique et risque</li>
-                        {% elseif fiche == 'catheterisation' %}<li name="catheterisation">Cathétérisation</li>
-                        {% elseif fiche == 'coronaireAngioplastie' %}<li name="coronaireAngioplastie">Coronaire et angioplastie</li>
-                        {% elseif fiche == 'echographie' %}<li name="echographie">Échographie</li>
-                        {% elseif fiche == 'echographieCardiaque' %}<li name="echographieCardiaque">Échographie cardiaque</li>
-                        {% elseif fiche == 'echographieVasculaire' %}<li name="echographieVasculaire">Échographie vasculaire</li>
-                        {% elseif fiche == 'medicaments' %}<li name="medicaments">Médicaments</li>
-                        {% elseif fiche == 'neuroPsychologie' %}<li name="neuroPsychologie">Neuro-psychologie</li>
-                        {% elseif fiche == 'scintigraphie' %}<li name="scintigraphie">Scintigraphie</li>
-                        {% elseif fiche == 'testsEffort' %}<li name="testsEffort">Test d'effort</li>
-                        {% elseif fiche == 'visite' %}<li name="visite">Visite</li>
-                        {% endif %}
+                        {# {% if fiche == 'angioplastiePontage' %}<li name="angioplastiePontage">Angioplastie</li>{% endif %} #}
+                        {% if fiche == 'bfr' %}<li name="bfr">Bilan biologique et risque</li>{% endif %}
+                        {# {% if fiche == 'catheterisation' %}<li name="catheterisation">Cathétérisation</li>{% endif %} #}
+                        {% if fiche == 'anatomieCoronaire' %}<li name="anatomieCoronaire">Anatomie coronaire</li>{% endif %}
+                        {% if fiche == 'echographie' %}<li name="echographie">Échographie</li>{% endif %}
+                        {# {% if fiche == 'echographieCardiaque' %}<li name="echographieCardiaque">Échographie cardiaque</li>{% endif %} #}
+                        {% if fiche == 'echographieVasculaire' %}<li name="echographieVasculaire">Échographie vasculaire</li>{% endif %}
+                        {% if fiche == 'medicaments' %}<li name="medicaments">Médicaments</li>{% endif %}
+                        {% if fiche == 'neuroPsychologie' %}<li name="neuroPsychologie">Neuro-psychologie</li>{% endif %}
+                        {% if fiche == 'scintigraphie' %}<li name="scintigraphie">Scintigraphie</li>{% endif %}
+                        {% if fiche == 'testsEffort' %}<li name="testsEffort">Épreuve d'effort</li>{% endif %}
+                        {# {% if fiche == 'visite' %}<li name="visite">Visite</li>{% endif %} #}
                     {% endfor %}
                 </ul>
 
                 <ul class="tab-list">
-					<li class="tab-content" name="angioplastiePontage">
-                        {#========== Angioplastie et pontage ==========#}
+                    {#========== Angioplastie ==========#}
+					{#
+                    <li class="tab-content" name="angioplastiePontage">
                         <div id="examen-angioplastiePontage">
                             {% include 'patient/form/examens/angioplastie_pontage.html.twig' with form %}
                         </div>
                     </li>
+                    #}
 
+                    {#========== Bilan biologique et risque (BRF) ==========#}
                     <li class="tab-content" name="bfr">
-                        {#========== Bilan biologique et risque (BRF) ==========#}
                         <div id="examen-bfr">
                             {% include 'patient/form/examens/bilan_biologique_risque.html.twig' with form %}
                         </div>
                     </li>
 
+                    {#========== Catheterisation ==========#}
+                    {#
                     <li class="tab-content" name="catheterisation">
-                        {#========== Catheterisation ==========#}
                         <div id="examen-catheterisation">
                             {% include 'patient/form/examens/catheterisation.html.twig' with form %}
                         </div>
                     </li>
+                    #}
 
-                    <li class="tab-content" name="coronaireAngioplastie">
-                        {#========== Coronaire & Angioplastie ==========#}
-                        <div id="examen-coronaireAngioplastie">
-                            {% include 'patient/form/examens/coronaire_angioplastie.html.twig' with form %}
+                    {#========== Anatomie coronaire ==========#}
+                    <li class="tab-content" name="anatomieCoronaire">
+                        <div id="examen-anatomieCoronaire">
+                            {% include 'patient/form/examens/anatomie_coronaire.html.twig' with form %}
                         </div>
                     </li>
 
+                    {#========== Échographie ==========#}
                     <li class="tab-content" name="echographie">
-                        {#========== Échographie ==========#}
                         <div id="examen-echographie">
                             {% include 'patient/form/examens/echographie.html.twig' with form %}
                         </div>
                     </li>
 
+                    {#========== Échographie cardiaque ==========#}
+                    {#
                     <li class="tab-content" name="echographieCardiaque">
-                        {#========== Échographie cardiaque ==========#}
                         <div id="examen-echographieCardiaque">
                             {% include 'patient/form/examens/echographie_cardiaque.html.twig' with form %}
                         </div>
                     </li>
+                    #}
 
+                    {#========== Échographie vasculaire ==========#}
                     <li class="tab-content" name="echographieVasculaire">
-                        {#========== Échographie vasculaire ==========#}
                         <div id="examen-echographieVasculaire">
                             {% include 'patient/form/examens/echographie_vasculaire.html.twig' with form %}
                         </div>
                     </li>
 
+                    {#========== Médicaments ==========#}
                     <li class="tab-content" name="medicaments">
-                        {#========== Médicaments ==========#}
                         <div id="examen-medicaments">
                             {% include 'patient/form/examens/medicament.html.twig' with form %}
                         </div>
                     </li>
 
+                    {#========== NeuroPsychologie ==========#}
                     <li class="tab-content" name="neuroPsychologie">
-                        {#========== NeuroPsychologie ==========#}
                         <div id="examen-neuroPsychologie">
                             {% include 'patient/form/examens/neuro_psychologie.html.twig' with form %}
                         </div>
                     </li>
 
+                    {#========== Scintigraphie ==========#}
                     <li class="tab-content" name="scintigraphie">
-                        {#========== Scintigraphie ==========#}
                         <div id="examen-scintigraphie">
                             {% include 'patient/form/examens/scintigraphie.html.twig' with form %}
                         </div>
                     </li>
 
+                    {#========== Test d'effort ==========#}
                     <li class="tab-content" name="testsEffort">
-                        {#========== Test d'effort ==========#}
                         <div id="examen-testsEffort">
                             {% include 'patient/form/examens/tests_effort.html.twig' with form %}
                         </div>
                     </li>
 
+                    {#========== Visite ==========#}
+                    {#
                     <li class="tab-content" name="visite">
-                        {#========== Visite ==========#}
                         <div id="examen-visite">
                             {% include 'patient/form/examens/visite.html.twig' with form %}
                         </div>
                     </li>
+                    #}
                 </ul>
             </section>
 
@@ -388,8 +392,8 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('js/select2.min.js') }}"></script>
-    <script src="{{ asset('js/bootgrid.min.js') }}"></script>
+    <script src="{{ asset('js/vendor/select2.min.js') }}"></script>
+    <script src="{{ asset('js/vendor/bootgrid.min.js') }}"></script>
 
     <script>
         $('.sidebar-navigation ul li').on('click', function () {
@@ -743,6 +747,57 @@
         }
         sortMedicamentsList();
 
+        /*
+        * MEDICAMENTS RESULTS
+        **********************************************************************/
+		let results = $('.bmq-results .result');
+        let bmqInputs = $('.table-bmq tbody tr .input');
+        let bmqResults = [];
+
+        $.sum = function(arr) {
+            var r = 0;
+            $.each(arr, function(i, v) {
+                r += +v;
+            });
+            return r;
+        }
+
+		function processResults() {
+            bmqResults = [];
+			$.each(bmqInputs, function() {
+                let items = $(this).find("input[type='radio']");
+                let check = 0;
+                $.each(items, function(index) {
+				    if ($(this).is(':checked')) {
+                        check = index + 1;
+                    }
+                });
+                bmqResults.push(check);
+			});
+            displayBMQResults();
+		}
+
+        function displayBMQResults() {
+            results.eq(0).find('span').html($.sum(bmqResults.slice(0, 5)));
+            results.eq(1).find('span').html($.sum(bmqResults.slice(5, 10)));
+            results.eq(2).find('span').html($.sum(bmqResults.slice(10, 14)));
+            results.eq(3).find('span').html($.sum(bmqResults.slice(14, 18)));
+        }
+
+        bmqInputs.on('change', function() {
+            processResults();
+        })
+        processResults();
+
+        /*
+        * QCM DEFAULT
+        **********************************************************************/
+        $.each($('.qcm-default .radio-row'), function() {
+            let r = $(this).find('input[type="radio"]:checked');
+            if (r.length == 0) {
+                $(this).find('input[value="Non"]').prop("checked", true);
+            }
+        })
 
         /*
         * SUIVI
@@ -800,10 +855,10 @@
             return null
         }
 
-        $('#bfr_taille, #bfr_poids').change(function() {
-            $('#bfr_IMC').val(getIMC($('#bfr_poids').val(), $('#bfr_taille').val()));
+        $('#patient_protocole_BFR_taille, #patient_protocole_BFR_poids').change(function() {
+            $('#bfr_IMC').val(getIMC($('#patient_protocole_BFR_poids').val(), $('#patient_protocole_BFR_taille').val()));
         });
-        $('#bfr_IMC').val(getIMC($('#bfr_poids').val(), $('#bfr_taille').val()));
+        $('#bfr_IMC').val(getIMC($('#patient_protocole_BFR_poids').val(), $('#patient_protocole_BFR_taille').val()));
        
     </script>
 

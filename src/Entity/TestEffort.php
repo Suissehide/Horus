@@ -40,22 +40,7 @@ class TestEffort
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $frequenceMax;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
     private $frequenceMaxPercent;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $TASRepos;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $TASEffort;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -66,6 +51,11 @@ class TestEffort
      * @ORM\Column(type="integer", nullable=true)
      */
     private $mesure;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $symptomes;
 
     public function getId(): ?int
     {
@@ -120,18 +110,6 @@ class TestEffort
         return $this;
     }
 
-    public function getFrequenceMax(): ?int
-    {
-        return $this->frequenceMax;
-    }
-
-    public function setFrequenceMax(?int $frequenceMax): self
-    {
-        $this->frequenceMax = $frequenceMax;
-
-        return $this;
-    }
-
     public function getFrequenceMaxPercent(): ?int
     {
         return $this->frequenceMaxPercent;
@@ -140,30 +118,6 @@ class TestEffort
     public function setFrequenceMaxPercent(?int $frequenceMaxPercent): self
     {
         $this->frequenceMaxPercent = $frequenceMaxPercent;
-
-        return $this;
-    }
-
-    public function getTASRepos(): ?int
-    {
-        return $this->TASRepos;
-    }
-
-    public function setTASRepos(?int $TASRepos): self
-    {
-        $this->TASRepos = $TASRepos;
-
-        return $this;
-    }
-
-    public function getTASEffort(): ?int
-    {
-        return $this->TASEffort;
-    }
-
-    public function setTASEffort(?int $TASEffort): self
-    {
-        $this->TASEffort = $TASEffort;
 
         return $this;
     }
@@ -188,6 +142,18 @@ class TestEffort
     public function setMesure(?int $mesure): self
     {
         $this->mesure = $mesure;
+
+        return $this;
+    }
+
+    public function getSymptomes(): ?string
+    {
+        return $this->symptomes;
+    }
+
+    public function setSymptomes(?string $symptomes): self
+    {
+        $this->symptomes = $symptomes;
 
         return $this;
     }

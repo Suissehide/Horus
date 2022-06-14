@@ -446,6 +446,169 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
 
+            ->add('scoreCalciqueCoronaire', ChoiceType::class, array(
+                'label' => ' ',
+                'choices' => array(
+                    '< 10' => '< 10',
+                    '11 - 99' => '11 - 99',
+                    '100 - 399' => '100 - 399',
+                    '> 400' => '> 400',
+                    '> 1000' => '> 1000',
+                    'Pas de données' => 'Pas de données'
+                ),
+                'required' => false
+            ))
+
+            ->add('nonAnalysable', ChoiceType::class, array(
+                'label' => 'Non analysable devant CAC élevé',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé'
+                ),
+                'required' => false
+            ))
+            ->add('absenceAtherome', ChoiceType::class, array(
+                'label' => 'Absence d\'athérome',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé'
+                ),
+                'required' => false
+            ))
+            ->add('remodelagePlaque', ChoiceType::class, array(
+                'label' => 'Remodelage de la plaque*',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé'
+                ),
+                'required' => false
+            ))
+            ->add('napkinRing', ChoiceType::class, array(
+                'label' => 'Napkin ring*',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé'
+                ),
+                'required' => false
+            ))
+
+            ->add('molle', ChoiceType::class, array(
+                'label' => 'Molle (hyperdense)',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé'
+                ),
+                'required' => false
+            ))
+            ->add('calcaire', ChoiceType::class, array(
+                'label' => 'Calcaire (hyperdense)',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé'
+                ),
+                'required' => false
+            ))
+            ->add('mixte', ChoiceType::class, array(
+                'label' => 'Mixte',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé'
+                ),
+                'required' => false
+            ))
+
+            ->add('volumeNonRealisable', ChoiceType::class, array(
+                'label' => 'Volume non réalisable (charge trop importante en athérome, CAC élevé...)',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé'
+                ),
+                'required' => false
+            ))
+            ->add('volumePlaqueHypodense', NumberType::class, array(
+                'label' => 'Valume plaque hypodense (< 30 UH) BLEU',
+                'attr' => array(
+                    'unity' => 'mm3',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                    'step' => '0.01',
+                ),
+                'required' => false
+            ))
+            ->add('volumePlaqueCalcifiee', NumberType::class, array(
+                'label' => 'Valume de plaque calcifiée JAUNE',
+                'attr' => array(
+                    'unity' => 'mm3',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                    'step' => '0.01',
+                ),
+                'required' => false
+            ))
+            ->add('volumePlaque', NumberType::class, array(
+                'label' => 'Volume plaque non calcifiée non hypodense ROSE',
+                'attr' => array(
+                    'unity' => 'mm3',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                    'step' => '0.01',
+                ),
+                'required' => false
+            ))
+            ->add('volumeTotalPlaque', NumberType::class, array(
+                'label' => 'Volume total de plaque (BLEU + JAUNE + ROSE)',
+                'attr' => array(
+                    'unity' => 'mm3',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                    'step' => '0.01',
+                ),
+                'required' => false
+            ))
+
+            ->add('stenose', ChoiceType::class, array(
+                'label' => ' ',
+                'choices' => array(
+                    'Absence' => 'Absence',
+                    '< 50%' => '< 50%',
+                    '> 50%' => '> 50%',
+                    '> 70%' => '> 70%'
+                ),
+                'required' => false
+            ))
+
             ->add('save', SubmitType::class, array('label' => 'Sauvegarder'))
         ;
     }

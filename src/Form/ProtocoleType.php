@@ -57,7 +57,7 @@ class ProtocoleType extends AbstractType
                 'label' => 'Scintigraphie'
             ))
             ->add('testEffort', TestEffortType::class, array(
-                'label' => 'Définition des tests d\'effort'
+                'label' => 'Épreuve d\'effort'
             ))
             ->add('visite', VisiteType::class, array(
                 'label' => 'Visite'

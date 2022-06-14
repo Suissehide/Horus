@@ -157,6 +157,35 @@ class EchographieVasculaire
      */
     private $vitesseOndePouls;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $volumeCarotideDroite;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $volumeCarotideGauche;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $chargeAtheromeTotale;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $IPSGrosOrteilDroit;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $IPSGrosOrteilGauche;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $arretPour;
 
     public function getId(): ?int
     {
@@ -495,6 +524,78 @@ class EchographieVasculaire
     public function setVitesseOndePouls(?int $vitesseOndePouls): self
     {
         $this->vitesseOndePouls = $vitesseOndePouls;
+
+        return $this;
+    }
+
+    public function getVolumeCarotideDroite(): ?int
+    {
+        return $this->volumeCarotideDroite;
+    }
+
+    public function setVolumeCarotideDroite(?int $volumeCarotideDroite): self
+    {
+        $this->volumeCarotideDroite = $volumeCarotideDroite;
+
+        return $this;
+    }
+
+    public function getVolumeCarotideGauche(): ?int
+    {
+        return $this->volumeCarotideGauche;
+    }
+
+    public function setVolumeCarotideGauche(?int $volumeCarotideGauche): self
+    {
+        $this->volumeCarotideGauche = $volumeCarotideGauche;
+
+        return $this;
+    }
+
+    public function getChargeAtheromeTotale(): ?int
+    {
+        return $this->chargeAtheromeTotale;
+    }
+
+    public function setChargeAtheromeTotale(?int $chargeAtheromeTotale): self
+    {
+        $this->chargeAtheromeTotale = $chargeAtheromeTotale;
+
+        return $this;
+    }
+
+    public function getIPSGrosOrteilDroit(): ?string
+    {
+        return $this->IPSGrosOrteilDroit;
+    }
+
+    public function setIPSGrosOrteilDroit(?string $IPSGrosOrteilDroit): self
+    {
+        $this->IPSGrosOrteilDroit = $IPSGrosOrteilDroit;
+
+        return $this;
+    }
+
+    public function getIPSGrosOrteilGauche(): ?string
+    {
+        return $this->IPSGrosOrteilGauche;
+    }
+
+    public function setIPSGrosOrteilGauche(?string $IPSGrosOrteilGauche): self
+    {
+        $this->IPSGrosOrteilGauche = $IPSGrosOrteilGauche;
+
+        return $this;
+    }
+
+    public function getArretPour(): ?string
+    {
+        return $this->arretPour;
+    }
+
+    public function setArretPour(?string $arretPour): self
+    {
+        $this->arretPour = $arretPour;
 
         return $this;
     }

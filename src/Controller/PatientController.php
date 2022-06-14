@@ -6,7 +6,6 @@ use App\Constant\FormConstants;
 
 use App\Entity\BMQ;
 use App\Entity\Erreur;
-use App\Entity\Gene;
 use App\Entity\Letter;
 use App\Entity\Medicament;
 use App\Entity\MedicamentsEntree;
@@ -182,12 +181,6 @@ class PatientController extends AbstractController
         foreach (FormConstants::LABELS["SUIVI_TRAITEMENT"] as $name) {
             $qcm = new Qcm();
             $suivi->addTraitement($qcm);
-        }
-
-        foreach (FormConstants::LABELS["SUIVI_GENES"] as $name) {
-            $gene = new Gene();
-            $gene->setStatut("Non muté");
-            $suivi->addGene($gene);
         }
 
         $this->em->persist($suivi);
@@ -469,6 +462,18 @@ class PatientController extends AbstractController
             'controller_name' => 'PatientController',
             'patient' => $jsonPatient,
             'letter' => $letter,
+        ]);
+    }
+
+        /**
+     * @Route("/patient/{id}/letter/static", name="patient_letter_static", methods={"GET", "POST"})
+     */
+    public function letter_static(Patient $patient): Response
+    {
+        return $this->render('patient/letter_static.html.twig', [
+            'title' => 'Lettre',
+            'controller_name' => 'PatientController',
+            'patient' => $patient,
         ]);
     }
 

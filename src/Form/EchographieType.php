@@ -112,7 +112,7 @@ class EchographieType extends AbstractType
             ))
 
             ->add('fractionEjection', IntegerType::class, array(
-                'label' => 'Fraction d\'éjection',
+                'label' => 'Fraction d\'éjection (en %)',
                 'attr' => array(
                     'unity' => '%',
                     'data-min' => 0,

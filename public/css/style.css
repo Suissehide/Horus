@@ -133,6 +133,10 @@ a:hover {
     color: var(--blue-green-hover);
 }
 
+h1 {
+    font-size: 34px;
+}
+
 .btn {
     cursor: pointer;
     font-family: Ubuntu-Bold;
@@ -306,7 +310,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
     color: var(--persian-indigo);
     background-color: #e6e6e6;
     font-size: 14px;
-    min-height: 42px;
+    height: 42px;
     line-height: 42px;
     padding: 0 10px;
     border-radius: 3px;
@@ -555,8 +559,8 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     display: flex;
     position: relative;
     flex-flow: row wrap;
-    height: auto;
     gap: 15px;
+    height: auto;
     /* padding: 0 15px; */
 }
 

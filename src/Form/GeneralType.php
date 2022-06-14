@@ -101,6 +101,7 @@ class GeneralType extends AbstractType
                 'placeholder' => false,
                 'choices' => array(
                     '' => '',
+                    'Actif' => 'Actif',
                     'Arrêt de travail' => 'Arrêt de travail',
                     'Reprise' => 'Reprise',
                     'Reclassement' => 'Reclassement',

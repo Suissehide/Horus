@@ -98,9 +98,9 @@ class SuiviType extends AbstractType
                 'label' => 'Activité physique',
                 'placeholder' => '',
                 'choices' => array(
-                    '> 150 min/semaine d’activité modérée ou > 75 min/semaine d’activité vigoureuse' => '> 150 min/semaine d’activité modérée ou > 75 min/semaine d’activité vigoureuse',
-                    '1 à 150 min/semaine d’activité modérée ou 1 à 75 min/semaine d’activité vigoureuse' => '1 à 150 min/semaine d’activité modérée ou 1 à 75 min/semaine d’activité vigoureuse',
                     'Aucune' => 'Aucune',
+                    '1 à 150 min/semaine d\'activité modérée ou 1 à 75 min/semaine d\'activité vigoureuse' => '1 à 150 min/semaine d\'activité modérée ou 1 à 75 min/semaine d\'activité vigoureuse',
+                    '> 150 min/semaine d\'activité modérée ou > 75 min/semaine d\'activité vigoureuse' => '> 150 min/semaine d\'activité modérée ou > 75 min/semaine d\'activité vigoureuse'
                 ),
                 'required' => false,
             ))
@@ -135,6 +135,16 @@ class SuiviType extends AbstractType
                 'block_name' => 'qcm_type',
             ))
 
+            ->add('debitFiltrationGlomerulaire', NumberType::class, array(
+                'label' => 'Débit de filtration glomerulaire CK-EPI',
+                'attr' => array(
+                    'unity' => '',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                    'step' => 0.01,
+                ),
+                'required' => false,
+            ))
             ->add('crp', NumberType::class, array(
                 'label' => 'CRP ultra-sensible',
                 'attr' => array(
@@ -142,107 +152,6 @@ class SuiviType extends AbstractType
                     'data-min' => 0,
                     'data-max' => 100,
                     'step' => 0.01,
-                ),
-                'required' => false,
-            ))
-            ->add('hemoglobine', NumberType::class, array(
-                'label' => 'Hémoglobine',
-                'scale' => 1,
-                'attr' => array(
-                    'unity' => 'g/dL',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                    'step' => 0.1,
-                ),
-                'required' => false,
-            ))
-            ->add('leucocytes', NumberType::class, array(
-                'label' => 'Leucocytes',
-                'scale' => 1,
-                'attr' => array(
-                    'unity' => 'G/L',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                    'step' => 0.01,
-                ),
-                'required' => false,
-            ))
-            ->add('pnn', NumberType::class, array(
-                'label' => 'PNN',
-                'scale' => 1,
-                'attr' => array(
-                    'unity' => 'G/L',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                    'step' => 0.01,
-                ),
-                'required' => false,
-            ))
-
-            ->add('IL1B', NumberType::class, array(
-                'label' => 'IL-1β',
-                'scale' => 1,
-                'attr' => array(
-                    'unity' => 'pg/mL',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                    'step' => 0.01,
-                ),
-                'required' => false,
-            ))
-            ->add('IL6', NumberType::class, array(
-                'label' => 'IL6',
-                'scale' => 1,
-                'attr' => array(
-                    'unity' => 'pg/mL',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                    'step' => 0.01,
-                ),
-                'required' => false,
-            ))
-            ->add('IL10', NumberType::class, array(
-                'label' => 'IL10',
-                'scale' => 1,
-                'attr' => array(
-                    'unity' => 'pg/mL',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                    'step' => 0.01,
-                ),
-                'required' => false,
-            ))
-            ->add('IL18', NumberType::class, array(
-                'label' => 'IL18',
-                'scale' => 1,
-                'attr' => array(
-                    'unity' => 'pg/mL',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                    'step' => 0.01,
-                ),
-                'required' => false,
-            ))
-            ->add('TNFa', NumberType::class, array(
-                'label' => 'TNF-α',
-                'scale' => 1,
-                'attr' => array(
-                    'unity' => 'pg/mL',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                    'step' => 0.01,
-                ),
-                'required' => false,
-            ))
-
-            ->add('plaquettes', NumberType::class, array(
-                'label' => 'Plaquettes',
-                'scale' => 1,
-                'attr' => array(
-                    'unity' => 'G/L',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                    'step' => 0.1,
                 ),
                 'required' => false,
             ))
@@ -287,135 +196,6 @@ class SuiviType extends AbstractType
                     'data-min' => 0,
                     'data-max' => 100,
                     'step' => 0.1,
-                ),
-                'required' => false,
-            ))
-            ->add('creatininemie', IntegerType::class, array(
-                'label' => ' ',
-                'attr' => array(
-                    'unity' => 'µmol/L',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                ),
-                'required' => false,
-            ))
-
-            ->add('hematopoiese', ChoiceType::class, array(
-                'label' => 'Mise en évidence d’une mutation',
-                'expanded' => true,
-                'multiple' => false,
-                'placeholder' => false,
-                'choices' => array(
-                    'Oui' => 'Oui',
-                    'Non' => 'Non',
-                    'Non précisé' => 'Non précisé',
-                ),
-                'required' => false,
-            ))
-
-            ->add('numberOfMutation', IntegerType::class, array(
-                'label' => 'Nombre de mutation',
-                'required' => false,
-            ))
-
-            ->add('genes', CollectionType::class, array(
-                'entry_type' => GeneType::class,
-                'entry_options' => array('label' => false),
-                'allow_add' => true,
-                'by_reference' => false,
-            ))
-
-            ->add('carotideCommuneDroite', IntegerType::class, array(
-                'label' => 'Volume athérome carotide commune droite',
-                'attr' => array(
-                    'unity' => '',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                ),
-                'required' => false,
-            ))
-            ->add('carotideCommuneDroiteDone', CheckboxType::class, array(
-                'label' => '',
-                'required' => false,
-            ))
-
-            ->add('carotideCommuneGauche', IntegerType::class, array(
-                'label' => 'Volume athérome carotide commune gauche',
-                'attr' => array(
-                    'unity' => '',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                ),
-                'required' => false,
-            ))
-            ->add('carotideCommuneGaucheDone', CheckboxType::class, array(
-                'label' => '',
-                'required' => false,
-            ))
-
-            ->add('carotideInterneDroite', IntegerType::class, array(
-                'label' => 'Volume athérome carotide interne droite',
-                'attr' => array(
-                    'unity' => '',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                ),
-                'required' => false,
-            ))
-            ->add('carotideInterneDroiteDone', CheckboxType::class, array(
-                'label' => '',
-                'required' => false,
-            ))
-
-            ->add('carotideInterneGauche', IntegerType::class, array(
-                'label' => 'Volume athérome carotide interne gauche',
-                'attr' => array(
-                    'unity' => '',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                ),
-                'required' => false,
-            ))
-            ->add('carotideInterneGaucheDone', CheckboxType::class, array(
-                'label' => '',
-                'required' => false,
-            ))
-
-            ->add('fraction', IntegerType::class, array(
-                'label' => 'Fraction d’éjection ventriculaire gauche',
-                'attr' => array(
-                    'unity' => '%',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                ),
-                'required' => false,
-            ))
-            ->add('fractionDone', CheckboxType::class, array(
-                'label' => '',
-                'required' => false,
-            ))
-
-            ->add('stenoses', ChoiceType::class, array(
-                'label' => 'Sténoses carotidiennes > 50%',
-                'expanded' => true,
-                'multiple' => false,
-                'placeholder' => false,
-                'choices' => array(
-                    'Oui' => 'Oui',
-                    'Non' => 'Non',
-                    'Non précisé' => 'Non précisé',
-                ),
-                'required' => false,
-            ))
-            ->add('ips', ChoiceType::class, array(
-                'label' => 'IPS < 0.9',
-                'expanded' => true,
-                'multiple' => false,
-                'placeholder' => false,
-                'choices' => array(
-                    'Oui' => 'Oui',
-                    'Non' => 'Non',
-                    'Non précisé' => 'Non précisé',
                 ),
                 'required' => false,
             ))

@@ -202,6 +202,76 @@ class CoronaireAngioplastie
      */
     private $scoreCalcique;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $scoreCalciqueCoronaire;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nonAnalysable;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $absenceAtherome;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $remodelagePlaque;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $napkinRing;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $molle;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $calcaire;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $mixte;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $volumeNonRealisable;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $volumePlaqueHypodense;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $volumePlaqueCalcifiee;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $volumePlaque;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $volumeTotalPlaque;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $stenose;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -647,6 +717,174 @@ class CoronaireAngioplastie
     public function setScoreCalcique(?int $scoreCalcique): self
     {
         $this->scoreCalcique = $scoreCalcique;
+
+        return $this;
+    }
+
+    public function getScoreCalciqueCoronaire(): ?string
+    {
+        return $this->scoreCalciqueCoronaire;
+    }
+
+    public function setScoreCalciqueCoronaire(?string $scoreCalciqueCoronaire): self
+    {
+        $this->scoreCalciqueCoronaire = $scoreCalciqueCoronaire;
+
+        return $this;
+    }
+
+    public function getNonAnalysable(): ?string
+    {
+        return $this->nonAnalysable;
+    }
+
+    public function setNonAnalysable(?string $nonAnalysable): self
+    {
+        $this->nonAnalysable = $nonAnalysable;
+
+        return $this;
+    }
+
+    public function getAbsenceAtherome(): ?string
+    {
+        return $this->absenceAtherome;
+    }
+
+    public function setAbsenceAtherome(?string $absenceAtherome): self
+    {
+        $this->absenceAtherome = $absenceAtherome;
+
+        return $this;
+    }
+
+    public function getRemodelagePlaque(): ?string
+    {
+        return $this->remodelagePlaque;
+    }
+
+    public function setRemodelagePlaque(?string $remodelagePlaque): self
+    {
+        $this->remodelagePlaque = $remodelagePlaque;
+
+        return $this;
+    }
+
+    public function getNapkinRing(): ?string
+    {
+        return $this->napkinRing;
+    }
+
+    public function setNapkinRing(?string $napkinRing): self
+    {
+        $this->napkinRing = $napkinRing;
+
+        return $this;
+    }
+
+    public function getMolle(): ?string
+    {
+        return $this->molle;
+    }
+
+    public function setMolle(?string $molle): self
+    {
+        $this->molle = $molle;
+
+        return $this;
+    }
+
+    public function getCalcaire(): ?string
+    {
+        return $this->calcaire;
+    }
+
+    public function setCalcaire(?string $calcaire): self
+    {
+        $this->calcaire = $calcaire;
+
+        return $this;
+    }
+
+    public function getMixte(): ?string
+    {
+        return $this->mixte;
+    }
+
+    public function setMixte(?string $mixte): self
+    {
+        $this->mixte = $mixte;
+
+        return $this;
+    }
+
+    public function getVolumeNonRealisable(): ?string
+    {
+        return $this->volumeNonRealisable;
+    }
+
+    public function setVolumeNonRealisable(?string $volumeNonRealisable): self
+    {
+        $this->volumeNonRealisable = $volumeNonRealisable;
+
+        return $this;
+    }
+
+    public function getVolumePlaqueHypodense(): ?string
+    {
+        return $this->volumePlaqueHypodense;
+    }
+
+    public function setVolumePlaqueHypodense(?string $volumePlaqueHypodense): self
+    {
+        $this->volumePlaqueHypodense = $volumePlaqueHypodense;
+
+        return $this;
+    }
+
+    public function getVolumePlaqueCalcifiee(): ?string
+    {
+        return $this->volumePlaqueCalcifiee;
+    }
+
+    public function setVolumePlaqueCalcifiee(?string $volumePlaqueCalcifiee): self
+    {
+        $this->volumePlaqueCalcifiee = $volumePlaqueCalcifiee;
+
+        return $this;
+    }
+
+    public function getVolumePlaque(): ?string
+    {
+        return $this->volumePlaque;
+    }
+
+    public function setVolumePlaque(?string $volumePlaque): self
+    {
+        $this->volumePlaque = $volumePlaque;
+
+        return $this;
+    }
+
+    public function getVolumeTotalPlaque(): ?string
+    {
+        return $this->volumeTotalPlaque;
+    }
+
+    public function setVolumeTotalPlaque(?string $volumeTotalPlaque): self
+    {
+        $this->volumeTotalPlaque = $volumeTotalPlaque;
+
+        return $this;
+    }
+
+    public function getStenose(): ?string
+    {
+        return $this->stenose;
+    }
+
+    public function setStenose(?string $stenose): self
+    {
+        $this->stenose = $stenose;
 
         return $this;
     }

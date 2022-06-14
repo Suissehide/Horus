@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\DecimalType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class EchographieVasculaireType extends AbstractType
@@ -19,29 +18,29 @@ class EchographieVasculaireType extends AbstractType
         $builder
             ->add('carotideInterneDroite', ChoiceType::class, array(
                 'label' => 'Carotide interne droite',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('carotideInterneGauche', ChoiceType::class, array(
                 'label' => 'Carotide interne gauche',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
@@ -67,85 +66,85 @@ class EchographieVasculaireType extends AbstractType
             ))
             ->add('vertebraleDroite', ChoiceType::class, array(
                 'label' => 'Vertébrale droite',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('vertebraleGauche', ChoiceType::class, array(
                 'label' => 'Vertébrale gauche',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('carotideCommuneDroite', ChoiceType::class, array(
                 'label' => 'Carotide commune droite',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('carotideCommuneGauche', ChoiceType::class, array(
                 'label' => 'Carotide commune gauche',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('sousClaviereDroite', ChoiceType::class, array(
                 'label' => 'Sous-clavière droite',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('sousClaviereGauche', ChoiceType::class, array(
                 'label' => 'Sous-clavière gauche',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
@@ -155,6 +154,37 @@ class EchographieVasculaireType extends AbstractType
                     'unity' => 'mm',
                     'data-min' => 0,
                     'data-max' => 0,
+                ),
+                'required' => false,
+            ))
+
+            ->add('volumeCarotideDroite', NumberType::class, array(
+                'label' => 'Volume carotide droite',
+                'attr' => array(
+                    'unity' => 'mm3',
+                    'data-min' => '0',
+                    'data-max' => '0',
+                    'step' => '0.01',
+                ),
+                'required' => false,
+            ))
+            ->add('volumeCarotideGauche', NumberType::class, array(
+                'label' => 'Volume carotide gauche',
+                'attr' => array(
+                    'unity' => 'mm3',
+                    'data-min' => '0',
+                    'data-max' => '0',
+                    'step' => '0.01',
+                ),
+                'required' => false,
+            ))
+            ->add('chargeAtheromeTotale', NumberType::class, array(
+                'label' => 'Charge en athérome totale',
+                'attr' => array(
+                    'unity' => 'mm3',
+                    'data-min' => '0',
+                    'data-max' => '0',
+                    'step' => '0.01',
                 ),
                 'required' => false,
             ))
@@ -171,141 +201,141 @@ class EchographieVasculaireType extends AbstractType
             ))
             ->add('iliaqueDroite', ChoiceType::class, array(
                 'label' => 'Iliaque droite',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('iliaqueGauche', ChoiceType::class, array(
                 'label' => 'Iliaque gauche',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('femoraleCommuneDroite', ChoiceType::class, array(
                 'label' => 'Fémorale commune droite',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('femoraleCommuneGauche', ChoiceType::class, array(
                 'label' => 'Fémorale commune gauche',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('femoraleSuperficielleDroite', ChoiceType::class, array(
                 'label' => 'Fémorale superficielle droite',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('femoraleSuperficielleGauche', ChoiceType::class, array(
                 'label' => 'Fémorale superficielle gauche',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('popliteDroite', ChoiceType::class, array(
                 'label' => 'Poplite droite',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('popliteGauche', ChoiceType::class, array(
                 'label' => 'Poplite gauche',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('axesJambiersDroits', ChoiceType::class, array(
                 'label' => 'Axes jambiers droits',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
             ->add('axesJambiersGauches', ChoiceType::class, array(
                 'label' => 'Axes jambiers gauches',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     '0%' => '0%',
                     '10%-30%' => '10%-30%',
                     '31-50%' => '31-50%',
                     '51-70%' => '51-70%',
                     '71-90%' => '71-90%',
-                    '+ de 90%' => '+ de 90%'
+                    '+ de 90%' => '+ de 90%',
+                    'Occlusion' => 'Occlusion'
                 ),
                 'required' => false,
             ))
@@ -323,6 +353,26 @@ class EchographieVasculaireType extends AbstractType
             ))
             ->add('IPSReposGauche', NumberType::class, array(
                 'label' => 'IPS repos gauche',
+                'attr' => array(
+                    'unity' => '',
+                    'data-min' => '0.2',
+                    'data-max' => '1.5',
+                    'step' => '0.1',
+                ),
+                'required' => false,
+            ))
+            ->add('IPSGrosOrteilDroit', NumberType::class, array(
+                'label' => 'IPS repos gros orteil droit',
+                'attr' => array(
+                    'unity' => '',
+                    'data-min' => '0.2',
+                    'data-max' => '1.5',
+                    'step' => '0.1',
+                ),
+                'required' => false,
+            ))
+            ->add('IPSGrosOrteilGauche', NumberType::class, array(
+                'label' => 'IPS repos gros orteil gauche',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => '0.2',
@@ -359,6 +409,19 @@ class EchographieVasculaireType extends AbstractType
                     'unity' => 'm',
                     'data-min' => 0,
                     'data-max' => 9999,
+                ),
+                'required' => false,
+            ))
+            ->add('arretPour', ChoiceType::class, array(
+                'label' => 'Arrêt pour',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Douleur' => 'Douleur',
+                    'Crampe' => 'Crampe',
+                    'Fatigue' => 'Fatigue',
                 ),
                 'required' => false,
             ))

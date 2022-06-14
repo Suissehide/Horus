@@ -208,7 +208,7 @@ class ScintigraphieType extends AbstractType
             ))
 
             ->add('fractionEjection', IntegerType::class, array(
-                'label' => 'Fraction d\'éjection sous régadénoson',
+                'label' => 'Fraction d\'éjection sous régadénoson (en %)',
                 'attr' => array(
                     'unity' => '%',
                     'data-min' => 0,

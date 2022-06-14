@@ -40,7 +40,7 @@ class TestEffortType extends AbstractType
                 'required' => false,
             ))
             ->add('duree', IntegerType::class, array(
-                'label' => 'Durée',
+                'label' => 'Durée totale (en min)',
                 'attr' => array(
                     'unity' => 'min.',
                     'data-min' => 0,
@@ -57,15 +57,7 @@ class TestEffortType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('frequenceMax', IntegerType::class, array(
-                'label' => 'Fréq. max',
-                'attr' => array(
-                    'unity' => 'btms/min.',
-                    'data-min' => 0,
-                    'data-max' => 0,
-                ),
-                'required' => false,
-            ))
+
             ->add('frequenceMaxPercent', IntegerType::class, array(
                 'label' => '% de la Fréq. max',
                 'attr' => array(
@@ -75,24 +67,21 @@ class TestEffortType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('TASRepos', IntegerType::class, array(
-                'label' => 'TAS repos',
-                'attr' => array(
-                    'unity' => 'mmHg',
-                    'data-min' => 0,
-                    'data-max' => 0,
+            ->add('symptomes', ChoiceType::class, array(
+                'label' => 'Symptomes',
+                'expanded' => false,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    '' => '',
+                    'Aucun' => 'Aucun',
+                    'Dyspnée importante' => 'Dyspnée importante',
+                    'Douleur angineuse' => 'Douleur angineuse',
+                    'Douleur atypique' => 'Douleur atypique',
                 ),
                 'required' => false,
             ))
-            ->add('TASEffort', IntegerType::class, array(
-                'label' => 'TAS effort',
-                'attr' => array(
-                    'unity' => 'mmHg',
-                    'data-min' => 0,
-                    'data-max' => 0,
-                ),
-                'required' => false,
-            ))
+
             ->add('ECGModifie', ChoiceType::class, array(
                 'label' => 'ECG modifié',
                 'expanded' => false,

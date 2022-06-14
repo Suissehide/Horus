@@ -1,0 +1,336 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+	Création de la lettre
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('css/index.css') }}">
+{% endblock %}
+
+{% block page_content %}
+	<div class="container-fluid">
+
+		<div class="title-wrapper">
+			Lettre
+		</div>
+
+		<div class="container-form">
+            <!-- Hero -->
+            <section id="tab-profile" class="hero-tabs">
+                <div class="hero-header">
+                    <div class="hero-title">
+                        <h1 class="profile">
+                            <div>PATIENT&nbsp;</div>
+                            <div class="profile__name">{{ patient.general.prenom }} {{ patient.general.nom }}</div>
+                        </h1>
+                    </div>
+                </div>
+
+                    <div class="btn-block">
+                        <a href="{{ path('index_patient') }}" class="form-btn btn-default">
+                            <i aria-hidden="true" class="fa fa-arrow-left"></i>Retour</a>
+                        <button class="form-btn" id="copy">
+                            <i aria-hidden="true" class="fa fa-copy"></i>Copier</button>
+                        <button class="form-btn btn-save" id="export">
+                            <i aria-hidden="true" class="fa fa-file-pdf"></i>Exporter en PDF</button>
+                    </div>
+                </div>
+            </section>
+			
+            <!-- Main -->
+            <main class="letter__content">
+
+                {#========== GENERAL ==========#}
+                <section class="slide" style="display: block">
+                    <h1 id="general">Informations générales</h1>
+                    <h3 id="identification">Identification</h3>
+                    <div class="form-space">
+                        <div class="flex-nowrap">
+                            {{ patient.general.civilite }}
+                            {{ patient.general.prenom }}
+                            {{ patient.general.nom }}
+                        </div>
+                        <div><strong>Nom de naissance : </strong>{{ patient.general.nomNaissance }}</div>
+                        <div><strong>Date de naissance : </strong>{{ patient.general.dateNaissance|date("d/m/Y") }}</div>
+                        <div><strong>Sexe : </strong>{{ patient.general.sexe }}</div>
+                    </div>
+
+                    <h3 id="complement">Complément</h3>
+                    <div class="form-space">
+                        <div><strong>Professions : </strong>{{ patient.general.profession }}</div>
+                        <div><strong>Statut actuel : </strong>{{ patient.general.statutActuel }}</div>
+                        <div><strong>Niveau d'étude : </strong>{{ patient.general.niveauEtude }}</div>
+                    </div>
+                </section>
+
+                {#========== ANTECEDENT CARDIOVASCULAIRE ==========#}
+                <section class="slide" style="display: block">
+                    <h1 id="antecedentCardiovasculaire">Antécédent cardiovasculaire</h1>
+                    <div class="form-space">
+                        <div class="qcm">
+                            <div><strong>IDM-SCA : </strong>{{ patient.antecedentCardiovasculaire.IDMSCA }}</div>
+                            <div><strong>Angor stable : </strong>{{ patient.antecedentCardiovasculaire.angorStable }}</div>
+                            <div><strong>Angioplastie coronaire : </strong>{{ patient.antecedentCardiovasculaire.angioplastieCoronaire }}</div>
+                            <div><strong>Pontage coronaire : </strong>{{ patient.antecedentCardiovasculaire.pontageCoronaire }}</div>
+                            <div><strong>Insuffisance cardiaque stade III ou IV : </strong>{{ patient.antecedentCardiovasculaire.insuffisanceCardiaque }}</div>
+                            <div><strong>AVC : </strong>{{ patient.antecedentCardiovasculaire.AVC }}</div>
+                            <div><strong>AIT : </strong>{{ patient.antecedentCardiovasculaire.AIT }}</div>
+                            <div><strong>Endartériectomie carotidienne : </strong>{{ patient.antecedentCardiovasculaire.endarteriectomieCarotidienne }}</div>
+                            <div><strong>Artérite des membres inférieurs : </strong>{{ patient.antecedentCardiovasculaire.arteriteMembresInferieurs }}</div>
+                            <div><strong>Angioplastie périphérique : </strong>{{ patient.antecedentCardiovasculaire.angioplastiePeripherique }}</div>
+                            <div><strong>Pontage périphérique : </strong>{{ patient.antecedentCardiovasculaire.pontagePeripherique }}</div>
+                            <div><strong>Antécédent de fibrillation auriculaire : </strong>{{ patient.antecedentCardiovasculaire.antecedentFibrillationAuriculaire }}</div>
+                            <div><strong>Antécédent d'insuffisance cardiaque : </strong>{{ patient.antecedentCardiovasculaire.antecedentInsuffisanceCardiaque }}</div>
+                            <div><strong>Valvulopathie (>grade 2 ou >modérée) : </strong>{{ patient.antecedentCardiovasculaire.valvulopathie }}</div>
+                        </div>
+                    </div>
+                </section>
+
+                {#========== INFORMATION ==========#}
+                <section class="slide" style="display: block">
+                    <h1 id="information">Information sur l'événement cardiovasculaire</h1>
+                    <h3 id="infarctusMyocarde">Type d'infarctus du myocarde</h3>
+                    <div class="form-space">
+                        <div><strong>Sus-décalage du segment ST : </strong>{{ patient.information.susDecalage }}</div>
+
+                        <div class="margin-space"></div>
+                        <h5>Territoire atteint</h5>
+                        <div><strong>Antérieur : </strong>{{ patient.information.anterieur }}</div>
+                        <div><strong>Septo-apical : </strong>{{ patient.information.septoApical }}</div>
+                        <div><strong>Latéral : </strong>{{ patient.information.lateral }}</div>
+                        <div><strong>Inférieur / Postérieur : </strong>{{ patient.information.inferieurPosterieur }}</div>
+                        <div><strong>Sans territoire : </strong>{{ patient.information.sansTerritoire }}</div>
+
+                        <div class="margin-space"></div>
+                        <h5>Coronarographie (sténose > 50%)</h5>
+                        <div><strong>IVA : </strong>{{ patient.information.IVA }}</div>
+                        <div><strong>CD : </strong>{{ patient.information.CD }}</div>
+                        <div><strong>Cx : </strong>{{ patient.information.Cx }}</div>
+                        <div><strong>Marginale : </strong>{{ patient.information.marginale }}</div>
+                        <div><strong>Diagonale : </strong>{{ patient.information.diagonale }}</div>
+                        <div><strong>Pontage : </strong>{{ patient.information.pontage }}</div>
+                        <div><strong>Tronc commun : </strong>{{ patient.information.troncCommun }}</div>
+                    </div>
+
+                    <div class="margin-space"></div>
+                    <h5>Traitement à la phase aiguë</h5>
+                    <div class="form-space">
+                        {% for t in patient.information.traitementPhaseAigue %}
+                            {{ t }}{% if loop.last == false %}, {% endif %}
+                        {% endfor %}
+                    </div>
+
+                    <div class="margin-space"></div>
+                    <h5>Complications immédiates</h5>
+                    <div class="form-space">
+                        <div><strong>Trouble du rythme ventriculaire : </strong>{{ patient.information.troubleRythmeVentriculaire }}</div>
+                        <div><strong>Insuffisance cardiaque : </strong>{{ patient.information.insuffisanceCardiaque }}</div>
+                        <div><strong>Péricardite : </strong>{{ patient.information.pericardite }}</div>
+                        <div><strong>Complication mécanique : </strong>{{ patient.information.complicationMecanique }}</div>
+                    </div>
+
+                    <h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
+                    <div class="form-space">
+                        <div><strong>Localisation : </strong>{{ patient.information.localisation }}</div>
+                        <div><strong>Taille : </strong>{{ patient.information.taille }}</div>
+                        <div><strong>Mécanisme : </strong>{{ patient.information.mecanisme }}</div>
+                    </div>
+                </section>
+
+                {#========== FACTEUR ==========#}
+                <section class="slide" style="display: block">
+                    <h1 id="facteur">Facteurs de risques initiaux</h1>
+                    <div class="radio-row">
+                        <div><strong>Antécédent familiaux : </strong>{{ patient.facteur.antecedentFamiliaux }}</div>
+                    </div>
+
+                    <div class="margin-space"></div>
+
+                    <div class="form-space">
+                        <div class="table-container">
+                            <table class="table-custom">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Risques</th>
+                                        <th>Depuis</th>
+                                        <th>Traité</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="row-header">HTA</td>
+                                        <td>{{ patient.facteur.risqueHTA }}</td>
+                                        <td>{{ patient.facteur.depuisHTA }}</td>
+                                        <td>{{ patient.facteur.traiteHTA }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-header">Diabète</td>
+                                        <td>{{ patient.facteur.risqueDiabete }}</td>
+                                        <td>{{ patient.facteur.depuisDiabete }}</td>
+                                        <td>{{ patient.facteur.traiteDiabete }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-header">Hypercholestérolémie</td>
+                                        <td>{{ patient.facteur.risqueHypercholesterolemie }}</td>
+                                        <td>{{ patient.facteur.depuisHypercholesterolemie }}</td>
+                                        <td>{{ patient.facteur.traiteHypercholesterolemie }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-header">Hypertriglycéridèmie</td>
+                                        <td>{{ patient.facteur.risqueHypertriglyceridemie }}</td>
+                                        <td>{{ patient.facteur.depuisHypertriglyceridemie }}</td>
+                                        <td>{{ patient.facteur.traiteHypertriglyceridemie }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="margin-space"></div>
+                        <h5>Tabagisme</h5>
+                        <div class="flex-wrap">
+                            <div class="flex-1">
+                                <div><strong>État : </strong>{{ patient.facteur.tabagisme }}</div>
+                            </div>
+                            <div class="flex-1">
+                                <div><strong>Date d'arrêt : </strong>{{ patient.facteur.dateArret }}</div>
+                            </div>
+                            <div class="flex-1">
+                                <div><strong>Nombres de paquets par an : </strong>{{ patient.facteur.nombrePaquetsAn }}</div>
+                            </div>
+                        </div>
+
+                        <h5>Obésité</h5>
+                        <div>
+                            <div><strong>État : </strong>{{ patient.facteur.obesite }}</div>
+                        </div>
+
+                        <h5>Alcoolisme</h5>
+                        <div class="flex-wrap">
+                            <div class="flex-1">
+                                <div><strong>État : </strong>{{ patient.facteur.alcoolisme }}</div>
+                            </div>
+                            <div class="flex-1">
+                                <div><strong>Sevré : </strong>{{ patient.facteur.sevre }}</div>
+                            </div>
+                        </div>
+
+                        <h5>Cannabis</h5>
+                        <div class="radio-row">
+                            <div><strong>État : </strong>{{ patient.facteur.cannabis }}</div>
+                        </div>
+
+                    </div>
+                </section>
+
+                {#==========  ==========#}
+                <section class="slide" style="display: block">
+                </section>
+
+                {#========== SUIVI ==========#}
+                <section class="slide" style="display: block">
+                </section>
+
+            </mail>
+
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/vendor/html2canvas.js') }}"></script>
+    <script src="{{ asset('js/vendor/jspdf.js') }}"></script>
+
+    <script>
+        /*
+        * COPY
+        **********************************************************************/
+        $('#copy').click(function() {
+            $(".letter__content").select();
+            document.execCommand('copy');
+        });
+
+
+        /*
+        * HTML TO PDF
+        **********************************************************************/
+        $('#export').on('click', function () {
+            {# splitHTMLtoMultiPagePDF(); #}
+            createPDFObject();
+        });
+
+        function splitHTMLtoMultiPagePDF() {
+            var htmlWidth = $(".letter__content").width();
+            var htmlHeight = $(".letter__content").height();
+            var pdfWidth = htmlWidth + (15 * 2);
+            var pdfHeight = (pdfWidth * 1.5) + (15 * 2);
+            
+            var doc = new jsPDF('p', 'pt', 'a4', [pdfWidth, pdfHeight]);
+
+            var pageCount = Math.ceil(htmlHeight / pdfHeight) - 1;
+
+            html2canvas($(".letter__content")[0], { allowTaint: true }).then(function(canvas) {
+                canvas.getContext('2d');
+
+                var image = canvas.toDataURL("image/png", 1.0);
+                doc.addImage(image, 'PNG', 15, 15, htmlWidth, htmlHeight);
+
+                for (var i = 1; i <= pageCount; i++) {
+                    doc.addPage(pdfWidth, pdfHeight);
+                    doc.addImage(image, 'PNG', 15, -(pdfHeight * i) + 15, htmlWidth, htmlHeight);
+                }
+                let date = new Date().
+                    toLocaleString('fr-FR', {year: 'numeric', month: '2-digit', day: '2-digit'}).
+                    replace(/(\d+)\/(\d+)\/(\d+)/, '$1-$2-$3');
+                doc.save("Horus_{{patient.general.nom}}-{{patient.general.prenom}}_" + date + ".pdf");
+            });
+        };
+
+
+        function createPDFObject() {
+            html2canvas($(".letter__content")[0]).then(function(canvas) {
+                    var contentWidth = canvas.width;
+                    var contentHeight = canvas.height;
+
+                    //One page pdf shows the height of canvas generated by html page;
+                    var pageHeight = contentWidth / 592.28 * 841.89;
+                    //html page height without pdf generation
+                    var leftHeight = contentHeight;
+                    //Page offset
+                    var position = 0;
+                    //a4 paper size [595.28841.89], width and height of image in pdf of canvas generated by html page
+                    var imgWidth = 595.28; 
+                    var imgHeight = 592.28/contentWidth * contentHeight;
+
+                    //Return picture dataURL, parameters: picture format and sharpness (0-1)
+                    var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+                    //Direction is vertical by default, dimension ponits, format A4 [595.28841.89]
+                    var pdf = new jsPDF('', 'pt', 'a4');
+
+                    //There are two heights to distinguish, one is the actual height of the html page, and the height of the generated pdf page (841.89)
+                    //When the content does not exceed the display range of one page of pdf, paging is not required
+                    if (leftHeight < pageHeight) {
+                        pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight );
+                    } else {
+                        while(leftHeight > 0) {
+                            pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                            leftHeight -= pageHeight;
+                            position -= 841.89;
+                            //Avoid adding blank pages
+                            if(leftHeight > 0) {
+                                pdf.addPage();
+                            }
+                        }
+                    }
+                    let date = new Date().
+                        toLocaleString('fr-FR', {year: 'numeric', month: '2-digit', day: '2-digit'}).
+                        replace(/(\d+)\/(\d+)\/(\d+)/, '$1-$2-$3');
+                    pdf.save("Horus_{{patient.general.nom}}-{{patient.general.prenom}}_" + date + ".pdf");
+                }
+            );
+        }
+    </script>
+{% endblock %}

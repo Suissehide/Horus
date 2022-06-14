@@ -18,7 +18,7 @@ class NeuroPsychologieType extends AbstractType
             ->add('MMSE', IntegerType::class, array(
                 'label' => 'MMSE *',
                 'attr' => array(
-                    'unity' => '',
+                    'unity' => '/ 30',
                     'data-min' => 0,
                     'data-max' => 0,
                 ),
@@ -27,7 +27,7 @@ class NeuroPsychologieType extends AbstractType
             ->add('MOCA', IntegerType::class, array(
                 'label' => 'MOCA *',
                 'attr' => array(
-                    'unity' => '',
+                    'unity' => '/ 30',
                     'data-min' => 0,
                     'data-max' => 0,
                 ),
@@ -36,7 +36,7 @@ class NeuroPsychologieType extends AbstractType
             ->add('HADAnxiete', IntegerType::class, array(
                 'label' => 'HAD anxiété *',
                 'attr' => array(
-                    'unity' => '',
+                    'unity' => '/ 15',
                     'data-min' => 0,
                     'data-max' => 0,
                 ),
@@ -45,7 +45,7 @@ class NeuroPsychologieType extends AbstractType
             ->add('HADDepression', IntegerType::class, array(
                 'label' => 'HAD dépression *',
                 'attr' => array(
-                    'unity' => '',
+                    'unity' => '/ 15',
                     'data-min' => 0,
                     'data-max' => 0,
                 ),

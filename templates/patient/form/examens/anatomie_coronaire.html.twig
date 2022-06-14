@@ -1,0 +1,117 @@
+<h1 id="anatomie-coronaire">Anatomie coronaire</h1>
+
+<div class="form-space">
+	<div class="table-container">
+		<table class="table-custom table-anatomieCoronaire">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Sténose coronarographie</th>
+					<th>Sténose coroscanner</th>
+					<th>FFR</th>
+					<th>Angioplastie</th>
+					<th>CMR</th>
+					<th>IMR</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="row-header">IVA</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.stenoseIVA, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.coroscannerIVA, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.ffrIVA, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.angioplastieIVA, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.cmrIVA, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.imrIVA, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Diagonale</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.stenoseDiagonale, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.coroscannerDiagonale, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.ffrDiagonale, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.angioplastieDiagonale, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.cmrDiagonale, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.imrDiagonale, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Circonflexe</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.stenoseCirconflexe, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.coroscannerCirconflexe, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.ffrCirconflexe, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.angioplastieCirconflexe, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.cmrCirconflexe, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.imrCirconflexe, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Postérolatéral</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.stenosePosterolateral, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.coroscannerPosterolateral, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.ffrPosterolateral, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.angioplastiePosterolateral, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.cmrPosterolateral, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.imrPosterolateral, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Coronaire droite</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.stenoseCoronaireDroite, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.coroscannerCoronaireDroite, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.ffrCoronaireDroite, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.angioplastieCoronaireDroite, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.cmrCoronaireDroite, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.imrCoronaireDroite, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Pontage</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.stenosePontage, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.coroscannerPontage, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.ffrPontage, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.angioplastiePontage, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.cmrPontage, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.protocole.coronaireAngioplastie.imrPontage, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="form-space">
+	{{ form_row(form.protocole.coronaireAngioplastie.scoreCalcique, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+</div>
+
+<h2>Exploration de la charge en athérome coronaire</h2>
+
+<h3>Score calcique coronaire</h3>
+{{ form_row(form.protocole.coronaireAngioplastie.scoreCalciqueCoronaire, {'attr': {'class': 'input'} }) }}
+
+<h3>Athérome coronaire</h3>
+<div class="form-space">
+	{{ form_row(form.protocole.coronaireAngioplastie.nonAnalysable, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_row(form.protocole.coronaireAngioplastie.absenceAtherome, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_row(form.protocole.coronaireAngioplastie.remodelagePlaque, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_row(form.protocole.coronaireAngioplastie.napkinRing, {'attr': {'class': 'input radio-row'} }) }}
+	<div class="def">*Remodelage et Napking ring décrit par le radiologue (sont des caractéristiques de plaque à risque)</div>
+</div>
+
+<h3>Plaque</h3>
+<h4>Caractéristiques</h4>
+<div class="form-space">
+	{{ form_row(form.protocole.coronaireAngioplastie.molle, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_row(form.protocole.coronaireAngioplastie.calcaire, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_row(form.protocole.coronaireAngioplastie.mixte, {'attr': {'class': 'input radio-row'} }) }}
+</div>
+
+<h4>Volume</h4>
+<div class="form-space">
+	{{ form_row(form.protocole.coronaireAngioplastie.volumeNonRealisable, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_row(form.protocole.coronaireAngioplastie.volumePlaqueHypodense, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.coronaireAngioplastie.volumePlaqueCalcifiee, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.coronaireAngioplastie.volumePlaque, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.coronaireAngioplastie.volumeTotalPlaque, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+</div>
+
+<h3>Sténose</h3>
+<div class="form-space">
+	{{ form_row(form.protocole.coronaireAngioplastie.stenose, {'attr': {'class': 'input'} }) }}
+</div>
+
+{{ form_row(form.protocole.coronaireAngioplastie.save, {'attr': {'class': 'form-btn'} }) }}

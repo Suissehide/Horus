@@ -19,7 +19,7 @@ class MedicamentsEntreeType extends AbstractType
     {
         $builder
             ->add('NbMedicamentSemaine', IntegerType::class, array(
-                'label' => 'Nombre d\'unités de prise de médicament',
+                'label' => 'Nombre d\'unités de prise de médicament (par semaine)',
                 'attr' => array(
                     'unity' => 'par semaine',
                     'data-min' => 0,
@@ -28,7 +28,7 @@ class MedicamentsEntreeType extends AbstractType
                 'required' => false,
             ))
             ->add('DelaiSousTraitement', IntegerType::class, array(
-                'label' => 'Délai dpuis la mise sous traitement',
+                'label' => 'Délai dpuis la mise sous traitement (en mois)',
                 'attr' => array(
                     'unity' => 'en mois',
                     'data-min' => 0,
@@ -86,7 +86,7 @@ class MedicamentsEntreeType extends AbstractType
                 'required' => false,
             ))
             ->add('scoreMasCard', IntegerType::class, array(
-                'label' => 'Score échelle adhésion MasCard',
+                'label' => 'Score échelle adhésion MasCard (/5)',
                 'attr' => array(
                     'unity' => '/ 5',
                     'data-min' => 0,

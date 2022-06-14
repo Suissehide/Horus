@@ -80,7 +80,7 @@
                 {{ form_help(form) }}
                 <span class="focus-input"></span>
             </div>
-            <button class="history"><div class="history-icon"></div></button>
+            <button class="history" tabindex="-1"><div class="history-icon"></div></button>
         </div>
         {{ form_errors(form) }}
     </div>
@@ -170,7 +170,7 @@
                     {{ form_widget(child) }}
                 {% endfor %}
             </div>
-            <button class="history"><div class="history-icon"></div></button>
+            <button class="history" tabindex="-1"><div class="history-icon"></div></button>
         </div>
         {{ form_errors(form) }}
     </div>
@@ -198,7 +198,7 @@
                 {% endif %}
             {% endfor %}
         </div>
-        <button class="history"><div class="history-icon"></div></button>
+        <button class="history" tabindex="-1"><div class="history-icon"></div></button>
     </div>
     {{ form_errors(form) }}
 {% endblock qcm_widget %}
