@@ -115,10 +115,12 @@
 
                     <div class="margin-space"></div>
                     <h5>Traitement à la phase aiguë</h5>
-                    <div class="form-space">
-                        {% for t in patient.information.traitementPhaseAigue %}
-                            {{ t }}{% if loop.last == false %}, {% endif %}
-                        {% endfor %}
+                    <div><strong>Traitement : </strong> 
+                        <div class="form-space">
+                            {% for t in patient.information.traitementPhaseAigue %}
+                                {{ t }}{% if loop.last == false %}, {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
 
                     <div class="margin-space"></div>

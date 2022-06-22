@@ -8,7 +8,6 @@ use App\Form\GeneralType;
 use App\Form\FacteurType;
 use App\Form\AntecedentCardiovasculaireType;
 use App\Form\InformationType;
-use App\Form\ProtocoleType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,10 +34,6 @@ class PatientType extends AbstractType
 
             ->add('facteur', FacteurType::class, array(
                 'label' => 'Facteur'
-            ))
-
-            ->add('protocole', ProtocoleType::class, array(
-                'label' => 'Protocole'
             ))
 
             ->add('suivis', CollectionType::class, [

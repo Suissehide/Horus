@@ -22,11 +22,6 @@ class Segment
      */
     private $segment;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Bullseye::class, inversedBy="segments")
-     */
-    private $bullseye;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -40,18 +35,6 @@ class Segment
     public function setSegment(?string $segment): self
     {
         $this->segment = $segment;
-
-        return $this;
-    }
-
-    public function getBullseye(): ?Bullseye
-    {
-        return $this->bullseye;
-    }
-
-    public function setBullseye(?Bullseye $bullseye): self
-    {
-        $this->bullseye = $bullseye;
 
         return $this;
     }

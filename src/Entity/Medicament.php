@@ -25,7 +25,7 @@ class Medicament
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=MedicamentsEntree::class, mappedBy="medicaments")
+     * @ORM\ManyToMany(targetEntity=MedicamentsEntree::class, mappedBy="medicaments", cascade={"persist", "remove"})
      */
     private $medicamentsEntrees;
 

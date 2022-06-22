@@ -75,7 +75,7 @@ class Suivi
     private $alimentation = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist", "remove"})
      * @Groups({"advancement", "export"})
      * @ORM\JoinTable(name="donnee_qcm_facteurs",
      *      joinColumns={@ORM\JoinColumn(name="facteurs_id", referencedColumnName="id", onDelete="CASCADE")},
@@ -85,7 +85,7 @@ class Suivi
     private $facteurs;
 
     /**
-     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist", "remove"})
      * @Groups({"advancement", "export"})
      * @ORM\JoinTable(name="donnee_qcm_traitement",
      *      joinColumns={@ORM\JoinColumn(name="traitement_id", referencedColumnName="id", onDelete="CASCADE")},
@@ -131,9 +131,14 @@ class Suivi
     private $hba1c;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="suivis")
+     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="suivis", cascade={"persist"})
      */
     private $patient;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Protocole::class, inversedBy="suivis", cascade={"persist", "remove"})
+     */
+    private $protocole;
 
     public function __construct()
     {
@@ -387,6 +392,18 @@ class Suivi
     public function setPatient(?Patient $patient): self
     {
         $this->patient = $patient;
+
+        return $this;
+    }
+
+    public function getProtocole(): ?Protocole
+    {
+        return $this->protocole;
+    }
+
+    public function setProtocole(?Protocole $protocole): self
+    {
+        $this->protocole = $protocole;
 
         return $this;
     }

@@ -12,7 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class SuiviType extends AbstractType
 {
@@ -198,6 +197,10 @@ class SuiviType extends AbstractType
                     'step' => 0.1,
                 ),
                 'required' => false,
+            ))
+
+            ->add('protocole', ProtocoleType::class, array(
+                'label' => 'Protocoles'
             ))
 
             ->add('save', SubmitType::class, array('label' => 'Sauvegarder'))

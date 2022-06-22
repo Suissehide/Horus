@@ -4,18 +4,17 @@ namespace App\Controller;
 
 use App\Constant\FormConstants;
 
-use App\Entity\BMQ;
 use App\Entity\Erreur;
 use App\Entity\Letter;
 use App\Entity\Medicament;
-use App\Entity\MedicamentsEntree;
+use App\Entity\Protocole;
 use App\Entity\Patient;
-use App\Entity\QCM;
-use App\Entity\Suivi;
 
 use App\Form\PatientType;
 
 use App\Repository\ErreurRepository;
+
+use App\Service\InitializePatient;
 
 use DateTime;
 use DateTimeZone;
@@ -53,31 +52,18 @@ class PatientController extends AbstractController
     /**
      * @Route("/patient/add", name="patient_add", methods={"GET", "POST"})
      */
-    public function patient_add(Request $request): Response
+    public function patient_add(Request $request, InitializePatient $initializePatient): Response
     {
         $patient = new Patient();
+
         $form = $this->createForm(PatientType::class, $patient);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $patient = $form->getData();
-
             $type = $form->get('general')->get('feuille')->getData();
-            switch ($type) {
-                case 'Ensemble 1':
-                    $patient->getProtocole()->setFiches(['bfr', 'testsEffort']);
-                    break;
 
-                case 'Ensemble 2':
-                    $patient->getProtocole()->setFiches(['echographieCardiaque', 'neuroPsychologie', 'visite']);
-                    break;
-
-                default:
-                    break;
-            }
-
-            $this->createMedicamentsEntree($patient);
-            $this->createSuivi($patient);
+            $initializePatient->createSuivi($patient, $type);
 
             $this->em->persist($patient);
             $this->em->flush();
@@ -90,102 +76,6 @@ class PatientController extends AbstractController
             'controller_name' => 'PatientController',
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/patient/add/suivi", name="patient_add_suivi", methods={"GET", "POST"})
-     */
-    public function patient_add_suivi(Request $request): Response
-    {
-        if ($request->isXmlHttpRequest()) {
-            $patientId = $request->request->get('patientId');
-
-            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
-            $this->createSuivi($patient);
-
-            return new JsonResponse('success!', Response::HTTP_CREATED);
-        }
-        return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
-    }
-
-    /**
-     * @Route("/patient/suivi/add", name="patient_suivi_add", methods={"GET", "POST"})
-     */
-    public function patient_suivi_add(Request $request): Response
-    {
-        if ($request->isXmlHttpRequest()) {
-            $patientId = $request->request->get('patientId');
-
-            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
-            $this->createSuivi($patient);
-            $this->em->flush();
-
-            return new JsonResponse('success!', Response::HTTP_CREATED);
-        }
-        return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
-    }
-
-    /**
-     * @Route("/patient/suivi/delete", name="patient_suivi_delete", methods={"GET", "POST"})
-     */
-    public function patient_suivi_delete(Request $request): Response
-    {
-        if ($request->isXmlHttpRequest()) {
-            $patientId = $request->request->get('patientId');
-            $suiviId = $request->request->get('suiviId');
-            
-            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
-            $suivi = $this->getDoctrine()->getRepository(Suivi::class)->find($suiviId);
-            $patient->removeSuivi($suivi);
-            $this->em->remove($suivi);
-            $this->em->flush();
-
-            return new JsonResponse('success!', Response::HTTP_OK);
-        }
-        return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
-    }
-
-    private function createMedicamentsEntree(Patient $patient)
-    {
-        $medicamentsEntree = new MedicamentsEntree();
-
-        foreach (FormConstants::LABELS["MEDICAMENTSENTREE_VERBATIMS_VECU"] as $name) {
-            $qcm = new QCM();
-            $medicamentsEntree->addVerbatim($qcm);
-        }
-
-        foreach (FormConstants::LABELS["MEDICAMENTSENTREE_VERBATIMS_SANTE"] as $name) {
-            $qcm = new QCM();
-            $medicamentsEntree->addVerbatimsSante($qcm);
-        }
-
-        foreach (FormConstants::LABELS["MEDICAMENTSENTREE_QUESTIONNAIRE"] as $name) {
-            $bmq = new BMQ();
-            $medicamentsEntree->addQuestionnaire($bmq);
-        }
-
-        $this->em->persist($medicamentsEntree);
-        $this->em->flush();
-        $patient->getProtocole()->setMedicamentsEntree($medicamentsEntree);
-    }
-
-    private function createSuivi(Patient $patient)
-    {
-        $suivi = new Suivi();
-
-        foreach (FormConstants::LABELS["SUIVI_FACTEUR"] as $name) {
-            $qcm = new Qcm();
-            $suivi->addFacteur($qcm);
-        }
-
-        foreach (FormConstants::LABELS["SUIVI_TRAITEMENT"] as $name) {
-            $qcm = new Qcm();
-            $suivi->addTraitement($qcm);
-        }
-
-        $this->em->persist($suivi);
-        $this->em->flush();
-        $patient->addSuivi($suivi);
     }
 
     /**
@@ -271,7 +161,6 @@ class PatientController extends AbstractController
         return $this->render('patient/index.html.twig', [
             'controller_name' => 'PatientController',
             'patient' => $patient,
-
             'form' => $form->createView(),
             'constants_labels' => FormConstants::LABELS,
         ]);
@@ -465,7 +354,7 @@ class PatientController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/patient/{id}/letter/static", name="patient_letter_static", methods={"GET", "POST"})
      */
     public function letter_static(Patient $patient): Response
@@ -498,12 +387,12 @@ class PatientController extends AbstractController
     public function medicament_entree_add(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $patientId = $request->request->get('patientId');
+            $protocoleId = $request->request->get('protocoleId');
             $medicamentId = $request->request->get('medicamentId');
 
-            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
+            $protocole = $this->getDoctrine()->getRepository(Protocole::class)->find($protocoleId);
             $medicament = $this->getDoctrine()->getRepository(Medicament::class)->find($medicamentId);
-            $patient->getProtocole()->getMedicamentsEntree()->addMedicament($medicament);
+            $protocole->getMedicamentsEntree()->addMedicament($medicament);
 
             $this->em->flush();
 
@@ -517,13 +406,13 @@ class PatientController extends AbstractController
     public function medicament_entree_delete(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $patientId = $request->request->get('patientId');
+            $protocoleId = $request->request->get('protocoleId');
             $medicamentId = $request->request->get('medicamentId');
 
-            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
+            $protocole = $this->getDoctrine()->getRepository(Protocole::class)->find($protocoleId);
             $medicament = $this->getDoctrine()->getRepository(Medicament::class)->find($medicamentId);
 
-            $patient->getProtocole()->getMedicamentsEntree()->removeMedicament($medicament);
+            $protocole->getMedicamentsEntree()->removeMedicament($medicament);
             $this->em->flush();
 
             return new JsonResponse(true);

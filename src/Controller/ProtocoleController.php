@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Patient;
+use App\Entity\Protocole;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,16 +21,18 @@ class ProtocoleController extends AbstractController
 
         if ($request->isXmlHttpRequest()) {
             $fiche = $request->request->get('fiche');
-            $patientId = $request->request->get('patientId');
+            $protocoleId = $request->request->get('protocoleId');
 
-            $patient = $em->getRepository(Patient::class)->find($patientId);
-            $fiches = $patient->getProtocole()->getFiches();
+            $protocole = $em->getRepository(Protocole::class)->find($protocoleId);
+            dump($protocole);
+            $fiches = $protocole->getFiches();
             array_push($fiches, $fiche);
-            $patient->getProtocole()->setFiches($fiches);
+            $protocole->setFiches($fiches);
             $em->flush();
 
-            return new JsonResponse(true);
+            return new JsonResponse('success!', Response::HTTP_OK);
         }
+        return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
     }
 
     /**
@@ -42,15 +44,16 @@ class ProtocoleController extends AbstractController
 
         if ($request->isXmlHttpRequest()) {
             $fiche = $request->request->get('fiche');
-            $patientId = $request->request->get('patientId');
-            $patient = $em->getRepository(Patient::class)->find($patientId);
+            $protocoleId = $request->request->get('protocoleId');
+            $protocole = $em->getRepository(Protocole::class)->find($protocoleId);
 
-            $patient->getProtocole()->setFiches(
-                array_diff($patient->getProtocole()->getFiches(), [$fiche])
+            $protocole->setFiches(
+                array_diff($protocole->getFiches(), [$fiche])
             );
             $em->flush();
 
-            return new JsonResponse(true);
+            return new JsonResponse('success!', Response::HTTP_OK);
         }
+        return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
     }
 }

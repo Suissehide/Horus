@@ -49,7 +49,7 @@
                             </div>
 						</a>
 					</li>
-					<li class='sub-menu'>
+					<li class="sub-menu">
 						<a href='#general'>
 							<div class="menu-title">
 								<i class='fa fa-stethoscope'></i>
@@ -70,7 +70,7 @@
                             </div>
 						</a>
 					</li>
-                    <li class='sub-menu'>
+                    <li class="sub-menu">
 						<a href='#information'>
 							<div class="menu-title">
 								<i class='fa fa-notes-medical'></i>
@@ -91,46 +91,58 @@
                             </div>
 						</a>
 					</li>
-					<li class='sub-menu'>
-						<a href='#examen'>
-							<div class="menu-title">
-								<i class='fa fa-procedures'></i>
-								<div>Examens paracliniques</div>
-                            </div>
-							<i class='fa fa-caret-down right'></i>
-						</a>
-						<ul class="protocole-list">
-                            {% for fiche in patient.protocole.fiches %}
-                                {# {% if fiche == 'angioplastiePontage' %}<li><a name='angioplastiePontage'>Angioplastie et pontage</a></li>{% endif %} #}
-                                {% if fiche == 'bfr' %}<li><a name='bfr'>Bilan biologique et risque</a></li>{% endif %}
-                                {# {% if fiche == 'catheterisation' %}<li><a name='catheterisation'>Cathétérisation</a></li>{% endif %} #}
-                                {% if fiche == 'anatomieCoronaire' %}<li><a name="anatomieCoronaire">Anatomie coronaire</a></li>{% endif %}
-                                {% if fiche == 'echographie' %}<li><a name="echographie">Échographie</a></li>{% endif %}
-                                {# {% if fiche == 'echographieCardiaque' %}<li><a name='echographieCardiaque'>Échographie cardiaque</a></li>{% endif %} #}
-                                {% if fiche == 'echographieVasculaire' %}<li><a name='echographieVasculaire'>Échographie vasculaire</a></li>{% endif %}
-                                {% if fiche == 'medicaments' %}<li><a name='medicaments'>Médicaments</a></li>{% endif %}
-                                {% if fiche == 'neuroPsychologie' %}<li><a name='neuroPsychologie'>Neuro-psychologie</a></li>{% endif %}
-                                {% if fiche == 'scintigraphie' %}<li><a name="scintigraphie">Scintigraphie</a></li>{% endif %}
-                                {% if fiche == 'testsEffort' %}<li><a name='testsEffort'>Épreuve d'effort</a></li>{% endif %}
-                                {# {% if fiche == 'visite' %}<li><a name='visite'>Visite</a></li>{% endif %} #}
-                            {% endfor %}
-						</ul>
-					</li>
-					<li>
+                    <li class="sub-menu">
 						<a href='#suivi'>
 							<div class="menu-title">
 								<i class="fa fa-clinic-medical"></i>
 								<div>Suivi</div>
                             </div>
+                            <i class='fa fa-caret-down right'></i>
 						</a>
+                        <ul class="suivi-list">
+                            {% for suivi in patient.suivis %}
+                                <li><a name={{"suivi-" ~ suivi.id}} data-protocole={{suivi.protocole.id}}>Suivi {{ loop.index }}</a></li>
+                            {% endfor %}
+                        </ul>
 					</li>
+                    {% set protocoleMenuIds = [] %}
+                    {% for suivi in patient.suivis %}
+                        {% if suivi.protocole.id not in protocoleMenuIds %}
+                        {% set protocoleMenuIds = protocoleMenuIds|merge([suivi.protocole.id]) %}
+                            <li class="sub-menu protocole-menu" data-protocole={{suivi.protocole.id}}>
+                                <a href={{'#examen-' ~ suivi.protocole.id}}>
+                                    <div class="menu-title">
+                                        <i class='fa fa-procedures'></i>
+                                        <div>Examens paracliniques {{ protocoleMenuIds|length }}</div>
+                                    </div>
+                                    <i class='fa fa-caret-down right'></i>
+                                </a>
+                                <ul class="protocole-list" data-protocole={{suivi.protocole.id}}>
+                                    {% for fiche in suivi.protocole.fiches %}
+                                        {# {% if fiche == 'angioplastiePontage' %}<li><a name='angioplastiePontage'>Angioplastie et pontage</a></li>{% endif %} #}
+                                        {% if fiche == 'bfr' %}<li><a name='bfr'>Bilan biologique et risque</a></li>{% endif %}
+                                        {# {% if fiche == 'catheterisation' %}<li><a name='catheterisation'>Cathétérisation</a></li>{% endif %} #}
+                                        {% if fiche == 'anatomieCoronaire' %}<li><a name="anatomieCoronaire">Anatomie coronaire</a></li>{% endif %}
+                                        {% if fiche == 'echographie' %}<li><a name="echographie">Échographie</a></li>{% endif %}
+                                        {# {% if fiche == 'echographieCardiaque' %}<li><a name='echographieCardiaque'>Échographie cardiaque</a></li>{% endif %} #}
+                                        {% if fiche == 'echographieVasculaire' %}<li><a name='echographieVasculaire'>Échographie vasculaire</a></li>{% endif %}
+                                        {% if fiche == 'medicaments' %}<li><a name='medicaments'>Médicaments</a></li>{% endif %}
+                                        {% if fiche == 'neuroPsychologie' %}<li><a name='neuroPsychologie'>Neuro-psychologie</a></li>{% endif %}
+                                        {% if fiche == 'scintigraphie' %}<li><a name="scintigraphie">Scintigraphie</a></li>{% endif %}
+                                        {% if fiche == 'testsEffort' %}<li><a name='testsEffort'>Épreuve d'effort</a></li>{% endif %}
+                                        {# {% if fiche == 'visite' %}<li><a name='visite'>Visite</a></li>{% endif %} #}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
                     <li>
                         <button id="js-reducemenu"><i class="fas fa-arrow-left"></i></button>
                     </li>
 				</ul>
 			</nav>
 
-            <section class="slide" id="tab-history" style="display: block;">
+            <section class="slide active" id="tab-history">
                 <h1 id="history">Historique</h1>
     
                 <div class="flex">
@@ -156,8 +168,6 @@
 
             {% form_theme form 'form-theme.html.twig' %}
 
-            {# {{ dump(form) }} #}
-
 			{#========== GENERAL ==========#}
 			<section class="slide" id="tab-general">
                 {% include 'patient/form/general.html.twig' with form %}
@@ -180,197 +190,251 @@
                 {% include 'patient/form/facteur.html.twig' with form %}
             </section>
 
-            {#========== EXAMEN ==========#}
-            <section class="slide" id="tab-examen">
-                <div class="form-space">
-                    <h3>Fiches d'examen déjà existantes</h3>
-                    <ul class="etiquettes__list">
-                        {% for fiche in patient.protocole.fiches %}
-                            <li name={{ fiche }} class='etiquette'>
-                                {# {% if fiche == 'angioplastiePontage' %}Angioplastie{% endif %} #}
-                                {% if fiche == 'bfr' %}Bilan biologique et risque{% endif %}
-                                {# {% if fiche == 'catheterisation' %}Cathétérisation{% endif %} #}
-                                {% if fiche == 'anatomieCoronaire' %}Anatomie coronaire{% endif %}
-                                {% if fiche == 'echographie' %}Échographie{% endif %}
-                                {# {% if fiche == 'echographieCardiaque' %}Échographie cardiaque{% endif %} #}
-                                {% if fiche == 'echographieVasculaire' %}Échographie vasculaire{% endif %}
-                                {% if fiche == 'medicaments' %}Médicaments{% endif %}
-                                {% if fiche == 'neuroPsychologie' %}Neuro-psychologie{% endif %}
-                                {% if fiche == 'scintigraphie' %}Scintigraphie{% endif %}
-                                {% if fiche == 'testsEffort' %}Épreuve d'effort{% endif %}
-                                {# {% if fiche == 'visite' %}Visite{% endif %} #}
-                                <span class="delete">
-                                    <i class="fa fa-times"></i>
-                                </span>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-
-                <div class="wrap-input">
-                    <h3>Ajouter une fiche d'examen</h3>
-                    <label for="protocole">
-                        <span></span>
-                        <em>Fiches</em>
-                    </label>
-                
-                    <div class="flex">
-                        <select id="protocole_fiches" name="protocole[fiches]" class="input">
-                            <option value=""></option>
-                            {# {% if "angioplastiePontage" not in patient.protocole.fiches %}<option value="angioplastiePontage">Angioplastie</option>{% endif %} #}
-                            {% if "bfr" not in patient.protocole.fiches %}<option value="bfr">Bilan biologique et risque</option>{% endif %}
-                            {# {% if "catheterisation" not in patient.protocole.fiches %}<option value="catheterisation">Cathétérisation</option>{% endif %} #}
-                            {% if "anatomieCoronaire" not in patient.protocole.fiches %}<option value="anatomieCoronaire">Anatomie coronaire</option>{% endif %}
-                            {% if "echographie" not in patient.protocole.fiches %}<option value="echographie">Échographie</option>{% endif %}
-                            {# {% if "echographieCardiaque" not in patient.protocole.fiches %}<option value="echographieCardiaque">Échographie cardiaque</option>{% endif %} #}
-                            {% if "echographieVasculaire" not in patient.protocole.fiches %}<option value="echographieVasculaire">Échographie vasculaire</option>{% endif %}
-                            {% if "medicaments" not in patient.protocole.fiches %}<option value="medicaments">Médicaments</option>{% endif %}
-                            {% if "neuroPsychologie" not in patient.protocole.fiches %}<option value="neuroPsychologie">Neuro-psychologie</option>{% endif %}
-                            {% if "scintigraphie" not in patient.protocole.fiches %}<option value="scintigraphie">Scintigraphie</option>{% endif %}
-                            {% if "testsEffort" not in patient.protocole.fiches %}<option value="testsEffort">Épreuve d'effort</option>{% endif %}
-                            {# {% if "visite" not in patient.protocole.fiches %}<option value="visite">Visite</option>{% endif %} #}
-                        </select>
-                        <span class="focus-input"></span>
-                    </div>
-                </div>
-                <button type="button" class="form-btn" id="add-fiche"><i aria-hidden="true" class="fa fa-plus"></i>Ajouter une fiche</button>
-                <div class="margin-space"></div>
-
-                <h1 id="examens">Examens paracliniques</h1>
-
-                <ul class="tabbed tabbed__fiches">
-                    {% for fiche in patient.protocole.fiches %}
-                        {# {% if fiche == 'angioplastiePontage' %}<li name="angioplastiePontage">Angioplastie</li>{% endif %} #}
-                        {% if fiche == 'bfr' %}<li name="bfr">Bilan biologique et risque</li>{% endif %}
-                        {# {% if fiche == 'catheterisation' %}<li name="catheterisation">Cathétérisation</li>{% endif %} #}
-                        {% if fiche == 'anatomieCoronaire' %}<li name="anatomieCoronaire">Anatomie coronaire</li>{% endif %}
-                        {% if fiche == 'echographie' %}<li name="echographie">Échographie</li>{% endif %}
-                        {# {% if fiche == 'echographieCardiaque' %}<li name="echographieCardiaque">Échographie cardiaque</li>{% endif %} #}
-                        {% if fiche == 'echographieVasculaire' %}<li name="echographieVasculaire">Échographie vasculaire</li>{% endif %}
-                        {% if fiche == 'medicaments' %}<li name="medicaments">Médicaments</li>{% endif %}
-                        {% if fiche == 'neuroPsychologie' %}<li name="neuroPsychologie">Neuro-psychologie</li>{% endif %}
-                        {% if fiche == 'scintigraphie' %}<li name="scintigraphie">Scintigraphie</li>{% endif %}
-                        {% if fiche == 'testsEffort' %}<li name="testsEffort">Épreuve d'effort</li>{% endif %}
-                        {# {% if fiche == 'visite' %}<li name="visite">Visite</li>{% endif %} #}
-                    {% endfor %}
-                </ul>
-
-                <ul class="tab-list">
-                    {#========== Angioplastie ==========#}
-					{#
-                    <li class="tab-content" name="angioplastiePontage">
-                        <div id="examen-angioplastiePontage">
-                            {% include 'patient/form/examens/angioplastie_pontage.html.twig' with form %}
-                        </div>
-                    </li>
-                    #}
-
-                    {#========== Bilan biologique et risque (BRF) ==========#}
-                    <li class="tab-content" name="bfr">
-                        <div id="examen-bfr">
-                            {% include 'patient/form/examens/bilan_biologique_risque.html.twig' with form %}
-                        </div>
-                    </li>
-
-                    {#========== Catheterisation ==========#}
-                    {#
-                    <li class="tab-content" name="catheterisation">
-                        <div id="examen-catheterisation">
-                            {% include 'patient/form/examens/catheterisation.html.twig' with form %}
-                        </div>
-                    </li>
-                    #}
-
-                    {#========== Anatomie coronaire ==========#}
-                    <li class="tab-content" name="anatomieCoronaire">
-                        <div id="examen-anatomieCoronaire">
-                            {% include 'patient/form/examens/anatomie_coronaire.html.twig' with form %}
-                        </div>
-                    </li>
-
-                    {#========== Échographie ==========#}
-                    <li class="tab-content" name="echographie">
-                        <div id="examen-echographie">
-                            {% include 'patient/form/examens/echographie.html.twig' with form %}
-                        </div>
-                    </li>
-
-                    {#========== Échographie cardiaque ==========#}
-                    {#
-                    <li class="tab-content" name="echographieCardiaque">
-                        <div id="examen-echographieCardiaque">
-                            {% include 'patient/form/examens/echographie_cardiaque.html.twig' with form %}
-                        </div>
-                    </li>
-                    #}
-
-                    {#========== Échographie vasculaire ==========#}
-                    <li class="tab-content" name="echographieVasculaire">
-                        <div id="examen-echographieVasculaire">
-                            {% include 'patient/form/examens/echographie_vasculaire.html.twig' with form %}
-                        </div>
-                    </li>
-
-                    {#========== Médicaments ==========#}
-                    <li class="tab-content" name="medicaments">
-                        <div id="examen-medicaments">
-                            {% include 'patient/form/examens/medicament.html.twig' with form %}
-                        </div>
-                    </li>
-
-                    {#========== NeuroPsychologie ==========#}
-                    <li class="tab-content" name="neuroPsychologie">
-                        <div id="examen-neuroPsychologie">
-                            {% include 'patient/form/examens/neuro_psychologie.html.twig' with form %}
-                        </div>
-                    </li>
-
-                    {#========== Scintigraphie ==========#}
-                    <li class="tab-content" name="scintigraphie">
-                        <div id="examen-scintigraphie">
-                            {% include 'patient/form/examens/scintigraphie.html.twig' with form %}
-                        </div>
-                    </li>
-
-                    {#========== Test d'effort ==========#}
-                    <li class="tab-content" name="testsEffort">
-                        <div id="examen-testsEffort">
-                            {% include 'patient/form/examens/tests_effort.html.twig' with form %}
-                        </div>
-                    </li>
-
-                    {#========== Visite ==========#}
-                    {#
-                    <li class="tab-content" name="visite">
-                        <div id="examen-visite">
-                            {% include 'patient/form/examens/visite.html.twig' with form %}
-                        </div>
-                    </li>
-                    #}
-                </ul>
-            </section>
 
 			{#========== SUIVI ==========#}
 			<section class="slide" id="tab-suivi">
+                <div class="wrap-input">
+                    <h3>Ajout d'un suivi</h3>
+
+                    <div class="protocole-choice">
+                        <div class="feuilles">
+                            <div class="wrap-input">
+                                <label for="protocole-existant">
+                                    <span></span>
+                                    <em>À partir d'un protocoles existants</em>
+                                </label>
+                                <div class="flex">
+                                    <select id="protocole_existant" name="protocole[existant]" class="input">
+                                        {% set protocoleOptionIds = [] %}
+                                        {% for suivi in patient.suivis %}
+                                            {% if suivi.protocole.id not in protocoleOptionIds %}
+                                                {% set protocoleOptionIds = protocoleOptionIds|merge([suivi.protocole.id]) %}
+                                                <option value={{suivi.protocole.id}}>Protocole {{ protocoleOptionIds|length }}</li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                    <span class="focus-input"></span>
+                                </div>
+                            </div>
+                            <button type="button" class="form-btn" id="suivi-add-existant"><i aria-hidden="true" class="fa fa-plus"></i>Ajouter un suivi</button>
+                        </div>
+
+                        <div class="feuilles">
+                            <div class="wrap-input">
+                                <label for="protocole-new">
+                                    <span></span>
+                                    <em>À partir d'un nouveau protocole</em>
+                                </label>
+                                <div class="flex">
+                                    <select id="protocole_new" name="protocole[new]" class="input">
+                                        {% for feuille in constants_labels["FEUILLES"] %}
+                                            <option value="{{ feuille }}">{{ feuille }}</li>
+                                        {% endfor %}
+                                    </select>
+                                    <span class="focus-input"></span>
+                                </div>
+                            </div>
+                            <button type="button" class="form-btn" id="suivi-add-new"><i aria-hidden="true" class="fa fa-plus"></i>Ajouter un suivi</button>
+                        </div>
+                    </div>
+                </div>
+
 				<h1 id="suivi">Liste des suivis</h1>
                 <ul class="tabbed tabbed__suivis">
                     {% for suivi in patient.suivis %}
-                        <li {%if loop.last %}class="active"{% endif %} name={{"suivi-" ~ loop.index }}>Suivi {{ loop.index }}</li>
+                        <li {%if loop.last %}class="active"{% endif %} name={{"suivi-" ~ suivi.id }} data-protocole={{suivi.protocole.id}}>Suivi {{ loop.index }}</li>
                     {% endfor %}
-                    <li class="suivi-add"><i class="fas fa-plus"></i>Ajouter un suivi</li>
                 </ul>
 
                 <ul class="tab-list">
                     {% for suivi in form.suivis %}
-                        <li class="tab-content {%if loop.last %}active{% endif %}" name={{"suivi-" ~ loop.index }}>
+                        <li class="tab-content {%if loop.last %}active{% endif %}" name={{"suivi-" ~ suivi.vars.value.id }}>
                             {% include 'patient/form/suivi.html.twig' with {'suivi': suivi, 'index': loop.index} %}
                         </li>
                     {% endfor %}
-
                 </ul>
 			</section>
 
+
+            {#========== EXAMEN ==========#}
+            {% set protocoleIds = [] %}
+            {% for suivi in form.suivis %}
+                {% if suivi.protocole.vars.value.id not in protocoleIds %}
+                {% set protocoleIds = protocoleIds|merge([suivi.protocole.vars.value.id]) %}
+                    <section class="slide" id={{'tab-examen-' ~ suivi.protocole.vars.value.id}} data-protocole={{suivi.protocole.vars.value.id}}>
+                        <div class="form-space">
+                            <h3>Fiches d'examen déjà existantes</h3>
+                            <ul class="etiquettes__list">
+                                {% for fiche in suivi.protocole.vars.value.fiches %}
+                                    <li name={{ fiche }} class='etiquette'>
+                                        {# {% if fiche == 'angioplastiePontage' %}Angioplastie{% endif %} #}
+                                        {% if fiche == 'bfr' %}Bilan biologique et risque{% endif %}
+                                        {# {% if fiche == 'catheterisation' %}Cathétérisation{% endif %} #}
+                                        {% if fiche == 'anatomieCoronaire' %}Anatomie coronaire{% endif %}
+                                        {% if fiche == 'echographie' %}Échographie{% endif %}
+                                        {# {% if fiche == 'echographieCardiaque' %}Échographie cardiaque{% endif %} #}
+                                        {% if fiche == 'echographieVasculaire' %}Échographie vasculaire{% endif %}
+                                        {% if fiche == 'medicaments' %}Médicaments{% endif %}
+                                        {% if fiche == 'neuroPsychologie' %}Neuro-psychologie{% endif %}
+                                        {% if fiche == 'scintigraphie' %}Scintigraphie{% endif %}
+                                        {% if fiche == 'testsEffort' %}Épreuve d'effort{% endif %}
+                                        {# {% if fiche == 'visite' %}Visite{% endif %} #}
+                                        <span class="delete">
+                                            <i class="fa fa-times"></i>
+                                        </span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        {% set fiches = suivi.protocole.vars.value.fiches %}
+
+                        <div class="wrap-input">
+                            <h3>Ajouter une fiche d'examen</h3>
+
+                            <label for="protocole">
+                                <span></span>
+                                <em>Fiches</em>
+                            </label>
+                            <div class="flex">
+                                <select id="protocole_fiches" name="protocole[fiches]" class="input">
+                                    <option value=""></option>
+                                    {# {% if "angioplastiePontage" not in fiches %}<option value="angioplastiePontage">Angioplastie</option>{% endif %} #}
+                                    {% if "bfr" not in fiches %}<option value="bfr">Bilan biologique et risque</option>{% endif %}
+                                    {# {% if "catheterisation" not in fiches %}<option value="catheterisation">Cathétérisation</option>{% endif %} #}
+                                    {% if "anatomieCoronaire" not in fiches %}<option value="anatomieCoronaire">Anatomie coronaire</option>{% endif %}
+                                    {% if "echographie" not in fiches %}<option value="echographie">Échographie</option>{% endif %}
+                                    {# {% if "echographieCardiaque" not in fiches %}<option value="echographieCardiaque">Échographie cardiaque</option>{% endif %} #}
+                                    {% if "echographieVasculaire" not in fiches %}<option value="echographieVasculaire">Échographie vasculaire</option>{% endif %}
+                                    {% if "medicaments" not in fiches %}<option value="medicaments">Médicaments</option>{% endif %}
+                                    {% if "neuroPsychologie" not in fiches %}<option value="neuroPsychologie">Neuro-psychologie</option>{% endif %}
+                                    {% if "scintigraphie" not in fiches %}<option value="scintigraphie">Scintigraphie</option>{% endif %}
+                                    {% if "testsEffort" not in fiches %}<option value="testsEffort">Épreuve d'effort</option>{% endif %}
+                                    {# {% if "visite" not in fiches %}<option value="visite">Visite</option>{% endif %} #}
+                                </select>
+                                <span class="focus-input"></span>
+                            </div>
+                        </div>
+                        <button type="button" class="form-btn" id="fiche-add"><i aria-hidden="true" class="fa fa-plus"></i>Ajouter une fiche</button>
+                        <div class="margin-space"></div>
+
+                        <h1 id="examens">Examens paracliniques {{ protocoleIds|length }}</h1>
+
+                        <ul class="tabbed tabbed__fiches">
+                            {% for fiche in fiches %}
+                                {# {% if fiche == 'angioplastiePontage' %}<li name="angioplastiePontage">Angioplastie</li>{% endif %} #}
+                                {% if fiche == 'bfr' %}<li name="bfr">Bilan biologique et risque</li>{% endif %}
+                                {# {% if fiche == 'catheterisation' %}<li name="catheterisation">Cathétérisation</li>{% endif %} #}
+                                {% if fiche == 'anatomieCoronaire' %}<li name="anatomieCoronaire">Anatomie coronaire</li>{% endif %}
+                                {% if fiche == 'echographie' %}<li name="echographie">Échographie</li>{% endif %}
+                                {# {% if fiche == 'echographieCardiaque' %}<li name="echographieCardiaque">Échographie cardiaque</li>{% endif %} #}
+                                {% if fiche == 'echographieVasculaire' %}<li name="echographieVasculaire">Échographie vasculaire</li>{% endif %}
+                                {% if fiche == 'medicaments' %}<li name="medicaments">Médicaments</li>{% endif %}
+                                {% if fiche == 'neuroPsychologie' %}<li name="neuroPsychologie">Neuro-psychologie</li>{% endif %}
+                                {% if fiche == 'scintigraphie' %}<li name="scintigraphie">Scintigraphie</li>{% endif %}
+                                {% if fiche == 'testsEffort' %}<li name="testsEffort">Épreuve d'effort</li>{% endif %}
+                                {# {% if fiche == 'visite' %}<li name="visite">Visite</li>{% endif %} #}
+                            {% endfor %}
+                        </ul>
+
+                        <ul class="tab-list">
+                            {#========== Angioplastie ==========#}
+                            {#
+                            <li class="tab-content" name="angioplastiePontage">
+                                <div id="examen-angioplastiePontage">
+                                    {% include 'patient/form/examens/angioplastie_pontage.html.twig' with form %}
+                                </div>
+                            </li>
+                            #}
+
+                            {#========== Bilan biologique et risque (BRF) ==========#}
+                            <li class="tab-content" name="bfr">
+                                <div id="examen-bfr">
+                                    {% include 'patient/form/examens/bilan_biologique_risque.html.twig' with {form: suivi} %}
+                                </div>
+                            </li>
+
+                            {#========== Catheterisation ==========#}
+                            {#
+                            <li class="tab-content" name="catheterisation">
+                                <div id="examen-catheterisation">
+                                    {% include 'patient/form/examens/catheterisation.html.twig' with {form: suivi} %}
+                                </div>
+                            </li>
+                            #}
+
+                            {#========== Anatomie coronaire ==========#}
+                            <li class="tab-content" name="anatomieCoronaire">
+                                <div id="examen-anatomieCoronaire">
+                                    {% include 'patient/form/examens/anatomie_coronaire.html.twig' with {form: suivi} %}
+                                </div>
+                            </li>
+
+                            {#========== Échographie ==========#}
+                            <li class="tab-content" name="echographie">
+                                <div id="examen-echographie">
+                                    {% include 'patient/form/examens/echographie.html.twig' with {form: suivi} %}
+                                </div>
+                            </li>
+
+                            {#========== Échographie cardiaque ==========#}
+                            {#
+                            <li class="tab-content" name="echographieCardiaque">
+                                <div id="examen-echographieCardiaque">
+                                    {% include 'patient/form/examens/echographie_cardiaque.html.twig' with {form: suivi} %}
+                                </div>
+                            </li>
+                            #}
+
+                            {#========== Échographie vasculaire ==========#}
+                            <li class="tab-content" name="echographieVasculaire">
+                                <div id="examen-echographieVasculaire">
+                                    {% include 'patient/form/examens/echographie_vasculaire.html.twig' with {form: suivi} %}
+                                </div>
+                            </li>
+
+                            {#========== Médicaments ==========#}
+                            <li class="tab-content" name="medicaments">
+                                <div id="examen-medicaments">
+                                    {% include 'patient/form/examens/medicament.html.twig' with {form: suivi} %}
+                                </div>
+                            </li>
+
+                            {#========== NeuroPsychologie ==========#}
+                            <li class="tab-content" name="neuroPsychologie">
+                                <div id="examen-neuroPsychologie">
+                                    {% include 'patient/form/examens/neuro_psychologie.html.twig' with {form: suivi} %}
+                                </div>
+                            </li>
+
+                            {#========== Scintigraphie ==========#}
+                            <li class="tab-content" name="scintigraphie">
+                                <div id="examen-scintigraphie">
+                                    {% include 'patient/form/examens/scintigraphie.html.twig' with {form: suivi} %}
+                                </div>
+                            </li>
+
+                            {#========== Test d'effort ==========#}
+                            <li class="tab-content" name="testsEffort">
+                                <div id="examen-testsEffort">
+                                    {% include 'patient/form/examens/tests_effort.html.twig' with {form: suivi} %}
+                                </div>
+                            </li>
+
+                            {#========== Visite ==========#}
+                            {#
+                            <li class="tab-content" name="visite">
+                                <div id="examen-visite">
+                                    {% include 'patient/form/examens/visite.html.twig' with {form: suivi} %}
+                                </div>
+                            </li>
+                            #}
+                        </ul>
+                    </section>
+                {% endif %}
+            {% endfor %}
             
+
             {{ form_row(form._token) }}
             {{ form_end(form, {'render_rest' : false}) }}
 		</main>
@@ -549,15 +613,22 @@
         * FICHES
         **********************************************************************/
         let fiches = [];
-        $.each({{patient.protocole.fiches|json_encode|raw}}, function (index, fiche) {
-            fiches[fiches.length] = fiche;
+        let patient = {{ patient.serializer | raw }};
+        $.each(patient.suivis, function (index, suivi) {
+            let id = suivi.protocole.id;
+            fiches[id] = [];
+            $.each(suivi.protocole.fiches, function (index, fiche) {
+                fiches[id][index] = fiche;
+            });
         });
 
-        $('#add-fiche').click(function() {
-            let fiche = $('#protocole_fiches').val()
+        $("main").on("click", "#fiche-add", function() {
+            let protocoleId = $(this).parents('section').attr("data-protocole");
+            let section = $("section[data-protocole=" + protocoleId + "]");
+            let fiche = section.find("#protocole_fiches").val();
             if (!fiche) return;
-            fiches.push(fiche);
-            let text = $('#protocole_fiches').find(":selected").text();
+            fiches[protocoleId].push(fiche);
+            let text = section.find('#protocole_fiches').find(":selected").text();
             let t = $(
                 `<li name='` + fiche + `' class='etiquette'>
                     ` + text + `
@@ -566,46 +637,49 @@
                     </span>
                 </li>`
             );
-            $('.etiquettes__list').append(t);
-            $('.tabbed__fiches').append('<li name="' + fiche + '">' + text + '</li>');
-            $('.protocole-list').append('<li><a name="' + fiche + '">' + text + '</a></li>');
-            $('#protocole_fiches option[value="' + fiche + '"').remove();
-            sortList('.etiquettes__list', 'li');
-            sortList('.tabbed__fiches', 'li');
-            sortList('.protocole-list', 'li', 'a');
-            sortList('#protocole_fiches', 'option');
-            $('#protocole_fiches option').eq(0).prop('selected', true);
-            if (fiches.length === 1) selectTab(fiche);
+            section.find('.etiquettes__list').append(t);
+            section.find('.tabbed__fiches').append('<li name="' + fiche + '">' + text + '</li>');
+            $(".protocole-list[data-protocole=" + protocoleId + "]").append('<li><a name="' + fiche + '">' + text + '</a></li>');
+            section.find("#protocole_fiches option[value='" + fiche + "']").remove();
+            sortAllList($('.etiquettes__list'), 'li');
+            sortAllList($('.tabbed__fiches'), 'li');
+            sortAllList($('.protocole-list'), 'li', 'a');
+            sortAllList($('#protocole_fiches'), 'option');
+            section.find('#protocole_fiches option').eq(0).prop('selected', true);
+            if (fiches[protocoleId].length === 1) selectTab(fiche);
 
             $.ajax({
                 type: "POST",
                 url: "{{ path('fiche_add') }}",
                 data: {
                     'fiche': fiche,
-                    'patientId': {{ patient.id }},
+                    'protocoleId': protocoleId
                 },
                 success: function(response) {},
             });
         })
 
         $('.etiquettes__list').on('click', '.etiquette .delete', function() {
+            let protocoleId = $(this).parents('section').attr("data-protocole");
+            let section = $("section[data-protocole=" + protocoleId + "]");
             let fiche = $(this).parent().attr('name');
             let text = $(this).parent().text();
-            const index = fiches.indexOf(fiche);
+            const index = (fiches[protocoleId]).indexOf(fiche);
             if (index > -1) {
-                fiches.splice(index, 1);
+                (fiches[protocoleId]).splice(index, 1);
             }
-            $('.etiquette[name="' + fiche + '"]').remove();
-            $('.tabbed__fiches li[name="' + fiche + '"]').remove();
-            $('.protocole-list li a[name="' + fiche + '"]').remove();
-            $('#protocole_fiches').append('<option value="' + fiche + '">' + text + '</option>')
-            sortList('.etiquettes__list', 'li');
-            sortList('.tabbed__fiches', 'li');
-            sortList('.protocole-list', 'li', 'a');
-            sortList('#protocole_fiches', 'option');
-            if (fiches.length === 0) clearTab();
+            section.find('.etiquette[name="' + fiche + '"]').remove();
+            section.find('.tabbed__fiches li[name="' + fiche + '"]').remove();
+            $(".protocole-list[data-protocole=" + protocoleId + "] li a[name='" + fiche + "']").remove();
+            section.find('#protocole_fiches').append('<option value="' + fiche + '">' + text + '</option>')
+            sortAllList($('.etiquettes__list'), 'li');
+            sortAllList($('.tabbed__fiches'), 'li');
+            sortAllList($('.protocole-list'), 'li', 'a');
+            sortAllList($('#protocole_fiches'), 'option');
+            section.find('#protocole_fiches option').eq(0).prop('selected', true);
+            if (fiches[protocoleId].length === 0) clearTab(section.find('.tabbed__fiches'));
             else if (!isTabAvailable(fiche)) {
-                let tab = $('.tabbed__fiches li').eq(0).attr('name');
+                let tab = section.find('.tabbed__fiches li').eq(0).attr('name');
                 selectTab(tab);
             }
 
@@ -614,31 +688,37 @@
                 url: "{{ path('fiche_delete') }}",
                 data: {
                     'fiche': fiche,
-                    'patientId': {{ patient.id }},
+                    'protocoleId': protocoleId
                 },
                 success: function(response) {},
             });
         })
 
-        function sortList(list, element, depth = '') {
-            $(list + " " + element).sort(function(a, b) {
+        function sortAllList(list, element, depth = '') {
+            $.each(list, function(i, e) { sortList(e, element, depth) });
+        }
+
+        function sortList(e, element, depth = '') {
+            $(e).find(element).sort(function(a, b) {
                 if (depth) {
                     return $(a).find(depth).text().trim().toUpperCase().localeCompare($(b).find(depth).text().trim().toUpperCase());
                 }
                 return $(a).text().trim().toUpperCase().localeCompare($(b).text().trim().toUpperCase());
-            }).appendTo(list);
+            }).appendTo(e);
         }
-        sortList('.etiquettes__list', 'li');
-        sortList('.tabbed__fiches', 'li');
-        sortList('.protocole-list', 'li', 'a');
-        sortList('#protocole_fiches', 'option');
+
+        sortAllList($('.etiquettes__list'), 'li');
+        sortAllList($('.tabbed__fiches'), 'li');
+        sortAllList($('.protocole-list'), 'li', 'a');
+        sortAllList($('#protocole_fiches'), 'option');
         $('#protocole_fiches option').eq(0).prop('selected', true);
 
         /*
         * MEDICAMENT
         **********************************************************************/
-        $('.medicament-add').click(function() {
-            let medicament = $('.js-medicaments-ajax').select2('data');
+        $('main').on('click', '#medicament-add', function() {
+            let medicament = $(this).parents('section').find('.js-medicaments-ajax').select2('data');
+            let protocoleId = $(this).parents('section').attr("data-protocole");
             if (!medicament || !medicament[0]) return;
             let t = $(
                 `<div class='medicament' data-id='` + medicament[0].id + `'>
@@ -648,35 +728,37 @@
                     </span>
                 </div>`
             );
-            if ($('.medicament[data-id="' + medicament[0].id + '"]').length === 0) {
-                $('.medicaments__list').append(t);
-                sortMedicamentsList();
-
+            if ($('section[data-protocole="' + protocoleId + '"] .medicament[data-id="' + medicament[0].id + '"]').length === 0) {
                 $.ajax({
                     type: "POST",
                     url: "{{ path('medicament_entree_add') }}",
                     data: {
                         'medicamentId': medicament[0].id,
-                        'patientId': {{ patient.id }},
+                        'protocoleId': protocoleId,
                     },
-                    success: function(response) {},
+                    success: function(response) {
+                        $('section[data-protocole="' + protocoleId + '"] .medicaments__list').append(t);
+                        sortMedicamentsList();
+                    },
                 });
             }
         })
 
         $('.medicaments__list').on('click', '.medicament .delete', function() {
             let medicamentId = $(this).parent().attr('data-id');
-            $('.medicament[data-id="' + medicamentId + '"]').remove();
-            sortMedicamentsList();
+            let protocoleId = $(this).parents('section').attr("data-protocole");
 
             $.ajax({
                 type: "POST",
                 url: "{{ path('medicament_entree_delete') }}",
                 data: {
                     'medicamentId': medicamentId,
-                    'patientId': {{ patient.id }},
+                    'protocoleId': protocoleId,
                 },
-                success: function(response) {},
+                success: function(response) {
+                    $('section[data-protocole="' + protocoleId + '"] .medicament[data-id="' + medicamentId + '"]').remove();
+                    sortMedicamentsList();
+                },
             });
         })
 
@@ -734,15 +816,16 @@
         }
 
         function sortMedicamentsList() {
-            let mylist = $('.medicaments__list');
-            let listitems = mylist.children('div').get();
+            $.each($('.medicaments__list'), function(i, e) {
+                let listitems = $(this).children('div').get();
 
-            listitems.sort(function(a, b) {
-                return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
-            });
+                listitems.sort(function(a, b) {
+                    return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
+                });
 
-            $.each(listitems, function(index, item) {
-                mylist.append(item); 
+                $.each(listitems, function(index, item) {
+                    $(this).append(item); 
+                });
             });
         }
         sortMedicamentsList();
@@ -802,18 +885,35 @@
         /*
         * SUIVI
         **********************************************************************/
-       $(".suivi-add").on('click', function() {
+        $("#suivi-add-new").on('click', function() {
+            let type = $("#protocole_new option").filter(":selected").val();
             $.ajax({
                 type: "POST",
-                url: "{{ path('patient_suivi_add') }}",
+                url: "{{ path('patient_suivi_add_new') }}",
                 data: {
                     'patientId': {{ patient.id }},
+                    'type': type
                 },
                 success: function(response) {
                     location.reload();
                 },
             });
-       })
+        })
+
+        $("#suivi-add-existant").on('click', function() {
+            let protocoleId = $("#protocole_existant option").filter(":selected").val();
+            $.ajax({
+                type: "POST",
+                url: "{{ path('patient_suivi_add_existant') }}",
+                data: {
+                    'patientId': {{ patient.id }},
+                    'protocoleId': protocoleId
+                },
+                success: function() {
+                    location.reload();
+                },
+            });
+        })
 
         $(".suivi-delete").on('click', function() {
             let suiviId = $(this).attr('data-suivi-id');
@@ -824,13 +924,13 @@
                     'patientId': {{ patient.id }},
                     'suiviId': suiviId
                 },
-                success: function(response) {
+                success: function() {
+                    $('.suivi-list li a[name="suivi-' + suiviId + '"]').remove();
                     $('.tab-list .tab-content[name="suivi-' + suiviId + '"]').remove();
                     $('.tabbed li[name="suivi-' + suiviId + '"]').remove();
                 },
             });
-       })
-
+        })
 
         /*
         * Motifs
@@ -879,12 +979,14 @@
             return ret;
         }
 
-        let tabNameSelected = localStorage.getItem('tabSelected');
-        let tabSelected = $('.tabbed__fiches li').eq(0);
-        if (tabNameSelected != null && isTabAvailable(tabNameSelected)) {
-            tabSelected = $(".tabbed__fiches li[name='" + tabNameSelected + "']")
+        function IsJsonString(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
         }
-        selectTab(tabSelected);
 
         $('ul.protocole-list').on('click', 'li a', function() {
             let tab = $(this).attr('name');
@@ -894,16 +996,32 @@
 
         function selectTab(obj) {
             let tab = $(obj).attr('name');
-            localStorage.setItem('tabSelected', tab);
             $(obj).parents("ul").next(".tab-list").find(".tab-content").removeClass('active');
             $(obj).parents("ul").find("li").removeClass('active');
             $("li[name='" + tab + "']").addClass('active');
         }
 
         function clearTab() {
-            localStorage.setItem('tabSelected', null);
             $(".tab-content").removeClass('active');
             $(".tabbed__fiches li").removeClass('active');
+        }
+
+        /* SUIVI */
+        $('.suivi-list').on('click', 'li a', function() {
+            let protocoleId = $(this).attr("data-protocole");
+            let n = $(this).attr('name');
+            selectTab($(".tabbed__suivis li[name='" + n + "']"));
+            selectProtocole(protocoleId);
+        })
+
+        $('.tabbed__suivis').on('click', 'li', function() {
+            let protocoleId = $(this).attr("data-protocole");
+            selectProtocole(protocoleId);
+        })
+
+        function selectProtocole(id) {
+            $(".protocole-menu").removeClass('active');
+            $(".protocole-menu[data-protocole=" + id + "]").addClass('active');
         }
 
         /* TOC */
@@ -911,11 +1029,9 @@
         function displaySlide(page) {
             $('.slide').each(function(i, e) {
                 let id = 'tab-' + page.substring(1);
-                $(this).hide();
-                $(this).removeClass('slide-active');
+                $(this).removeClass('active');
                 if ($(this).attr('id') == id) {
-                    $(this).show();
-                    $(this).addClass('slide-active');
+                    $(this).addClass('active');
                 }
             })
         }
@@ -1019,7 +1135,7 @@
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if (keycode == '13' && !$("textarea").is(":focus")) {
                 event.preventDefault();
-                $(this).find('.slide-active form').submit();
+                $(this).find('.slide.active form').submit();
             }
         });
     </script>

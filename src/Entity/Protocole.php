@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProtocoleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -94,6 +96,16 @@ class Protocole
      * @Groups({"advancement", "export"})
      */
     private $visite;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Suivi::class, mappedBy="protocole", cascade={"persist", "remove"})
+     */
+    private $suivis;
+
+    public function __construct()
+    {
+        $this->suivis = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -252,6 +264,36 @@ class Protocole
     public function setVisite(?Visite $visite): self
     {
         $this->visite = $visite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Suivi>
+     */
+    public function getSuivis(): Collection
+    {
+        return $this->suivis;
+    }
+
+    public function addSuivi(Suivi $suivi): self
+    {
+        if (!$this->suivis->contains($suivi)) {
+            $this->suivis[] = $suivi;
+            $suivi->setProtocole($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSuivi(Suivi $suivi): self
+    {
+        if ($this->suivis->removeElement($suivi)) {
+            // set the owning side to null (unless already changed)
+            if ($suivi->getProtocole() === $this) {
+                $suivi->setProtocole(null);
+            }
+        }
 
         return $this;
     }

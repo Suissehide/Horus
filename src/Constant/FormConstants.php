@@ -5,6 +5,13 @@ namespace App\Constant;
 class FormConstants
 {
 	const LABELS = [
+		"FEUILLES" => [
+			'Ensemble 1',
+			'Ensemble 2',
+			'Ensemble 3',
+			'Ensemble 4'
+		],
+
 		"MEDICAMENTSENTREE_VERBATIMS_VECU" => [
 			'Non compréhension des génériques',
 			'Refus des génériques',

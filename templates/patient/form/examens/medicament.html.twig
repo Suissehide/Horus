@@ -119,7 +119,7 @@
 
 <div class="form-space">
 	<div class="medicaments__list">
-		{% for medicament in patient.protocole.medicamentsEntree.medicaments %}
+		{% for medicament in suivi.protocole.medicamentsEntree.vars.value.medicaments %}
 			<div data-id='{{ medicament.id }}' class='medicament'>
 				{{ medicament.name }}
 				<span class="delete">
@@ -132,7 +132,7 @@
 <div class="form-space">
 	<div class="btn-bar">
 		<select class="js-medicaments-ajax"></select>
-		<button type="button" class="btn medicament-add" data-collection-holder-class="medicaments">
+		<button type="button" class="btn" id="medicament-add">
 			<i class="fa fa-plus"></i>
 			Ajouter un médicaments
 		</button>

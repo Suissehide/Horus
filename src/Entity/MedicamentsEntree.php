@@ -113,7 +113,7 @@ class MedicamentsEntree
     private $vecuTraitement;
 
     /**
-     * @ORM\ManyToMany(targetEntity=BMQ::class, cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity=BMQ::class, cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\JoinTable(name="medicaments_entree_bmq_questionnaire",
      *      joinColumns={@ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="bmq_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}

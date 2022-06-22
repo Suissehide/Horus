@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\PatientRepository;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -45,12 +48,6 @@ class Patient
     private $facteur;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Protocole", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
-    private $protocole;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Erreur", mappedBy="patient", cascade={"remove"})
      */
     private $erreurs;
@@ -64,6 +61,20 @@ class Patient
     {
         $this->erreurs = new ArrayCollection();
         $this->suivis = new ArrayCollection();
+    }
+
+    public function serializer()
+    {
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        return $serializer->serialize($this, 'json', [
+            'groups' => 'advancement',
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            },
+        ]);
     }
 
     public function getId(): ?int
@@ -115,18 +126,6 @@ class Patient
     public function setFacteur(?Facteur $facteur): self
     {
         $this->facteur = $facteur;
-
-        return $this;
-    }
-
-    public function getProtocole(): ?Protocole
-    {
-        return $this->protocole;
-    }
-
-    public function setProtocole(?Protocole $protocole): self
-    {
-        $this->protocole = $protocole;
 
         return $this;
     }

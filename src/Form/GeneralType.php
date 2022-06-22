@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use App\Constant\FormConstants;
+
 use App\Entity\General;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,6 +17,11 @@ class GeneralType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $choices = array();
+        foreach (FormConstants::LABELS["FEUILLES"] as $feuille) {
+            $choices[$feuille] = $feuille;
+        }
+
         $builder
             ->add('civilite', ChoiceType::class, array(
                 'label' => 'Civilité',
@@ -130,12 +137,7 @@ class GeneralType extends AbstractType
                 'expanded' => false,
                 'multiple' => false,
                 'placeholder' => false,
-                'choices' => array(
-                    '' => '',
-                    'Ensemble 1' => 'Ensemble 1',
-                    'Ensemble 2' => 'Ensemble 2',
-                    'Ensemble 3' => 'Ensemble 3'
-                ),
+                'choices' => $choices,
                 'mapped' => false
             ])
 
