@@ -140,6 +140,162 @@
                     </div>
                 </section>
 
+                <section class="slide" style="display: block">
+                    <h1 id="information">Information sur l'événement cardiovasculaire</h1>
+                    <h3 id="infarctusMyocarde">Type d'infarctus du myocarde</h3>
+                    <div class="form-space">
+                        <div><strong>Sus-décalage du segment ST : </strong>{{ patient.information.susDecalage }}</div>
+
+                        <div class="margin-space"></div>
+                        <h5>Territoire atteint</h5>
+                        <div><strong>Antérieur : </strong>{{ patient.information.anterieur }}</div>
+                        <div><strong>Septo-apical : </strong>{{ patient.information.septoApical }}</div>
+                        <div><strong>Latéral : </strong>{{ patient.information.lateral }}</div>
+                        <div><strong>Inférieur / Postérieur : </strong>{{ patient.information.inferieurPosterieur }}</div>
+                        <div><strong>Sans territoire : </strong>{{ patient.information.sansTerritoire }}</div>
+
+                        <div class="margin-space"></div>
+                        <h5>Coronarographie (sténose > 50%)</h5>
+                        <div><strong>IVA : </strong>{{ patient.information.IVA }}</div>
+                        <div><strong>CD : </strong>{{ patient.information.CD }}</div>
+                        <div><strong>Cx : </strong>{{ patient.information.Cx }}</div>
+                        <div><strong>Marginale : </strong>{{ patient.information.marginale }}</div>
+                        <div><strong>Diagonale : </strong>{{ patient.information.diagonale }}</div>
+                        <div><strong>Pontage : </strong>{{ patient.information.pontage }}</div>
+                        <div><strong>Tronc commun : </strong>{{ patient.information.troncCommun }}</div>
+                    </div>
+
+                    <div class="margin-space"></div>
+                    <h5>Traitement à la phase aiguë</h5>
+                    <div><strong>Traitement : </strong> 
+                        <div class="form-space">
+                            {% for t in patient.information.traitementPhaseAigue %}
+                                {{ t }}{% if loop.last == false %}, {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="margin-space"></div>
+                    <h5>Complications immédiates</h5>
+                    <div class="form-space">
+                        <div><strong>Trouble du rythme ventriculaire : </strong>{{ patient.information.troubleRythmeVentriculaire }}</div>
+                        <div><strong>Insuffisance cardiaque : </strong>{{ patient.information.insuffisanceCardiaque }}</div>
+                        <div><strong>Péricardite : </strong>{{ patient.information.pericardite }}</div>
+                        <div><strong>Complication mécanique : </strong>{{ patient.information.complicationMecanique }}</div>
+                    </div>
+
+                    <h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
+                    <div class="form-space">
+                        <div><strong>Localisation : </strong>{{ patient.information.localisation }}</div>
+                        <div><strong>Taille : </strong>{{ patient.information.taille }}</div>
+                        <div><strong>Mécanisme : </strong>{{ patient.information.mecanisme }}</div>
+                    </div>
+                </section>
+
+                <section class="slide" style="display: block">
+                    <h1 id="information">Information sur l'événement cardiovasculaire</h1>
+                    <h3 id="infarctusMyocarde">Type d'infarctus du myocarde</h3>
+                    <div class="form-space">
+                        <div><strong>Sus-décalage du segment ST : </strong>{{ patient.information.susDecalage }}</div>
+
+                        <div class="margin-space"></div>
+                        <h5>Territoire atteint</h5>
+                        <div><strong>Antérieur : </strong>{{ patient.information.anterieur }}</div>
+                        <div><strong>Septo-apical : </strong>{{ patient.information.septoApical }}</div>
+                        <div><strong>Latéral : </strong>{{ patient.information.lateral }}</div>
+                        <div><strong>Inférieur / Postérieur : </strong>{{ patient.information.inferieurPosterieur }}</div>
+                        <div><strong>Sans territoire : </strong>{{ patient.information.sansTerritoire }}</div>
+
+                        <div class="margin-space"></div>
+                        <h5>Coronarographie (sténose > 50%)</h5>
+                        <div><strong>IVA : </strong>{{ patient.information.IVA }}</div>
+                        <div><strong>CD : </strong>{{ patient.information.CD }}</div>
+                        <div><strong>Cx : </strong>{{ patient.information.Cx }}</div>
+                        <div><strong>Marginale : </strong>{{ patient.information.marginale }}</div>
+                        <div><strong>Diagonale : </strong>{{ patient.information.diagonale }}</div>
+                        <div><strong>Pontage : </strong>{{ patient.information.pontage }}</div>
+                        <div><strong>Tronc commun : </strong>{{ patient.information.troncCommun }}</div>
+                    </div>
+
+                    <div class="margin-space"></div>
+                    <h5>Traitement à la phase aiguë</h5>
+                    <div><strong>Traitement : </strong> 
+                        <div class="form-space">
+                            {% for t in patient.information.traitementPhaseAigue %}
+                                {{ t }}{% if loop.last == false %}, {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="margin-space"></div>
+                    <h5>Complications immédiates</h5>
+                    <div class="form-space">
+                        <div><strong>Trouble du rythme ventriculaire : </strong>{{ patient.information.troubleRythmeVentriculaire }}</div>
+                        <div><strong>Insuffisance cardiaque : </strong>{{ patient.information.insuffisanceCardiaque }}</div>
+                        <div><strong>Péricardite : </strong>{{ patient.information.pericardite }}</div>
+                        <div><strong>Complication mécanique : </strong>{{ patient.information.complicationMecanique }}</div>
+                    </div>
+
+                    <h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
+                    <div class="form-space">
+                        <div><strong>Localisation : </strong>{{ patient.information.localisation }}</div>
+                        <div><strong>Taille : </strong>{{ patient.information.taille }}</div>
+                        <div><strong>Mécanisme : </strong>{{ patient.information.mecanisme }}</div>
+                    </div>
+                </section>
+
+                <section class="slide" style="display: block">
+                    <h1 id="information">Information sur l'événement cardiovasculaire</h1>
+                    <h3 id="infarctusMyocarde">Type d'infarctus du myocarde</h3>
+                    <div class="form-space">
+                        <div><strong>Sus-décalage du segment ST : </strong>{{ patient.information.susDecalage }}</div>
+
+                        <div class="margin-space"></div>
+                        <h5>Territoire atteint</h5>
+                        <div><strong>Antérieur : </strong>{{ patient.information.anterieur }}</div>
+                        <div><strong>Septo-apical : </strong>{{ patient.information.septoApical }}</div>
+                        <div><strong>Latéral : </strong>{{ patient.information.lateral }}</div>
+                        <div><strong>Inférieur / Postérieur : </strong>{{ patient.information.inferieurPosterieur }}</div>
+                        <div><strong>Sans territoire : </strong>{{ patient.information.sansTerritoire }}</div>
+
+                        <div class="margin-space"></div>
+                        <h5>Coronarographie (sténose > 50%)</h5>
+                        <div><strong>IVA : </strong>{{ patient.information.IVA }}</div>
+                        <div><strong>CD : </strong>{{ patient.information.CD }}</div>
+                        <div><strong>Cx : </strong>{{ patient.information.Cx }}</div>
+                        <div><strong>Marginale : </strong>{{ patient.information.marginale }}</div>
+                        <div><strong>Diagonale : </strong>{{ patient.information.diagonale }}</div>
+                        <div><strong>Pontage : </strong>{{ patient.information.pontage }}</div>
+                        <div><strong>Tronc commun : </strong>{{ patient.information.troncCommun }}</div>
+                    </div>
+
+                    <div class="margin-space"></div>
+                    <h5>Traitement à la phase aiguë</h5>
+                    <div><strong>Traitement : </strong> 
+                        <div class="form-space">
+                            {% for t in patient.information.traitementPhaseAigue %}
+                                {{ t }}{% if loop.last == false %}, {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="margin-space"></div>
+                    <h5>Complications immédiates</h5>
+                    <div class="form-space">
+                        <div><strong>Trouble du rythme ventriculaire : </strong>{{ patient.information.troubleRythmeVentriculaire }}</div>
+                        <div><strong>Insuffisance cardiaque : </strong>{{ patient.information.insuffisanceCardiaque }}</div>
+                        <div><strong>Péricardite : </strong>{{ patient.information.pericardite }}</div>
+                        <div><strong>Complication mécanique : </strong>{{ patient.information.complicationMecanique }}</div>
+                    </div>
+
+                    <h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
+                    <div class="form-space">
+                        <div><strong>Localisation : </strong>{{ patient.information.localisation }}</div>
+                        <div><strong>Taille : </strong>{{ patient.information.taille }}</div>
+                        <div><strong>Mécanisme : </strong>{{ patient.information.mecanisme }}</div>
+                    </div>
+                </section>
+
                 {#========== FACTEUR ==========#}
                 <section class="slide" style="display: block">
                     <h1 id="facteur">Facteurs de risques initiaux</h1>
@@ -196,7 +352,7 @@
                                 <div><strong>État : </strong>{{ patient.facteur.tabagisme }}</div>
                             </div>
                             <div class="flex-1">
-                                <div><strong>Date d'arrêt : </strong>{{ patient.facteur.dateArret }}</div>
+                                <div><strong>Date d'arrêt : </strong>{{ patient.facteur.dateArret|date("d/m/Y") }}</div>
                             </div>
                             <div class="flex-1">
                                 <div><strong>Nombres de paquets par an : </strong>{{ patient.facteur.nombrePaquetsAn }}</div>
@@ -259,37 +415,8 @@
         * HTML TO PDF
         **********************************************************************/
         $('#export').on('click', function () {
-            {# splitHTMLtoMultiPagePDF(); #}
             createPDFObject();
         });
-
-        function splitHTMLtoMultiPagePDF() {
-            var htmlWidth = $(".letter__content").width();
-            var htmlHeight = $(".letter__content").height();
-            var pdfWidth = htmlWidth + (15 * 2);
-            var pdfHeight = (pdfWidth * 1.5) + (15 * 2);
-            
-            var doc = new jsPDF('p', 'pt', 'a4', [pdfWidth, pdfHeight]);
-
-            var pageCount = Math.ceil(htmlHeight / pdfHeight) - 1;
-
-            html2canvas($(".letter__content")[0], { allowTaint: true }).then(function(canvas) {
-                canvas.getContext('2d');
-
-                var image = canvas.toDataURL("image/png", 1.0);
-                doc.addImage(image, 'PNG', 15, 15, htmlWidth, htmlHeight);
-
-                for (var i = 1; i <= pageCount; i++) {
-                    doc.addPage(pdfWidth, pdfHeight);
-                    doc.addImage(image, 'PNG', 15, -(pdfHeight * i) + 15, htmlWidth, htmlHeight);
-                }
-                let date = new Date().
-                    toLocaleString('fr-FR', {year: 'numeric', month: '2-digit', day: '2-digit'}).
-                    replace(/(\d+)\/(\d+)\/(\d+)/, '$1-$2-$3');
-                doc.save("Horus_{{patient.general.nom}}-{{patient.general.prenom}}_" + date + ".pdf");
-            });
-        };
-
 
         function createPDFObject() {
             html2canvas($(".letter__content")[0]).then(function(canvas) {
@@ -314,13 +441,14 @@
 
                     //There are two heights to distinguish, one is the actual height of the html page, and the height of the generated pdf page (841.89)
                     //When the content does not exceed the display range of one page of pdf, paging is not required
+                    var margin = 25;
                     if (leftHeight < pageHeight) {
-                        pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight );
+                        pdf.addImage(pageData, 'JPEG', margin, margin, imgWidth - margin, imgHeight - margin);
                     } else {
                         while(leftHeight > 0) {
-                            pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
-                            leftHeight -= pageHeight;
-                            position -= 841.89;
+                            pdf.addImage(pageData, 'JPEG', margin, position + margin, imgWidth - margin, imgHeight - margin)
+                            leftHeight -= pageHeight - margin;
+                            position -= 841.89 - margin;
                             //Avoid adding blank pages
                             if(leftHeight > 0) {
                                 pdf.addPage();

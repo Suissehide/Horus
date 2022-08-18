@@ -443,8 +443,8 @@
 			<a href="{{ path('index_patient') }}" class="cd-btn btn-back">
 				<i aria-hidden="true" class="fa fa-arrow-left"></i>
 			</a>
-			<button class="cd-btn btn-delete">
-				<i aria-hidden="true" class="fa fa-trash"></i>
+			<button class="cd-btn btn-check">
+				<i aria-hidden="true" class="fa fa-save"></i>
 			</button>
 			<a class="cd-btn btn-top" href="#0">
 				<i aria-hidden="true" class="fa fa-chevron-up"></i>
@@ -998,6 +998,7 @@
             let tab = $(obj).attr('name');
             $(obj).parents("ul").next(".tab-list").find(".tab-content").removeClass('active');
             $(obj).parents("ul").find("li").removeClass('active');
+            clearTab();
             $("li[name='" + tab + "']").addClass('active');
         }
 
