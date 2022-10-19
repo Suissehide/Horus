@@ -14,9 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HistoryController extends AbstractController
 {
-    /**
-     * @Route("/patient/{patient}/history/{fieldId}", name="history_list_field")
-     */
+    #[Route(path: '/patient/{patient}/history/{fieldId}', name: 'history_list_field')]
     public function index(ErreurRepository $erreurRepository, Patient $patient, $fieldId, Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {

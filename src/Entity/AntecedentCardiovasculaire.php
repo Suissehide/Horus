@@ -5,86 +5,51 @@ namespace App\Entity;
 use App\Repository\AntecedentCardiovasculaireRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=AntecedentCardiovasculaireRepository::class)
- */
+#[ORM\Entity(repositoryClass: AntecedentCardiovasculaireRepository::class)]
 class AntecedentCardiovasculaire
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $IDM_SCA;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $angorStable;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $angioplastieCoronaire;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $pontageCoronaire;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $insuffisanceCardiaque;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $AVC;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $AIT;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $endarteriectomieCarotidienne;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $arteriteMembresInferieurs;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $angioplastiePeripherique;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $pontagePeripherique;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $antecedentFibrillationAuriculaire;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $antecedentInsuffisanceCardiaque;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $valvulopathie;
 
     public function getId(): ?int
@@ -232,18 +197,6 @@ class AntecedentCardiovasculaire
     public function setAntecedentFibrillationAuriculaire(?string $antecedentFibrillationAuriculaire): self
     {
         $this->antecedentFibrillationAuriculaire = $antecedentFibrillationAuriculaire;
-
-        return $this;
-    }
-
-    public function getAntecedentInsuffisanceCardiaque(): ?string
-    {
-        return $this->antecedentInsuffisanceCardiaque;
-    }
-
-    public function setAntecedentInsuffisanceCardiaque(?string $antecedentInsuffisanceCardiaque): self
-    {
-        $this->antecedentInsuffisanceCardiaque = $antecedentInsuffisanceCardiaque;
 
         return $this;
     }

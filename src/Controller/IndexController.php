@@ -17,9 +17,11 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class IndexController extends AbstractController
 {
-    /**
-     * @Route("/index", name="index_patient")
-     */
+    public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry, private \Symfony\Component\Serializer\SerializerInterface $serializer)
+    {
+    }
+
+    #[Route(path: '/index', name: 'index_patient')]
     public function index(): Response
     {
         return $this->render('index/index.html.twig', [
@@ -27,9 +29,7 @@ class IndexController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/patient/list", name="patient_list")
-     */
+    #[Route(path: '/patient/list', name: 'patient_list')]
     public function list(Request $request, PatientRepository $patientRepository): Response
     {
         if ($request->isXmlHttpRequest()) {
@@ -74,16 +74,14 @@ class IndexController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/advancement", name="advancement", methods={"GET", "POST"})
-     */
+    #[Route(path: '/advancement', name: 'advancement', methods: ['GET', 'POST'])]
     public function advancement(Request $request): Response
     {
-        $conn = $this->getDoctrine()->getConnection();
+        $conn = $this->managerRegistry->getConnection();
 
         if ($request->isXmlHttpRequest()) {
             $id = $request->request->get('id');
-            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($id);
+            $patient = $this->managerRegistry->getRepository(Patient::class)->find($id);
 
             $RAW_QUERY = 'SELECT f.field_id
             FROM (
@@ -159,7 +157,7 @@ class IndexController extends AbstractController
 
     private function serializeEntity($data)
     {
-        $res = $this->get('serializer')->normalize(
+        $res = $this->serializer->normalize(
             $data,
             'json',
             ['groups' => ['advancement']]
@@ -167,14 +165,12 @@ class IndexController extends AbstractController
         return $res;
     }
 
-    /**
-     * @Route("/export/csv", name="export_csv", methods={"GET"})
-     */
+    #[Route(path: '/export/csv', name: 'export_csv', methods: ['GET'])]
     public function generateCsvAction(PatientRepository $patientRepository)
     {
         $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
 
-        $res = $this->get('serializer')->normalize(
+        $res = $this->serializer->normalize(
             $patientRepository->findAll(),
             'json',
             ['groups' => ['export']]
@@ -184,7 +180,7 @@ class IndexController extends AbstractController
         $data = str_replace(",", ";", $data);
         $fileName = "export_patient_" . date("d_m_Y") . ".csv";
         $response = new Response($data);
-        $response->setStatusCode(200);
+        $response->setStatusCode(\Symfony\Component\HttpFoundation\Response::HTTP_OK);
         $response->headers->set('Content-Type', 'text/csv; charset=UTF-8; application/excel');
         $response->headers->set('Content-Disposition', 'attachment; filename=' . $fileName);
         echo "\xEF\xBB\xBF"; // UTF-8 with BOM

@@ -42,7 +42,7 @@ class EntityNormalizer extends ObjectNormalizer
         $this->em = $em;
     }
 
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization($data, $type, $format = null): bool
     {
         return strpos($type, 'App\\Entity\\') === 0 && (is_numeric($data) || is_string($data));
     }
@@ -52,7 +52,7 @@ class EntityNormalizer extends ObjectNormalizer
         return $this->em->find($class, $data);
     }
 
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof \DateTime;
     }

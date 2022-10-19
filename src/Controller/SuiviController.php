@@ -23,21 +23,19 @@ class SuiviController extends AbstractController
      */
     private $em;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
     {
         $this->em = $entityManager;
     }
 
-    /**
-     * @Route("/patient/suivi/add/new", name="patient_suivi_add_new", methods={"GET", "POST"})
-     */
+    #[Route(path: '/patient/suivi/add/new', name: 'patient_suivi_add_new', methods: ['GET', 'POST'])]
     public function patient_suivi_add_new(Request $request, InitializePatient $initializePatient): Response
     {
         if ($request->isXmlHttpRequest()) {
             $patientId = $request->request->get('patientId');
             $type = $request->request->get('type');
 
-            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
+            $patient = $this->managerRegistry->getRepository(Patient::class)->find($patientId);
             $initializePatient->createSuivi($patient, $type);
             $this->em->flush();
 
@@ -46,17 +44,15 @@ class SuiviController extends AbstractController
         return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
     }
 
-    /**
-     * @Route("/patient/suivi/add/existant", name="patient_suivi_add_existant", methods={"GET", "POST"})
-     */
+    #[Route(path: '/patient/suivi/add/existant', name: 'patient_suivi_add_existant', methods: ['GET', 'POST'])]
     public function patient_suivi_add_existant(Request $request, InitializePatient $initializePatient): Response
     {
         if ($request->isXmlHttpRequest()) {
             $patientId = $request->request->get('patientId');
             $protocoleId = $request->request->get('protocoleId');
 
-            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
-            $protocole = $this->getDoctrine()->getRepository(Protocole::class)->find($protocoleId);
+            $patient = $this->managerRegistry->getRepository(Patient::class)->find($patientId);
+            $protocole = $this->managerRegistry->getRepository(Protocole::class)->find($protocoleId);
             $suivi = new Suivi();
             $suivi->setProtocole($protocole);
             $patient->addSuivi($suivi);
@@ -69,17 +65,15 @@ class SuiviController extends AbstractController
         return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
     }
 
-    /**
-     * @Route("/patient/suivi/delete", name="patient_suivi_delete", methods={"GET", "POST"})
-     */
+    #[Route(path: '/patient/suivi/delete', name: 'patient_suivi_delete', methods: ['GET', 'POST'])]
     public function patient_suivi_delete(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
             $patientId = $request->request->get('patientId');
             $suiviId = $request->request->get('suiviId');
             
-            $patient = $this->getDoctrine()->getRepository(Patient::class)->find($patientId);
-            $suivi = $this->getDoctrine()->getRepository(Suivi::class)->find($suiviId);
+            $patient = $this->managerRegistry->getRepository(Patient::class)->find($patientId);
+            $suivi = $this->managerRegistry->getRepository(Suivi::class)->find($suiviId);
             $patient->removeSuivi($suivi);
             $this->em->remove($suivi);
             $this->em->flush();

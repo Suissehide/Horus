@@ -12,12 +12,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProtocoleController extends AbstractController
 {
-    /**
-     * @Route("/fiche/add", name="fiche_add")
-     */
+    public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
+    {
+    }
+    #[Route(path: '/fiche/add', name: 'fiche_add')]
     public function fiche_add(Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->managerRegistry->getManager();
 
         if ($request->isXmlHttpRequest()) {
             $fiche = $request->request->get('fiche');
@@ -35,12 +36,10 @@ class ProtocoleController extends AbstractController
         return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
     }
 
-    /**
-     * @Route("/fiche/delete", name="fiche_delete")
-     */
+    #[Route(path: '/fiche/delete', name: 'fiche_delete')]
     public function fiche_delete(Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->managerRegistry->getManager();
 
         if ($request->isXmlHttpRequest()) {
             $fiche = $request->request->get('fiche');

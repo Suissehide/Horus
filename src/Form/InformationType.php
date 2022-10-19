@@ -27,6 +27,19 @@ class InformationType extends AbstractType
                 'block_name' => 'qcm_type',
                 'required' => false,
             ))
+            ->add('sansSusDecalage', ChoiceType::class, array(
+                'label' => 'Sans sus-décalage du segment ST',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'block_name' => 'qcm_type',
+                'required' => false,
+            ))
             ->add('anterieur', ChoiceType::class, array(
                 'label' => 'Antérieur',
                 'expanded' => true,

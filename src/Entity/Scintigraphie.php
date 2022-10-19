@@ -3,113 +3,72 @@
 namespace App\Entity;
 
 use App\Repository\ScintigraphieRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=ScintigraphieRepository::class)
- */
+#[ORM\Entity(repositoryClass: ScintigraphieRepository::class)]
 class Scintigraphie
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $reposDebitIVA;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $reposDebitCX;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $reposDebitCD;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $reposDebitTotal;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $regadenosonDebitIVA;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $regadenosonDebitCX;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $regadenosonDebitCD;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $regadenosonDebitTotal;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $reserveIVA;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $reserveCX;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $reserveCD;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $reserveTotal;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $reposAnalyseVisuelleIVA;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $reposAnalyseVisuelleCX;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $reposAnalyseVisuelleCD;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $regadenosonAnalyseVisuelleIVA;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $regadenosonAnalyseVisuelleCX;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $regadenosonAnalyseVisuelleCD;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $fractionEjection;
 
     public function getId(): ?int

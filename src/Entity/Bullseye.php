@@ -7,21 +7,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=BullseyeRepository::class)
- */
+#[ORM\Entity(repositoryClass: BullseyeRepository::class)]
 class Bullseye
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Segment::class, mappedBy="bullseye", cascade={"persist", "remove"})
-     */
+    #[ORM\OneToMany(targetEntity: Segment::class, mappedBy: 'bullseye', cascade: ['persist', 'remove'])]
     private $segments;
 
     public function __construct()
@@ -35,7 +29,7 @@ class Bullseye
     }
 
     /**
-     * @return Collection|Segment[]
+     * @return Collection<int, Segment>
      */
     public function getSegments(): Collection
     {
@@ -45,7 +39,7 @@ class Bullseye
     public function addSegment(Segment $segment): self
     {
         if (!$this->segments->contains($segment)) {
-            $this->segments[] = $segment;
+            $this->segments->add($segment);
             $segment->setBullseye($this);
         }
 

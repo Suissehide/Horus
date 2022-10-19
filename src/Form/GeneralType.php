@@ -71,7 +71,7 @@ class GeneralType extends AbstractType
                 'placeholder' => false,
                 'choices' => array(
                     'Féminin' => 'Féminin',
-                    'Inconnu' => 'Inconnu',
+                    'Iel' => 'Iel',
                     'Masculin' => 'Masculin',
                 ),
                 'required' => false,

@@ -7,26 +7,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=MedicamentRepository::class)
- */
+#[ORM\Entity(repositoryClass: MedicamentRepository::class)]
 class Medicament
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $name;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=MedicamentsEntree::class, mappedBy="medicaments", cascade={"persist", "remove"})
-     */
+    #[ORM\ManyToMany(targetEntity: MedicamentsEntree::class, mappedBy: 'medicaments', cascade: ['persist', 'remove'])]
     private $medicamentsEntrees;
 
     public function __construct()
@@ -52,7 +44,7 @@ class Medicament
     }
 
     /**
-     * @return Collection|MedicamentsEntree[]
+     * @return Collection<int, MedicamentsEntree>
      */
     public function getMedicamentsEntrees(): Collection
     {
@@ -62,7 +54,7 @@ class Medicament
     public function addMedicamentsEntree(MedicamentsEntree $medicamentsEntree): self
     {
         if (!$this->medicamentsEntrees->contains($medicamentsEntree)) {
-            $this->medicamentsEntrees[] = $medicamentsEntree;
+            $this->medicamentsEntrees->add($medicamentsEntree);
             $medicamentsEntree->addMedicament($this);
         }
 

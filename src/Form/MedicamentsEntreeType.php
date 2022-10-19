@@ -138,7 +138,7 @@ class MedicamentsEntreeType extends AbstractType
             
             ->add('verbatims', CollectionType::class, array(
                 'entry_type' => QCMType::class,
-                'entry_options' => array('label' => false),
+                // 'entry_options' => array('label' => false),
                 'allow_add' => false,
                 'by_reference' => false,
                 'block_name' => 'qcm_type',
@@ -151,7 +151,7 @@ class MedicamentsEntreeType extends AbstractType
 
             ->add('verbatimsSante', CollectionType::class, array(
                 'entry_type' => QCMType::class,
-                'entry_options' => array('label' => false),
+                // 'entry_options' => array('label' => false),
                 'allow_add' => false,
                 'by_reference' => false,
                 'block_name' => 'qcm_type',
@@ -172,7 +172,7 @@ class MedicamentsEntreeType extends AbstractType
 
             ->add('questionnaire', CollectionType::class, array(
                 'entry_type' => BMQType::class,
-                'entry_options' => array('label' => false),
+                // 'entry_options' => array('label' => false),
                 'allow_add' => false,
                 'by_reference' => false,
                 'block_name' => 'qcm_type',

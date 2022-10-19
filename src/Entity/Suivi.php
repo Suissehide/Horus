@@ -5,139 +5,96 @@ namespace App\Entity;
 use App\Repository\SuiviRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity(repositoryClass=SuiviRepository::class)
- */
+#[ORM\Entity(repositoryClass: SuiviRepository::class)]
 class Suivi
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-/**
-     * @ORM\Column(type="date", nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+#[ORM\Column(type: 'date', nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $dateVisite;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $recidive;
 
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'date', nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $dateSurvenue;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $type;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $dyspnee;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $douleur;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $tabac;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $activite;
 
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'array', nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $alimentation = [];
 
-    /**
-     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     * @ORM\JoinTable(name="donnee_qcm_facteurs",
-     *      joinColumns={@ORM\JoinColumn(name="facteurs_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="qcm_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}
-     *      )
-     */
+    #[ORM\JoinTable(name: 'donnee_qcm_facteurs')]
+    #[ORM\JoinColumn(name: 'facteurs_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'qcm_id', referencedColumnName: 'id', onDelete: 'CASCADE', unique: true)]
+    #[ORM\ManyToMany(targetEntity: QCM::class, cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $facteurs;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     * @ORM\JoinTable(name="donnee_qcm_traitement",
-     *      joinColumns={@ORM\JoinColumn(name="traitement_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="qcm_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}
-     *      )
-     */
+    #[ORM\JoinTable(name: 'donnee_qcm_traitement')]
+    #[ORM\JoinColumn(name: 'traitement_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'qcm_id', referencedColumnName: 'id', onDelete: 'CASCADE', unique: true)]
+    #[ORM\ManyToMany(targetEntity: QCM::class, cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $traitement;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $debitFiltrationGlomerulaire;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $crp;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
-    private $cholesterol;
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['advancement', 'export'])]
+    private $triglycerides;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $ldl;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $hdl;
 
-    /**
-     * @ORM\Column(type="decimal", precision=10, scale=1, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 1, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $hba1c;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="suivis", cascade={"persist"})
-     */
+    #[ORM\ManyToOne(targetEntity: Patient::class, inversedBy: 'suivis', cascade: ['persist'])]
     private $patient;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Protocole::class, inversedBy="suivis", cascade={"persist", "remove"})
-     */
+    #[ORM\ManyToOne(targetEntity: Protocole::class, inversedBy: 'suivis', cascade: ['persist', 'remove'])]
     private $protocole;
 
     public function __construct()
@@ -248,7 +205,7 @@ class Suivi
         return $this;
     }
 
-    public function getAlimentation(): ?array
+    public function getAlimentation(): array
     {
         return $this->alimentation;
     }
@@ -261,7 +218,7 @@ class Suivi
     }
 
     /**
-     * @return Collection|QCM[]
+     * @return Collection<int, QCM>
      */
     public function getFacteurs(): Collection
     {
@@ -271,7 +228,7 @@ class Suivi
     public function addFacteur(QCM $facteur): self
     {
         if (!$this->facteurs->contains($facteur)) {
-            $this->facteurs[] = $facteur;
+            $this->facteurs->add($facteur);
         }
 
         return $this;
@@ -279,15 +236,13 @@ class Suivi
 
     public function removeFacteur(QCM $facteur): self
     {
-        if ($this->facteurs->contains($facteur)) {
-            $this->facteurs->removeElement($facteur);
-        }
+        $this->facteurs->removeElement($facteur);
 
         return $this;
     }
 
     /**
-     * @return Collection|QCM[]
+     * @return Collection<int, QCM>
      */
     public function getTraitement(): Collection
     {
@@ -297,7 +252,7 @@ class Suivi
     public function addTraitement(QCM $traitement): self
     {
         if (!$this->traitement->contains($traitement)) {
-            $this->traitement[] = $traitement;
+            $this->traitement->add($traitement);
         }
 
         return $this;
@@ -305,9 +260,7 @@ class Suivi
 
     public function removeTraitement(QCM $traitement): self
     {
-        if ($this->traitement->contains($traitement)) {
-            $this->traitement->removeElement($traitement);
-        }
+        $this->traitement->removeElement($traitement);
 
         return $this;
     }
@@ -324,60 +277,60 @@ class Suivi
         return $this;
     }
 
-    public function getCrp(): ?float
+    public function getCrp(): ?string
     {
         return $this->crp;
     }
 
-    public function setCrp(?float $crp): self
+    public function setCrp(?string $crp): self
     {
         $this->crp = $crp;
 
         return $this;
     }
 
-    public function getCholesterol(): ?float
+    public function getTriglycerides(): ?string
     {
-        return $this->cholesterol;
+        return $this->triglycerides;
     }
 
-    public function setCholesterol(?float $cholesterol): self
+    public function setTriglycerides(?string $triglycerides): self
     {
-        $this->cholesterol = $cholesterol;
+        $this->triglycerides = $triglycerides;
 
         return $this;
     }
 
-    public function getLdl(): ?float
+    public function getLdl(): ?string
     {
         return $this->ldl;
     }
 
-    public function setLdl(?float $ldl): self
+    public function setLdl(?string $ldl): self
     {
         $this->ldl = $ldl;
 
         return $this;
     }
 
-    public function getHdl(): ?float
+    public function getHdl(): ?string
     {
         return $this->hdl;
     }
 
-    public function setHdl(?float $hdl): self
+    public function setHdl(?string $hdl): self
     {
         $this->hdl = $hdl;
 
         return $this;
     }
 
-    public function getHba1c(): ?float
+    public function getHba1c(): ?string
     {
         return $this->hba1c;
     }
 
-    public function setHba1c(?float $hba1c): self
+    public function setHba1c(?string $hba1c): self
     {
         $this->hba1c = $hba1c;
 

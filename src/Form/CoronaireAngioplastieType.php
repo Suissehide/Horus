@@ -435,17 +435,6 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
 
-
-            ->add('scoreCalcique', IntegerType::class, array(
-                'label' => 'Score calcique',
-                'attr' => array(
-                    'unity' => '',
-                    'data-min' => 0,
-                    'data-max' => 0,
-                ),
-                'required' => false,
-            ))
-
             ->add('scoreCalciqueCoronaire', ChoiceType::class, array(
                 'label' => ' ',
                 'choices' => array(
@@ -594,17 +583,6 @@ class CoronaireAngioplastieType extends AbstractType
                     'data-min' => 0,
                     'data-max' => 0,
                     'step' => '0.01',
-                ),
-                'required' => false
-            ))
-
-            ->add('stenose', ChoiceType::class, array(
-                'label' => ' ',
-                'choices' => array(
-                    'Absence' => 'Absence',
-                    '< 50%' => '< 50%',
-                    '> 50%' => '> 50%',
-                    '> 70%' => '> 70%'
                 ),
                 'required' => false
             ))

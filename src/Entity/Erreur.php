@@ -2,48 +2,33 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ErreurRepository")
- */
+#[ORM\Entity(repositoryClass: 'App\Repository\ErreurRepository')]
 class Erreur
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $dateCreation;
 
-    /**
-     * @ORM\Column(type="string", length=1023, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 1023, nullable: true)]
     private $message;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $etat;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Patient", inversedBy="erreurs")
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\Patient', inversedBy: 'erreurs')]
     private $patient;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $fieldId;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $utilisateur;
 
     public function getId(): ?int

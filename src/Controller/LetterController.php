@@ -18,12 +18,13 @@ use Symfony\Component\Serializer\Serializer;
 
 class LetterController extends AbstractController
 {
-    /**
-     * @Route("/letter", name="letter", methods={"GET", "POST"})
-     */
+    public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
+    {
+    }
+    #[Route(path: '/letter', name: 'letter', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->managerRegistry->getManager();
         $letter = $em->getRepository(Letter::class)->findOneBy([]);
         if (!$letter) {
             $letter = new Letter();

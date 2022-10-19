@@ -37,8 +37,7 @@ class PatientType extends AbstractType
             ))
 
             ->add('suivis', CollectionType::class, [
-                'entry_type' => SuiviType::class,
-                'entry_options' => ['label' => false],
+                'entry_type' => SuiviType::class
             ])
 
             ->add('create', SubmitType::class, array('label' => 'Créer'))

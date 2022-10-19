@@ -23,9 +23,7 @@ class SecurityController extends AbstractController
         $this->passwordHasher = $passwordHasher;
     }
 
-    /**
-     * @Route("/login", name="app_login")
-     */
+    #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // get the login error if there is one
@@ -39,17 +37,13 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/logout", name="app_logout")
-     */
+    #[Route(path: '/logout', name: 'app_logout')]
     public function logout()
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    /**
-     * @Route("/register", name="app_register", methods={"GET", "POST"})
-     */
+    #[Route(path: '/register', name: 'app_register', methods: ['GET', 'POST'])]
     public function register(Request $request): Response
     {
         $user = new User();
@@ -89,9 +83,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    /** 
-     * @Route("/guest", name="guest")
-     */
+    #[Route(path: '/guest', name: 'guest')]
     public function guest()
     {
         return $this->render('user/guest.html.twig', [

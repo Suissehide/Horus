@@ -47,7 +47,7 @@ class BFRType extends AbstractType
 
 
             ->add('tensionArterielleSystoliqueJour', NumberType::class, array(
-                'label' => 'Jour (en mmHg)',
+                'label' => 'Systole jour (en mmHg)',
                 'attr' => array(
                     'unity' => 'mmHg',
                     'data-min' => 1,
@@ -56,7 +56,7 @@ class BFRType extends AbstractType
                 'required' => false,
             ))
             ->add('tensionArterielleDiastoliqueJour', NumberType::class, array(
-                'label' => 'Jour (en mmHg)',
+                'label' => 'Systole jour (en mmHg)',
                 'attr' => array(
                     'unity' => 'mmHg',
                     'data-min' => 1,
@@ -65,7 +65,7 @@ class BFRType extends AbstractType
                 'required' => false
             ))
             ->add('tensionArterielleSystoliqueNuit', NumberType::class, array(
-                'label' => 'Nuit (en mmHg)',
+                'label' => 'Diastole nuit (en mmHg)',
                 'attr' => array(
                     'unity' => 'mmHg',
                     'data-min' => 1,
@@ -74,7 +74,7 @@ class BFRType extends AbstractType
                 'required' => false,
             ))
             ->add('tensionArterielleDiastoliqueNuit', NumberType::class, array(
-                'label' => 'Nuit (en mmHg)',
+                'label' => 'Diastole nuit (en mmHg)',
                 'attr' => array(
                     'unity' => 'mmHg',
                     'data-min' => 1,
@@ -86,14 +86,13 @@ class BFRType extends AbstractType
                 'label' => 'HVG',
                 'expanded' => false,
                 'multiple' => false,
-                'placeholder' => false,
+                'placeholder' => 'false',
                 'choices' => array(
-                    '' => '',
                     'Non' => 'Non',
                     'Electrique' => 'Electrique',
                     'Echographique' => 'Echographique',
                 ),
-                'required' => false,
+                'required' => false
             ))
 
 
@@ -245,9 +244,9 @@ class BFRType extends AbstractType
             ))
             ->add('neuropathieClinique', ChoiceType::class, array(
                 'label' => 'Neuropathie clinique (DN4)',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
+
                     'Normal' => 'Normal',
                     'Background (micro-anévrysme ou oedème)' => 'Background (micro-anévrysme ou oedème)',
                     'Ischémique' => 'Ischémique',
@@ -260,9 +259,8 @@ class BFRType extends AbstractType
             ))
             ->add('fondOeil', ChoiceType::class, array(
                 'label' => 'fond d\'oeil',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     'Non Renseigné' => 'Non Renseigné',
                     'Normal' => 'Normal',
                     'Anormal' => 'Anormal'

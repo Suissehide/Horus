@@ -11,36 +11,34 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+
 
 class UserController extends AbstractController
 {
+    /**
+     * @var DoctrineManager
+     */
+    private $em;
+
     public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
     {
-        $this->entityManager = $entityManager;
+        $this->em = $entityManager;
         $this->passwordHasher = $passwordHasher;
     }
 
-    /**
-     * @Route("/", name="default", methods="GET")
-     */
+    #[Route(path: '/', name: 'default', methods: 'GET')]
     function default(): Response
     {
         return $this->redirectToRoute('app_login');
     }
 
-    /**
-     * @Route("/user/ajax", name="user_roles_edit")
-     */
+    #[Route(path: '/user/ajax', name: 'user_roles_edit')]
     public function roles_edit(UserRepository $userRepository, Request $request, AuthorizationCheckerInterface $authChecker): JsonResponse
     {
-        $em = $this->getDoctrine()->getManager();
-
         if ($request->isXmlHttpRequest() && true === $authChecker->isGranted('ROLE_ADMIN')) {
             $email = $request->request->get('email');
             $nom = $request->request->get('nom');
@@ -57,15 +55,13 @@ class UserController extends AbstractController
                     $user->setRoles(["ROLE_ADMIN"]);
                 $user->setNom($nom);
                 $user->setPrenom($prenom);
-                $em->flush();
+                $this->em->flush();
             }
             return new JsonResponse();
         }
     }
 
-    /**
-     * @Route("/user/list", name="user_list")
-     */
+    #[Route(path: '/user/list', name: 'user_list')]
     public function list(UserRepository $UserRepository, Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
@@ -73,7 +69,7 @@ class UserController extends AbstractController
             $rowCount = $request->request->get('rowCount');
             $searchPhrase = $request->request->get('searchPhrase');
             $sort = $request->request->get('sort');
-            $roles = $request->request->get('roles');
+            $roles = $request->request->all()['roles'];
 
             $Users = $UserRepository->findByFilter($sort, $searchPhrase, $roles);
             if ($searchPhrase != "" || !empty($roles))
@@ -115,13 +111,10 @@ class UserController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/user/edit", name="user_edit")
-     */
+    #[Route(path: '/user/edit', name: 'user_edit')]
     public function edit(Request $request): Response
     {
         $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
 
         $errorsForm = [];
         $form = $this->createForm(UserFormType::class, $user);
@@ -129,8 +122,8 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('save')->isClicked()) {
                 $user = $form->getData();
-                $em->persist($user);
-                $em->flush();
+                $this->em->persist($user);
+                $this->em->flush();
 
                 return $this->redirectToRoute('user_edit');
             } else {
@@ -150,10 +143,10 @@ class UserController extends AbstractController
                 $user = $form->getData();
                 $password = $this->passwordHasher->hashPassword($user, $user->get('plainPassword')->getData());
                 $user->setPassword($password);
-                $user->setRoles($roles);
+                $user->setRoles($user->getRoles());
 
-                $em->persist($user);
-                $em->flush();
+                $this->em->persist($user);
+                $this->em->flush();
 
                 $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
 
@@ -176,9 +169,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/user/view/{id}", name="user_view")
-     */
+    #[Route(path: '/user/view/{id}', name: 'user_view')]
     public function view(User $User): Response
     {
         return $this->render('user/view.html.twig', [
@@ -187,15 +178,12 @@ class UserController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/user/getByEmail", name="user_getByEmail")
-     */
+    #[Route(path: '/user/getByEmail', name: 'user_getByEmail')]
     public function getByEmail(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $em = $this->getDoctrine()->getManager();
             $email = $request->request->get('email');
-            $user = $em->getRepository(User::class)->findOneBy(['email' => $email]);
+            $user = $this->em->getRepository(User::class)->findOneBy(['email' => $email]);
             return new JsonResponse($user->getId());
         }
     }

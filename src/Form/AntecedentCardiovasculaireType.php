@@ -170,21 +170,8 @@ class AntecedentCardiovasculaireType extends AbstractType
                 'block_name' => 'qcm_type',
                 'required' => false,
             ))
-            ->add('antecedentInsuffisanceCardiaque', ChoiceType::class, array(
-                'label' => 'Antécédent d\'insuffisance cardiaque',
-                'expanded' => true,
-                'multiple' => false,
-                'placeholder' => false,
-                'choices' => array(
-                    'Oui' => 'Oui',
-                    'Non' => 'Non',
-                    'Non précisé' => 'Non précisé',
-                ),
-                'block_name' => 'qcm_type',
-                'required' => false,
-            ))
             ->add('valvulopathie', ChoiceType::class, array(
-                'label' => 'Valvulopathie (>grade 2 ou >modérée)',
+                'label' => 'Valvulopathie (>grade 2)',
                 'expanded' => true,
                 'multiple' => false,
                 'placeholder' => false,

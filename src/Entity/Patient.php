@@ -11,50 +11,34 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity(repositoryClass=PatientRepository::class)
- */
+#[ORM\Entity(repositoryClass: PatientRepository::class)]
 class Patient
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\General", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\General', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $general;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\AntecedentCardiovasculaire", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\AntecedentCardiovasculaire', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $antecedentCardiovasculaire;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Information", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\Information', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $information;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Facteur", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\Facteur', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $facteur;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Erreur", mappedBy="patient", cascade={"remove"})
-     */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\Erreur', mappedBy: 'patient', cascade: ['remove'])]
     private $erreurs;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Suivi::class, mappedBy="patient", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
+    #[ORM\OneToMany(targetEntity: Suivi::class, mappedBy: 'patient', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private $suivis;
 
     public function __construct()
@@ -129,9 +113,9 @@ class Patient
 
         return $this;
     }
-    
+
     /**
-     * @return Collection|Erreur[]
+     * @return Collection<int, Erreur>
      */
     public function getErreurs(): Collection
     {
@@ -141,7 +125,7 @@ class Patient
     public function addErreur(Erreur $erreur): self
     {
         if (!$this->erreurs->contains($erreur)) {
-            $this->erreurs[] = $erreur;
+            $this->erreurs->add($erreur);
             $erreur->setPatient($this);
         }
 
@@ -150,8 +134,7 @@ class Patient
 
     public function removeErreur(Erreur $erreur): self
     {
-        if ($this->erreurs->contains($erreur)) {
-            $this->erreurs->removeElement($erreur);
+        if ($this->erreurs->removeElement($erreur)) {
             // set the owning side to null (unless already changed)
             if ($erreur->getPatient() === $this) {
                 $erreur->setPatient(null);
@@ -172,7 +155,7 @@ class Patient
     public function addSuivi(Suivi $suivi): self
     {
         if (!$this->suivis->contains($suivi)) {
-            $this->suivis[] = $suivi;
+            $this->suivis->add($suivi);
             $suivi->setPatient($this);
         }
 

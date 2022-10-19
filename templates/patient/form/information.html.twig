@@ -3,6 +3,7 @@
 <h3 id="infarctusMyocarde">Type d'infarctus du myocarde</h3>
 <div class="form-space">
 	{{ form_widget(form.information.susDecalage, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.sansSusDecalage, {'attr': {'class': 'input radio-row'} }) }}
 
 	<div class="margin-space"></div>
 	<h5>Territoire atteint</h5>
@@ -15,10 +16,10 @@
 	<div class="margin-space"></div>
 	<h5>Coronarographie (sténose > 50%)</h5>
 	{{ form_widget(form.information.IVA, {'attr': {'class': 'input radio-row'} }) }}
-	{{ form_widget(form.information.CD, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.diagonale, {'attr': {'class': 'input radio-row'} }) }}
 	{{ form_widget(form.information.Cx, {'attr': {'class': 'input radio-row'} }) }}
 	{{ form_widget(form.information.marginale, {'attr': {'class': 'input radio-row'} }) }}
-	{{ form_widget(form.information.diagonale, {'attr': {'class': 'input radio-row'} }) }}
+	{{ form_widget(form.information.CD, {'attr': {'class': 'input radio-row'} }) }}
 	{{ form_widget(form.information.pontage, {'attr': {'class': 'input radio-row'} }) }}
 	{{ form_widget(form.information.troncCommun, {'attr': {'class': 'input radio-row'} }) }}
 </div>

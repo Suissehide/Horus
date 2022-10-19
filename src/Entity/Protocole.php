@@ -5,101 +5,70 @@ namespace App\Entity;
 use App\Repository\ProtocoleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity(repositoryClass=ProtocoleRepository::class)
- */
+#[ORM\Entity(repositoryClass: ProtocoleRepository::class)]
 class Protocole
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
+    #[ORM\Column(type: 'array', nullable: true)]
     private $fiches = [];
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\AngioplastiePontage", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\AngioplastiePontage', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $angioplastiePontage;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\BFR", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\BFR', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $BFR;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Catheterisation", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\Catheterisation', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $catheterisation;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\CoronaireAngioplastie", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\CoronaireAngioplastie', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $coronaireAngioplastie;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Echographie", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\Echographie', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $echographie;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\EchographieCardiaque", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\EchographieCardiaque', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $echographieCardiaque;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\EchographieVasculaire", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\EchographieVasculaire', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $echographieVasculaire;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\MedicamentsEntree", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\MedicamentsEntree', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $medicamentsEntree;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\NeuroPsychologie", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\NeuroPsychologie', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $neuroPsychologie;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Scintigraphie", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\Scintigraphie', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $scintigraphie;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\TestEffort", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\TestEffort', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $testEffort;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Visite", cascade={"persist", "remove"})
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\Visite', cascade: ['persist', 'remove'])]
+    #[Groups(['advancement', 'export'])]
     private $visite;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Suivi::class, mappedBy="protocole", cascade={"persist", "remove"})
-     */
+    #[ORM\OneToMany(targetEntity: Suivi::class, mappedBy: 'protocole', cascade: ['persist', 'remove'])]
     private $suivis;
 
     public function __construct()
@@ -112,7 +81,7 @@ class Protocole
         return $this->id;
     }
 
-    public function getFiches(): ?array
+    public function getFiches(): array
     {
         return $this->fiches;
     }
@@ -123,7 +92,7 @@ class Protocole
 
         return $this;
     }
-    
+
     public function getMedicamentsEntree(): ?MedicamentsEntree
     {
         return $this->medicamentsEntree;
@@ -279,7 +248,7 @@ class Protocole
     public function addSuivi(Suivi $suivi): self
     {
         if (!$this->suivis->contains($suivi)) {
-            $this->suivis[] = $suivi;
+            $this->suivis->add($suivi);
             $suivi->setProtocole($this);
         }
 

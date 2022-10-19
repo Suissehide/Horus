@@ -5,21 +5,15 @@ namespace App\Entity;
 use App\Repository\QCMRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=QCMRepository::class)
- */
+#[ORM\Entity(repositoryClass: QCMRepository::class)]
 class QCM
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $response;
 
     public function getId(): ?int

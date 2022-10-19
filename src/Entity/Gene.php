@@ -6,46 +6,32 @@ use App\Repository\GeneRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity(repositoryClass=GeneRepository::class)
- */
+#[ORM\Entity(repositoryClass: GeneRepository::class)]
 class Gene
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $statut;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $mutation;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $frequence;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $classification;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"advancement", "export"})
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['advancement', 'export'])]
     private $commentaire;
 
     public function getId(): ?int

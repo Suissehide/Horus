@@ -5,120 +5,78 @@ namespace App\Entity;
 use App\Repository\MedicamentsEntreeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=MedicamentsEntreeRepository::class)
- */
+#[ORM\Entity(repositoryClass: MedicamentsEntreeRepository::class)]
 class MedicamentsEntree
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Medicament::class, inversedBy="medicamentsEntrees")
-     */
+    #[ORM\ManyToMany(targetEntity: Medicament::class, inversedBy: 'medicamentsEntrees')]
     private $medicaments;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $NbMedicamentSemaine;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $DelaiSousTraitement;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $pilulier;
 
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
+    #[ORM\Column(type: 'array', nullable: true)]
     private $gestionMedicaments = [];
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $satisfaction;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $ConnaissanceDureeTraitement;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $scoreMasCard;
 
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
+    #[ORM\Column(type: 'array', nullable: true)]
     private $problemes = [];
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $remarques;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $effetIndesirable;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $lequel;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $verbatimsMedicaments;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="medicaments_entree_qcm_verbatims",
-     *      joinColumns={@ORM\JoinColumn(name="verbatims_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="qcm_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}
-     *      )
-     */
+    #[ORM\JoinTable(name: 'medicaments_entree_qcm_verbatims')]
+    #[ORM\JoinColumn(name: 'verbatims_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'qcm_id', referencedColumnName: 'id', onDelete: 'CASCADE', unique: true)]
+    #[ORM\ManyToMany(targetEntity: QCM::class, cascade: ['persist', 'remove'])]
     private $verbatims;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $verbatimsApportSante;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=QCM::class, cascade={"persist", "remove"})
-     * @ORM\JoinTable(name="medicaments_entree_qcm_verbatims_sante",
-     *      joinColumns={@ORM\JoinColumn(name="verbatims_sante_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="qcm_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}
-     *      )
-     */
+    #[ORM\JoinTable(name: 'medicaments_entree_qcm_verbatims_sante')]
+    #[ORM\JoinColumn(name: 'verbatims_sante_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'qcm_id', referencedColumnName: 'id', onDelete: 'CASCADE', unique: true)]
+    #[ORM\ManyToMany(targetEntity: QCM::class, cascade: ['persist', 'remove'])]
     private $verbatimsSante;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $vecuTraitement;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=BMQ::class, cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\JoinTable(name="medicaments_entree_bmq_questionnaire",
-     *      joinColumns={@ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="bmq_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}
-     *      )
-     */
+    #[ORM\JoinTable(name: 'medicaments_entree_bmq_questionnaire')]
+    #[ORM\JoinColumn(name: 'questionnaire_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'bmq_id', referencedColumnName: 'id', onDelete: 'CASCADE', unique: true)]
+    #[ORM\ManyToMany(targetEntity: BMQ::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private $questionnaire;
 
     public function __construct()
@@ -135,7 +93,7 @@ class MedicamentsEntree
     }
 
     /**
-     * @return Collection|Medicament[]
+     * @return Collection<int, Medicament>
      */
     public function getMedicaments(): Collection
     {
@@ -145,7 +103,7 @@ class MedicamentsEntree
     public function addMedicament(Medicament $medicament): self
     {
         if (!$this->medicaments->contains($medicament)) {
-            $this->medicaments[] = $medicament;
+            $this->medicaments->add($medicament);
         }
 
         return $this;
@@ -194,7 +152,7 @@ class MedicamentsEntree
         return $this;
     }
 
-    public function getGestionMedicaments(): ?array
+    public function getGestionMedicaments(): array
     {
         return $this->gestionMedicaments;
     }
@@ -242,7 +200,7 @@ class MedicamentsEntree
         return $this;
     }
 
-    public function getProblemes(): ?array
+    public function getProblemes(): array
     {
         return $this->problemes;
     }
@@ -313,7 +271,7 @@ class MedicamentsEntree
     public function addVerbatim(QCM $verbatim): self
     {
         if (!$this->verbatims->contains($verbatim)) {
-            $this->verbatims[] = $verbatim;
+            $this->verbatims->add($verbatim);
         }
 
         return $this;
@@ -349,7 +307,7 @@ class MedicamentsEntree
     public function addVerbatimsSante(QCM $verbatimsSante): self
     {
         if (!$this->verbatimsSante->contains($verbatimsSante)) {
-            $this->verbatimsSante[] = $verbatimsSante;
+            $this->verbatimsSante->add($verbatimsSante);
         }
 
         return $this;
@@ -357,9 +315,7 @@ class MedicamentsEntree
 
     public function removeVerbatimsSante(QCM $verbatimsSante): self
     {
-        if ($this->verbatimsSante->contains($verbatimsSante)) {
-            $this->verbatimsSante->removeElement($verbatimsSante);
-        }
+        $this->verbatimsSante->removeElement($verbatimsSante);
 
         return $this;
     }
@@ -387,7 +343,7 @@ class MedicamentsEntree
     public function addQuestionnaire(BMQ $questionnaire): self
     {
         if (!$this->questionnaire->contains($questionnaire)) {
-            $this->questionnaire[] = $questionnaire;
+            $this->questionnaire->add($questionnaire);
         }
 
         return $this;
@@ -395,9 +351,7 @@ class MedicamentsEntree
 
     public function removeQuestionnaire(BMQ $questionnaire): self
     {
-        if ($this->questionnaire->contains($questionnaire)) {
-            $this->questionnaire->removeElement($questionnaire);
-        }
+        $this->questionnaire->removeElement($questionnaire);
 
         return $this;
     }

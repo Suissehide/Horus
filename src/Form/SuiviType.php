@@ -120,7 +120,7 @@ class SuiviType extends AbstractType
 
             ->add('facteurs', CollectionType::class, array(
                 'entry_type' => QCMType::class,
-                'entry_options' => array('label' => false),
+                // 'entry_options' => array('label' => false),
                 'allow_add' => true,
                 'by_reference' => false,
                 'block_name' => 'qcm_type',
@@ -128,7 +128,7 @@ class SuiviType extends AbstractType
 
             ->add('traitement', CollectionType::class, array(
                 'entry_type' => QCMType::class,
-                'entry_options' => array('label' => false),
+                // 'entry_options' => array('label' => false),
                 'allow_add' => true,
                 'by_reference' => false,
                 'block_name' => 'qcm_type',
@@ -154,8 +154,8 @@ class SuiviType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('cholesterol', NumberType::class, array(
-                'label' => 'Cholestérol total',
+            ->add('triglycerides', NumberType::class, array(
+                'label' => 'Triglycérides',
                 'scale' => 2,
                 'attr' => array(
                     'unity' => 'g/L',

@@ -43,15 +43,13 @@ class PatientController extends AbstractController
      */
     private $em;
 
-    public function __construct(Security $security, EntityManagerInterface $entityManager)
+    public function __construct(Security $security, EntityManagerInterface $entityManager, private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
     {
         $this->security = $security;
         $this->em = $entityManager;
     }
 
-    /**
-     * @Route("/patient/add", name="patient_add", methods={"GET", "POST"})
-     */
+    #[Route(path: '/patient/add', name: 'patient_add', methods: ['GET', 'POST'])]
     public function patient_add(Request $request, InitializePatient $initializePatient): Response
     {
         $patient = new Patient();
@@ -78,9 +76,7 @@ class PatientController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/patient/history", name="history_list")
-     */
+    #[Route(path: '/patient/history', name: 'history_list')]
     public function patient_history(ErreurRepository $erreurRepository, Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
@@ -126,9 +122,7 @@ class PatientController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/patient/view/{id}", name="patient_view", methods={"GET", "POST"})
-     */
+    #[Route(path: '/patient/view/{id}', name: 'patient_view', methods: ['GET', 'POST'])]
     public function patient_index(Patient $patient, Request $request): Response
     {
         $oldArray = $this->serializeEntity($patient);
@@ -314,9 +308,7 @@ class PatientController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/erreur/add", name="erreur_add_info")
-     */
+    #[Route(path: '/erreur/add', name: 'erreur_add_info')]
     public function erreur_add_info(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
@@ -332,9 +324,7 @@ class PatientController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/patient/{id}/letter", name="patient_letter", methods={"GET", "POST"})
-     */
+    #[Route(path: '/patient/{id}/letter', name: 'patient_letter', methods: ['GET', 'POST'])]
     public function letter(Patient $patient): Response
     {
         $letter = $this->em->getRepository(Letter::class)->findOneBy([]);
@@ -354,9 +344,7 @@ class PatientController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/patient/{id}/letter/static", name="patient_letter_static", methods={"GET", "POST"})
-     */
+    #[Route(path: '/patient/{id}/letter/static', name: 'patient_letter_static', methods: ['GET', 'POST'])]
     public function letter_static(Patient $patient): Response
     {
         return $this->render('patient/letter_static.html.twig', [
@@ -366,9 +354,7 @@ class PatientController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/patient/delete/{id}", name="patient_delete", methods={"POST", "DELETE"})
-     */
+    #[Route(path: '/patient/delete/{id}', name: 'patient_delete', methods: ['POST', 'DELETE'])]
     public function patient_delete(Request $request, Patient $patient): Response
     {
         if ($this->isCsrfTokenValid('delete' . $patient->getId(), $request->request->get('_token'))) {
@@ -381,17 +367,15 @@ class PatientController extends AbstractController
         return $this->redirectToRoute('index_patient');
     }
 
-    /**
-     * @Route("/patient/medicament/add", name="medicament_entree_add")
-     */
+    #[Route(path: '/patient/medicament/add', name: 'medicament_entree_add')]
     public function medicament_entree_add(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
             $protocoleId = $request->request->get('protocoleId');
             $medicamentId = $request->request->get('medicamentId');
 
-            $protocole = $this->getDoctrine()->getRepository(Protocole::class)->find($protocoleId);
-            $medicament = $this->getDoctrine()->getRepository(Medicament::class)->find($medicamentId);
+            $protocole = $this->managerRegistry->getRepository(Protocole::class)->find($protocoleId);
+            $medicament = $this->managerRegistry->getRepository(Medicament::class)->find($medicamentId);
             $protocole->getMedicamentsEntree()->addMedicament($medicament);
 
             $this->em->flush();
@@ -400,17 +384,15 @@ class PatientController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/patient/medicament/delete", name="medicament_entree_delete")
-     */
+    #[Route(path: '/patient/medicament/delete', name: 'medicament_entree_delete')]
     public function medicament_entree_delete(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
             $protocoleId = $request->request->get('protocoleId');
             $medicamentId = $request->request->get('medicamentId');
 
-            $protocole = $this->getDoctrine()->getRepository(Protocole::class)->find($protocoleId);
-            $medicament = $this->getDoctrine()->getRepository(Medicament::class)->find($medicamentId);
+            $protocole = $this->managerRegistry->getRepository(Protocole::class)->find($protocoleId);
+            $medicament = $this->managerRegistry->getRepository(Medicament::class)->find($medicamentId);
 
             $protocole->getMedicamentsEntree()->removeMedicament($medicament);
             $this->em->flush();

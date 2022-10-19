@@ -31,31 +31,29 @@ class PatientRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('p');
         $qb->leftJoin('p.general', 'g');
-        // $qb->leftJoin('p.information', 'i');
-        // $qb->leftJoin('p.donnee', 'd');
 
         if ($searchPhrase != "") {
             $qb
             ->andWhere('
-                    p.code LIKE :search
-                    OR v.date LIKE :search
-                    OR i.dateSurvenue LIKE :search
-                    OR d.dateVisite LIKE :search
+                    g.civilite LIKE :search
+                    OR g.nom LIKE :search
+                    OR g.prenom LIKE :search
+                    OR g.dateNaissance LIKE :search
                 ')
             ->setParameter('search', '%' . $searchPhrase . '%');
         }
         if ($sort) {
             foreach ($sort as $key => $value) {
-                if ($key == 'consentement')
-                    $qb->orderBy('v.date', $value);
-                else if ($key == 'evenement')
-                    $qb->orderBy('i.dateSurvenue', $value);
-                else if ($key == 'inclusion')
-                    $qb->orderBy('d.dateVisite', $value);
-                else if ($key == 'code')
-                    $qb->orderBy('p.id', $value);
+                if ($key == 'civilite')
+                    $qb->orderBy('g.civilite', $value);
+                else if ($key == 'nom')
+                    $qb->orderBy('g.nom', $value);
+                else if ($key == 'prenom')
+                    $qb->orderBy('g.prenom', $value);
+                else if ($key == 'dateNaissance')
+                    $qb->orderBy('g.dateNaissance', $value);
                 else
-                    $qb->orderBy('p.' . $key, $value);
+                    $qb->orderBy('g.' . $key, $value);
             }
         } else {
             $qb->orderBy('g.nom', 'DESC');

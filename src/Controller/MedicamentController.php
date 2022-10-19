@@ -14,9 +14,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MedicamentController extends AbstractController
 {
-    /**
-     * @Route("/medicament", name="medicament")
-     */
+    public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
+    {
+    }
+    #[Route(path: '/medicament', name: 'medicament')]
     public function index(MedicamentRepository $medicamentRepository, Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
@@ -59,12 +60,10 @@ class MedicamentController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/medicament/add", name="medicament_add")
-     */
+    #[Route(path: '/medicament/add', name: 'medicament_add')]
     public function medicament_add(Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->managerRegistry->getManager();
 
         if ($request->isXmlHttpRequest()) {
             $name = $request->request->get('name');
@@ -79,9 +78,7 @@ class MedicamentController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/medicament/search", name="medicament_search")
-     */
+    #[Route(path: '/medicament/search', name: 'medicament_search')]
     public function medicament_search(MedicamentRepository $medicamentRepository, Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
@@ -98,17 +95,15 @@ class MedicamentController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/medicament/delete", name="medicament_delete")
-     */
+    #[Route(path: '/medicament/delete', name: 'medicament_delete')]
     public function medicament_delete(Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->managerRegistry->getManager();
 
         if ($request->isXmlHttpRequest()) {
             $id = $request->request->get('id');
 
-            $medicament = $this->getDoctrine()->getRepository(Medicament::class)->find($id);;
+            $medicament = $this->managerRegistry->getRepository(Medicament::class)->find($id);;
 
             $em->remove($medicament);
             $em->flush();
