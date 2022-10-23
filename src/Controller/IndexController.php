@@ -39,11 +39,13 @@ class IndexController extends AbstractController
             $sort = $request->request->get('sort');
 
             $patients = $patientRepository->findByFilter($sort, $searchPhrase);
+            
             if ($searchPhrase != "") {
                 $count = count($patients->getQuery()->getResult());
             } else {
                 $count = $patientRepository->getCount();
             }
+            
             if ($rowCount != -1) {
                 $min = ($current - 1) * $rowCount;
                 $max = $rowCount;
@@ -52,7 +54,6 @@ class IndexController extends AbstractController
             $patients = $patients->getQuery()->getResult();
             $rows = array();
             foreach ($patients as $patient) {
-
                 $row = array(
                     "id" => $patient->getId(),                   
                     "civilite" => $patient->getGeneral()->getCivilite(),
@@ -63,7 +64,6 @@ class IndexController extends AbstractController
                 );
                 array_push($rows, $row);
             }
-
             $data = array(
                 "current" => intval($current),
                 "rowCount" => intval($rowCount),
@@ -72,6 +72,7 @@ class IndexController extends AbstractController
             );
             return new JsonResponse($data);
         }
+        return new JsonResponse('no results found', Response::HTTP_NOT_FOUND);
     }
 
     #[Route(path: '/advancement', name: 'advancement', methods: ['GET', 'POST'])]
@@ -115,6 +116,7 @@ class IndexController extends AbstractController
             }
             return new JsonResponse($arr);
         }
+        return new JsonResponse('no results found', Response::HTTP_NOT_FOUND);
     }
 
     //TODO

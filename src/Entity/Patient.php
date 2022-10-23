@@ -38,13 +38,13 @@ class Patient
     #[ORM\OneToMany(targetEntity: 'App\Entity\Erreur', mappedBy: 'patient', cascade: ['remove'])]
     private $erreurs;
 
-    #[ORM\OneToMany(targetEntity: Suivi::class, mappedBy: 'patient', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    private $suivis;
+    #[ORM\OneToMany(targetEntity: Visite::class, mappedBy: 'patient', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private $visites;
 
     public function __construct()
     {
         $this->erreurs = new ArrayCollection();
-        $this->suivis = new ArrayCollection();
+        $this->visites = new ArrayCollection();
     }
 
     public function serializer()
@@ -145,29 +145,29 @@ class Patient
     }
 
     /**
-     * @return Collection<int, Suivi>
+     * @return Collection<int, Visite>
      */
-    public function getSuivis(): Collection
+    public function getVisites(): Collection
     {
-        return $this->suivis;
+        return $this->visites;
     }
 
-    public function addSuivi(Suivi $suivi): self
+    public function addVisite(Visite $visite): self
     {
-        if (!$this->suivis->contains($suivi)) {
-            $this->suivis->add($suivi);
-            $suivi->setPatient($this);
+        if (!$this->visites->contains($visite)) {
+            $this->visites->add($visite);
+            $visite->setPatient($this);
         }
 
         return $this;
     }
 
-    public function removeSuivi(Suivi $suivi): self
+    public function removeVisite(Visite $visite): self
     {
-        if ($this->suivis->removeElement($suivi)) {
+        if ($this->visites->removeElement($visite)) {
             // set the owning side to null (unless already changed)
-            if ($suivi->getPatient() === $this) {
-                $suivi->setPatient(null);
+            if ($visite->getPatient() === $this) {
+                $visite->setPatient(null);
             }
         }
 

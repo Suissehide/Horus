@@ -18,18 +18,6 @@ class SuiviType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('dateVisite', DateType::class, array(
-                'label' => 'Date de la visite de suivi',
-                'widget' => 'single_text',
-                'format' => 'dd/MM/yyyy',
-                'attr' => [
-                    'placeholder' => 'dd/mm/yyyy',
-                    'class' => 'datepicker',
-                    'autocomplete' => 'off',
-                ],
-                'html5' => false,
-                'required' => false,
-            ))
             ->add('recidive', ChoiceType::class, array(
                 'label' => 'Récidive d’événement cardiovasculaire',
                 'expanded' => true,
@@ -197,10 +185,6 @@ class SuiviType extends AbstractType
                     'step' => 0.1,
                 ),
                 'required' => false,
-            ))
-
-            ->add('protocole', ProtocoleType::class, array(
-                'label' => 'Protocoles'
             ))
 
             ->add('save', SubmitType::class, array('label' => 'Sauvegarder'))

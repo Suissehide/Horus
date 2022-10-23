@@ -61,7 +61,7 @@ class PatientController extends AbstractController
             $patient = $form->getData();
             $type = $form->get('general')->get('feuille')->getData();
 
-            $initializePatient->createSuivi($patient, $type);
+            $initializePatient->createVisite($patient, $type);
 
             $this->em->persist($patient);
             $this->em->flush();

@@ -36,8 +36,8 @@ class PatientType extends AbstractType
                 'label' => 'Facteur'
             ))
 
-            ->add('suivis', CollectionType::class, [
-                'entry_type' => SuiviType::class
+            ->add('visites', CollectionType::class, [
+                'entry_type' => VisiteType::class
             ])
 
             ->add('create', SubmitType::class, array('label' => 'Créer'))

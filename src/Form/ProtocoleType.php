@@ -59,8 +59,8 @@ class ProtocoleType extends AbstractType
             ->add('testEffort', TestEffortType::class, array(
                 'label' => 'Épreuve d\'effort'
             ))
-            ->add('visite', VisiteType::class, array(
-                'label' => 'Visite'
+            ->add('suivi', SuiviType::class, array(
+                'label' => 'Suivi'
             ))
         ;
     }

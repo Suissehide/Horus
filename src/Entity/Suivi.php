@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\SuiviRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -16,10 +15,6 @@ class Suivi
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
-
-#[ORM\Column(type: 'date', nullable: true)]
-    #[Groups(['advancement', 'export'])]
-    private $dateVisite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['advancement', 'export'])]
@@ -91,12 +86,6 @@ class Suivi
     #[Groups(['advancement', 'export'])]
     private $hba1c;
 
-    #[ORM\ManyToOne(targetEntity: Patient::class, inversedBy: 'suivis', cascade: ['persist'])]
-    private $patient;
-
-    #[ORM\ManyToOne(targetEntity: Protocole::class, inversedBy: 'suivis', cascade: ['persist', 'remove'])]
-    private $protocole;
-
     public function __construct()
     {
         $this->facteurs = new ArrayCollection();
@@ -107,18 +96,6 @@ class Suivi
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getDateVisite(): ?\DateTimeInterface
-    {
-        return $this->dateVisite;
-    }
-
-    public function setDateVisite(?\DateTimeInterface $dateVisite): self
-    {
-        $this->dateVisite = $dateVisite;
-
-        return $this;
     }
 
     public function getRecidive(): ?string
@@ -333,30 +310,6 @@ class Suivi
     public function setHba1c(?string $hba1c): self
     {
         $this->hba1c = $hba1c;
-
-        return $this;
-    }
-
-    public function getPatient(): ?Patient
-    {
-        return $this->patient;
-    }
-
-    public function setPatient(?Patient $patient): self
-    {
-        $this->patient = $patient;
-
-        return $this;
-    }
-
-    public function getProtocole(): ?Protocole
-    {
-        return $this->protocole;
-    }
-
-    public function setProtocole(?Protocole $protocole): self
-    {
-        $this->protocole = $protocole;
 
         return $this;
     }

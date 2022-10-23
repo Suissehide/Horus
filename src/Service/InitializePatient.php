@@ -16,10 +16,10 @@ use App\Entity\EchographieVasculaire;
 use App\Entity\NeuroPsychologie;
 use App\Entity\Scintigraphie;
 use App\Entity\TestEffort;
-use App\Entity\Visite;
+use App\Entity\Suivi;
 use App\Entity\Patient;
 use App\Entity\Protocole;
-use App\Entity\Suivi;
+use App\Entity\Visite;
 use App\Entity\QCM;
 use App\Entity\BMQ;
 
@@ -35,8 +35,36 @@ class InitializePatient
         $this->em = $entityManager;
     }
 
-    public function createSuivi(Patient $patient, $type)
+    public function createVisite(Patient $patient, $type)
     {
+        $visite = new Visite();
+
+        $visite->setProtocole(new Protocole());
+
+        switch ($type) {
+            case FormConstants::LABELS['FEUILLES'][0]:
+                $visite->getProtocole()->setFiches(['bfr', 'testsEffort']);
+                break;
+
+            case FormConstants::LABELS['FEUILLES'][1]:
+                $visite->getProtocole()->setFiches(['echographie', 'neuroPsychologie', 'scintigraphie']);
+                break;
+
+            default:
+                break;
+        }
+
+        $patient->addVisite($visite);
+
+        $this->createProtocole($visite);
+
+        $this->em->persist($visite);
+        $this->em->flush();
+    }
+
+    public function createProtocole(Visite $visite)
+    {
+        $medicamentsEntree = new MedicamentsEntree();
         $suivi = new Suivi();
 
         foreach (FormConstants::LABELS["SUIVI_FACTEUR"] as $name) {
@@ -48,33 +76,6 @@ class InitializePatient
             $qcm = new Qcm();
             $suivi->addTraitement($qcm);
         }
-
-        $suivi->setProtocole(new Protocole());
-
-        switch ($type) {
-            case FormConstants::LABELS['FEUILLES'][0]:
-                $suivi->getProtocole()->setFiches(['bfr', 'testsEffort']);
-                break;
-
-            case FormConstants::LABELS['FEUILLES'][1]:
-                $suivi->getProtocole()->setFiches(['echographie', 'neuroPsychologie', 'scintigraphie']);
-                break;
-
-            default:
-                break;
-        }
-
-        $patient->addSuivi($suivi);
-
-        $this->createProtocole($suivi);
-
-        $this->em->persist($suivi);
-        $this->em->flush();
-    }
-
-    public function createProtocole(Suivi $suivi)
-    {
-        $medicamentsEntree = new MedicamentsEntree();
 
         foreach (FormConstants::LABELS["MEDICAMENTSENTREE_VERBATIMS_VECU"] as $name) {
             $qcm = new QCM();
@@ -91,19 +92,19 @@ class InitializePatient
             $medicamentsEntree->addQuestionnaire($bmq);
         }
 
-        $suivi->getProtocole()->setMedicamentsEntree($medicamentsEntree);
-
-        $suivi->getProtocole()->setAngioplastiePontage(new AngioplastiePontage());
-        $suivi->getProtocole()->setBFR(new BFR());
-        $suivi->getProtocole()->setCatheterisation(new Catheterisation());
-        $suivi->getProtocole()->setCoronaireAngioplastie(new CoronaireAngioplastie());
-        $suivi->getProtocole()->setEchographie(new Echographie());
-        $suivi->getProtocole()->setEchographieCardiaque(new EchographieCardiaque());
-        $suivi->getProtocole()->setEchographieVasculaire(new EchographieVasculaire());
-        $suivi->getProtocole()->setNeuroPsychologie(new NeuroPsychologie());
-        $suivi->getProtocole()->setScintigraphie(new Scintigraphie());
-        $suivi->getProtocole()->setTestEffort(new TestEffort());
-        $suivi->getProtocole()->setVisite(new Visite());
+        $protocole = $visite->getProtocole();
+        $protocole->setMedicamentsEntree($medicamentsEntree);
+        $protocole->setAngioplastiePontage(new AngioplastiePontage());
+        $protocole->setBFR(new BFR());
+        $protocole->setCatheterisation(new Catheterisation());
+        $protocole->setCoronaireAngioplastie(new CoronaireAngioplastie());
+        $protocole->setEchographie(new Echographie());
+        $protocole->setEchographieCardiaque(new EchographieCardiaque());
+        $protocole->setEchographieVasculaire(new EchographieVasculaire());
+        $protocole->setNeuroPsychologie(new NeuroPsychologie());
+        $protocole->setScintigraphie(new Scintigraphie());
+        $protocole->setTestEffort(new TestEffort());
+        $protocole->setSuivi($suivi);
 
         $this->em->flush();
     }

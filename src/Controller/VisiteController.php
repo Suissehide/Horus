@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Patient;
 use App\Entity\Protocole;
-use App\Entity\Suivi;
+use App\Entity\Visite;
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class SuiviController extends AbstractController
+class VisiteController extends AbstractController
 {
     /**
      * @var DoctrineManager
@@ -28,15 +28,15 @@ class SuiviController extends AbstractController
         $this->em = $entityManager;
     }
 
-    #[Route(path: '/patient/suivi/add/new', name: 'patient_suivi_add_new', methods: ['GET', 'POST'])]
-    public function patient_suivi_add_new(Request $request, InitializePatient $initializePatient): Response
+    #[Route(path: '/patient/visite/add/new', name: 'patient_visite_add_new', methods: ['GET', 'POST'])]
+    public function patient_visite_add_new(Request $request, InitializePatient $initializePatient): Response
     {
         if ($request->isXmlHttpRequest()) {
             $patientId = $request->request->get('patientId');
             $type = $request->request->get('type');
 
             $patient = $this->managerRegistry->getRepository(Patient::class)->find($patientId);
-            $initializePatient->createSuivi($patient, $type);
+            $initializePatient->createVisite($patient, $type);
             $this->em->flush();
 
             return new JsonResponse('success!', Response::HTTP_CREATED);
@@ -44,8 +44,8 @@ class SuiviController extends AbstractController
         return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
     }
 
-    #[Route(path: '/patient/suivi/add/existant', name: 'patient_suivi_add_existant', methods: ['GET', 'POST'])]
-    public function patient_suivi_add_existant(Request $request, InitializePatient $initializePatient): Response
+    #[Route(path: '/patient/visite/add/existant', name: 'patient_visite_add_existant', methods: ['GET', 'POST'])]
+    public function patient_visite_add_existant(Request $request, InitializePatient $initializePatient): Response
     {
         if ($request->isXmlHttpRequest()) {
             $patientId = $request->request->get('patientId');
@@ -53,11 +53,11 @@ class SuiviController extends AbstractController
 
             $patient = $this->managerRegistry->getRepository(Patient::class)->find($patientId);
             $protocole = $this->managerRegistry->getRepository(Protocole::class)->find($protocoleId);
-            $suivi = new Suivi();
-            $suivi->setProtocole($protocole);
-            $patient->addSuivi($suivi);
+            $visite = new Visite();
+            $visite->setProtocole($protocole);
+            $patient->addVisite($visite);
 
-            $this->em->persist($suivi);
+            $this->em->persist($visite);
             $this->em->flush();
 
             return new JsonResponse('success!', Response::HTTP_CREATED);
@@ -65,17 +65,17 @@ class SuiviController extends AbstractController
         return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
     }
 
-    #[Route(path: '/patient/suivi/delete', name: 'patient_suivi_delete', methods: ['GET', 'POST'])]
-    public function patient_suivi_delete(Request $request): Response
+    #[Route(path: '/patient/visite/delete', name: 'patient_visite_delete', methods: ['GET', 'POST'])]
+    public function patient_visite_delete(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
             $patientId = $request->request->get('patientId');
-            $suiviId = $request->request->get('suiviId');
+            $visiteId = $request->request->get('visiteId');
             
             $patient = $this->managerRegistry->getRepository(Patient::class)->find($patientId);
-            $suivi = $this->managerRegistry->getRepository(Suivi::class)->find($suiviId);
-            $patient->removeSuivi($suivi);
-            $this->em->remove($suivi);
+            $visite = $this->managerRegistry->getRepository(Visite::class)->find($visiteId);
+            $patient->removeVisite($visite);
+            $this->em->remove($visite);
             $this->em->flush();
 
             return new JsonResponse('success!', Response::HTTP_OK);

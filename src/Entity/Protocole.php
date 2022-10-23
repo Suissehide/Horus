@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\ProtocoleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -64,16 +63,16 @@ class Protocole
     #[Groups(['advancement', 'export'])]
     private $testEffort;
 
-    #[ORM\OneToOne(targetEntity: 'App\Entity\Visite', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: 'App\Entity\Suivi', cascade: ['persist', 'remove'])]
     #[Groups(['advancement', 'export'])]
-    private $visite;
+    private $suivi;
 
-    #[ORM\OneToMany(targetEntity: Suivi::class, mappedBy: 'protocole', cascade: ['persist', 'remove'])]
-    private $suivis;
+    #[ORM\OneToMany(targetEntity: Visite::class, mappedBy: 'protocole', cascade: ['persist', 'remove'])]
+    private $visites;
 
     public function __construct()
     {
-        $this->suivis = new ArrayCollection();
+        $this->visites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -225,42 +224,42 @@ class Protocole
         return $this;
     }
 
-    public function getVisite(): ?Visite
+    public function getSuivi(): ?Suivi
     {
-        return $this->visite;
+        return $this->suivi;
     }
 
-    public function setVisite(?Visite $visite): self
+    public function setSuivi(?Suivi $suivi): self
     {
-        $this->visite = $visite;
+        $this->suivi = $suivi;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Suivi>
+     * @return Collection<int, Visite>
      */
-    public function getSuivis(): Collection
+    public function getVisites(): Collection
     {
-        return $this->suivis;
+        return $this->visites;
     }
 
-    public function addSuivi(Suivi $suivi): self
+    public function addVisite(Visite $visite): self
     {
-        if (!$this->suivis->contains($suivi)) {
-            $this->suivis->add($suivi);
-            $suivi->setProtocole($this);
+        if (!$this->visites->contains($visite)) {
+            $this->visites->add($visite);
+            $visite->setProtocole($this);
         }
 
         return $this;
     }
 
-    public function removeSuivi(Suivi $suivi): self
+    public function removeVisite(Visite $visite): self
     {
-        if ($this->suivis->removeElement($suivi)) {
+        if ($this->visites->removeElement($visite)) {
             // set the owning side to null (unless already changed)
-            if ($suivi->getProtocole() === $this) {
-                $suivi->setProtocole(null);
+            if ($visite->getProtocole() === $this) {
+                $visite->setProtocole(null);
             }
         }
 

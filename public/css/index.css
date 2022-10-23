@@ -1064,9 +1064,9 @@ input[type='checkbox'].checkbox-round+span {
     right: 90px;
 }
 
-/* Suivi
+/* Visite
 ========================================================================== */
-.flex-suivi {
+.flex-visite {
     display: flex;
     justify-content: space-between;
     align-items: center;
