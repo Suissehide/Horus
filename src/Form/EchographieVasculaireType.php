@@ -191,7 +191,7 @@ class EchographieVasculaireType extends AbstractType
 
 
             ->add('membresInferieurAorte', IntegerType::class, array(
-                'label' => 'Aorte',
+                'label' => 'Diamètre aorte',
                 'attr' => array(
                     'unity' => 'mm',
                     'data-min' => 0,
@@ -403,8 +403,17 @@ class EchographieVasculaireType extends AbstractType
             ))
             
 
-            ->add('testStandness', IntegerType::class, array(
-                'label' => 'Test de Standness: distance max *',
+            ->add('testStrandnessDistanceMax', IntegerType::class, array(
+                'label' => 'Test de Strandness: distance max *',
+                'attr' => array(
+                    'unity' => 'm',
+                    'data-min' => 0,
+                    'data-max' => 9999,
+                ),
+                'required' => false,
+            ))
+            ->add('testStrandnessDistanceGene', IntegerType::class, array(
+                'label' => 'Test de Strandness: distance de première gêne',
                 'attr' => array(
                     'unity' => 'm',
                     'data-min' => 0,

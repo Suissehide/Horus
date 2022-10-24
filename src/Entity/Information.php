@@ -76,8 +76,80 @@ class Information
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $taille;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $mecanisme;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causePotentielleAtherosclerose = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causeIncertaineAtherosclerose = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causeImprobableAtherosclerose = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pathologieAbsenteAtherosclerose = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $explorationsInsuffisantesAtherosclerose = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causePotentielleMaladiePetitsArteres = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causeIncertaineMaladiePetitsArteres = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causeImprobableMaladiePetitsArteres = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pathologieAbsenteMaladiePetitsArteres = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $explorationsInsuffisanteMaladiePetitsArteres = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causePotentielleCardioEmbolique = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causeIncertaineCardioEmbolique = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causeImprobableCardioEmbolique = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pathologieAbsenteCardioEmbolique = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $explorationsInsuffisanteCardioEmbolique = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causePotentielleAutreCause = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causeIncertaineAutreCause = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causeImprobableAutreCause = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pathologieAbsenteAutreCause = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $explorationsInsuffisanteAutreCause = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causePotentielleDissection = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causeIncertaineDissection = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $causeImprobableDissection = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $pathologieAbsenteDissection = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $explorationsInsuffisanteDissection = null;
 
     public function getId(): ?int
     {
@@ -336,14 +408,302 @@ class Information
         return $this;
     }
 
-    public function getMecanisme(): ?string
+    public function getCausePotentielleAtherosclerose(): ?string
     {
-        return $this->mecanisme;
+        return $this->causePotentielleAtherosclerose;
     }
 
-    public function setMecanisme(?string $mecanisme): self
+    public function setCausePotentielleAtherosclerose(?string $causePotentielleAtherosclerose): self
     {
-        $this->mecanisme = $mecanisme;
+        $this->causePotentielleAtherosclerose = $causePotentielleAtherosclerose;
+
+        return $this;
+    }
+
+    public function getCauseIncertaineAtherosclerose(): ?string
+    {
+        return $this->causeIncertaineAtherosclerose;
+    }
+
+    public function setCauseIncertaineAtherosclerose(?string $causeIncertaineAtherosclerose): self
+    {
+        $this->causeIncertaineAtherosclerose = $causeIncertaineAtherosclerose;
+
+        return $this;
+    }
+
+    public function getCauseImprobableAtherosclerose(): ?string
+    {
+        return $this->causeImprobableAtherosclerose;
+    }
+
+    public function setCauseImprobableAtherosclerose(?string $causeImprobableAtherosclerose): self
+    {
+        $this->causeImprobableAtherosclerose = $causeImprobableAtherosclerose;
+
+        return $this;
+    }
+
+    public function getPathologieAbsenteAtherosclerose(): ?string
+    {
+        return $this->pathologieAbsenteAtherosclerose;
+    }
+
+    public function setPathologieAbsenteAtherosclerose(?string $pathologieAbsenteAtherosclerose): self
+    {
+        $this->pathologieAbsenteAtherosclerose = $pathologieAbsenteAtherosclerose;
+
+        return $this;
+    }
+
+    public function getExplorationsInsuffisantesAtherosclerose(): ?string
+    {
+        return $this->explorationsInsuffisantesAtherosclerose;
+    }
+
+    public function setExplorationsInsuffisantesAtherosclerose(?string $explorationsInsuffisantesAtherosclerose): self
+    {
+        $this->explorationsInsuffisantesAtherosclerose = $explorationsInsuffisantesAtherosclerose;
+
+        return $this;
+    }
+
+    public function getCausePotentielleMaladiePetitsArteres(): ?string
+    {
+        return $this->causePotentielleMaladiePetitsArteres;
+    }
+
+    public function setCausePotentielleMaladiePetitsArteres(?string $causePotentielleMaladiePetitsArteres): self
+    {
+        $this->causePotentielleMaladiePetitsArteres = $causePotentielleMaladiePetitsArteres;
+
+        return $this;
+    }
+
+    public function getCauseIncertaineMaladiePetitsArteres(): ?string
+    {
+        return $this->causeIncertaineMaladiePetitsArteres;
+    }
+
+    public function setCauseIncertaineMaladiePetitsArteres(?string $causeIncertaineMaladiePetitsArteres): self
+    {
+        $this->causeIncertaineMaladiePetitsArteres = $causeIncertaineMaladiePetitsArteres;
+
+        return $this;
+    }
+
+    public function getCauseImprobableMaladiePetitsArteres(): ?string
+    {
+        return $this->causeImprobableMaladiePetitsArteres;
+    }
+
+    public function setCauseImprobableMaladiePetitsArteres(?string $causeImprobableMaladiePetitsArteres): self
+    {
+        $this->causeImprobableMaladiePetitsArteres = $causeImprobableMaladiePetitsArteres;
+
+        return $this;
+    }
+
+    public function getPathologieAbsenteMaladiePetitsArteres(): ?string
+    {
+        return $this->pathologieAbsenteMaladiePetitsArteres;
+    }
+
+    public function setPathologieAbsenteMaladiePetitsArteres(?string $pathologieAbsenteMaladiePetitsArteres): self
+    {
+        $this->pathologieAbsenteMaladiePetitsArteres = $pathologieAbsenteMaladiePetitsArteres;
+
+        return $this;
+    }
+
+    public function getExplorationsInsuffisanteMaladiePetitsArteres(): ?string
+    {
+        return $this->explorationsInsuffisanteMaladiePetitsArteres;
+    }
+
+    public function setExplorationsInsuffisanteMaladiePetitsArteres(?string $explorationsInsuffisanteMaladiePetitsArteres): self
+    {
+        $this->explorationsInsuffisanteMaladiePetitsArteres = $explorationsInsuffisanteMaladiePetitsArteres;
+
+        return $this;
+    }
+
+    public function getCausePotentielleCardioEmbolique(): ?string
+    {
+        return $this->causePotentielleCardioEmbolique;
+    }
+
+    public function setCausePotentielleCardioEmbolique(?string $causePotentielleCardioEmbolique): self
+    {
+        $this->causePotentielleCardioEmbolique = $causePotentielleCardioEmbolique;
+
+        return $this;
+    }
+
+    public function getCauseIncertaineCardioEmbolique(): ?string
+    {
+        return $this->causeIncertaineCardioEmbolique;
+    }
+
+    public function setCauseIncertaineCardioEmbolique(?string $causeIncertaineCardioEmbolique): self
+    {
+        $this->causeIncertaineCardioEmbolique = $causeIncertaineCardioEmbolique;
+
+        return $this;
+    }
+
+    public function getCauseImprobableCardioEmbolique(): ?string
+    {
+        return $this->causeImprobableCardioEmbolique;
+    }
+
+    public function setCauseImprobableCardioEmbolique(?string $causeImprobableCardioEmbolique): self
+    {
+        $this->causeImprobableCardioEmbolique = $causeImprobableCardioEmbolique;
+
+        return $this;
+    }
+
+    public function getPathologieAbsenteCardioEmbolique(): ?string
+    {
+        return $this->pathologieAbsenteCardioEmbolique;
+    }
+
+    public function setPathologieAbsenteCardioEmbolique(?string $pathologieAbsenteCardioEmbolique): self
+    {
+        $this->pathologieAbsenteCardioEmbolique = $pathologieAbsenteCardioEmbolique;
+
+        return $this;
+    }
+
+    public function getExplorationsInsuffisanteCardioEmbolique(): ?string
+    {
+        return $this->explorationsInsuffisanteCardioEmbolique;
+    }
+
+    public function setExplorationsInsuffisanteCardioEmbolique(?string $explorationsInsuffisanteCardioEmbolique): self
+    {
+        $this->explorationsInsuffisanteCardioEmbolique = $explorationsInsuffisanteCardioEmbolique;
+
+        return $this;
+    }
+
+    public function getCausePotentielleAutreCause(): ?string
+    {
+        return $this->causePotentielleAutreCause;
+    }
+
+    public function setCausePotentielleAutreCause(?string $causePotentielleAutreCause): self
+    {
+        $this->causePotentielleAutreCause = $causePotentielleAutreCause;
+
+        return $this;
+    }
+
+    public function getCauseIncertaineAutreCause(): ?string
+    {
+        return $this->causeIncertaineAutreCause;
+    }
+
+    public function setCauseIncertaineAutreCause(?string $causeIncertaineAutreCause): self
+    {
+        $this->causeIncertaineAutreCause = $causeIncertaineAutreCause;
+
+        return $this;
+    }
+
+    public function getCauseImprobableAutreCause(): ?string
+    {
+        return $this->causeImprobableAutreCause;
+    }
+
+    public function setCauseImprobableAutreCause(?string $causeImprobableAutreCause): self
+    {
+        $this->causeImprobableAutreCause = $causeImprobableAutreCause;
+
+        return $this;
+    }
+
+    public function getPathologieAbsenteAutreCause(): ?string
+    {
+        return $this->pathologieAbsenteAutreCause;
+    }
+
+    public function setPathologieAbsenteAutreCause(?string $pathologieAbsenteAutreCause): self
+    {
+        $this->pathologieAbsenteAutreCause = $pathologieAbsenteAutreCause;
+
+        return $this;
+    }
+
+    public function getExplorationsInsuffisanteAutreCause(): ?string
+    {
+        return $this->explorationsInsuffisanteAutreCause;
+    }
+
+    public function setExplorationsInsuffisanteAutreCause(?string $explorationsInsuffisanteAutreCause): self
+    {
+        $this->explorationsInsuffisanteAutreCause = $explorationsInsuffisanteAutreCause;
+
+        return $this;
+    }
+
+    public function getCausePotentielleDissection(): ?string
+    {
+        return $this->causePotentielleDissection;
+    }
+
+    public function setCausePotentielleDissection(?string $causePotentielleDissection): self
+    {
+        $this->causePotentielleDissection = $causePotentielleDissection;
+
+        return $this;
+    }
+
+    public function getCauseIncertaineDissection(): ?string
+    {
+        return $this->causeIncertaineDissection;
+    }
+
+    public function setCauseIncertaineDissection(?string $causeIncertaineDissection): self
+    {
+        $this->causeIncertaineDissection = $causeIncertaineDissection;
+
+        return $this;
+    }
+
+    public function getCauseImprobableDissection(): ?string
+    {
+        return $this->causeImprobableDissection;
+    }
+
+    public function setCauseImprobableDissection(?string $causeImprobableDissection): self
+    {
+        $this->causeImprobableDissection = $causeImprobableDissection;
+
+        return $this;
+    }
+
+    public function getPathologieAbsenteDissection(): ?string
+    {
+        return $this->pathologieAbsenteDissection;
+    }
+
+    public function setPathologieAbsenteDissection(?string $pathologieAbsenteDissection): self
+    {
+        $this->pathologieAbsenteDissection = $pathologieAbsenteDissection;
+
+        return $this;
+    }
+
+    public function getExplorationsInsuffisanteDissection(): ?string
+    {
+        return $this->explorationsInsuffisanteDissection;
+    }
+
+    public function setExplorationsInsuffisanteDissection(?string $explorationsInsuffisanteDissection): self
+    {
+        $this->explorationsInsuffisanteDissection = $explorationsInsuffisanteDissection;
 
         return $this;
     }

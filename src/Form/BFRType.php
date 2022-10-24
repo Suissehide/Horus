@@ -86,7 +86,7 @@ class BFRType extends AbstractType
                 'label' => 'HVG',
                 'expanded' => false,
                 'multiple' => false,
-                'placeholder' => 'false',
+                'placeholder' => false,
                 'choices' => array(
                     'Non' => 'Non',
                     'Electrique' => 'Electrique',
@@ -242,11 +242,18 @@ class BFRType extends AbstractType
                 ),
                 'required' => false,
             ))
+            ->add('fondOeil', ChoiceType::class, array(
+                'label' => 'fond d\'oeil',
+                'choices' => array(
+                    'Non Renseigné' => 'Non Renseigné',
+                    'Normal' => 'Normal',
+                    'Anormal' => 'Anormal'
+                ),
+                'required' => false,
+            ))
             ->add('neuropathieClinique', ChoiceType::class, array(
                 'label' => 'Neuropathie clinique (DN4)',
-                'placeholder' => false,
                 'choices' => array(
-
                     'Normal' => 'Normal',
                     'Background (micro-anévrysme ou oedème)' => 'Background (micro-anévrysme ou oedème)',
                     'Ischémique' => 'Ischémique',
@@ -257,16 +264,7 @@ class BFRType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('fondOeil', ChoiceType::class, array(
-                'label' => 'fond d\'oeil',
-                'placeholder' => false,
-                'choices' => array(
-                    'Non Renseigné' => 'Non Renseigné',
-                    'Normal' => 'Normal',
-                    'Anormal' => 'Anormal'
-                ),
-                'required' => false,
-            ))
+
             ->add('neuroesthesiometriePiedDroit', NumberType::class, array(
                 'label' => 'Neuroesthésiométrie pied droit (en volt)',
                 'attr' => array(
@@ -281,6 +279,48 @@ class BFRType extends AbstractType
                 'label' => 'Neuroesthésiométrie pied gauche (en volt)',
                 'attr' => array(
                     'unity' => 'volt',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                    'step' => 0.01,
+                ),
+                'required' => false,
+            ))
+
+
+            ->add('creatinine', NumberType::class, array(
+                'label' => 'Créatinine',
+                'attr' => array(
+                    'unity' => 'umol/L',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                    'step' => 0.01,
+                ),
+                'required' => false,
+            ))
+            ->add('debitFiltrationGlomerulaire', NumberType::class, array(
+                'label' => 'Débit de filtration glomerulaire CK-EPI',
+                'attr' => array(
+                    'unity' => '',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                    'step' => 0.01,
+                ),
+                'required' => false,
+            ))
+            ->add('microAlbuminurie', NumberType::class, array(
+                'label' => 'MicroAlbuminurie',
+                'attr' => array(
+                    'unity' => 'mg/24h',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                    'step' => 0.01,
+                ),
+                'required' => false,
+            ))
+            ->add('proteinurie', NumberType::class, array(
+                'label' => 'Protéinurie',
+                'attr' => array(
+                    'unity' => 'g/l',
                     'data-min' => 0,
                     'data-max' => 0,
                     'step' => 0.01,
@@ -321,48 +361,6 @@ class BFRType extends AbstractType
             ))
 
 
-            ->add('microAlbuminurie', NumberType::class, array(
-                'label' => 'MicroAlbuminurie',
-                'attr' => array(
-                    'unity' => 'mg/24h',
-                    'data-min' => 0,
-                    'data-max' => 0,
-                    'step' => 0.01,
-                ),
-                'required' => false,
-            ))
-            ->add('creatinine', NumberType::class, array(
-                'label' => 'Créatinine',
-                'attr' => array(
-                    'unity' => 'umol/L',
-                    'data-min' => 0,
-                    'data-max' => 0,
-                    'step' => 0.01,
-                ),
-                'required' => false,
-            ))
-            ->add('debitFiltrationGlomerulaire', NumberType::class, array(
-                'label' => 'Débit de filtration glomerulaire CK-EPI',
-                'attr' => array(
-                    'unity' => '',
-                    'data-min' => 0,
-                    'data-max' => 0,
-                    'step' => 0.01,
-                ),
-                'required' => false,
-            ))
-            ->add('proteinurie', NumberType::class, array(
-                'label' => 'Protéinurie',
-                'attr' => array(
-                    'unity' => 'g/l',
-                    'data-min' => 0,
-                    'data-max' => 0,
-                    'step' => 0.01,
-                ),
-                'required' => false,
-            ))
-
-
             ->add('fibrinogene', NumberType::class, array(
                 'label' => 'Fibrinogène',
                 'attr' => array(
@@ -393,8 +391,8 @@ class BFRType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('UGM', NumberType::class, array(
-                'label' => 'UGM',
+            ->add('VGM', NumberType::class, array(
+                'label' => 'VGM',
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,

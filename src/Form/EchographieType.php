@@ -17,9 +17,8 @@ class EchographieType extends AbstractType
         $builder
             ->add('reposIVA', ChoiceType::class, array(
                 'label' => ' ',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     'Normal' => 'Normal',
                     'Hypokinésie' => 'Hypokinésie',
                     'Akinésie' => 'Akinésie',
@@ -28,9 +27,8 @@ class EchographieType extends AbstractType
             ))
             ->add('reposCX', ChoiceType::class, array(
                 'label' => ' ',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     'Normal' => 'Normal',
                     'Hypokinésie' => 'Hypokinésie',
                     'Akinésie' => 'Akinésie',
@@ -39,9 +37,8 @@ class EchographieType extends AbstractType
             ))
             ->add('reposCD', ChoiceType::class, array(
                 'label' => ' ',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     'Normal' => 'Normal',
                     'Hypokinésie' => 'Hypokinésie',
                     'Akinésie' => 'Akinésie',
@@ -51,9 +48,8 @@ class EchographieType extends AbstractType
 
             ->add('effortIVA', ChoiceType::class, array(
                 'label' => ' ',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     'Normal' => 'Normal',
                     'Hypokinésie' => 'Hypokinésie',
                     'Akinésie' => 'Akinésie',
@@ -62,9 +58,8 @@ class EchographieType extends AbstractType
             ))
             ->add('effortCX', ChoiceType::class, array(
                 'label' => ' ',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     'Normal' => 'Normal',
                     'Hypokinésie' => 'Hypokinésie',
                     'Akinésie' => 'Akinésie',
@@ -73,9 +68,8 @@ class EchographieType extends AbstractType
             ))
             ->add('effortCD', ChoiceType::class, array(
                 'label' => ' ',
-                'placeholder' => '',
+                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
                     'Normal' => 'Normal',
                     'Hypokinésie' => 'Hypokinésie',
                     'Akinésie' => 'Akinésie',

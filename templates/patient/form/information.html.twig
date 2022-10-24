@@ -43,7 +43,65 @@
 <div class="form-space">
 	{{ form_row(form.information.localisation, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.information.taille, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.information.mecanisme, {'attr': {'class': 'input'} }) }}
+</div>
+
+<div class="form-space">
+	<div class="table-container">
+		<table class="table-custom">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Cause potentielle</th>
+					<th>Cause incertaine</th>
+					<th>Cause improbable</th>
+					<th>Pathologie absente</th>
+					<th>Explorations insuffisantes pour statuer</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="row-header">Athérosclérose</td>
+					<td>{{ form_row(form.information.causePotentielleAtherosclerose, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.causeIncertaineAtherosclerose, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.causeImprobableAtherosclerose, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.pathologieAbsenteAtherosclerose, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.explorationsInsuffisantesAtherosclerose, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Maladie des petits artères</td>
+					<td>{{ form_row(form.information.causePotentielleMaladiePetitsArteres, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.causeIncertaineMaladiePetitsArteres, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.causeImprobableMaladiePetitsArteres, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.pathologieAbsenteMaladiePetitsArteres, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.explorationsInsuffisanteMaladiePetitsArteres, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Cardio-embolique</td>
+					<td>{{ form_row(form.information.causePotentielleCardioEmbolique, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.causeIncertaineCardioEmbolique, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.causeImprobableCardioEmbolique, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.pathologieAbsenteCardioEmbolique, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.explorationsInsuffisanteCardioEmbolique, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Autre cause</td>
+					<td>{{ form_row(form.information.causePotentielleAutreCause, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.causeIncertaineAutreCause, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.causeImprobableAutreCause, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.pathologieAbsenteAutreCause, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.explorationsInsuffisanteAutreCause, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+				<tr>
+					<td class="row-header">Dissection</td>
+					<td>{{ form_row(form.information.causePotentielleDissection, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.causeIncertaineDissection, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.causeImprobableDissection, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.pathologieAbsenteDissection, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.information.explorationsInsuffisanteDissection, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
 
 {{ form_row(form.information.save, {'attr': {'class': 'form-btn'} }) }}

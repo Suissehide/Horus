@@ -547,7 +547,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false
             ))
             ->add('volumePlaqueHypodense', NumberType::class, array(
-                'label' => 'Valume plaque hypodense (< 30 UH) BLEU',
+                'label' => 'Volume plaque hypodense (< 30 UH) BLEU',
                 'attr' => array(
                     'unity' => 'mm3',
                     'data-min' => 0,
@@ -557,7 +557,7 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false
             ))
             ->add('volumePlaqueCalcifiee', NumberType::class, array(
-                'label' => 'Valume de plaque calcifiée JAUNE',
+                'label' => 'Volume de plaque calcifiée JAUNE',
                 'attr' => array(
                     'unity' => 'mm3',
                     'data-min' => 0,

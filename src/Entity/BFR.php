@@ -120,7 +120,7 @@ class BFR
     private $hemoglobine;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
-    private $UGM;
+    private $VGM;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $plaquettes;
@@ -547,14 +547,14 @@ class BFR
         return $this;
     }
 
-    public function getUGM(): ?string
+    public function getVGM(): ?string
     {
-        return $this->UGM;
+        return $this->VGM;
     }
 
-    public function setUGM(?string $UGM): self
+    public function setVGM(?string $VGM): self
     {
-        $this->UGM = $UGM;
+        $this->VGM = $VGM;
 
         return $this;
     }

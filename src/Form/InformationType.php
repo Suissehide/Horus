@@ -300,23 +300,336 @@ class InformationType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('mecanisme', ChoiceType::class, array(
-                'label' => 'Mécanisme',
+
+
+            ->add('causePotentielleAtherosclerose', ChoiceType::class, array(
+                'label' => false,
                 'expanded' => false,
                 'multiple' => false,
-                'placeholder' => false,
                 'choices' => array(
-                    '' => '',
-                    'Athérothrombose affirmée' => 'Athérothrombose affirmée',
-                    'Athérothrombose possible' => 'Athérothrombose possible',
-                    'Atteinte des petits vaisseaux affirmée' => 'Atteinte des petits vaisseaux affirmée',
-                    'Atteinte des petits vaisseaux possible' => 'InfirAtteinte des petits vaisseaux possiblemière',
-                    'Autres causes (dissections, thrombocytémie, mal de systèmes) affirmée' => 'Autres causes (dissections, thrombocytémie, mal de systèmes) affirmée',
-                    'Autres causes (dissections, thrombocytémie, mal de systèmes) possible' => 'Autres causes (dissections, thrombocytémie, mal de systèmes) possible',
-                    'Cardio-embolique affirmée' => 'Cardio-embolique affirmée',
-                    'Cardio-embolique possible' => 'Cardio-embolique possible'
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
                 ),
-                'required' => false,
+                'required' => false
+            ))
+            ->add('causeIncertaineAtherosclerose', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('causeImprobableAtherosclerose', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('pathologieAbsenteAtherosclerose', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('explorationsInsuffisantesAtherosclerose', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+
+            ->add('causePotentielleMaladiePetitsArteres', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('causeIncertaineMaladiePetitsArteres', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('causeImprobableMaladiePetitsArteres', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('pathologieAbsenteMaladiePetitsArteres', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('explorationsInsuffisanteMaladiePetitsArteres', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+
+            ->add('causePotentielleCardioEmbolique', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('causeIncertaineCardioEmbolique', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('causeImprobableCardioEmbolique', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('pathologieAbsenteCardioEmbolique', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('explorationsInsuffisanteCardioEmbolique', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+
+            ->add('causePotentielleAutreCause', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('causeIncertaineAutreCause', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('causeImprobableAutreCause', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('pathologieAbsenteAutreCause', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('explorationsInsuffisanteAutreCause', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+
+            ->add('causePotentielleDissection', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('causeIncertaineDissection', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('causeImprobableDissection', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('pathologieAbsenteDissection', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
+            ))
+            ->add('explorationsInsuffisanteDissection', ChoiceType::class, array(
+                'label' => false,
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => array(
+                    '1' => '1',
+                    '2' => '2',
+                    '3' => '3',
+                    '0' => '0',
+                    '9' => '9'
+                ),
+                'required' => false
             ))
 
             ->add('save', SubmitType::class, array('label' => 'Sauvegarder'))

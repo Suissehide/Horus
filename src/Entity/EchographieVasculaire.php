@@ -93,7 +93,10 @@ class EchographieVasculaire
     private $IPSEffortGauche;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private $testStandness;
+    private $testStrandnessDistanceMax;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $testStrandnessDistanceGene;
 
     #[ORM\Column(type: 'integer', nullable: true)]
     private $vitesseOndePouls;
@@ -433,14 +436,26 @@ class EchographieVasculaire
         return $this;
     }
 
-    public function getTestStandness(): ?int
+    public function getTestStrandnessDistanceMax(): ?int
     {
-        return $this->testStandness;
+        return $this->testStrandnessDistanceMax;
     }
 
-    public function setTestStandness(?int $testStandness): self
+    public function setTestStrandnessDistanceMax(?int $testStrandnessDistanceMax): self
     {
-        $this->testStandness = $testStandness;
+        $this->testStrandnessDistanceMax = $testStrandnessDistanceMax;
+
+        return $this;
+    }
+
+    public function getTestStrandnessDistanceGene(): ?int
+    {
+        return $this->testStrandnessDistanceGene;
+    }
+
+    public function setTestStrandnessDistanceGene(?int $testStrandnessDistanceGene): self
+    {
+        $this->testStrandnessDistanceGene = $testStrandnessDistanceGene;
 
         return $this;
     }

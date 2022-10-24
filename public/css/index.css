@@ -542,9 +542,9 @@ input[type='checkbox'].checkbox-round+span {
 }
 
 .table-custom thead tr>th {
-    padding: 0 10px 16px;
-    border-left: 1px solid var(--persian-indigo);
+    padding: 8px 10px 8px;
     word-break: break-word;
+    border-bottom: 1px solid var(--persian-indigo);
 }
 
 .table-custom thead tr>th:empty {

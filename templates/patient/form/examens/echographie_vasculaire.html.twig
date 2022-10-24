@@ -13,9 +13,9 @@
 	{{ form_row(form.protocole.echographieVasculaire.sousClaviereGauche, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.protocole.echographieVasculaire.TSAAorte, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 
-	{{ form_row(form.protocole.echographieVasculaire.volumeCarotideDroite, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-	{{ form_row(form.protocole.echographieVasculaire.volumeCarotideGauche, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-	{{ form_row(form.protocole.echographieVasculaire.chargeAtheromeTotale, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.echographieVasculaire.volumeCarotideDroite, {'attr': {'class': 'input special'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.echographieVasculaire.volumeCarotideGauche, {'attr': {'class': 'input special'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.echographieVasculaire.chargeAtheromeTotale, {'attr': {'class': 'input special'}, 'useStyle': true }) }}
 </div>
 
 <h3 id="membres-inferieur">Schéma membres inférieur</h3>
@@ -45,20 +45,22 @@
 	</div>
 
 	<div class="form-space">
-		{{ form_row(form.protocole.echographieVasculaire.testStandness, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+		{{ form_row(form.protocole.echographieVasculaire.testStrandnessDistanceGene, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+		{{ form_row(form.protocole.echographieVasculaire.testStrandnessDistanceMax, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 		<div class="def">* compris entre 0 et 1000, 9999 si non réalisé</div>
+	</div>
+	<div class="form-space flex-2">
+		{{ form_row(form.protocole.echographieVasculaire.arretPour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	</div>
 
 	<div class="flex-nowrap">
 		{{ form_row(form.protocole.echographieVasculaire.IPSEffortDroit, {'attr': {'class': 'input'} }) }}
 		{{ form_row(form.protocole.echographieVasculaire.IPSEffortGauche, {'attr': {'class': 'input'} }) }}
 	</div>
-</div>
 
-<div class="form-space flex-2">
-	{{ form_row(form.protocole.echographieVasculaire.arretPour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-	{{ form_row(form.protocole.echographieVasculaire.vitesseOndePouls, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	<div class="form-space flex-2">
+		{{ form_row(form.protocole.echographieVasculaire.vitesseOndePouls, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	</div>
 </div>
-
 
 {{ form_row(form.protocole.echographieVasculaire.save, {'attr': {'class': 'form-btn'} }) }}
