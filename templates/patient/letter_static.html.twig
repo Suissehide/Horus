@@ -46,21 +46,21 @@
                     <h1 id="general">Informations générales</h1>
                     <h3 id="identification">Identification</h3>
                     <div class="form-space">
-                        <div class="flex-nowrap">
-                            {{ patient.general.civilite }}
-                            {{ patient.general.prenom }}
-                            {{ patient.general.nom }}
-                        </div>
-                        <div><strong>Nom de naissance : </strong>{{ patient.general.nomNaissance }}</div>
-                        <div><strong>Date de naissance : </strong>{{ patient.general.dateNaissance|date("d/m/Y") }}</div>
-                        <div><strong>Sexe : </strong>{{ patient.general.sexe }}</div>
+                        <div class="field"><strong>Civilité : </strong>{{ patient.general.civilite }}</div>
+                        <div class="field"><strong>Prénom : </strong>{{ patient.general.prenom }}</div>
+                        <div class="field"><strong>Nom : </strong>{{ patient.general.nom }}</div>
+                        <div class="field"><strong>Nom de naissance : </strong>{{ patient.general.nomNaissance }}</div>
+                        <div class="field"><strong>Date de naissance : </strong>{{ patient.general.dateNaissance|date("d/m/Y") }}</div>
+                        <div class="field"><strong>Sexe : </strong>{{ patient.general.sexe }}</div>
                     </div>
 
                     <h3 id="complement">Complément</h3>
                     <div class="form-space">
-                        <div><strong>Professions : </strong>{{ patient.general.profession }}</div>
-                        <div><strong>Statut actuel : </strong>{{ patient.general.statutActuel }}</div>
-                        <div><strong>Niveau d'étude : </strong>{{ patient.general.niveauEtude }}</div>
+                        <div class="field">
+                            <strong>Professions : </strong>{{ patient.general.profession }}
+                        </div>
+                        <div class="field"><strong>Statut actuel : </strong>{{ patient.general.statutActuel }}</div>
+                        <div class="field"><strong>Niveau d'étude : </strong>{{ patient.general.niveauEtude }}</div>
                     </div>
                 </section>
 
@@ -69,20 +69,19 @@
                     <h1 id="antecedentCardiovasculaire">Antécédent cardiovasculaire</h1>
                     <div class="form-space">
                         <div class="qcm">
-                            <div><strong>IDM-SCA : </strong>{{ patient.antecedentCardiovasculaire.IDMSCA }}</div>
-                            <div><strong>Angor stable : </strong>{{ patient.antecedentCardiovasculaire.angorStable }}</div>
-                            <div><strong>Angioplastie coronaire : </strong>{{ patient.antecedentCardiovasculaire.angioplastieCoronaire }}</div>
-                            <div><strong>Pontage coronaire : </strong>{{ patient.antecedentCardiovasculaire.pontageCoronaire }}</div>
-                            <div><strong>Insuffisance cardiaque stade III ou IV : </strong>{{ patient.antecedentCardiovasculaire.insuffisanceCardiaque }}</div>
-                            <div><strong>AVC : </strong>{{ patient.antecedentCardiovasculaire.AVC }}</div>
-                            <div><strong>AIT : </strong>{{ patient.antecedentCardiovasculaire.AIT }}</div>
-                            <div><strong>Endartériectomie carotidienne : </strong>{{ patient.antecedentCardiovasculaire.endarteriectomieCarotidienne }}</div>
-                            <div><strong>Artérite des membres inférieurs : </strong>{{ patient.antecedentCardiovasculaire.arteriteMembresInferieurs }}</div>
-                            <div><strong>Angioplastie périphérique : </strong>{{ patient.antecedentCardiovasculaire.angioplastiePeripherique }}</div>
-                            <div><strong>Pontage périphérique : </strong>{{ patient.antecedentCardiovasculaire.pontagePeripherique }}</div>
-                            <div><strong>Antécédent de fibrillation auriculaire : </strong>{{ patient.antecedentCardiovasculaire.antecedentFibrillationAuriculaire }}</div>
-                            <div><strong>Antécédent d'insuffisance cardiaque : </strong>{{ patient.antecedentCardiovasculaire.antecedentInsuffisanceCardiaque }}</div>
-                            <div><strong>Valvulopathie (>grade 2 ou >modérée) : </strong>{{ patient.antecedentCardiovasculaire.valvulopathie }}</div>
+                            <div class="field"><strong>IDM-SCA : </strong>{{ patient.antecedentCardiovasculaire.IDMSCA }}</div>
+                            <div class="field"><strong>Angor stable : </strong>{{ patient.antecedentCardiovasculaire.angorStable }}</div>
+                            <div class="field"><strong>Angioplastie coronaire : </strong>{{ patient.antecedentCardiovasculaire.angioplastieCoronaire }}</div>
+                            <div class="field"><strong>Pontage coronaire : </strong>{{ patient.antecedentCardiovasculaire.pontageCoronaire }}</div>
+                            <div class="field"><strong>AVC : </strong>{{ patient.antecedentCardiovasculaire.AVC }}</div>
+                            <div class="field"><strong>AIT : </strong>{{ patient.antecedentCardiovasculaire.AIT }}</div>
+                            <div class="field"><strong>Endartériectomie carotidienne : </strong>{{ patient.antecedentCardiovasculaire.endarteriectomieCarotidienne }}</div>
+                            <div class="field"><strong>Artérite des membres inférieurs : </strong>{{ patient.antecedentCardiovasculaire.arteriteMembresInferieurs }}</div>
+                            <div class="field"><strong>Angioplastie périphérique : </strong>{{ patient.antecedentCardiovasculaire.angioplastiePeripherique }}</div>
+                            <div class="field"><strong>Pontage périphérique : </strong>{{ patient.antecedentCardiovasculaire.pontagePeripherique }}</div>
+                            <div class="field"><strong>Antécédent de fibrillation auriculaire : </strong>{{ patient.antecedentCardiovasculaire.antecedentFibrillationAuriculaire }}</div>
+                            <div class="field"><strong>Valvulopathie (>grade 2 ou >modérée) : </strong>{{ patient.antecedentCardiovasculaire.valvulopathie }}</div>
+                            <div class="field"><strong>Insuffisance cardiaque stade III ou IV : </strong>{{ patient.antecedentCardiovasculaire.insuffisanceCardiaque }}</div>
                         </div>
                     </div>
                 </section>
@@ -92,207 +91,109 @@
                     <h1 id="information">Information sur l'événement cardiovasculaire</h1>
                     <h3 id="infarctusMyocarde">Type d'infarctus du myocarde</h3>
                     <div class="form-space">
-                        <div><strong>Sus-décalage du segment ST : </strong>{{ patient.information.susDecalage }}</div>
+                        <div class="field"><strong>Sus-décalage du segment ST : </strong>{{ patient.information.susDecalage }}</div>
+                        <div class="field"><strong>Sans sus-décalage du segment ST : </strong>{{ patient.information.sansSusDecalage }}</div>
+                    </div>
 
-                        <div class="margin-space"></div>
+                    <div class="form-space">
                         <h5>Territoire atteint</h5>
-                        <div><strong>Antérieur : </strong>{{ patient.information.anterieur }}</div>
-                        <div><strong>Septo-apical : </strong>{{ patient.information.septoApical }}</div>
-                        <div><strong>Latéral : </strong>{{ patient.information.lateral }}</div>
-                        <div><strong>Inférieur / Postérieur : </strong>{{ patient.information.inferieurPosterieur }}</div>
-                        <div><strong>Sans territoire : </strong>{{ patient.information.sansTerritoire }}</div>
+                        <div class="field"><strong>Antérieur : </strong>{{ patient.information.anterieur }}</div>
+                        <div class="field"><strong>Septo-apical : </strong>{{ patient.information.septoApical }}</div>
+                        <div class="field"><strong>Latéral : </strong>{{ patient.information.lateral }}</div>
+                        <div class="field"><strong>Inférieur / Postérieur : </strong>{{ patient.information.inferieurPosterieur }}</div>
+                        <div class="field"><strong>Sans territoire : </strong>{{ patient.information.sansTerritoire }}</div>
+                    </div>
 
-                        <div class="margin-space"></div>
+                    <div class="form-space">
                         <h5>Coronarographie (sténose > 50%)</h5>
-                        <div><strong>IVA : </strong>{{ patient.information.IVA }}</div>
-                        <div><strong>CD : </strong>{{ patient.information.CD }}</div>
-                        <div><strong>Cx : </strong>{{ patient.information.Cx }}</div>
-                        <div><strong>Marginale : </strong>{{ patient.information.marginale }}</div>
-                        <div><strong>Diagonale : </strong>{{ patient.information.diagonale }}</div>
-                        <div><strong>Pontage : </strong>{{ patient.information.pontage }}</div>
-                        <div><strong>Tronc commun : </strong>{{ patient.information.troncCommun }}</div>
+                        <div class="field"><strong>IVA : </strong>{{ patient.information.IVA }}</div>
+                        <div class="field"><strong>Diagonale : </strong>{{ patient.information.diagonale }}</div>
+                        <div class="field"><strong>Cx : </strong>{{ patient.information.Cx }}</div>
+                        <div class="field"><strong>Marginale : </strong>{{ patient.information.marginale }}</div>
+                        <div class="field"><strong>CD : </strong>{{ patient.information.CD }}</div>
+                        <div class="field"><strong>Pontage : </strong>{{ patient.information.pontage }}</div>
+                        <div class="field"><strong>Tronc commun : </strong>{{ patient.information.troncCommun }}</div>
                     </div>
 
-                    <div class="margin-space"></div>
                     <h5>Traitement à la phase aiguë</h5>
-                    <div><strong>Traitement : </strong> 
-                        <div class="form-space">
-                            {% for t in patient.information.traitementPhaseAigue %}
-                                {{ t }}{% if loop.last == false %}, {% endif %}
-                            {% endfor %}
-                        </div>
+                    <div class="form-space field">
+                        <strong>Traitement : </strong> 
+                        {% for t in patient.information.traitementPhaseAigue %}
+                            {{ t }}{% if loop.last == false %}, {% endif %}
+                        {% endfor %}
                     </div>
 
-                    <div class="margin-space"></div>
                     <h5>Complications immédiates</h5>
                     <div class="form-space">
-                        <div><strong>Trouble du rythme ventriculaire : </strong>{{ patient.information.troubleRythmeVentriculaire }}</div>
-                        <div><strong>Insuffisance cardiaque : </strong>{{ patient.information.insuffisanceCardiaque }}</div>
-                        <div><strong>Péricardite : </strong>{{ patient.information.pericardite }}</div>
-                        <div><strong>Complication mécanique : </strong>{{ patient.information.complicationMecanique }}</div>
+                        <div class="field"><strong>Trouble du rythme ventriculaire : </strong>{{ patient.information.troubleRythmeVentriculaire }}</div>
+                        <div class="field"><strong>Insuffisance cardiaque : </strong>{{ patient.information.insuffisanceCardiaque }}</div>
+                        <div class="field"><strong>Péricardite : </strong>{{ patient.information.pericardite }}</div>
+                        <div class="field"><strong>Complication mécanique : </strong>{{ patient.information.complicationMecanique }}</div>
                     </div>
 
                     <h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
                     <div class="form-space">
-                        <div><strong>Localisation : </strong>{{ patient.information.localisation }}</div>
-                        <div><strong>Taille : </strong>{{ patient.information.taille }}</div>
-                        <div><strong>Mécanisme : </strong>{{ patient.information.mecanisme }}</div>
+                        <div class="field"><strong>Localisation : </strong>{{ patient.information.localisation }}</div>
+                        <div class="field"><strong>Taille : </strong>{{ patient.information.taille }}</div>
                     </div>
-                </section>
 
-                <section class="slide" style="display: block">
-                    <h1 id="information">Information sur l'événement cardiovasculaire</h1>
-                    <h3 id="infarctusMyocarde">Type d'infarctus du myocarde</h3>
                     <div class="form-space">
-                        <div><strong>Sus-décalage du segment ST : </strong>{{ patient.information.susDecalage }}</div>
-
-                        <div class="margin-space"></div>
-                        <h5>Territoire atteint</h5>
-                        <div><strong>Antérieur : </strong>{{ patient.information.anterieur }}</div>
-                        <div><strong>Septo-apical : </strong>{{ patient.information.septoApical }}</div>
-                        <div><strong>Latéral : </strong>{{ patient.information.lateral }}</div>
-                        <div><strong>Inférieur / Postérieur : </strong>{{ patient.information.inferieurPosterieur }}</div>
-                        <div><strong>Sans territoire : </strong>{{ patient.information.sansTerritoire }}</div>
-
-                        <div class="margin-space"></div>
-                        <h5>Coronarographie (sténose > 50%)</h5>
-                        <div><strong>IVA : </strong>{{ patient.information.IVA }}</div>
-                        <div><strong>CD : </strong>{{ patient.information.CD }}</div>
-                        <div><strong>Cx : </strong>{{ patient.information.Cx }}</div>
-                        <div><strong>Marginale : </strong>{{ patient.information.marginale }}</div>
-                        <div><strong>Diagonale : </strong>{{ patient.information.diagonale }}</div>
-                        <div><strong>Pontage : </strong>{{ patient.information.pontage }}</div>
-                        <div><strong>Tronc commun : </strong>{{ patient.information.troncCommun }}</div>
-                    </div>
-
-                    <div class="margin-space"></div>
-                    <h5>Traitement à la phase aiguë</h5>
-                    <div><strong>Traitement : </strong> 
-                        <div class="form-space">
-                            {% for t in patient.information.traitementPhaseAigue %}
-                                {{ t }}{% if loop.last == false %}, {% endif %}
-                            {% endfor %}
+                        <div class="table-container">
+                            <table class="table-custom">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Cause potentielle</th>
+                                        <th>Cause incertaine</th>
+                                        <th>Cause improbable</th>
+                                        <th>Pathologie absente</th>
+                                        <th>Explorations insuffisantes pour statuer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="row-header">Athérosclérose</td>
+                                        <td>{{ patient.information.causePotentielleAtherosclerose }}</td>
+                                        <td>{{ patient.information.causeIncertaineAtherosclerose }}</td>
+                                        <td>{{ patient.information.causeImprobableAtherosclerose }}</td>
+                                        <td>{{ patient.information.pathologieAbsenteAtherosclerose }}</td>
+                                        <td>{{ patient.information.explorationsInsuffisantesAtherosclerose }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-header">Maladie des petits artères</td>
+                                        <td>{{ patient.information.causePotentielleMaladiePetitsArteres }}</td>
+                                        <td>{{ patient.information.causeIncertaineMaladiePetitsArteres }}</td>
+                                        <td>{{ patient.information.causeImprobableMaladiePetitsArteres }}</td>
+                                        <td>{{ patient.information.pathologieAbsenteMaladiePetitsArteres }}</td>
+                                        <td>{{ patient.information.explorationsInsuffisanteMaladiePetitsArteres }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-header">Cardio-embolique</td>
+                                        <td>{{ patient.information.causePotentielleCardioEmbolique }}</td>
+                                        <td>{{ patient.information.causeIncertaineCardioEmbolique }}</td>
+                                        <td>{{ patient.information.causeImprobableCardioEmbolique }}</td>
+                                        <td>{{ patient.information.pathologieAbsenteCardioEmbolique }}</td>
+                                        <td>{{ patient.information.explorationsInsuffisanteCardioEmbolique }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-header">Autre cause</td>
+                                        <td>{{ patient.information.causePotentielleAutreCause }}</td>
+                                        <td>{{ patient.information.causeIncertaineAutreCause }}</td>
+                                        <td>{{ patient.information.causeImprobableAutreCause }}</td>
+                                        <td>{{ patient.information.pathologieAbsenteAutreCause }}</td>
+                                        <td>{{ patient.information.explorationsInsuffisanteAutreCause }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="row-header">Dissection</td>
+                                        <td>{{ patient.information.causePotentielleDissection }}</td>
+                                        <td>{{ patient.information.causeIncertaineDissection }}</td>
+                                        <td>{{ patient.information.causeImprobableDissection }}</td>
+                                        <td>{{ patient.information.pathologieAbsenteDissection }}</td>
+                                        <td>{{ patient.information.explorationsInsuffisanteDissection }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-
-                    <div class="margin-space"></div>
-                    <h5>Complications immédiates</h5>
-                    <div class="form-space">
-                        <div><strong>Trouble du rythme ventriculaire : </strong>{{ patient.information.troubleRythmeVentriculaire }}</div>
-                        <div><strong>Insuffisance cardiaque : </strong>{{ patient.information.insuffisanceCardiaque }}</div>
-                        <div><strong>Péricardite : </strong>{{ patient.information.pericardite }}</div>
-                        <div><strong>Complication mécanique : </strong>{{ patient.information.complicationMecanique }}</div>
-                    </div>
-
-                    <h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
-                    <div class="form-space">
-                        <div><strong>Localisation : </strong>{{ patient.information.localisation }}</div>
-                        <div><strong>Taille : </strong>{{ patient.information.taille }}</div>
-                        <div><strong>Mécanisme : </strong>{{ patient.information.mecanisme }}</div>
-                    </div>
-                </section>
-
-                <section class="slide" style="display: block">
-                    <h1 id="information">Information sur l'événement cardiovasculaire</h1>
-                    <h3 id="infarctusMyocarde">Type d'infarctus du myocarde</h3>
-                    <div class="form-space">
-                        <div><strong>Sus-décalage du segment ST : </strong>{{ patient.information.susDecalage }}</div>
-
-                        <div class="margin-space"></div>
-                        <h5>Territoire atteint</h5>
-                        <div><strong>Antérieur : </strong>{{ patient.information.anterieur }}</div>
-                        <div><strong>Septo-apical : </strong>{{ patient.information.septoApical }}</div>
-                        <div><strong>Latéral : </strong>{{ patient.information.lateral }}</div>
-                        <div><strong>Inférieur / Postérieur : </strong>{{ patient.information.inferieurPosterieur }}</div>
-                        <div><strong>Sans territoire : </strong>{{ patient.information.sansTerritoire }}</div>
-
-                        <div class="margin-space"></div>
-                        <h5>Coronarographie (sténose > 50%)</h5>
-                        <div><strong>IVA : </strong>{{ patient.information.IVA }}</div>
-                        <div><strong>CD : </strong>{{ patient.information.CD }}</div>
-                        <div><strong>Cx : </strong>{{ patient.information.Cx }}</div>
-                        <div><strong>Marginale : </strong>{{ patient.information.marginale }}</div>
-                        <div><strong>Diagonale : </strong>{{ patient.information.diagonale }}</div>
-                        <div><strong>Pontage : </strong>{{ patient.information.pontage }}</div>
-                        <div><strong>Tronc commun : </strong>{{ patient.information.troncCommun }}</div>
-                    </div>
-
-                    <div class="margin-space"></div>
-                    <h5>Traitement à la phase aiguë</h5>
-                    <div><strong>Traitement : </strong> 
-                        <div class="form-space">
-                            {% for t in patient.information.traitementPhaseAigue %}
-                                {{ t }}{% if loop.last == false %}, {% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
-
-                    <div class="margin-space"></div>
-                    <h5>Complications immédiates</h5>
-                    <div class="form-space">
-                        <div><strong>Trouble du rythme ventriculaire : </strong>{{ patient.information.troubleRythmeVentriculaire }}</div>
-                        <div><strong>Insuffisance cardiaque : </strong>{{ patient.information.insuffisanceCardiaque }}</div>
-                        <div><strong>Péricardite : </strong>{{ patient.information.pericardite }}</div>
-                        <div><strong>Complication mécanique : </strong>{{ patient.information.complicationMecanique }}</div>
-                    </div>
-
-                    <h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
-                    <div class="form-space">
-                        <div><strong>Localisation : </strong>{{ patient.information.localisation }}</div>
-                        <div><strong>Taille : </strong>{{ patient.information.taille }}</div>
-                        <div><strong>Mécanisme : </strong>{{ patient.information.mecanisme }}</div>
-                    </div>
-                </section>
-
-                <section class="slide" style="display: block">
-                    <h1 id="information">Information sur l'événement cardiovasculaire</h1>
-                    <h3 id="infarctusMyocarde">Type d'infarctus du myocarde</h3>
-                    <div class="form-space">
-                        <div><strong>Sus-décalage du segment ST : </strong>{{ patient.information.susDecalage }}</div>
-
-                        <div class="margin-space"></div>
-                        <h5>Territoire atteint</h5>
-                        <div><strong>Antérieur : </strong>{{ patient.information.anterieur }}</div>
-                        <div><strong>Septo-apical : </strong>{{ patient.information.septoApical }}</div>
-                        <div><strong>Latéral : </strong>{{ patient.information.lateral }}</div>
-                        <div><strong>Inférieur / Postérieur : </strong>{{ patient.information.inferieurPosterieur }}</div>
-                        <div><strong>Sans territoire : </strong>{{ patient.information.sansTerritoire }}</div>
-
-                        <div class="margin-space"></div>
-                        <h5>Coronarographie (sténose > 50%)</h5>
-                        <div><strong>IVA : </strong>{{ patient.information.IVA }}</div>
-                        <div><strong>CD : </strong>{{ patient.information.CD }}</div>
-                        <div><strong>Cx : </strong>{{ patient.information.Cx }}</div>
-                        <div><strong>Marginale : </strong>{{ patient.information.marginale }}</div>
-                        <div><strong>Diagonale : </strong>{{ patient.information.diagonale }}</div>
-                        <div><strong>Pontage : </strong>{{ patient.information.pontage }}</div>
-                        <div><strong>Tronc commun : </strong>{{ patient.information.troncCommun }}</div>
-                    </div>
-
-                    <div class="margin-space"></div>
-                    <h5>Traitement à la phase aiguë</h5>
-                    <div><strong>Traitement : </strong> 
-                        <div class="form-space">
-                            {% for t in patient.information.traitementPhaseAigue %}
-                                {{ t }}{% if loop.last == false %}, {% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
-
-                    <div class="margin-space"></div>
-                    <h5>Complications immédiates</h5>
-                    <div class="form-space">
-                        <div><strong>Trouble du rythme ventriculaire : </strong>{{ patient.information.troubleRythmeVentriculaire }}</div>
-                        <div><strong>Insuffisance cardiaque : </strong>{{ patient.information.insuffisanceCardiaque }}</div>
-                        <div><strong>Péricardite : </strong>{{ patient.information.pericardite }}</div>
-                        <div><strong>Complication mécanique : </strong>{{ patient.information.complicationMecanique }}</div>
-                    </div>
-
-                    <h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
-                    <div class="form-space">
-                        <div><strong>Localisation : </strong>{{ patient.information.localisation }}</div>
-                        <div><strong>Taille : </strong>{{ patient.information.taille }}</div>
-                        <div><strong>Mécanisme : </strong>{{ patient.information.mecanisme }}</div>
                     </div>
                 </section>
 
@@ -300,10 +201,8 @@
                 <section class="slide" style="display: block">
                     <h1 id="facteur">Facteurs de risques initiaux</h1>
                     <div class="radio-row">
-                        <div><strong>Antécédent familiaux : </strong>{{ patient.facteur.antecedentFamiliaux }}</div>
+                        <div class="field"><strong>Antécédent familiaux : </strong>{{ patient.facteur.antecedentFamiliaux }}</div>
                     </div>
-
-                    <div class="margin-space"></div>
 
                     <div class="form-space">
                         <div class="table-container">
@@ -345,53 +244,344 @@
                             </table>
                         </div>
 
-                        <div class="margin-space"></div>
                         <h5>Tabagisme</h5>
                         <div class="flex-wrap">
                             <div class="flex-1">
-                                <div><strong>État : </strong>{{ patient.facteur.tabagisme }}</div>
+                                <div class="field"><strong>État : </strong>{{ patient.facteur.tabagisme }}</div>
                             </div>
                             <div class="flex-1">
-                                <div><strong>Date d'arrêt : </strong>{{ patient.facteur.dateArret|date("d/m/Y") }}</div>
+                                <div class="field"><strong>Date d'arrêt : </strong>{{ patient.facteur.dateArret|date("d/m/Y") }}</div>
                             </div>
                             <div class="flex-1">
-                                <div><strong>Nombres de paquets par an : </strong>{{ patient.facteur.nombrePaquetsAn }}</div>
+                                <div class="field"><strong>Nombres de paquets par an : </strong>{{ patient.facteur.nombrePaquetsAn }}</div>
                             </div>
                         </div>
 
                         <h5>Obésité</h5>
                         <div>
-                            <div><strong>État : </strong>{{ patient.facteur.obesite }}</div>
+                            <div class="field"><strong>État : </strong>{{ patient.facteur.obesite }}</div>
                         </div>
 
                         <h5>Alcoolisme</h5>
                         <div class="flex-wrap">
                             <div class="flex-1">
-                                <div><strong>État : </strong>{{ patient.facteur.alcoolisme }}</div>
+                                <div class="field"><strong>État : </strong>{{ patient.facteur.alcoolisme }}</div>
                             </div>
                             <div class="flex-1">
-                                <div><strong>Sevré : </strong>{{ patient.facteur.sevre }}</div>
+                                <div class="field"><strong>Sevré : </strong>{{ patient.facteur.sevre }}</div>
                             </div>
                         </div>
 
                         <h5>Cannabis</h5>
                         <div class="radio-row">
-                            <div><strong>État : </strong>{{ patient.facteur.cannabis }}</div>
+                            <div class="field"><strong>État : </strong>{{ patient.facteur.cannabis }}</div>
                         </div>
 
                     </div>
                 </section>
 
-                {#==========  ==========#}
-                <section class="slide" style="display: block">
-                </section>
+                {% for visite in patient.visites %}
 
-                {#========== SUIVI ==========#}
-                <section class="slide" style="display: block">
-                </section>
+                    <hr class="separator">
 
-            </mail>
+                    {#========== VISITE ==========#}
+                    <section class="slide" style="display: block">
+                        <h1 id={{"visite-" ~ visite.id }}>Visite {{ loop.index }}</h1>
+                        <div class="form-space">
+                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                        </div>
+                    </section>
 
+                    {#========== EXAMENS ==========#}
+                    {#========== Anatomie coronaire ==========#}
+                    <section class="slide" style="display: block">
+                        <h1 id="bfr">Anatomie coronaire</h1>
+                        <div class="form-space">
+                            <div class="table-container">
+                                <table class="table-custom">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Sténose coronarographie</th>
+                                            <th>Sténose coroscanner</th>
+                                            <th>FFR</th>
+                                            <th>Angioplastie</th>
+                                            <th>CMR</th>
+                                            <th>IMR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="row-header">IVA</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.stenoseIVA }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.coroscannerIVA }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.ffrIVA }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.angioplastieIVA }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.cmrIVA }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.imrIVA }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="row-header">Diagonale</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.stenoseDiagonale }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.coroscannerDiagonale }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.ffrDiagonale }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.angioplastieDiagonale }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.cmrDiagonale }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.imrDiagonale }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="row-header">Circonflexe</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.stenoseCirconflexe }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.coroscannerCirconflexe }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.ffrCirconflexe }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.angioplastieCirconflexe }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.cmrCirconflexe }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.imrCirconflexe }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="row-header">Postérolatéral</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.stenosePosterolateral }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.coroscannerPosterolateral }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.ffrPosterolateral }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.angioplastiePosterolateral }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.cmrPosterolateral }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.imrPosterolateral }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="row-header">Coronaire droite</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.stenoseCoronaireDroite }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.coroscannerCoronaireDroite }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.ffrCoronaireDroite }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.angioplastieCoronaireDroite }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.cmrCoronaireDroite }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.imrCoronaireDroite }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="row-header">Pontage</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.stenosePontage }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.coroscannerPontage }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.ffrPontage }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.angioplastiePontage }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.cmrPontage }}</td>
+                                            <td>{{ visite.protocole.coronaireAngioplastie.imrPontage }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <h2>Exploration de la charge en athérome coronaire</h2>
+
+                        <h3>Score calcique coronaire</h3>
+                        <div class="form-space">
+                            <div class="field"><strong>Score calcique coronaire : </strong>{{ visite.protocole.coronaireAngioplastie.scoreCalciqueCoronaire }}</div>
+                        </div>
+
+                        <h3>Athérome coronaire</h3>
+                        <div class="form-space">
+                            <div class="field"><strong>Non analysable devant cac élevé : </strong>{{ visite.protocole.coronaireAngioplastie.nonAnalysable }}</div>
+                            <div class="field"><strong>Absence d'athérome : </strong>{{ visite.protocole.coronaireAngioplastie.absenceAtherome }}</div>
+                            <div class="field"><strong>Remodelage de la plaque* : </strong>{{ visite.protocole.coronaireAngioplastie.remodelagePlaque }}</div>
+                            <div class="field"><strong>Napkin ring* : </strong>{{ visite.protocole.coronaireAngioplastie.napkinRing }}</div>
+                            <div class="def">*Remodelage et Napking ring décrit par le radiologue (sont des caractéristiques de plaque à risque)</div>
+                        </div>
+
+                        <h3>Plaque</h3>
+                        <h5>Caractéristiques</h5>
+                        <div class="form-space">
+                            <div class="field"><strong>Molle (hyperdense) : </strong>{{ visite.protocole.coronaireAngioplastie.molle }}</div>
+                            <div class="field"><strong>Calcaire (hyperdense) : </strong>{{ visite.protocole.coronaireAngioplastie.calcaire }}</div>
+                            <div class="field"><strong>Mixte : </strong>{{ visite.protocole.coronaireAngioplastie.mixte }}</div>
+                        </div>
+
+                        <h5>Volume</h5>
+                        <div class="form-space">
+                            <div class="field"><strong>Volume non réalisable (charge trop importante en athérome, cac élevé...) : </strong>{{ visite.protocole.coronaireAngioplastie.volumeNonRealisable }}</div>
+                            <div class="field"><strong>Volume plaque hypodense (< 30 UH) bleu : </strong>{{ visite.protocole.coronaireAngioplastie.volumePlaqueHypodense }}</div>
+                            <div class="field"><strong>Volume de plaque calcifiée jaune : </strong>{{ visite.protocole.coronaireAngioplastie.volumePlaqueCalcifiee }}</div>
+                            <div class="field"><strong>Volume plaque non calcifiée non hypodense rose : </strong>{{ visite.protocole.coronaireAngioplastie.volumePlaque }}</div>
+                            <div class="field"><strong>Volume total de plaque (bleu + jaune + rose) : </strong>{{ visite.protocole.coronaireAngioplastie.volumeTotalPlaque }}</div>
+                        </div>
+                    </section>
+
+                    {#========== Bilan biologique et risque (BRF) ==========#}
+                    <section class="slide" style="display: block">
+                        <h1 id="bfr">Bilan biologique et risque</h1>
+
+                        <div class="form-space flex-nowrap">
+                            <div class="field"><strong>Taille (en cm): </strong>{{ visite.protocole.BFR.taille }}</div>
+                            <div class="field"><strong>Poids (en kg): </strong>{{ visite.protocole.BFR.poids }}</div>
+                            <div class="field"><strong>Tour de taille (en cm): </strong>{{ visite.protocole.BFR.tourTaille }}</div>
+                            {% if visite.protocole.BFR.taille != 0 %}
+                                <div class="field"><strong>IMC : </strong>{{ visite.protocole.BFR.poids / (visite.protocole.BFR.taille ** 2) }}</div>
+                            {% endif %}
+                        </div>
+
+                        <h3 id="tensionArterielle">Tension artérielle</h3>
+                        <div class="form-space flex-2">
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.tensionArterielleSystoliqueJour }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.tensionArterielleDiastoliqueJour }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.tensionArterielleSystoliqueNuit }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.tensionArterielleDiastoliqueNuit }}</div>
+                        </div>
+                        <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.HVG }}</div>
+
+                        <h3 id="dyslipidemie">Dyslipidémie</h3>
+                        <div class="form-space flex-2">
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.cholesterolTotal }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.triglicerides }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.HDLC }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.LDLC }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.scoreDUTCH }}</div>
+                        </div>
+
+                        <h3 id="activite-physique">Tabagisme</h3>
+                        <div class="form-space">
+                            <div class="flex-wrap">
+                                <div class="flex-1">
+                                    <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.tabagisme }}</div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.dateArret }}</div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.nombrePaquetsAn }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 id="diabete">Diabète</h3>
+                        <div class="form-space flex-2">
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.diabeteType }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.diabeteDepuis }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.glycemieAjeun }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.glycemiePostPrandiale }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.Hba1c }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.fondOeil }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.neuropathieClinique }}</div>
+                        </div>
+                        <div class="form-space flex-nowrap">
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.neuroesthesiometriePiedDroit }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.neuroesthesiometriePiedGauche }}</div>
+                        </div>
+
+
+                        <h3 id="bilan-renal">Bilan rénal</h3>
+                        <div class="form-space flex-2">
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.creatinine }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.debitFiltrationGlomerulaire }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.microAlbuminurie }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.proteinurie }}</div>
+                        </div>
+
+                        <h3 id="bilan-hepatique">Bilan hépatique</h3>
+                        <div class="form-space flex-2">
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.transaminasesASAT }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.transaminasesALAT }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.gamma }}</div>
+                        </div>
+
+                        <h3 id="facteur-thrombogeniques">Facteur thrombogéniques</h3>
+                        <div class="form-space flex-2">
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.fibrinogene }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.CRP }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.hemoglobine }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.VGM }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.plaquettes }}</div>
+                        </div>
+
+                        <h3 id="activite-physique">Thyroïde</h3>
+                        <div class="form-space flex-2">
+                           <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.TSH }}</div>
+                        </div>
+
+                        <h3 id="activite-physique">Activité physique</h3>
+                        <div class="form-space">
+                           <div class="field"><strong>Activité physique : </strong>{{ visite.protocole.BFR.activitePhysique }}</div>
+                        </div>
+
+                        <h3 id="alimentation">Alimentation</h3>
+                        <div class="form-space field">
+                            <strong>Alimentation : </strong> 
+                            {% for t in visite.protocole.BFR.alimentation %}
+                                {{ t }}{% if loop.last == false %}, {% endif %}
+                            {% endfor %}
+                            <div class="alimentation"></div>
+                        </div>
+                    </section>
+
+                    {#========== Échographie ==========#}
+                    <section class="slide" style="display: block">
+                        <h1 id="bfr">Échographie</h1>
+                        <div class="form-space">
+                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                        </div>
+                    </section>
+
+                    {#========== Échographie vasculaire ==========#}
+                    <section class="slide" style="display: block">
+                        <h1 id="bfr">Échographie vasculaire</h1>
+                        <div class="form-space">
+                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                        </div>
+                    </section>
+
+                    {#========== Médicaments ==========#}
+                    <section class="slide" style="display: block">
+                        <h1 id="bfr">Médicaments</h1>
+                        <div class="form-space">
+                            <div class="field"><strong>Nombre d'unités de prise de médicament (par semaine) : </strong>{{ visite.protocole.medicamentsEntree.NbMedicamentSemaine }}</div>
+                            <div class="field"><strong>Délai depuis la mise sous traitement (en mois) : </strong>{{ visite.protocole.medicamentsEntree.DelaiSousTraitement }}</div>
+
+                            <div class="field"><strong>Pilulier : </strong>{{ visite.protocole.medicamentsEntree.pilulier }}</div>
+                            <div class="field">
+                                <strong>Gestion des médicaments : </strong> 
+                                {% for t in visite.protocole.medicamentsEntree.gestionMedicaments %}
+                                    {{ t }}{% if loop.last == false %}, {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="field"><strong>Satisfaction pratique de la prise de traitement : </strong>{{ visite.protocole.medicamentsEntree.satisfaction }}</div>
+                            <div class="field"><strong>Connaissance de la durée de traitement : </strong>{{ visite.protocole.medicamentsEntree.ConnaissanceDureeTraitement }}</div>
+
+                            <div class="field"><strong>Score échelle adhésion Mascard (/5) : </strong>{{ visite.protocole.medicamentsEntree.scoreMasCard }}</div>
+                        </div>
+                    </section>
+
+                    {#========== NeuroPsychologie ==========#}
+                    <section class="slide" style="display: block">
+                        <h1 id="bfr">NeuroPsychologie</h1>
+                        <div class="form-space">
+                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                        </div>
+                    </section>
+
+                    {#========== Scintigraphie ==========#}
+                    <section class="slide" style="display: block">
+                        <h1 id="bfr">Scintigraphie</h1>
+                        <div class="form-space">
+                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                        </div>
+                    </section>
+
+                    {#========== Suivi ==========#}
+                    <section class="slide" style="display: block">
+                        <h1 id="bfr">Suivi</h1>
+                        <div class="form-space">
+                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                        </div>
+                    </section>
+
+                    {#========== Test d'effort ==========#}
+                    <section class="slide" style="display: block">
+                        <h1 id="bfr">Test d'effort</h1>
+                        <div class="form-space">
+                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                        </div>
+                    </section>
+
+                {% endfor %}
+
+            </main>
 		</div>
 	</div>
 {% endblock %}
@@ -410,6 +600,36 @@
             document.execCommand('copy');
         });
 
+        /*
+        * Clean
+        **********************************************************************/
+        function cleanTable() {
+            $.each($('.table-container'), function(i, table) {
+                $.each($(table).find('tbody tr'), function(j, line) {
+                    let colEmpty = 0;
+                    $.each($(line).find('td'), function(k, col) {
+                        let t = col.textContent.replace(/^\s+|\s+$/g, '').trim();
+                        if (t.length) colEmpty++;
+                    });
+                    if (colEmpty <= 1) line.remove();
+                });
+                if ($(table).find('tbody tr').length == 0) table.remove();
+            });
+        }
+
+        function clean() {
+            $.each($('.letter__content .field'), function(i, elem) {
+                let length = elem.childNodes.length
+                $.each(elem.childNodes, function(j, node) {
+                    let t = node.textContent.replace(/^\s+|\s+$/g, '').trim();
+                    if (!t) length--;
+                });
+                if (length <= 1) elem.remove();
+            });
+        }
+
+        {# cleanTable();
+        clean(); #}
 
         /*
         * HTML TO PDF

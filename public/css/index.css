@@ -234,7 +234,7 @@ ul.tabbed li i {
     position: relative;
     width: fit-content;
     font-size: 18px;
-    margin: 10px 0;
+    margin: 0 0 10px;
 }
 
 .hero-tabs h5::after, .slide h5::after {
@@ -242,7 +242,7 @@ ul.tabbed li i {
     position: absolute;
     border: 0;
     height: 8px;
-    background-color: #27006775;
+    background-color: #27006750;
     width: 35px;
     bottom: 0px;
     left: -2px;
@@ -256,11 +256,10 @@ ul.tabbed li i {
     margin-bottom: 16px;
 }
 
-.separator-space {
-    width: 50px;
+.separator {
     height: 1px;
     margin: 5px 0 16px 0;
-    background-color: var(--blue-green);
+    background-color: var(--persian-indigo);
 }
 
 .separator-space {
@@ -524,6 +523,18 @@ input[type='checkbox'].checkbox-round+span {
 
 .table-container {
     margin: 0 -10px;
+}
+
+.letter__content .table-container tbody tr {
+    background-color: #e6e6e6;
+}
+
+.letter__content .table-container tbody tr td {
+    padding: 5px 10px;
+}
+
+.letter__content .row-header {
+    font-weight: bold;
 }
 
 .table-custom {

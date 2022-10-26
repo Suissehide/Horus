@@ -338,6 +338,13 @@
                         </ul>
 
                         <ul class="tab-list">
+                            {#========== Anatomie coronaire ==========#}
+                            <li class="tab-content" name="anatomieCoronaire">
+                                <div id="examen-anatomieCoronaire">
+                                    {% include 'patient/form/examens/anatomie_coronaire.html.twig' with {form: visite} %}
+                                </div>
+                            </li>
+
                             {#========== Angioplastie ==========#}
                             {#
                             <li class="tab-content" name="angioplastiePontage">
@@ -362,13 +369,6 @@
                                 </div>
                             </li>
                             #}
-
-                            {#========== Anatomie coronaire ==========#}
-                            <li class="tab-content" name="anatomieCoronaire">
-                                <div id="examen-anatomieCoronaire">
-                                    {% include 'patient/form/examens/anatomie_coronaire.html.twig' with {form: visite} %}
-                                </div>
-                            </li>
 
                             {#========== Échographie ==========#}
                             <li class="tab-content" name="echographie">

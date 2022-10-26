@@ -28,7 +28,7 @@ class MedicamentsEntreeType extends AbstractType
                 'required' => false,
             ))
             ->add('DelaiSousTraitement', IntegerType::class, array(
-                'label' => 'Délai dpuis la mise sous traitement (en mois)',
+                'label' => 'Délai depuis la mise sous traitement (en mois)',
                 'attr' => array(
                     'unity' => 'en mois',
                     'data-min' => 0,
