@@ -58,15 +58,6 @@ class TestEffortType extends AbstractType
                 'required' => false,
             ))
 
-            ->add('frequenceMaxPercent', IntegerType::class, array(
-                'label' => '% de la Fréq. max',
-                'attr' => array(
-                    'unity' => '',
-                    'data-min' => 0,
-                    'data-max' => 0,
-                ),
-                'required' => false,
-            ))
             ->add('symptomes', ChoiceType::class, array(
                 'label' => 'Symptomes',
                 'expanded' => false,
@@ -78,6 +69,15 @@ class TestEffortType extends AbstractType
                     'Dyspnée importante' => 'Dyspnée importante',
                     'Douleur angineuse' => 'Douleur angineuse',
                     'Douleur atypique' => 'Douleur atypique',
+                ),
+                'required' => false,
+            ))
+            ->add('frequenceMaxPercent', IntegerType::class, array(
+                'label' => '% de la fréq. max',
+                'attr' => array(
+                    'unity' => '',
+                    'data-min' => 0,
+                    'data-max' => 0,
                 ),
                 'required' => false,
             ))

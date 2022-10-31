@@ -242,7 +242,8 @@ ul.tabbed li i {
     position: absolute;
     border: 0;
     height: 8px;
-    background-color: #27006750;
+    background-color: #270067;
+    opacity: 50%;
     width: 35px;
     bottom: 0px;
     left: -2px;
@@ -661,6 +662,19 @@ input[type='checkbox'].checkbox-round+span {
     padding: 15px 20px;
 }
 
+.letter__content .slide h5::after {
+    bottom: -3px;
+    height: 2px;
+}
+
+.letter__content .separator {
+    margin-top: 25px;
+}
+
+.letter__content .def {
+    margin-top: 5px;
+}
+
 .select-data {
     display: flex;
     margin-bottom: 15px;
@@ -676,6 +690,12 @@ input[type='checkbox'].checkbox-round+span {
 
 .select2-container--default .select2-selection--single .select2-selection__placeholder {
     text-transform: initial;
+}
+
+.letter__content .schema-tsa .field, .letter__content .schema-membres-inferieur .field {
+    background-color: white;
+    padding: 5px 10px;
+    width: auto;
 }
 
 /* Medicament
@@ -910,7 +930,7 @@ input[type='checkbox'].checkbox-round+span {
     width: 900px;
 }
 
-.schema-tsa>.wrap-input {
+.schema-tsa>div {
     position: absolute;
     width: 220px;
 }
@@ -927,72 +947,72 @@ input[type='checkbox'].checkbox-round+span {
     background-color: rgba(255, 255, 255, 0.8);
 }
 
-.schema-tsa>.wrap-input:nth-child(1) {
+.schema-tsa>div:nth-child(1) {
     top: 35px;
     left: 130px;
 }
 
-.schema-tsa>.wrap-input:nth-child(2) {
+.schema-tsa>div:nth-child(2) {
     top: 35px;
     right: 130px;
 }
 
-.schema-tsa>.wrap-input:nth-child(3) {
+.schema-tsa>div:nth-child(3) {
     top: 115px;
     left: 20px;
 }
 
-.schema-tsa>.wrap-input:nth-child(4) {
+.schema-tsa>div:nth-child(4) {
     top: 115px;
     right: 20px;
 }
 
-.schema-tsa>.wrap-input:nth-child(5) {
+.schema-tsa>div:nth-child(5) {
     top: 195px;
     left: 70px;
 }
 
-.schema-tsa>.wrap-input:nth-child(6) {
+.schema-tsa>div:nth-child(6) {
     top: 195px;
     right: 70px;
 }
 
-.schema-tsa>.wrap-input:nth-child(7) {
+.schema-tsa>div:nth-child(7) {
     top: 275px;
     left: 140px;
 }
 
-.schema-tsa>.wrap-input:nth-child(8) {
+.schema-tsa>div:nth-child(8) {
     top: 275px;
     right: 140px;
 }
 
-.schema-tsa>.wrap-input:nth-child(9) {
+.schema-tsa>div:nth-child(9) {
     top: 355px;
     left: 70px;
 }
 
-.schema-tsa>.wrap-input:nth-child(10) {
+.schema-tsa>div:nth-child(10) {
     top: 355px;
     right: 70px;
 }
 
-.schema-tsa>.wrap-input:nth-child(11) {
+.schema-tsa>div:nth-child(11) {
     top: 435px;
     left: 220px;
 }
 
-.schema-tsa>.wrap-input:nth-child(12) {
+.schema-tsa>div:nth-child(12) {
     top: 515px;
     left: 70px;
 }
 
-.schema-tsa>.wrap-input:nth-child(13) {
+.schema-tsa>div:nth-child(13) {
     top: 515px;
     right: 70px;
 }
 
-.schema-tsa>.wrap-input:nth-child(14) {
+.schema-tsa>div:nth-child(14) {
     top: 595px;
     left: 220px;
 }
@@ -1005,7 +1025,7 @@ input[type='checkbox'].checkbox-round+span {
     width: 900px;
 }
 
-.schema-membres-inferieur>.wrap-input {
+.schema-membres-inferieur>div {
     position: absolute;
     width: 260px;
 }
@@ -1020,57 +1040,57 @@ input[type='checkbox'].checkbox-round+span {
     background-color: rgba(255, 255, 255, 0.8);
 }
 
-.schema-membres-inferieur>.wrap-input:nth-child(1) {
+.schema-membres-inferieur>div:nth-child(1) {
     top: 0px;
     left: 330px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-child(2) {
+.schema-membres-inferieur>div:nth-child(2) {
     top: 95px;
     left: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-child(3) {
+.schema-membres-inferieur>div:nth-child(3) {
     top: 95px;
     right: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-child(4) {
+.schema-membres-inferieur>div:nth-child(4) {
     top: 175px;
     left: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-child(5) {
+.schema-membres-inferieur>div:nth-child(5) {
     top: 175px;
     right: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-child(6) {
+.schema-membres-inferieur>div:nth-child(6) {
     top: 275px;
     left: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-child(7) {
+.schema-membres-inferieur>div:nth-child(7) {
     top: 275px;
     right: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-child(8) {
+.schema-membres-inferieur>div:nth-child(8) {
     top: 385px;
     left: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-child(9) {
+.schema-membres-inferieur>div:nth-child(9) {
     top: 385px;
     right: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-child(10) {
+.schema-membres-inferieur>div:nth-child(10) {
     top: 495px;
     left: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-child(11) {
+.schema-membres-inferieur>div:nth-child(11) {
     top: 495px;
     right: 90px;
 }
@@ -1237,6 +1257,11 @@ input[type='checkbox'].checkbox-round+span {
 
 .toc ul li a.active {
     background: var(--blue-green-active);
+}
+
+.toc ul li ul li a.active {
+    background: var(--dark-goldenrod-active);
+    color: white;
 }
 
 .toc ul li a:hover, .toc ul li button:hover {

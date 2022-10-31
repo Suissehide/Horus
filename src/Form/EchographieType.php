@@ -16,7 +16,7 @@ class EchographieType extends AbstractType
     {
         $builder
             ->add('reposIVA', ChoiceType::class, array(
-                'label' => ' ',
+                'label' => false,
                 'placeholder' => false,
                 'choices' => array(
                     'Normal' => 'Normal',
@@ -26,7 +26,7 @@ class EchographieType extends AbstractType
                 'required' => false,
             ))
             ->add('reposCX', ChoiceType::class, array(
-                'label' => ' ',
+                'label' => false,
                 'placeholder' => false,
                 'choices' => array(
                     'Normal' => 'Normal',
@@ -36,7 +36,7 @@ class EchographieType extends AbstractType
                 'required' => false,
             ))
             ->add('reposCD', ChoiceType::class, array(
-                'label' => ' ',
+                'label' => false,
                 'placeholder' => false,
                 'choices' => array(
                     'Normal' => 'Normal',
@@ -47,7 +47,7 @@ class EchographieType extends AbstractType
             ))
 
             ->add('effortIVA', ChoiceType::class, array(
-                'label' => ' ',
+                'label' => false,
                 'placeholder' => false,
                 'choices' => array(
                     'Normal' => 'Normal',
@@ -57,7 +57,7 @@ class EchographieType extends AbstractType
                 'required' => false,
             ))
             ->add('effortCX', ChoiceType::class, array(
-                'label' => ' ',
+                'label' => false,
                 'placeholder' => false,
                 'choices' => array(
                     'Normal' => 'Normal',
@@ -67,7 +67,7 @@ class EchographieType extends AbstractType
                 'required' => false,
             ))
             ->add('effortCD', ChoiceType::class, array(
-                'label' => ' ',
+                'label' => false,
                 'placeholder' => false,
                 'choices' => array(
                     'Normal' => 'Normal',
@@ -78,7 +78,7 @@ class EchographieType extends AbstractType
             ))
 
             ->add('nbSegmentIVA', IntegerType::class, array(
-                'label' => ' ',
+                'label' => false,
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -87,7 +87,7 @@ class EchographieType extends AbstractType
                 'required' => false,
             ))
             ->add('nbSegmentCX', IntegerType::class, array(
-                'label' => ' ',
+                'label' => false,
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
@@ -96,7 +96,7 @@ class EchographieType extends AbstractType
                 'required' => false,
             ))
             ->add('nbSegmentCD', IntegerType::class, array(
-                'label' => ' ',
+                'label' => false,
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,

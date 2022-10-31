@@ -47,7 +47,7 @@ class BFRType extends AbstractType
 
 
             ->add('tensionArterielleSystoliqueJour', NumberType::class, array(
-                'label' => 'Systole jour (en mmHg)',
+                'label' => 'Systolique jour (en mmHg)',
                 'attr' => array(
                     'unity' => 'mmHg',
                     'data-min' => 1,
@@ -56,7 +56,7 @@ class BFRType extends AbstractType
                 'required' => false,
             ))
             ->add('tensionArterielleDiastoliqueJour', NumberType::class, array(
-                'label' => 'Systole jour (en mmHg)',
+                'label' => 'Diastolique jour (en mmHg)',
                 'attr' => array(
                     'unity' => 'mmHg',
                     'data-min' => 1,
@@ -65,7 +65,7 @@ class BFRType extends AbstractType
                 'required' => false
             ))
             ->add('tensionArterielleSystoliqueNuit', NumberType::class, array(
-                'label' => 'Diastole nuit (en mmHg)',
+                'label' => 'Systolique nuit (en mmHg)',
                 'attr' => array(
                     'unity' => 'mmHg',
                     'data-min' => 1,
@@ -74,7 +74,7 @@ class BFRType extends AbstractType
                 'required' => false,
             ))
             ->add('tensionArterielleDiastoliqueNuit', NumberType::class, array(
-                'label' => 'Diastole nuit (en mmHg)',
+                'label' => 'Diastolique nuit (en mmHg)',
                 'attr' => array(
                     'unity' => 'mmHg',
                     'data-min' => 1,
@@ -243,7 +243,7 @@ class BFRType extends AbstractType
                 'required' => false,
             ))
             ->add('fondOeil', ChoiceType::class, array(
-                'label' => 'fond d\'oeil',
+                'label' => 'Fond d\'oeil',
                 'choices' => array(
                     'Non Renseigné' => 'Non Renseigné',
                     'Normal' => 'Normal',
@@ -308,7 +308,7 @@ class BFRType extends AbstractType
                 'required' => false,
             ))
             ->add('microAlbuminurie', NumberType::class, array(
-                'label' => 'MicroAlbuminurie',
+                'label' => 'Microalbuminurie',
                 'attr' => array(
                     'unity' => 'mg/24h',
                     'data-min' => 0,

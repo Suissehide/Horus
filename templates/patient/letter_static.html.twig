@@ -27,19 +27,18 @@
                     </div>
                 </div>
 
-                    <div class="btn-block">
-                        <a href="{{ path('index_patient') }}" class="form-btn btn-default">
-                            <i aria-hidden="true" class="fa fa-arrow-left"></i>Retour</a>
-                        <button class="form-btn" id="copy">
-                            <i aria-hidden="true" class="fa fa-copy"></i>Copier</button>
-                        <button class="form-btn btn-save" id="export">
-                            <i aria-hidden="true" class="fa fa-file-pdf"></i>Exporter en PDF</button>
-                    </div>
+                <div class="btn-block">
+                    <a href="{{ path('index_patient') }}" class="form-btn btn-default">
+                        <i aria-hidden="true" class="fa fa-arrow-left"></i>Retour</a>
+                    <button class="form-btn" id="copy">
+                        <i aria-hidden="true" class="fa fa-copy"></i>Copier</button>
+                    <button class="form-btn btn-save" id="export">
+                        <i aria-hidden="true" class="fa fa-file-pdf"></i>Exporter en PDF</button>
                 </div>
             </section>
 			
             <!-- Main -->
-            <main class="letter__content">
+            <main class="letter__content" id="print">
 
                 {#========== GENERAL ==========#}
                 <section class="slide" style="display: block">
@@ -50,7 +49,7 @@
                         <div class="field"><strong>Prénom : </strong>{{ patient.general.prenom }}</div>
                         <div class="field"><strong>Nom : </strong>{{ patient.general.nom }}</div>
                         <div class="field"><strong>Nom de naissance : </strong>{{ patient.general.nomNaissance }}</div>
-                        <div class="field"><strong>Date de naissance : </strong>{{ patient.general.dateNaissance|date("d/m/Y") }}</div>
+                        <div class="field"><strong>Date de naissance : </strong>{{ patient.general.dateNaissance is empty ? "" : patient.general.dateNaissance|date("d/m/Y") }}</div>
                         <div class="field"><strong>Sexe : </strong>{{ patient.general.sexe }}</div>
                     </div>
 
@@ -138,62 +137,12 @@
                     </div>
 
                     <div class="form-space">
-                        <div class="table-container">
-                            <table class="table-custom">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Cause potentielle</th>
-                                        <th>Cause incertaine</th>
-                                        <th>Cause improbable</th>
-                                        <th>Pathologie absente</th>
-                                        <th>Explorations insuffisantes pour statuer</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="row-header">Athérosclérose</td>
-                                        <td>{{ patient.information.causePotentielleAtherosclerose }}</td>
-                                        <td>{{ patient.information.causeIncertaineAtherosclerose }}</td>
-                                        <td>{{ patient.information.causeImprobableAtherosclerose }}</td>
-                                        <td>{{ patient.information.pathologieAbsenteAtherosclerose }}</td>
-                                        <td>{{ patient.information.explorationsInsuffisantesAtherosclerose }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="row-header">Maladie des petits artères</td>
-                                        <td>{{ patient.information.causePotentielleMaladiePetitsArteres }}</td>
-                                        <td>{{ patient.information.causeIncertaineMaladiePetitsArteres }}</td>
-                                        <td>{{ patient.information.causeImprobableMaladiePetitsArteres }}</td>
-                                        <td>{{ patient.information.pathologieAbsenteMaladiePetitsArteres }}</td>
-                                        <td>{{ patient.information.explorationsInsuffisanteMaladiePetitsArteres }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="row-header">Cardio-embolique</td>
-                                        <td>{{ patient.information.causePotentielleCardioEmbolique }}</td>
-                                        <td>{{ patient.information.causeIncertaineCardioEmbolique }}</td>
-                                        <td>{{ patient.information.causeImprobableCardioEmbolique }}</td>
-                                        <td>{{ patient.information.pathologieAbsenteCardioEmbolique }}</td>
-                                        <td>{{ patient.information.explorationsInsuffisanteCardioEmbolique }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="row-header">Autre cause</td>
-                                        <td>{{ patient.information.causePotentielleAutreCause }}</td>
-                                        <td>{{ patient.information.causeIncertaineAutreCause }}</td>
-                                        <td>{{ patient.information.causeImprobableAutreCause }}</td>
-                                        <td>{{ patient.information.pathologieAbsenteAutreCause }}</td>
-                                        <td>{{ patient.information.explorationsInsuffisanteAutreCause }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="row-header">Dissection</td>
-                                        <td>{{ patient.information.causePotentielleDissection }}</td>
-                                        <td>{{ patient.information.causeIncertaineDissection }}</td>
-                                        <td>{{ patient.information.causeImprobableDissection }}</td>
-                                        <td>{{ patient.information.pathologieAbsenteDissection }}</td>
-                                        <td>{{ patient.information.explorationsInsuffisanteDissection }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="form-space">
+                        <div class="field"><strong>Cause potentielle : </strong>{{ patient.information.etiologieAtherosclerose }}</div>
+                        <div class="field"><strong>Cause incertaine : </strong>{{ patient.information.etiologieMaladiePetitsArteres }}</div>
+                        <div class="field"><strong>Cause improbable : </strong>{{ patient.information.etiologieCardioEmbolique }}</div>
+                        <div class="field"><strong>Pathologie absente : </strong>{{ patient.information.etiologieAutreCause }}</div>
+                        <div class="field"><strong>Explorations insuffisantes pour statuer : </strong>{{ patient.information.etiologieDissection }}</div>
                     </div>
                 </section>
 
@@ -243,40 +192,29 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
 
-                        <h5>Tabagisme</h5>
-                        <div class="flex-wrap">
-                            <div class="flex-1">
-                                <div class="field"><strong>État : </strong>{{ patient.facteur.tabagisme }}</div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="field"><strong>Date d'arrêt : </strong>{{ patient.facteur.dateArret|date("d/m/Y") }}</div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="field"><strong>Nombres de paquets par an : </strong>{{ patient.facteur.nombrePaquetsAn }}</div>
-                            </div>
-                        </div>
+                    <h5>Tabagisme</h5>
+                    <div class="form-space flex-wrap">
+                        <div class="flex-1 field"><strong>État : </strong>{{ patient.facteur.tabagisme }}</div>
+                        <div class="flex-1 field"><strong>Date d'arrêt : </strong>{{ patient.facteur.dateArret is empty ? "" : patient.facteur.dateArret|date("d/m/Y") }}{{ patient.facteur.dateArret|date("d/m/Y") }}</div>
+                        <div class="flex-1 field"><strong>Nombres de paquets par an : </strong>{{ patient.facteur.nombrePaquetsAn }}</div>
+                    </div>
 
-                        <h5>Obésité</h5>
-                        <div>
-                            <div class="field"><strong>État : </strong>{{ patient.facteur.obesite }}</div>
-                        </div>
+                    <h5>Obésité</h5>
+                    <div class="form-space">
+                        <div class="field"><strong>État : </strong>{{ patient.facteur.obesite }}</div>
+                    </div>
 
-                        <h5>Alcoolisme</h5>
-                        <div class="flex-wrap">
-                            <div class="flex-1">
-                                <div class="field"><strong>État : </strong>{{ patient.facteur.alcoolisme }}</div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="field"><strong>Sevré : </strong>{{ patient.facteur.sevre }}</div>
-                            </div>
-                        </div>
+                    <h5>Alcoolisme</h5>
+                    <div class="form-space flex-wrap">
+                        <div class="flex-1 field"><strong>État : </strong>{{ patient.facteur.alcoolisme }}</div>
+                        <div class="flex-1 field"><strong>Sevré : </strong>{{ patient.facteur.sevre }}</div>
+                    </div>
 
-                        <h5>Cannabis</h5>
-                        <div class="radio-row">
-                            <div class="field"><strong>État : </strong>{{ patient.facteur.cannabis }}</div>
-                        </div>
-
+                    <h5>Cannabis</h5>
+                    <div class="form-space">
+                        <div class="field"><strong>État : </strong>{{ patient.facteur.cannabis }}</div>
                     </div>
                 </section>
 
@@ -288,7 +226,7 @@
                     <section class="slide" style="display: block">
                         <h1 id={{"visite-" ~ visite.id }}>Visite {{ loop.index }}</h1>
                         <div class="form-space">
-                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                            <div class="field"><strong>Date : </strong>{{ visite.date is empty ? "" : visite.date|date("m/d/Y") }}</div>
                         </div>
                     </section>
 
@@ -419,80 +357,76 @@
 
                         <h3 id="tensionArterielle">Tension artérielle</h3>
                         <div class="form-space flex-2">
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.tensionArterielleSystoliqueJour }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.tensionArterielleDiastoliqueJour }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.tensionArterielleSystoliqueNuit }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.tensionArterielleDiastoliqueNuit }}</div>
+                            <div class="field"><strong>Systolique jour (en mmHg) : </strong>{{ visite.protocole.BFR.tensionArterielleSystoliqueJour }}</div>
+                            <div class="field"><strong>Diastolique jour (en mmHg) : </strong>{{ visite.protocole.BFR.tensionArterielleDiastoliqueJour }}</div>
+                            <div class="field"><strong>Systolique nuit (en mmHg) : </strong>{{ visite.protocole.BFR.tensionArterielleSystoliqueNuit }}</div>
+                            <div class="field"><strong>Diastolique nuit (en mmHg) : </strong>{{ visite.protocole.BFR.tensionArterielleDiastoliqueNuit }}</div>
                         </div>
-                        <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.HVG }}</div>
+                        <div class="form-space">
+                            <div class="field"><strong>HVG : </strong>{{ visite.protocole.BFR.HVG }}</div>
+                        </div>
 
                         <h3 id="dyslipidemie">Dyslipidémie</h3>
                         <div class="form-space flex-2">
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.cholesterolTotal }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.triglicerides }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.HDLC }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.LDLC }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.scoreDUTCH }}</div>
+                            <div class="field"><strong>Cholestérol total (en g/L) : </strong>{{ visite.protocole.BFR.cholesterolTotal }}</div>
+                            <div class="field"><strong>Triglicérides (en g/L) : </strong>{{ visite.protocole.BFR.triglicerides }}</div>
+                            <div class="field"><strong>HDL-C (en g/L) : </strong>{{ visite.protocole.BFR.HDLC }}</div>
+                            <div class="field"><strong>LDL-C (en g/L) : </strong>{{ visite.protocole.BFR.LDLC }}</div>
+                            <div class="field"><strong>Score de DUTCH : </strong>{{ visite.protocole.BFR.scoreDUTCH }}</div>
                         </div>
 
                         <h3 id="activite-physique">Tabagisme</h3>
                         <div class="form-space">
                             <div class="flex-wrap">
-                                <div class="flex-1">
-                                    <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.tabagisme }}</div>
-                                </div>
-                                <div class="flex-1">
-                                    <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.dateArret }}</div>
-                                </div>
-                                <div class="flex-1">
-                                    <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.nombrePaquetsAn }}</div>
-                                </div>
+                                <div class="flex-1 field"><strong>État : </strong>{{ visite.protocole.BFR.tabagisme }}</div>
+                                <div class="flex-1 field"><strong>Date d'arrêt : </strong>{{ visite.protocole.BFR.dateArret }}</div>
+                                <div class="flex-1 field"><strong>Nombres de paquets par an : </strong>{{ visite.protocole.BFR.nombrePaquetsAn }}</div>
                             </div>
                         </div>
 
                         <h3 id="diabete">Diabète</h3>
                         <div class="form-space flex-2">
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.diabeteType }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.diabeteDepuis }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.glycemieAjeun }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.glycemiePostPrandiale }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.Hba1c }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.fondOeil }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.neuropathieClinique }}</div>
+                            <div class="field"><strong>Type : </strong>{{ visite.protocole.BFR.diabeteType }}</div>
+                            <div class="field"><strong>Depuis : </strong>{{ visite.protocole.BFR.diabeteDepuis }}</div>
+                            <div class="field"><strong>Glycémie ajeûn : </strong>{{ visite.protocole.BFR.glycemieAjeun }}</div>
+                            <div class="field"><strong>Glycémie post prandiale : </strong>{{ visite.protocole.BFR.glycemiePostPrandiale }}</div>
+                            <div class="field"><strong>Hba1c : </strong>{{ visite.protocole.BFR.Hba1c }}</div>
+                            <div class="field"><strong>Fond d'oeil : </strong>{{ visite.protocole.BFR.fondOeil }}</div>
+                            <div class="field"><strong>Neuropathie clinique (DN4) : </strong>{{ visite.protocole.BFR.neuropathieClinique }}</div>
                         </div>
                         <div class="form-space flex-nowrap">
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.neuroesthesiometriePiedDroit }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.neuroesthesiometriePiedGauche }}</div>
+                            <div class="field"><strong>Neuroesthésiométrie pied droit (en volt) : </strong>{{ visite.protocole.BFR.neuroesthesiometriePiedDroit }}</div>
+                            <div class="field"><strong>Neuroesthésiométrie pied gauche (en volt) : </strong>{{ visite.protocole.BFR.neuroesthesiometriePiedGauche }}</div>
                         </div>
 
 
                         <h3 id="bilan-renal">Bilan rénal</h3>
                         <div class="form-space flex-2">
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.creatinine }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.debitFiltrationGlomerulaire }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.microAlbuminurie }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.proteinurie }}</div>
+                            <div class="field"><strong>Créatinine : </strong>{{ visite.protocole.BFR.creatinine }}</div>
+                            <div class="field"><strong>Débit de filtration glomerulaire CK-EPI : </strong>{{ visite.protocole.BFR.debitFiltrationGlomerulaire }}</div>
+                            <div class="field"><strong>Microalbuminurie : </strong>{{ visite.protocole.BFR.microAlbuminurie }}</div>
+                            <div class="field"><strong>Protéinurie : </strong>{{ visite.protocole.BFR.proteinurie }}</div>
                         </div>
 
                         <h3 id="bilan-hepatique">Bilan hépatique</h3>
                         <div class="form-space flex-2">
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.transaminasesASAT }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.transaminasesALAT }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.gamma }}</div>
+                            <div class="field"><strong>Transaminases ASAT : </strong>{{ visite.protocole.BFR.transaminasesASAT }}</div>
+                            <div class="field"><strong>Transaminases ALAT : </strong>{{ visite.protocole.BFR.transaminasesALAT }}</div>
+                            <div class="field"><strong>Gamma GT : </strong>{{ visite.protocole.BFR.gamma }}</div>
                         </div>
 
                         <h3 id="facteur-thrombogeniques">Facteur thrombogéniques</h3>
                         <div class="form-space flex-2">
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.fibrinogene }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.CRP }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.hemoglobine }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.VGM }}</div>
-                            <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.plaquettes }}</div>
+                            <div class="field"><strong>Fibrinogène : </strong>{{ visite.protocole.BFR.fibrinogene }}</div>
+                            <div class="field"><strong>CRP : </strong>{{ visite.protocole.BFR.CRP }}</div>
+                            <div class="field"><strong>Hémoglobine : </strong>{{ visite.protocole.BFR.hemoglobine }}</div>
+                            <div class="field"><strong>VGM : </strong>{{ visite.protocole.BFR.VGM }}</div>
+                            <div class="field"><strong>Plaquettes : </strong>{{ visite.protocole.BFR.plaquettes }}</div>
                         </div>
 
                         <h3 id="activite-physique">Thyroïde</h3>
                         <div class="form-space flex-2">
-                           <div class="field"><strong>Date : </strong>{{ visite.protocole.BFR.TSH }}</div>
+                           <div class="field"><strong>TSH : </strong>{{ visite.protocole.BFR.TSH }}</div>
                         </div>
 
                         <h3 id="activite-physique">Activité physique</h3>
@@ -510,19 +444,114 @@
                         </div>
                     </section>
 
-                    {#========== Échographie ==========#}
+                    {#========== Échocardiographie repos/effort ==========#}
                     <section class="slide" style="display: block">
-                        <h1 id="bfr">Échographie</h1>
+                        <h1 id="bfr">Échocardiographie repos/effort</h1>
                         <div class="form-space">
-                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                            <div class="table-container">
+                                <table class="table-custom">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Repos</th>
+                                            <th>Effort</th>
+                                            <th>Nombre de segments</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="row-header">IVA</td>
+                                            <td>{{ visite.protocole.echographie.reposIVA }}</td>
+                                            <td>{{ visite.protocole.echographie.effortIVA }}</td>
+                                            <td>{{ visite.protocole.echographie.nbSegmentIVA }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="row-header">Diagonale</td>
+                                            <td>{{ visite.protocole.echographie.reposCX }}</td>
+                                            <td>{{ visite.protocole.echographie.effortCX }}</td>
+                                            <td>{{ visite.protocole.echographie.nbSegmentCX }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="row-header">Circonflexe</td>
+                                            <td>{{ visite.protocole.echographie.reposCD }}</td>
+                                            <td>{{ visite.protocole.echographie.effortCD }}</td>
+                                            <td>{{ visite.protocole.echographie.nbSegmentCD }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="form-space">
+                            <div class="field"><strong>Fraction d'éjection (en %) : </strong>{{ visite.protocole.echographie.fractionEjection }}
                         </div>
                     </section>
 
                     {#========== Échographie vasculaire ==========#}
                     <section class="slide" style="display: block">
                         <h1 id="bfr">Échographie vasculaire</h1>
+                        <h3 id="tsa">Schéma TSA</h3>
+                        <div class="form-space schema-tsa">
+                            <div class="field"><strong>Carotide interne droite : </strong>{{ visite.protocole.echographieVasculaire.carotideInterneDroite }}</div>
+                            <div class="field"><strong>Carotide interne gauche : </strong>{{ visite.protocole.echographieVasculaire.carotideInterneGauche }}</div>
+                            <div class="field"><strong>EIM droit : </strong>{{ visite.protocole.echographieVasculaire.EIMDroit }}</div>
+                            <div class="field"><strong>EIM gauche : </strong>{{ visite.protocole.echographieVasculaire.EIMGauche }}</div>
+                            <div class="field"><strong>Vertébrale droite : </strong>{{ visite.protocole.echographieVasculaire.vertebraleDroite }}</div>
+                            <div class="field"><strong>Vertébrale gauche : </strong>{{ visite.protocole.echographieVasculaire.vertebraleGauche }}</div>
+                            <div class="field"><strong>Carotide commune droite : </strong>{{ visite.protocole.echographieVasculaire.carotideCommuneDroite }}</div>
+                            <div class="field"><strong>Carotide commune gauche : </strong>{{ visite.protocole.echographieVasculaire.carotideCommuneGauche }}</div>
+                            <div class="field"><strong>Sous-clavière droite : </strong>{{ visite.protocole.echographieVasculaire.sousClaviereDroite }}</div>
+                            <div class="field"><strong>Sous-clavière gauche : </strong>{{ visite.protocole.echographieVasculaire.sousClaviereGauche }}</div>
+                            <div class="field"><strong>Aorte : </strong>{{ visite.protocole.echographieVasculaire.TSAAorte }}</div>
+
+                            <div class="field"><strong>Volume carotide droite : </strong>{{ visite.protocole.echographieVasculaire.volumeCarotideDroite }}</div>
+                            <div class="field"><strong>Volume carotide gauche : </strong>{{ visite.protocole.echographieVasculaire.volumeCarotideGauche }}</div>
+                            <div class="field"><strong>Charge en athérome totale : </strong>{{ visite.protocole.echographieVasculaire.chargeAtheromeTotale }}</div>
+                        </div>
+
+                        <h3 id="membres-inferieur">Schéma membres inférieur</h3>
+                        <div class="form-space schema-membres-inferieur">
+                            <div class="field"><strong>Diamètre aorte : </strong>{{ visite.protocole.echographieVasculaire.membresInferieurAorte }}</div>
+                            <div class="field"><strong>Iliaque droite : </strong>{{ visite.protocole.echographieVasculaire.iliaqueDroite }}</div>
+                            <div class="field"><strong>Iliaque gauche : </strong>{{ visite.protocole.echographieVasculaire.iliaqueGauche }}</div>
+                            <div class="field"><strong>Fémorale commune droite : </strong>{{ visite.protocole.echographieVasculaire.femoraleCommuneDroite }}</div>
+                            <div class="field"><strong>Fémorale commune gauche : </strong>{{ visite.protocole.echographieVasculaire.femoraleCommuneGauche }}</div>
+                            <div class="field"><strong>Fémorale superficielle droite : </strong>{{ visite.protocole.echographieVasculaire.femoraleSuperficielleDroite }}</div>
+                            <div class="field"><strong>Fémorale superficielle gauche : </strong>{{ visite.protocole.echographieVasculaire.femoraleSuperficielleGauche }}</div>
+                            <div class="field"><strong>Poplite droite : </strong>{{ visite.protocole.echographieVasculaire.popliteDroite }}</div>
+                            <div class="field"><strong>Poplite gauche : </strong>{{ visite.protocole.echographieVasculaire.popliteGauche }}</div>
+                            <div class="field"><strong>Axes jambiers droits : </strong>{{ visite.protocole.echographieVasculaire.axesJambiersDroits }}</div>
+                            <div class="field"><strong>Axes jambiers gauches : </strong>{{ visite.protocole.echographieVasculaire.axesJambiersGauches }}</div>
+                        </div>
+
                         <div class="form-space">
-                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                            <div class="flex-nowrap">
+                                <div class="field"><strong>IPS repos droit : </strong>{{ visite.protocole.echographieVasculaire.IPSReposDroit }}</div>
+                                <div class="field"><strong>IPS repos gauche : </strong>{{ visite.protocole.echographieVasculaire.IPSReposGauche }}</div>
+                            </div>
+
+                            <div class="flex-nowrap">
+                                <div class="field"><strong>IPS repos gros orteil droit : </strong>{{ visite.protocole.echographieVasculaire.IPSGrosOrteilDroit }}</div>
+                                <div class="field"><strong>IPS repos gros orteil gauche : </strong>{{ visite.protocole.echographieVasculaire.IPSGrosOrteilGauche }}</div>
+                            </div>
+
+                            <div class="form-space">
+                                <div class="field"><strong>Test de Strandness: distance de première gêne : </strong>{{ visite.protocole.echographieVasculaire.testStrandnessDistanceGene }}</div>
+                                <div class="field"><strong>Test de Strandness: distance max * : </strong>{{ visite.protocole.echographieVasculaire.testStrandnessDistanceMax }}</div>
+                                <div class="def">* compris entre 0 et 1000, 9999 si non réalisé</div>
+                            </div>
+                            <div class="form-space flex-2">
+                                <div class="field"><strong>Arrêt pour : </strong>{{ visite.protocole.echographieVasculaire.arretPour }}</div>
+                            </div>
+
+                            <div class="flex-nowrap">
+                                <div class="field"><strong>IPS effort droit : </strong>{{ visite.protocole.echographieVasculaire.IPSEffortDroit }}</div>
+                                <div class="field"><strong>IPS effort gauche : </strong>{{ visite.protocole.echographieVasculaire.IPSEffortGauche }}</div>
+                            </div>
+
+                            <div class="form-space flex-2">
+                                <div class="field"><strong>Vélocité de l'onde pouls : </strong>{{ visite.protocole.echographieVasculaire.vitesseOndePouls }}</div>
+                            </div>
                         </div>
                     </section>
 
@@ -549,9 +578,25 @@
 
                     {#========== NeuroPsychologie ==========#}
                     <section class="slide" style="display: block">
-                        <h1 id="bfr">NeuroPsychologie</h1>
+                        <h1 id="bfr">Neuro-psychologie</h1>
                         <div class="form-space">
-                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                            <div class="field"><strong>Rankin* : </strong>{{ visite.protocole.neuroPsychologie.rankin }}</div>
+
+                            <div class="flex-nowrap">
+                                <div class="field"><strong>MMSE* : </strong>{{ visite.protocole.neuroPsychologie.MMSE }}</div>
+                                <div class="field"><strong>MOCA* : </strong>{{ visite.protocole.neuroPsychologie.MOCA }}</div>
+                            </div>
+                            <div class="flex-nowrap">
+                                <div class="field"><strong>HAD anxiété* : </strong>{{ visite.protocole.neuroPsychologie.HADAnxiete }}</div>
+                                <div class="field"><strong>HAD dépression* : </strong>{{ visite.protocole.neuroPsychologie.HADDepression }}</div>
+                            </div>
+
+                            <div class="def">* compris entre 0 et 1000, 9999 si non réalisé</div>	
+
+                            <div class="field"><strong>Barrière langue : </strong>{{ visite.protocole.neuroPsychologie.barriereLangue }}</div>
+                            <div class="field"><strong>Niveau socio-éducatif : </strong>{{ visite.protocole.neuroPsychologie.niveauSocioEducatif }}</div>
+                            <div class="field"><strong>Aphasie : </strong>{{ visite.protocole.neuroPsychologie.aphasie }}</div>
+                           <div class="field"><strong>Difficultés mouvement fin : </strong> {{ visite.protocole.neuroPsychologie.difficultesMouvementFin }}</div>
                         </div>
                     </section>
 
@@ -559,15 +604,128 @@
                     <section class="slide" style="display: block">
                         <h1 id="bfr">Scintigraphie</h1>
                         <div class="form-space">
-                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                            <div class="table-container">
+                                <table class="table-custom table-scintigraphie">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th colspan="2">Analyse visuelle</th>
+                                            <th colspan="2">Débit</th>
+                                            <th>&nbsp;</th>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <th>Repos</th>
+                                            <th>Régadénoson</th>
+                                            <th>Repos</th>
+                                            <th>Régadénoson</th>
+                                            <th>Réserve</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="row-header">IVA</td>
+                                            <td>{{ visite.protocole.scintigraphie.reposAnalyseVisuelleIVA }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.regadenosonAnalyseVisuelleIVA }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.reposDebitIVA }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.regadenosonDebitIVA }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.reserveIVA }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="row-header">CX</td>
+                                            <td>{{ visite.protocole.scintigraphie.reposAnalyseVisuelleCX }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.regadenosonAnalyseVisuelleCX }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.reposDebitCX }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.regadenosonDebitCX }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.reserveCX }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="row-header">CD</td>
+                                            <td>{{ visite.protocole.scintigraphie.reposAnalyseVisuelleCD }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.regadenosonAnalyseVisuelleCD }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.reposDebitCD }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.regadenosonDebitCD }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.reserveCD }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="row-header">Total</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>{{ visite.protocole.scintigraphie.reposDebitTotal }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.regadenosonDebitTotal }}</td>
+                                            <td>{{ visite.protocole.scintigraphie.reserveTotal }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="form-space">
+                            <div class="field"><strong>Fraction d'éjection sous régadénoson (en %) : </strong>{{ visite.protocole.scintigraphie.fractionEjection }}</div>
                         </div>
                     </section>
 
                     {#========== Suivi ==========#}
                     <section class="slide" style="display: block">
                         <h1 id="bfr">Suivi</h1>
+                        <h3 id="recidive">Récidive</h3>
                         <div class="form-space">
-                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                            <div class="field"><strong>Récidive d’événement cardiovasculaire : </strong>{{ visite.protocole.suivi.recidive }}</div>
+                            <div class="field"><strong>Date de survenue : </strong>{{ visite.protocole.suivi.dateSurvenue is empty ? "" : visite.protocole.suivi.dateSurvenue|date("m/d/Y") }}</div>
+                            <div class="field"><strong>Type d'événement : </strong>{{ visite.protocole.suivi.type }}</div>
+                        </div>
+
+                        <h3 id="clinique">Clinique</h3>
+                        <div class="form-space">
+                            <div class="field"><strong>Dyspnée : </strong>{{ visite.protocole.suivi.dyspnee }}</div>
+                            <div class="field"><strong>Douleur thoracique : </strong>{{ visite.protocole.suivi.douleur }}</div>
+                        </div>
+
+                        <h3 id="facteur">Facteurs de risque cardiovasculaire</h3>
+                        <div class="form-space">
+                            <div class="field"><strong>Tabac : </strong>{{ visite.protocole.suivi.tabac }}</div>
+                            <div class="field"><strong>Activité physique : </strong>{{ visite.protocole.suivi.activite }}</div>
+                            <div class="form-space field">
+                                <strong>Alimentation : </strong> 
+                                {% for t in visite.protocole.suivi.alimentation %}
+                                    {{ t }}{% if loop.last == false %}, {% endif %}
+                                {% endfor %}
+                                <div class="alimentation"></div>
+                            </div>
+
+                            <div class="qcm">
+                                {% for qcm in visite.protocole.suivi.facteurs %}
+                                    <div><strong>{{constants_labels["SUIVI_FACTEUR"][ loop.index0 ]}} : </strong>{{ qcm.response }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <h3 id="place">Traitement mis en place suite à l'évènement cardiovasculaire</h3>
+                        <div class="form-space">
+                            <div class="qcm">
+                                {% for qcm in visite.protocole.suivi.traitement %}
+                                    <div><strong>{{constants_labels["SUIVI_TRAITEMENT"][ loop.index0 ]}} : </strong>{{ qcm.response }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <h3 id="biologie2">Biologie</h3>
+                        <div class="form-space">
+                            <div class="field"><strong>Débit de filtration glomerulaire CK-EPI : </strong>{{ visite.protocole.suivi.debitFiltrationGlomerulaire }}</div>
+                        </div>
+                        <div class="form-space">
+                            <h5>Inflammation</h5>
+                            <div class="field"><strong>CRP ultra-sensible : </strong>{{ visite.protocole.suivi.crp }}</div>
+                        </div>
+                        <div class="form-space">
+                            <h5>Bilan lipidique</h5>
+                            <div class="field"><strong>Triglycérides : </strong>{{ visite.protocole.suivi.triglycerides }}</div>
+                            <div class="field"><strong>LDL-c : </strong>{{ visite.protocole.suivi.ldl }}</div>
+                            <div class="field"><strong>HDL-c : </strong>{{ visite.protocole.suivi.hdl }}</div>
+                        </div>
+                        <div>
+                            <h5>HbA1c</h5>
+                            <div class="field"><strong>HbA1c : </strong>{{ visite.protocole.suivi.hba1c }}</div>
                         </div>
                     </section>
 
@@ -575,7 +733,24 @@
                     <section class="slide" style="display: block">
                         <h1 id="bfr">Test d'effort</h1>
                         <div class="form-space">
-                            <div class="field"><strong>Date : </strong>{{ visite.date|date("m/d/Y") }}</div>
+                            <div class="flex-nowrap">
+                                <div class="field"><strong>Maquillé : </strong>{{ visite.protocole.testEffort.maquille }}</div>
+                                <div class="field"><strong>Type : </strong>{{ visite.protocole.testEffort.type }}</div>
+                            </div>
+                        </div>
+                        <div class="form-space">
+                            <div class="field"><strong>Durée totale (en min) : </strong>{{ visite.protocole.testEffort.duree }}</div>
+                            <div class="field"><strong>Watts : </strong>{{ visite.protocole.testEffort.watts }}</div>
+                        </div>
+                        <div class="form-space">
+                            <div class="flex-nowrap">
+                                <div class="field"><strong>Symptomes : </strong>{{ visite.protocole.testEffort.symptomes }}</div>
+                                <div class="field"><strong>% de la fréq. max : </strong>{{ visite.protocole.testEffort.frequenceMaxPercent }}</div>
+                            </div>
+                            <div class="flex-nowrap">
+                                <div class="field"><strong>ECG modifié : </strong>{{ visite.protocole.testEffort.ECGModifie }}</div>
+                                <div class="field"><strong>Mesure : </strong>{{ visite.protocole.testEffort.mesure }}</div>
+                            </div>
                         </div>
                     </section>
 
@@ -588,8 +763,8 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('js/vendor/html2canvas.js') }}"></script>
-    <script src="{{ asset('js/vendor/jspdf.js') }}"></script>
+    <script src="{{ asset('js/vendor/html2canvas.min.js') }}"></script>
+    <script src="{{ asset('js/vendor/jspdf.umd.js') }}"></script>
 
     <script>
         /*
@@ -628,15 +803,65 @@
             });
         }
 
-        {# cleanTable();
-        clean(); #}
+        // cleanTable();
+        // clean();
 
         /*
         * HTML TO PDF
         **********************************************************************/
+       window.jsPDF = window.jspdf.jsPDF;
+
         $('#export').on('click', function () {
-            createPDFObject();
+            // createPDFObject();
+            buildPDF();
         });
+
+        function buildPDF() {
+            const input = document.getElementById('print');
+            const pdf = new jsPDF({
+                orientation: '',
+                unit: 'pt',
+                format: 'a4'
+            });
+
+            $('.letter__content').css("font-family", "sans-serif")
+
+            let srcwidth = document.getElementById('print').scrollWidth;
+            let date = new Date().
+                toLocaleString('fr-FR', {year: 'numeric', month: '2-digit', day: '2-digit'}).
+                replace(/(\d+)\/(\d+)\/(\d+)/, '$1-$2-$3');
+
+            pdf
+                .html(input, {
+                    callback: function (pdf) {
+                        pdf.save("Horus_{{patient.general.nom}}-{{patient.general.prenom}}_" + date + ".pdf");
+                        $('.letter__content').css("Ubuntu-Regular, sans-serif", "sans-serif")
+                    },
+                    margin: [25, 25, 25, 25],
+                    autoPaging: 'text',
+                    html2canvas: {
+                        scale: 595.26 / srcwidth, //595.26 is the width of A4 page
+                        scrollY: 0,
+                    }
+                })
+                .then(() => {
+                    const pageCount = pdf.internal.getNumberOfPages();
+                    const pageWidth = pdf.internal.pageSize.getWidth();
+                    var pageHeight = pdf.internal.pageSize.getHeight();
+
+                    //loop to set header/ footer, style, alignment, text style to the page
+                    for (let i = 1; i <= pageCount; i++) {
+                        pdf.rect(
+                            25,
+                            25,
+                            pdf.internal.pageSize.width - 150,
+                            pdf.internal.pageSize.height - 50,
+                            'S',
+                        );
+                        pdf.setPage(i);
+                    };
+                });
+        }
 
         function createPDFObject() {
             html2canvas($(".letter__content")[0]).then(function(canvas) {
@@ -644,33 +869,39 @@
                     var contentHeight = canvas.height;
 
                     //One page pdf shows the height of canvas generated by html page;
-                    var pageHeight = contentWidth / 592.28 * 841.89;
+                    var pageHeight = contentWidth / 595.28 * 841.89;
                     //html page height without pdf generation
                     var leftHeight = contentHeight;
                     //Page offset
                     var position = 0;
-                    //a4 paper size [595.28841.89], width and height of image in pdf of canvas generated by html page
+                    //a4 paper size [595.28;841.89], width and height of image in pdf of canvas generated by html page
                     var imgWidth = 595.28; 
-                    var imgHeight = 592.28/contentWidth * contentHeight;
+                    var imgHeight = 595.28 / contentWidth * contentHeight;
+                    console.log(pageHeight, leftHeight, imgHeight);
 
                     //Return picture dataURL, parameters: picture format and sharpness (0-1)
                     var pageData = canvas.toDataURL('image/jpeg', 1.0);
 
-                    //Direction is vertical by default, dimension ponits, format A4 [595.28841.89]
+                    //Direction is vertical by default, dimension ponits, format A4 [595.28;841.89]
                     var pdf = new jsPDF('', 'pt', 'a4');
 
                     //There are two heights to distinguish, one is the actual height of the html page, and the height of the generated pdf page (841.89)
                     //When the content does not exceed the display range of one page of pdf, paging is not required
                     var margin = 25;
-                    if (leftHeight < pageHeight) {
-                        pdf.addImage(pageData, 'JPEG', margin, margin, imgWidth - margin, imgHeight - margin);
+                    if (leftHeight + (margin * 2) < pageHeight) {
+                        pdf.addImage(pageData, 'JPEG', margin, margin, imgWidth - (margin * 2), imgHeight);
                     } else {
-                        while(leftHeight > 0) {
-                            pdf.addImage(pageData, 'JPEG', margin, position + margin, imgWidth - margin, imgHeight - margin)
-                            leftHeight -= pageHeight - margin;
-                            position -= 841.89 - margin;
+                        while (leftHeight > 0) {
+                            pdf.addImage(pageData, 'JPEG', margin, position + margin, imgWidth - (margin * 2), imgHeight - (margin * 2))
+                            
+                            pdf.setLineWidth(25);
+                            pdf.setDrawColor(255, 0, 0);
+                            pdf.rect(margin / 2, margin / 2, 595.28 - margin, 841.89 - margin);
+
+                            leftHeight -= pageHeight - (margin * 2);
+                            position -= 841.89 - (margin * 2);
                             //Avoid adding blank pages
-                            if(leftHeight > 0) {
+                            if (leftHeight > 0) {
                                 pdf.addPage();
                             }
                         }

@@ -191,7 +191,7 @@
             </section>
 
 
-			{#========== SUIVI ==========#}
+			{#========== VISITE ==========#}
 			<section class="slide" id="tab-visite">
                 <div class="wrap-input">
                     <h3>Ajout d'une visite</h3>
@@ -370,7 +370,7 @@
                             </li>
                             #}
 
-                            {#========== Échographie ==========#}
+                            {#========== Échocardiographie repos/effort ==========#}
                             <li class="tab-content" name="echographie">
                                 <div id="examen-echographie">
                                     {% include 'patient/form/examens/echographie.html.twig' with {form: visite} %}
@@ -431,7 +431,6 @@
                     </section>
                 {% endif %}
             {% endfor %}
-            
 
             {{ form_row(form._token) }}
             {{ form_end(form, {'render_rest' : false}) }}
@@ -1005,7 +1004,7 @@
             $(".tabbed__fiches li").removeClass('active');
         }
 
-        /* SUIVI */
+        /* VISITE */
         $('.visite-list').on('click', 'li a', function() {
             let protocoleId = $(this).attr("data-protocole");
             let n = $(this).attr('name');
@@ -1025,47 +1024,16 @@
 
         /* TOC */
         /* Smooth scroll */
-        function displaySlide(page) {
-            $('.slide').each(function(i, e) {
-                let id = 'tab-' + page.substring(1);
-                $(this).removeClass('active');
-                if ($(this).attr('id') == id) {
-                    $(this).addClass('active');
-                }
-            })
-        }
-
+        $('.toc li a').on('click', function () {
+            $('.toc li a').removeClass('active');
+            $(this).addClass('active');
+            scrollToc($(this).attr('href'));
+        });
+        
         $('.toc > ul > li > a').on('click', function () {
             displaySlide($(this).attr('href'));
             window.location.hash = $(this).attr("href");
-            return false;
-        });
 
-        function scrollToc(page) {
-            let speed = 550;
-            if (!$(page).offset()) return;
-            $('html, body').animate({
-                scrollTop: $(page).offset().top - 30
-            }, speed);
-        }
-
-        $('.toc li a').on('click', function () {
-            scrollToc($(this).attr('href'));
-        });
-
-        //onLoad
-        var hash = window.location.hash.substr(0);
-        $('.toc > ul > li > a').each(function (i) {
-            page = $(this).attr('href');
-            if (hash == page) {
-                $(this).toggleClass('js-active active');
-                toggleMenu($(this));
-                displaySlide(page);
-                scrollToc(page);
-            }
-        });
-
-        $(".toc > ul > li > a").click(function () {
             if (!$(this).hasClass('js-active')) {
                 $('.toc > ul > li > a').each(function (i) {
                     if ($(this).hasClass('js-active')) 
@@ -1079,12 +1047,44 @@
             } else {
                 $(this).toggleClass('active');
             }
+
+            return false;
         });
 
         function toggleMenu(e) {
             $(e).find(".right").toggleClass("fa-caret-up fa-caret-down");
             $(e).parent(".sub-menu").children("ul").slideToggle("100");
         }
+
+        function displaySlide(page) {
+            $('.slide').each(function(i, e) {
+                let id = 'tab-' + page.substring(1);
+                $(this).removeClass('active');
+                if ($(this).attr('id') == id) {
+                    $(this).addClass('active');
+                }
+            })
+        }
+
+        function scrollToc(page) {
+            let speed = 550;
+            if (!$(page).offset()) return;
+            $('html, body').animate({
+                scrollTop: $(page).offset().top - 30
+            }, speed);
+        }
+
+        //onLoad
+        var hash = window.location.hash.substr(0);
+        $('.toc > ul > li > a').each(function (i) {
+            page = $(this).attr('href');
+            if (hash == page) {
+                $(this).toggleClass('js-active active');
+                toggleMenu($(this));
+                displaySlide(page);
+                scrollToc(page);
+            }
+        });
 
         $(function() {
             $(window).on('scroll', function () { 
@@ -1123,6 +1123,7 @@
             });
         }
 
+        /* TEXTAREA */
         $("textarea").keyup(function(e) {
             while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
                 $(this).height($(this).height() + 1);

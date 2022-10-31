@@ -15,6 +15,15 @@ class NeuroPsychologieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('rankin', IntegerType::class, array(
+                'label' => 'Rankin *',
+                'attr' => array(
+                    'unity' => '',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                ),
+                'required' => false,
+            ))
             ->add('MMSE', IntegerType::class, array(
                 'label' => 'MMSE *',
                 'attr' => array(
@@ -96,15 +105,6 @@ class NeuroPsychologieType extends AbstractType
                     'Oui' => 'Oui',
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
-                ),
-                'required' => false,
-            ))
-            ->add('rankin', IntegerType::class, array(
-                'label' => 'Rankin *',
-                'attr' => array(
-                    'unity' => '',
-                    'data-min' => 0,
-                    'data-max' => 0,
                 ),
                 'required' => false,
             ))

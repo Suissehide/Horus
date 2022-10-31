@@ -351,6 +351,7 @@ class PatientController extends AbstractController
             'title' => 'Lettre',
             'controller_name' => 'PatientController',
             'patient' => $patient,
+            'constants_labels' => FormConstants::LABELS
         ]);
     }
 

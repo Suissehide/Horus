@@ -594,6 +594,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
 .table {
     overflow: hidden;
     margin-bottom: 0;
+    border: none;
 }
 
 .table th {
@@ -628,6 +629,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     padding: 10px;
     white-space: normal;
     vertical-align: middle;
+    border: none;
 }
 
 .table>tbody>tr.out>td, .table>tbody>tr.out>th, .table>tbody>tr>td.out, .table>tbody>tr>th.out, .table>tfoot>tr.out>td, .table>tfoot>tr.out>th, .table>tfoot>tr>td.out, .table>tfoot>tr>th.out, .table>thead>tr.out>td, .table>thead>tr.out>th, .table>thead>tr>td.out, .table>thead>tr>th.out {
@@ -962,9 +964,6 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     height: 60px;
     width: 60px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    text-indent: 100%;
-    white-space: nowrap;
     color: white;
     cursor: pointer !important;
     transition: none;
@@ -972,7 +971,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
 
 .cd-btn .fa {
     position: absolute;
-    left: -1px;
+    left: 20px;
     top: 18px;
     font-size: 24px;
 }
