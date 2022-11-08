@@ -32,8 +32,8 @@ class VisiteController extends AbstractController
     public function patient_visite_add_new(Request $request, InitializePatient $initializePatient): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $patientId = $request->request->get('patientId');
-            $type = $request->request->get('type');
+            $patientId = $request->get('patientId');
+            $type = $request->get('type');
 
             $patient = $this->managerRegistry->getRepository(Patient::class)->find($patientId);
             $initializePatient->createVisite($patient, $type);
@@ -48,8 +48,8 @@ class VisiteController extends AbstractController
     public function patient_visite_add_existant(Request $request, InitializePatient $initializePatient): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $patientId = $request->request->get('patientId');
-            $protocoleId = $request->request->get('protocoleId');
+            $patientId = $request->get('patientId');
+            $protocoleId = $request->get('protocoleId');
 
             $patient = $this->managerRegistry->getRepository(Patient::class)->find($patientId);
             $protocole = $this->managerRegistry->getRepository(Protocole::class)->find($protocoleId);
@@ -69,8 +69,8 @@ class VisiteController extends AbstractController
     public function patient_visite_delete(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $patientId = $request->request->get('patientId');
-            $visiteId = $request->request->get('visiteId');
+            $patientId = $request->get('patientId');
+            $visiteId = $request->get('visiteId');
             
             $patient = $this->managerRegistry->getRepository(Patient::class)->find($patientId);
             $visite = $this->managerRegistry->getRepository(Visite::class)->find($visiteId);

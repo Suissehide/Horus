@@ -1,6 +1,6 @@
 <h1 id="facteur">Facteurs de risques initiaux</h1>
 
-<div class="radio-row">
+<div>
 	{{ form_row(form.facteur.antecedentFamiliaux, {'attr': {'class': 'input'} }) }}
 </div>
 
@@ -48,16 +48,10 @@
 
 	<div class="margin-space"></div>
 	<h5>Tabagisme</h5>
-	<div class="flex-wrap">
-		<div class="flex-1">
-			{{ form_row(form.facteur.tabagisme, {'attr': {'class': 'input'} }) }}
-		</div>
-		<div class="flex-1">
-			{{ form_row(form.facteur.dateArret, {'attr': {'class': 'input js-datepicker'} }) }}
-		</div>
-		<div class="flex-1">
-			{{ form_row(form.facteur.nombrePaquetsAn, {'attr': {'class': 'input radio-row'} }) }}
-		</div>
+	<div class="column">
+		{{ form_row(form.facteur.tabagisme, {'attr': {'class': 'input'} }) }}
+		{{ form_row(form.facteur.dateArret, {'attr': {'class': 'input js-datepicker'} }) }}
+		{{ form_row(form.facteur.nombrePaquetsAn, {'attr': {'class': 'input radio-row'} }) }}
 	</div>
 
 	<h5>Obésité</h5>
@@ -66,20 +60,16 @@
 	</div>
 
 	<h5>Alcoolisme</h5>
-	<div class="flex-wrap">
-		<div class="flex-1">
-			{{ form_row(form.facteur.alcoolisme, {'attr': {'class': 'input radio-row'} }) }}
-		</div>
-		<div class="flex-1">
-			{{ form_row(form.facteur.sevre, {'attr': {'class': 'input radio-row'} }) }}
-		</div>
+	<div class="column">
+		{{ form_row(form.facteur.alcoolisme, {'attr': {'class': 'input radio-row'} }) }}
+		{{ form_row(form.facteur.sevre, {'attr': {'class': 'input radio-row'} }) }}
 	</div>
 
 	<h5>Cannabis</h5>
-	<div class="radio-row">
+	<div>
 		{{ form_row(form.facteur.cannabis, {'attr': {'class': 'input radio-row'} }) }}
 	</div>
 
 </div>
 
-{{ form_row(form.facteur.save, {'attr': {'class': 'form-btn'} }) }}
+{{ form_row(form.facteur.save, {'attr': {'class': 'form-btn btn-save'} }) }}

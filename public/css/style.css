@@ -1011,11 +1011,11 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     color: white;
 }
 
-.btn-save {
+.btn-export {
     background: #438945cc;
 }
 
-.btn-save:hover {
+.btn-export:hover {
     background: #438945;
     color: white;
 }

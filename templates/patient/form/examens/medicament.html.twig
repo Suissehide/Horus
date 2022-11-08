@@ -26,7 +26,7 @@
 	<label>
 		<em>Verbatims vécu</em>
 	</label>
-	<div class="qcm qcm-default">
+	<div class="column qcm-default">
 		{% for qcm in form.protocole.medicamentsEntree.verbatims %}
 			<div class="qcm-row">
 				<div class="qcm-question">
@@ -46,7 +46,7 @@
 	<label>
 		<em>Verbatims santé</em>
 	</label>
-	<div class="qcm qcm-default">
+	<div class="column qcm-default">
 		{% for qcm in form.protocole.medicamentsEntree.verbatimsSante %}
 			<div class="qcm-row">
 				<div class="qcm-question">
@@ -139,4 +139,4 @@
 	</div>
 </div>
 
-{{ form_row(form.protocole.medicamentsEntree.save, {'attr': {'class': 'form-btn'} }) }}
+{{ form_row(form.protocole.medicamentsEntree.save, {'attr': {'class': 'form-btn btn-save'} }) }}

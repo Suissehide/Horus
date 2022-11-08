@@ -21,8 +21,8 @@ class ProtocoleController extends AbstractController
         $em = $this->managerRegistry->getManager();
 
         if ($request->isXmlHttpRequest()) {
-            $fiche = $request->request->get('fiche');
-            $protocoleId = $request->request->get('protocoleId');
+            $fiche = $request->get('fiche');
+            $protocoleId = $request->get('protocoleId');
 
             $protocole = $em->getRepository(Protocole::class)->find($protocoleId);
             dump($protocole);
@@ -42,8 +42,8 @@ class ProtocoleController extends AbstractController
         $em = $this->managerRegistry->getManager();
 
         if ($request->isXmlHttpRequest()) {
-            $fiche = $request->request->get('fiche');
-            $protocoleId = $request->request->get('protocoleId');
+            $fiche = $request->get('fiche');
+            $protocoleId = $request->get('protocoleId');
             $protocole = $em->getRepository(Protocole::class)->find($protocoleId);
 
             $protocole->setFiches(

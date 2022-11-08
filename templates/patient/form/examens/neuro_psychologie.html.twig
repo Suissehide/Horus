@@ -2,11 +2,11 @@
 <div class="form-space">
 	{{ form_row(form.protocole.neuroPsychologie.rankin, {'attr': {'class': 'input'} }) }}
 
-	<div class="flex-nowrap">
+	<div class="column">
 		{{ form_row(form.protocole.neuroPsychologie.MMSE, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 		{{ form_row(form.protocole.neuroPsychologie.MOCA, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	</div>
-	<div class="flex-nowrap">
+	<div class="column">
 		{{ form_row(form.protocole.neuroPsychologie.HADAnxiete, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 		{{ form_row(form.protocole.neuroPsychologie.HADDepression, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	</div>
@@ -19,4 +19,4 @@
 	{{ form_row(form.protocole.neuroPsychologie.difficultesMouvementFin, {'attr': {'class': 'input radio-row'} }) }}
 </div>
 
-{{ form_row(form.protocole.neuroPsychologie.save, {'attr': {'class': 'form-btn'} }) }}
+{{ form_row(form.protocole.neuroPsychologie.save, {'attr': {'class': 'form-btn btn-save'} }) }}

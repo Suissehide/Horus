@@ -443,9 +443,9 @@
 			<button class="cd-btn btn-check">
 				<i aria-hidden="true" class="fa fa-save"></i>
 			</button>
-			<a class="cd-btn btn-top" href="#0">
+			<button class="cd-btn btn-top">
 				<i aria-hidden="true" class="fa fa-chevron-up"></i>
-			</a>
+			</button>
 		</div>
 
 	</div>
@@ -1076,6 +1076,10 @@
 
         //onLoad
         var hash = window.location.hash.substr(0);
+        if (~hash.indexOf("examen")) {
+            selectProtocole(hash.split('-')[1]);
+            selectTab($(".tabbed__visites li[name='" + hash + "']"));
+        }
         $('.toc > ul > li > a').each(function (i) {
             page = $(this).attr('href');
             if (hash == page) {

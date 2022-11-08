@@ -1,6 +1,7 @@
 <h1 id="echographie-vasculaire">Échographie vasculaire</h1>
 <h3 id="tsa">Schéma TSA</h3>
 <div class="form-space schema-tsa">
+	<img src={{ asset('assets/images/tsa.png') }} alt="Schéma TSA"/>
 	{{ form_row(form.protocole.echographieVasculaire.carotideInterneDroite, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.protocole.echographieVasculaire.carotideInterneGauche, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.protocole.echographieVasculaire.EIMDroit, {'attr': {'class': 'input special'} }) }}
@@ -20,6 +21,7 @@
 
 <h3 id="membres-inferieur">Schéma membres inférieur</h3>
 <div class="form-space schema-membres-inferieur">
+	<img src={{ asset('assets/images/membres_inferieur.jpg') }} alt="Schéma membres inférieur"/>
 	{{ form_row(form.protocole.echographieVasculaire.membresInferieurAorte, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	{{ form_row(form.protocole.echographieVasculaire.iliaqueDroite, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.protocole.echographieVasculaire.iliaqueGauche, {'attr': {'class': 'input'} }) }}
@@ -34,12 +36,12 @@
 </div>
 
 <div class="form-space">
-	<div class="flex-nowrap">
+	<div class="column">
 		{{ form_row(form.protocole.echographieVasculaire.IPSReposDroit, {'attr': {'class': 'input'} }) }}
 		{{ form_row(form.protocole.echographieVasculaire.IPSReposGauche, {'attr': {'class': 'input'} }) }}
 	</div>
 
-	<div class="flex-nowrap">
+	<div class="column">
 		{{ form_row(form.protocole.echographieVasculaire.IPSGrosOrteilDroit, {'attr': {'class': 'input'} }) }}
 		{{ form_row(form.protocole.echographieVasculaire.IPSGrosOrteilGauche, {'attr': {'class': 'input'} }) }}
 	</div>
@@ -49,18 +51,18 @@
 		{{ form_row(form.protocole.echographieVasculaire.testStrandnessDistanceMax, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 		<div class="def">* compris entre 0 et 1000, 9999 si non réalisé</div>
 	</div>
-	<div class="form-space flex-2">
+	<div class="form-space">
 		{{ form_row(form.protocole.echographieVasculaire.arretPour, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	</div>
 
-	<div class="flex-nowrap">
+	<div class="column">
 		{{ form_row(form.protocole.echographieVasculaire.IPSEffortDroit, {'attr': {'class': 'input'} }) }}
 		{{ form_row(form.protocole.echographieVasculaire.IPSEffortGauche, {'attr': {'class': 'input'} }) }}
 	</div>
 
-	<div class="form-space flex-2">
+	<div class="form-space column">
 		{{ form_row(form.protocole.echographieVasculaire.vitesseOndePouls, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	</div>
 </div>
 
-{{ form_row(form.protocole.echographieVasculaire.save, {'attr': {'class': 'form-btn'} }) }}
+{{ form_row(form.protocole.echographieVasculaire.save, {'attr': {'class': 'form-btn btn-save'} }) }}

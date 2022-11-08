@@ -21,10 +21,10 @@ class MedicamentController extends AbstractController
     public function index(MedicamentRepository $medicamentRepository, Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $current = $request->request->get('current');
-            $rowCount = $request->request->get('rowCount');
-            $searchPhrase = $request->request->get('searchPhrase');
-            $sort = $request->request->get('sort');
+            $current = $request->get('current');
+            $rowCount = $request->get('rowCount');
+            $searchPhrase = $request->get('searchPhrase');
+            $sort = $request->get('sort');
 
             $medicaments = $medicamentRepository->findByFilter($sort, $searchPhrase);
             if ($searchPhrase != "")
@@ -66,7 +66,7 @@ class MedicamentController extends AbstractController
         $em = $this->managerRegistry->getManager();
 
         if ($request->isXmlHttpRequest()) {
-            $name = $request->request->get('name');
+            $name = $request->get('name');
 
             $medicament = new Medicament();
             $medicament->setName($name);
@@ -82,8 +82,8 @@ class MedicamentController extends AbstractController
     public function medicament_search(MedicamentRepository $medicamentRepository, Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $q = $request->request->get('q');
-            $page = $request->request->get('page');
+            $q = $request->get('q');
+            $page = $request->get('page');
 
             if (!$q) return new JsonResponse([]);
 
@@ -101,7 +101,7 @@ class MedicamentController extends AbstractController
         $em = $this->managerRegistry->getManager();
 
         if ($request->isXmlHttpRequest()) {
-            $id = $request->request->get('id');
+            $id = $request->get('id');
 
             $medicament = $this->managerRegistry->getRepository(Medicament::class)->find($id);;
 

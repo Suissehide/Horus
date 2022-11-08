@@ -35,11 +35,12 @@ class Patient
     #[Groups(['advancement', 'export'])]
     private $facteur;
 
+    #[ORM\OneToMany(targetEntity: Visite::class, mappedBy: 'patient', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[Groups(['advancement', 'export'])]
+    private $visites;
+
     #[ORM\OneToMany(targetEntity: 'App\Entity\Erreur', mappedBy: 'patient', cascade: ['remove'])]
     private $erreurs;
-
-    #[ORM\OneToMany(targetEntity: Visite::class, mappedBy: 'patient', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    private $visites;
 
     public function __construct()
     {

@@ -31,15 +31,18 @@
     margin-bottom: 16px;
 }
 
-.flex-2 {
-    display: flex;
-    justify-content: space-between;
-    flex-flow: row wrap;
-    gap: 0 16px;
+.column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "a a";
+    grid-gap: 0 16px;
 }
 
-.flex-2>* {
-    width: calc(50% - 8px);
+@media screen and (max-width: 1400px) {
+    .column {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-areas: "a";
+    }
 }
 
 .alert {
@@ -223,21 +226,24 @@ ul.tabbed li i {
     display: block;
 }
 
-.hero-tabs h3, .slide h3, main h3 {
+.hero-tabs h3,
+.slide h3,
+main h3 {
     position: relative;
-    display: inline-block;
-    opacity: 0.6;
+    color: var(--gray-dark);
     margin-bottom: 10px;
 }
 
-.hero-tabs h5, .slide h5 {
+.hero-tabs h5,
+.slide h5 {
     position: relative;
     width: fit-content;
     font-size: 18px;
     margin: 0 0 10px;
 }
 
-.hero-tabs h5::after, .slide h5::after {
+.hero-tabs h5::after,
+.slide h5::after {
     content: "";
     position: absolute;
     border: 0;
@@ -306,7 +312,9 @@ ul.tabbed li i {
     transition: all 0.5s ease;
 }
 
-.hero-tab, .hero-tab:visited, .hero-tab:focus {
+.hero-tab,
+.hero-tab:visited,
+.hero-tab:focus {
     text-decoration: none;
 }
 
@@ -341,7 +349,7 @@ ul.tabbed li i {
     flex: 15%;
 }
 
-.col-flex-2 {
+.col-column {
     flex: 18%;
 }
 
@@ -383,13 +391,15 @@ ul.tabbed li i {
     filter: invert(43%) sepia(86%) saturate(441%) hue-rotate(147deg) brightness(96%) contrast(84%);
 }
 
-.etiquettes__list, .medicaments__list {
+.etiquettes__list,
+.medicaments__list {
     display: flex;
     flex-flow: row wrap;
     gap: 5px;
 }
 
-.etiquette, .medicament {
+.etiquette,
+.medicament {
     width: fit-content;
     color: #f4f9f7;
     padding: 3px 15px;
@@ -399,7 +409,8 @@ ul.tabbed li i {
     background-color: var(--blue-green);
 }
 
-.etiquettes__list .etiquette:first-child, .medicaments__list .medicament:first-child {
+.etiquettes__list .etiquette:first-child,
+.medicaments__list .medicament:first-child {
     margin-left: 0;
 }
 
@@ -407,14 +418,16 @@ ul.tabbed li i {
     margin: 5px 0;
 }
 
-.etiquette .delete, .medicament .delete {
+.etiquette .delete,
+.medicament .delete {
     cursor: pointer;
     float: right;
     padding-left: 10px;
     transition: 0.3s ease;
 }
 
-.etiquette .delete:hover, .medicament .delete:hover {
+.etiquette .delete:hover,
+.medicament .delete:hover {
     color: var(--blue-green-active);
 }
 
@@ -544,7 +557,8 @@ input[type='checkbox'].checkbox-round+span {
     border-collapse: separate;
 }
 
-.table-custom .wrap-input, .table-custom label {
+.table-custom .wrap-input,
+.table-custom label {
     margin-bottom: 0px;
 }
 
@@ -579,26 +593,12 @@ input[type='checkbox'].checkbox-round+span {
 /* QCM
 ========================================================================== */
 
-.qcm {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-areas: "a a";
-    grid-gap: 0 16px;
-}
-
 .qcm-row {
     width: 100%;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid var(--persian-indigo);
     margin-bottom: 16px;
-}
-
-@media screen and (max-width: 1400px) {
-    .qcm {
-        grid-template-columns: repeat(1, 1fr);
-        grid-template-areas: "a";
-    }
 }
 
 .qcm-question {
@@ -675,6 +675,10 @@ input[type='checkbox'].checkbox-round+span {
     margin-top: 5px;
 }
 
+.letter__content .table-custom {
+    table-layout: fixed;
+}
+
 .select-data {
     display: flex;
     margin-bottom: 15px;
@@ -692,7 +696,8 @@ input[type='checkbox'].checkbox-round+span {
     text-transform: initial;
 }
 
-.letter__content .schema-tsa .field, .letter__content .schema-membres-inferieur .field {
+.letter__content .schema-tsa .field,
+.letter__content .schema-membres-inferieur .field {
     background-color: white;
     padding: 5px 10px;
     width: auto;
@@ -924,10 +929,17 @@ input[type='checkbox'].checkbox-round+span {
 ========================================================================== */
 .schema-tsa {
     position: relative;
-    background: url(../assets/images/tsa.png) no-repeat center;
-    background-size: contain;
     height: 700px;
     width: 900px;
+}
+
+.schema-tsa img {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    height: 700px;
 }
 
 .schema-tsa>div {
@@ -947,82 +959,89 @@ input[type='checkbox'].checkbox-round+span {
     background-color: rgba(255, 255, 255, 0.8);
 }
 
-.schema-tsa>div:nth-child(1) {
+.schema-tsa>.wrap-input:nth-of-type(1), #carotideInterneDroite {
     top: 35px;
     left: 130px;
 }
 
-.schema-tsa>div:nth-child(2) {
+.schema-tsa>.wrap-input:nth-of-type(2), #carotideInterneGauche {
     top: 35px;
     right: 130px;
 }
 
-.schema-tsa>div:nth-child(3) {
+.schema-tsa>.wrap-input:nth-of-type(3), #EIMDroit {
     top: 115px;
     left: 20px;
 }
 
-.schema-tsa>div:nth-child(4) {
+.schema-tsa>.wrap-input:nth-of-type(4), #EIMGauche {
     top: 115px;
     right: 20px;
 }
 
-.schema-tsa>div:nth-child(5) {
+.schema-tsa>.wrap-input:nth-of-type(5), #vertebraleDroite {
     top: 195px;
     left: 70px;
 }
 
-.schema-tsa>div:nth-child(6) {
+.schema-tsa>.wrap-input:nth-of-type(6), #vertebraleGauche {
     top: 195px;
     right: 70px;
 }
 
-.schema-tsa>div:nth-child(7) {
+.schema-tsa>.wrap-input:nth-of-type(7), #carotideCommuneDroite {
     top: 275px;
     left: 140px;
 }
 
-.schema-tsa>div:nth-child(8) {
+.schema-tsa>.wrap-input:nth-of-type(8), #carotideCommuneGauche {
     top: 275px;
     right: 140px;
 }
 
-.schema-tsa>div:nth-child(9) {
+.schema-tsa>.wrap-input:nth-of-type(9), #sousClaviereDroite {
     top: 355px;
     left: 70px;
 }
 
-.schema-tsa>div:nth-child(10) {
+.schema-tsa>.wrap-input:nth-of-type(10), #sousClaviereGauche {
     top: 355px;
     right: 70px;
 }
 
-.schema-tsa>div:nth-child(11) {
+.schema-tsa>.wrap-input:nth-of-type(11), #TSAAorte {
     top: 435px;
     left: 220px;
 }
 
-.schema-tsa>div:nth-child(12) {
+.schema-tsa>.wrap-input:nth-of-type(12), #volumeCarotideDroite {
     top: 515px;
     left: 70px;
 }
 
-.schema-tsa>div:nth-child(13) {
+.schema-tsa>.wrap-input:nth-of-type(13), #volumeCarotideGauche {
     top: 515px;
     right: 70px;
 }
 
-.schema-tsa>div:nth-child(14) {
+.schema-tsa>.wrap-input:nth-of-type(14), #chargeAtheromeTotale {
     top: 595px;
     left: 220px;
 }
 
 .schema-membres-inferieur {
     position: relative;
-    background: url(../assets/images/membres_inferieur.jpg) no-repeat center;
-    background-size: contain;
     height: 700px;
-    width: 900px;
+    width: 800px;
+}
+
+.schema-membres-inferieur img {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    height: 700px;
 }
 
 .schema-membres-inferieur>div {
@@ -1040,57 +1059,57 @@ input[type='checkbox'].checkbox-round+span {
     background-color: rgba(255, 255, 255, 0.8);
 }
 
-.schema-membres-inferieur>div:nth-child(1) {
+.schema-membres-inferieur>.wrap-input:nth-of-type(1), #membresInferieurAorte {
     top: 0px;
     left: 330px;
 }
 
-.schema-membres-inferieur>div:nth-child(2) {
+.schema-membres-inferieur>.wrap-input:nth-of-type(2), #iliaqueDroite {
     top: 95px;
     left: 90px;
 }
 
-.schema-membres-inferieur>div:nth-child(3) {
+.schema-membres-inferieur>.wrap-input:nth-of-type(3), #iliaqueGauche {
     top: 95px;
     right: 90px;
 }
 
-.schema-membres-inferieur>div:nth-child(4) {
+.schema-membres-inferieur>.wrap-input:nth-of-type(4), #femoraleCommuneDroite {
     top: 175px;
     left: 90px;
 }
 
-.schema-membres-inferieur>div:nth-child(5) {
+.schema-membres-inferieur>.wrap-input:nth-of-type(5), #femoraleCommuneGauche {
     top: 175px;
     right: 90px;
 }
 
-.schema-membres-inferieur>div:nth-child(6) {
+.schema-membres-inferieur>.wrap-input:nth-of-type(6), #femoraleSuperficielleDroite {
     top: 275px;
     left: 90px;
 }
 
-.schema-membres-inferieur>div:nth-child(7) {
+.schema-membres-inferieur>.wrap-input:nth-of-type(7), #femoraleSuperficielleGauche {
     top: 275px;
     right: 90px;
 }
 
-.schema-membres-inferieur>div:nth-child(8) {
+.schema-membres-inferieur>.wrap-input:nth-of-type(8), #popliteDroite {
     top: 385px;
     left: 90px;
 }
 
-.schema-membres-inferieur>div:nth-child(9) {
+.schema-membres-inferieur>.wrap-input:nth-of-type(9), #popliteGauche {
     top: 385px;
     right: 90px;
 }
 
-.schema-membres-inferieur>div:nth-child(10) {
+.schema-membres-inferieur>.wrap-input:nth-of-type(10), #axesJambiersDroits {
     top: 495px;
     left: 90px;
 }
 
-.schema-membres-inferieur>div:nth-child(11) {
+.schema-membres-inferieur>.wrap-input:nth-of-type(11), #axesJambiersGauches {
     top: 495px;
     right: 90px;
 }
@@ -1228,7 +1247,8 @@ input[type='checkbox'].checkbox-round+span {
     text-overflow: ellipsis;
 }
 
-.toc ul li a, .toc ul li button {
+.toc ul li a,
+.toc ul li button {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -1239,7 +1259,8 @@ input[type='checkbox'].checkbox-round+span {
     transition: 0.5s ease;
 }
 
-.toc>ul>li>a, .toc>ul>li>button {
+.toc>ul>li>a,
+.toc>ul>li>button {
     height: 42px;
 }
 
@@ -1264,7 +1285,8 @@ input[type='checkbox'].checkbox-round+span {
     color: white;
 }
 
-.toc ul li a:hover, .toc ul li button:hover {
+.toc ul li a:hover,
+.toc ul li button:hover {
     background: var(--blue-green-hover);
 }
 
@@ -1273,17 +1295,21 @@ input[type='checkbox'].checkbox-round+span {
     text-align: center;
 }
 
-.toc ul li a .fa-caret-down, .toc ul li a .fa-caret-up {
+.toc ul li a .fa-caret-down,
+.toc ul li a .fa-caret-up {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.reduce .toc ul li a, .reduce .toc ul li {
+.reduce .toc ul li a,
+.reduce .toc ul li {
     justify-content: center;
 }
 
-.reduce .toc ul li a .fa-caret-down, .reduce .toc ul li a .fa-caret-up, .reduce .toc ul li a .menu-title>div {
+.reduce .toc ul li a .fa-caret-down,
+.reduce .toc ul li a .fa-caret-up,
+.reduce .toc ul li a .menu-title>div {
     display: none;
 }
 

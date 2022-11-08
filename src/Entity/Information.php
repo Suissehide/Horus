@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\InformationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: InformationRepository::class)]
 class Information
@@ -14,81 +15,107 @@ class Information
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $susDecalage;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $sansSusDecalage;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $anterieur;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $septoApical;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $lateral;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $inferieurPosterieur;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $sansTerritoire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $IVA;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $CD;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $Cx;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $marginale;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $diagonale;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $pontage;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $troncCommun;
 
     #[ORM\Column(type: 'array', nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $traitementPhaseAigue = [];
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $troubleRythmeVentriculaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $insuffisanceCardiaque;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $pericardite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $complicationMecanique;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $localisation;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $taille;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private ?string $etiologieAtherosclerose = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private ?string $etiologieMaladiePetitsArteres = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private ?string $etiologieCardioEmbolique = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private ?string $etiologieAutreCause = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private ?string $etiologieDissection = null;
 
     public function getId(): ?int

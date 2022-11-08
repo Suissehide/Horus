@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\FacteurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: FacteurRepository::class)]
 class Facteur
@@ -14,63 +15,83 @@ class Facteur
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $risqueHTA;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $depuisHTA;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $traiteHTA;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $risqueDiabete;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $depuisDiabete;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $traiteDiabete;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $risqueHypercholesterolemie;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $depuisHypercholesterolemie;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $traiteHypercholesterolemie;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $risqueHypertriglyceridemie;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $depuisHypertriglyceridemie;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $traiteHypertriglyceridemie;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $obesite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $alcoolisme;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $sevre;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $tabagisme;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $dateArret;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $nombrePaquetsAn;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $antecedentFamiliaux;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $cannabis;
 
     public function getId(): ?int

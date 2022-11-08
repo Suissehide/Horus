@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\GeneralRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: GeneralRepository::class)]
 class General
@@ -14,30 +15,39 @@ class General
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $civilite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $nom;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $prenom;
 
     #[ORM\Column(type: 'date', nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $dateNaissance;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $sexe;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $nomNaissance;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $profession;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $statutActuel;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $niveauEtude;
 
     public function getId(): ?int

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AntecedentCardiovasculaireRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AntecedentCardiovasculaireRepository::class)]
 class AntecedentCardiovasculaire
@@ -14,42 +15,55 @@ class AntecedentCardiovasculaire
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $IDM_SCA;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $angorStable;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $angioplastieCoronaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $pontageCoronaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $insuffisanceCardiaque;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $AVC;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $AIT;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $endarteriectomieCarotidienne;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $arteriteMembresInferieurs;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $angioplastiePeripherique;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $pontagePeripherique;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private $antecedentFibrillationAuriculaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]    
     private $valvulopathie;
 
     public function getId(): ?int

@@ -259,7 +259,7 @@ class FacteurType extends AbstractType
                 'required' => false,
             ))
 
-            ->add('save', SubmitType::class, array('label' => 'Sauvegarder'))
+            ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
         ;
     }
 

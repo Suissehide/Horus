@@ -18,12 +18,12 @@ class HistoryController extends AbstractController
     public function index(ErreurRepository $erreurRepository, Patient $patient, $fieldId, Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $current = $request->request->get('current');
-            $rowCount = $request->request->get('rowCount');
-            $searchPhrase = $request->request->get('searchPhrase');
-            $sort = $request->request->get('sort');
-            $patientId = $request->request->get('patientId');
-            $fieldId = $request->request->get('fieldId');
+            $current = $request->get('current');
+            $rowCount = $request->get('rowCount');
+            $searchPhrase = $request->get('searchPhrase');
+            $sort = $request->get('sort');
+            $patientId = $request->get('patientId');
+            $fieldId = $request->get('fieldId');
 
             $erreurs = $erreurRepository->findByFilter($sort, $searchPhrase, $patientId, $fieldId);
             if ($searchPhrase != "") {

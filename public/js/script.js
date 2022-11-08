@@ -47,15 +47,15 @@ jQuery(function ($) {
                 (!window.requestAnimationFrame) ? setTimeout(checkBackToTop, 250) : window.requestAnimationFrame(checkBackToTop);
             }
         });
+
         //smooth scroll to top
-        var btnTop = document.getElementsByClassName('btn-top')[0]
-        btnTop.addEventListener('click', function (event) {
-            event.preventDefault();
+        $(".btn-top").on('click', function (e) {
+            e.preventDefault();
             (!window.requestAnimationFrame) ? window.scrollTo(0, 0) : scrollTop(scrollDuration);
         });
 
-        $(".btn-delete").on('click', function () {
-            $('#btn-delete').trigger('click');
+        $(".btn-check").on('click', function () {
+            $('.btn-save').trigger('click');
         })
     }
 

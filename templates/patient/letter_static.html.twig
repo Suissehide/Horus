@@ -32,7 +32,7 @@
                         <i aria-hidden="true" class="fa fa-arrow-left"></i>Retour</a>
                     <button class="form-btn" id="copy">
                         <i aria-hidden="true" class="fa fa-copy"></i>Copier</button>
-                    <button class="form-btn btn-save" id="export">
+                    <button class="form-btn btn-export" id="export">
                         <i aria-hidden="true" class="fa fa-file-pdf"></i>Exporter en PDF</button>
                 </div>
             </section>
@@ -43,43 +43,46 @@
                 {#========== GENERAL ==========#}
                 <section class="slide" style="display: block">
                     <h1 id="general">Informations générales</h1>
-                    <h3 id="identification">Identification</h3>
-                    <div class="form-space">
-                        <div class="field"><strong>Civilité : </strong>{{ patient.general.civilite }}</div>
-                        <div class="field"><strong>Prénom : </strong>{{ patient.general.prenom }}</div>
-                        <div class="field"><strong>Nom : </strong>{{ patient.general.nom }}</div>
-                        <div class="field"><strong>Nom de naissance : </strong>{{ patient.general.nomNaissance }}</div>
-                        <div class="field"><strong>Date de naissance : </strong>{{ patient.general.dateNaissance is empty ? "" : patient.general.dateNaissance|date("d/m/Y") }}</div>
-                        <div class="field"><strong>Sexe : </strong>{{ patient.general.sexe }}</div>
-                    </div>
-
-                    <h3 id="complement">Complément</h3>
-                    <div class="form-space">
-                        <div class="field"><strong>Professions : </strong>{{ patient.general.profession }}</div>
-                        <div class="field"><strong>Statut actuel : </strong>{{ patient.general.statutActuel }}</div>
-                        <div class="field"><strong>Niveau d'étude : </strong>{{ patient.general.niveauEtude }}</div>
+                    <div class="column">
+                        <div>
+                            <h3 id="identification">Identification</h3>
+                            <div class="form-space">
+                                <div class="field"><strong>Civilité : </strong>{{ patient.general.civilite }}</div>
+                                <div class="field"><strong>Prénom : </strong>{{ patient.general.prenom }}</div>
+                                <div class="field"><strong>Nom : </strong>{{ patient.general.nom }}</div>
+                                <div class="field"><strong>Nom de naissance : </strong>{{ patient.general.nomNaissance }}</div>
+                                <div class="field"><strong>Date de naissance : </strong>{{ patient.general.dateNaissance is empty ? "" : patient.general.dateNaissance|date("d/m/Y") }}</div>
+                                <div class="field"><strong>Sexe : </strong>{{ patient.general.sexe }}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 id="complement">Complément</h3>
+                            <div class="form-space">
+                                <div class="field"><strong>Professions : </strong>{{ patient.general.profession }}</div>
+                                <div class="field"><strong>Statut actuel : </strong>{{ patient.general.statutActuel }}</div>
+                                <div class="field"><strong>Niveau d'étude : </strong>{{ patient.general.niveauEtude }}</div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 {#========== ANTECEDENT CARDIOVASCULAIRE ==========#}
                 <section class="slide" style="display: block">
                     <h1 id="antecedentCardiovasculaire">Antécédent cardiovasculaire</h1>
-                    <div class="form-space">
-                        <div class="qcm">
-                            <div class="field"><strong>IDM-SCA : </strong>{{ patient.antecedentCardiovasculaire.IDMSCA }}</div>
-                            <div class="field"><strong>Angor stable : </strong>{{ patient.antecedentCardiovasculaire.angorStable }}</div>
-                            <div class="field"><strong>Angioplastie coronaire : </strong>{{ patient.antecedentCardiovasculaire.angioplastieCoronaire }}</div>
-                            <div class="field"><strong>Pontage coronaire : </strong>{{ patient.antecedentCardiovasculaire.pontageCoronaire }}</div>
-                            <div class="field"><strong>AVC : </strong>{{ patient.antecedentCardiovasculaire.AVC }}</div>
-                            <div class="field"><strong>AIT : </strong>{{ patient.antecedentCardiovasculaire.AIT }}</div>
-                            <div class="field"><strong>Endartériectomie carotidienne : </strong>{{ patient.antecedentCardiovasculaire.endarteriectomieCarotidienne }}</div>
-                            <div class="field"><strong>Artérite des membres inférieurs : </strong>{{ patient.antecedentCardiovasculaire.arteriteMembresInferieurs }}</div>
-                            <div class="field"><strong>Angioplastie périphérique : </strong>{{ patient.antecedentCardiovasculaire.angioplastiePeripherique }}</div>
-                            <div class="field"><strong>Pontage périphérique : </strong>{{ patient.antecedentCardiovasculaire.pontagePeripherique }}</div>
-                            <div class="field"><strong>Antécédent de fibrillation auriculaire : </strong>{{ patient.antecedentCardiovasculaire.antecedentFibrillationAuriculaire }}</div>
-                            <div class="field"><strong>Valvulopathie (>grade 2 ou >modérée) : </strong>{{ patient.antecedentCardiovasculaire.valvulopathie }}</div>
-                            <div class="field"><strong>Insuffisance cardiaque stade III ou IV : </strong>{{ patient.antecedentCardiovasculaire.insuffisanceCardiaque }}</div>
-                        </div>
+                    <div class="form-space column">
+                        <div class="field"><strong>IDM-SCA : </strong>{{ patient.antecedentCardiovasculaire.IDMSCA }}</div>
+                        <div class="field"><strong>Angor stable : </strong>{{ patient.antecedentCardiovasculaire.angorStable }}</div>
+                        <div class="field"><strong>Angioplastie coronaire : </strong>{{ patient.antecedentCardiovasculaire.angioplastieCoronaire }}</div>
+                        <div class="field"><strong>Pontage coronaire : </strong>{{ patient.antecedentCardiovasculaire.pontageCoronaire }}</div>
+                        <div class="field"><strong>AVC : </strong>{{ patient.antecedentCardiovasculaire.AVC }}</div>
+                        <div class="field"><strong>AIT : </strong>{{ patient.antecedentCardiovasculaire.AIT }}</div>
+                        <div class="field"><strong>Endartériectomie carotidienne : </strong>{{ patient.antecedentCardiovasculaire.endarteriectomieCarotidienne }}</div>
+                        <div class="field"><strong>Artérite des membres inférieurs : </strong>{{ patient.antecedentCardiovasculaire.arteriteMembresInferieurs }}</div>
+                        <div class="field"><strong>Angioplastie périphérique : </strong>{{ patient.antecedentCardiovasculaire.angioplastiePeripherique }}</div>
+                        <div class="field"><strong>Pontage périphérique : </strong>{{ patient.antecedentCardiovasculaire.pontagePeripherique }}</div>
+                        <div class="field"><strong>Antécédent de fibrillation auriculaire : </strong>{{ patient.antecedentCardiovasculaire.antecedentFibrillationAuriculaire }}</div>
+                        <div class="field"><strong>Valvulopathie (>grade 2 ou >modérée) : </strong>{{ patient.antecedentCardiovasculaire.valvulopathie }}</div>
+                        <div class="field"><strong>Insuffisance cardiaque stade III ou IV : </strong>{{ patient.antecedentCardiovasculaire.insuffisanceCardiaque }}</div>
                     </div>
                 </section>
 
@@ -92,8 +95,8 @@
                         <div class="field"><strong>Sans sus-décalage du segment ST : </strong>{{ patient.information.sansSusDecalage }}</div>
                     </div>
 
+                    <h5>Territoire atteint</h5>
                     <div class="form-space">
-                        <h5>Territoire atteint</h5>
                         <div class="field"><strong>Antérieur : </strong>{{ patient.information.anterieur }}</div>
                         <div class="field"><strong>Septo-apical : </strong>{{ patient.information.septoApical }}</div>
                         <div class="field"><strong>Latéral : </strong>{{ patient.information.lateral }}</div>
@@ -101,8 +104,8 @@
                         <div class="field"><strong>Sans territoire : </strong>{{ patient.information.sansTerritoire }}</div>
                     </div>
 
+                    <h5>Coronarographie (sténose > 50%)</h5>
                     <div class="form-space">
-                        <h5>Coronarographie (sténose > 50%)</h5>
                         <div class="field"><strong>IVA : </strong>{{ patient.information.IVA }}</div>
                         <div class="field"><strong>Diagonale : </strong>{{ patient.information.diagonale }}</div>
                         <div class="field"><strong>Cx : </strong>{{ patient.information.Cx }}</div>
@@ -113,11 +116,13 @@
                     </div>
 
                     <h5>Traitement à la phase aiguë</h5>
-                    <div class="form-space field">
-                        <strong>Traitement : </strong> 
-                        {% for t in patient.information.traitementPhaseAigue %}
-                            {{ t }}{% if loop.last == false %}, {% endif %}
-                        {% endfor %}
+                    <div class="form-space">
+                        <div class="field">
+                            <strong>Traitement : </strong> 
+                            {% for t in patient.information.traitementPhaseAigue %}
+                                {{ t }}{% if loop.last == false %}, {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
 
                     <h5>Complications immédiates</h5>
@@ -192,10 +197,10 @@
                     </div>
 
                     <h5>Tabagisme</h5>
-                    <div class="form-space flex-wrap">
-                        <div class="flex-1 field"><strong>État : </strong>{{ patient.facteur.tabagisme }}</div>
-                        <div class="flex-1 field"><strong>Date d'arrêt : </strong>{{ patient.facteur.dateArret is empty ? "" : patient.facteur.dateArret|date("d/m/Y") }}{{ patient.facteur.dateArret|date("d/m/Y") }}</div>
-                        <div class="flex-1 field"><strong>Nombres de paquets par an : </strong>{{ patient.facteur.nombrePaquetsAn }}</div>
+                    <div class="form-space column">
+                        <div class="field"><strong>État : </strong>{{ patient.facteur.tabagisme }}</div>
+                        <div class="field"><strong>Date d'arrêt : </strong>{{ patient.facteur.dateArret is empty ? "" : patient.facteur.dateArret|date("d/m/Y") }}{{ patient.facteur.dateArret|date("d/m/Y") }}</div>
+                        <div class="field"><strong>Nombres de paquets par an : </strong>{{ patient.facteur.nombrePaquetsAn }}</div>
                     </div>
 
                     <h5>Obésité</h5>
@@ -204,9 +209,9 @@
                     </div>
 
                     <h5>Alcoolisme</h5>
-                    <div class="form-space flex-wrap">
-                        <div class="flex-1 field"><strong>État : </strong>{{ patient.facteur.alcoolisme }}</div>
-                        <div class="flex-1 field"><strong>Sevré : </strong>{{ patient.facteur.sevre }}</div>
+                    <div class="form-space column">
+                        <div class="field"><strong>État : </strong>{{ patient.facteur.alcoolisme }}</div>
+                        <div class="field"><strong>Sevré : </strong>{{ patient.facteur.sevre }}</div>
                     </div>
 
                     <h5>Cannabis</h5>
@@ -343,7 +348,7 @@
                     <section class="slide" style="display: block">
                         <h1 id="bfr">Bilan biologique et risque</h1>
 
-                        <div class="form-space flex-nowrap">
+                        <div class="form-space column">
                             <div class="field"><strong>Taille (en cm): </strong>{{ visite.protocole.BFR.taille }}</div>
                             <div class="field"><strong>Poids (en kg): </strong>{{ visite.protocole.BFR.poids }}</div>
                             <div class="field"><strong>Tour de taille (en cm): </strong>{{ visite.protocole.BFR.tourTaille }}</div>
@@ -353,7 +358,7 @@
                         </div>
 
                         <h3 id="tensionArterielle">Tension artérielle</h3>
-                        <div class="form-space flex-2">
+                        <div class="form-space column">
                             <div class="field"><strong>Systolique jour (en mmHg) : </strong>{{ visite.protocole.BFR.tensionArterielleSystoliqueJour }}</div>
                             <div class="field"><strong>Diastolique jour (en mmHg) : </strong>{{ visite.protocole.BFR.tensionArterielleDiastoliqueJour }}</div>
                             <div class="field"><strong>Systolique nuit (en mmHg) : </strong>{{ visite.protocole.BFR.tensionArterielleSystoliqueNuit }}</div>
@@ -364,7 +369,7 @@
                         </div>
 
                         <h3 id="dyslipidemie">Dyslipidémie</h3>
-                        <div class="form-space flex-2">
+                        <div class="form-space column">
                             <div class="field"><strong>Cholestérol total (en g/L) : </strong>{{ visite.protocole.BFR.cholesterolTotal }}</div>
                             <div class="field"><strong>Triglicérides (en g/L) : </strong>{{ visite.protocole.BFR.triglicerides }}</div>
                             <div class="field"><strong>HDL-C (en g/L) : </strong>{{ visite.protocole.BFR.HDLC }}</div>
@@ -373,16 +378,14 @@
                         </div>
 
                         <h3 id="activite-physique">Tabagisme</h3>
-                        <div class="form-space">
-                            <div class="flex-wrap">
-                                <div class="flex-1 field"><strong>État : </strong>{{ visite.protocole.BFR.tabagisme }}</div>
-                                <div class="flex-1 field"><strong>Date d'arrêt : </strong>{{ visite.protocole.BFR.dateArret }}</div>
-                                <div class="flex-1 field"><strong>Nombres de paquets par an : </strong>{{ visite.protocole.BFR.nombrePaquetsAn }}</div>
-                            </div>
+                        <div class="form-space column">
+                            <div class="field"><strong>État : </strong>{{ visite.protocole.BFR.tabagisme }}</div>
+                            <div class="field"><strong>Date d'arrêt : </strong>{{ visite.protocole.BFR.dateArret }}</div>
+                            <div class="field"><strong>Nombres de paquets par an : </strong>{{ visite.protocole.BFR.nombrePaquetsAn }}</div>
                         </div>
 
                         <h3 id="diabete">Diabète</h3>
-                        <div class="form-space flex-2">
+                        <div class="form-space column">
                             <div class="field"><strong>Type : </strong>{{ visite.protocole.BFR.diabeteType }}</div>
                             <div class="field"><strong>Depuis : </strong>{{ visite.protocole.BFR.diabeteDepuis }}</div>
                             <div class="field"><strong>Glycémie ajeûn : </strong>{{ visite.protocole.BFR.glycemieAjeun }}</div>
@@ -391,14 +394,14 @@
                             <div class="field"><strong>Fond d'oeil : </strong>{{ visite.protocole.BFR.fondOeil }}</div>
                             <div class="field"><strong>Neuropathie clinique (DN4) : </strong>{{ visite.protocole.BFR.neuropathieClinique }}</div>
                         </div>
-                        <div class="form-space flex-nowrap">
+                        <div class="form-space column">
                             <div class="field"><strong>Neuroesthésiométrie pied droit (en volt) : </strong>{{ visite.protocole.BFR.neuroesthesiometriePiedDroit }}</div>
                             <div class="field"><strong>Neuroesthésiométrie pied gauche (en volt) : </strong>{{ visite.protocole.BFR.neuroesthesiometriePiedGauche }}</div>
                         </div>
 
 
                         <h3 id="bilan-renal">Bilan rénal</h3>
-                        <div class="form-space flex-2">
+                        <div class="form-space column">
                             <div class="field"><strong>Créatinine : </strong>{{ visite.protocole.BFR.creatinine }}</div>
                             <div class="field"><strong>Débit de filtration glomerulaire CK-EPI : </strong>{{ visite.protocole.BFR.debitFiltrationGlomerulaire }}</div>
                             <div class="field"><strong>Microalbuminurie : </strong>{{ visite.protocole.BFR.microAlbuminurie }}</div>
@@ -406,14 +409,14 @@
                         </div>
 
                         <h3 id="bilan-hepatique">Bilan hépatique</h3>
-                        <div class="form-space flex-2">
+                        <div class="form-space column">
                             <div class="field"><strong>Transaminases ASAT : </strong>{{ visite.protocole.BFR.transaminasesASAT }}</div>
                             <div class="field"><strong>Transaminases ALAT : </strong>{{ visite.protocole.BFR.transaminasesALAT }}</div>
                             <div class="field"><strong>Gamma GT : </strong>{{ visite.protocole.BFR.gamma }}</div>
                         </div>
 
                         <h3 id="facteur-thrombogeniques">Facteur thrombogéniques</h3>
-                        <div class="form-space flex-2">
+                        <div class="form-space column">
                             <div class="field"><strong>Fibrinogène : </strong>{{ visite.protocole.BFR.fibrinogene }}</div>
                             <div class="field"><strong>CRP : </strong>{{ visite.protocole.BFR.CRP }}</div>
                             <div class="field"><strong>Hémoglobine : </strong>{{ visite.protocole.BFR.hemoglobine }}</div>
@@ -422,7 +425,7 @@
                         </div>
 
                         <h3 id="activite-physique">Thyroïde</h3>
-                        <div class="form-space flex-2">
+                        <div class="form-space column">
                            <div class="field"><strong>TSH : </strong>{{ visite.protocole.BFR.TSH }}</div>
                         </div>
 
@@ -489,45 +492,47 @@
                         <h1 id="bfr">Échographie vasculaire</h1>
                         <h3 id="tsa">Schéma TSA</h3>
                         <div class="form-space schema-tsa">
-                            <div class="field"><strong>Carotide interne droite : </strong>{{ visite.protocole.echographieVasculaire.carotideInterneDroite }}</div>
-                            <div class="field"><strong>Carotide interne gauche : </strong>{{ visite.protocole.echographieVasculaire.carotideInterneGauche }}</div>
-                            <div class="field"><strong>EIM droit : </strong>{{ visite.protocole.echographieVasculaire.EIMDroit }}</div>
-                            <div class="field"><strong>EIM gauche : </strong>{{ visite.protocole.echographieVasculaire.EIMGauche }}</div>
-                            <div class="field"><strong>Vertébrale droite : </strong>{{ visite.protocole.echographieVasculaire.vertebraleDroite }}</div>
-                            <div class="field"><strong>Vertébrale gauche : </strong>{{ visite.protocole.echographieVasculaire.vertebraleGauche }}</div>
-                            <div class="field"><strong>Carotide commune droite : </strong>{{ visite.protocole.echographieVasculaire.carotideCommuneDroite }}</div>
-                            <div class="field"><strong>Carotide commune gauche : </strong>{{ visite.protocole.echographieVasculaire.carotideCommuneGauche }}</div>
-                            <div class="field"><strong>Sous-clavière droite : </strong>{{ visite.protocole.echographieVasculaire.sousClaviereDroite }}</div>
-                            <div class="field"><strong>Sous-clavière gauche : </strong>{{ visite.protocole.echographieVasculaire.sousClaviereGauche }}</div>
-                            <div class="field"><strong>Aorte : </strong>{{ visite.protocole.echographieVasculaire.TSAAorte }}</div>
+                            <img src={{ asset('assets/images/tsa.png') }} alt="Schéma TSA"/>
+                            <div class="field" id="carotideInterneDroite"><strong>Carotide interne droite : </strong>{{ visite.protocole.echographieVasculaire.carotideInterneDroite }}</div>
+                            <div class="field" id="carotideInterneGauche"><strong>Carotide interne gauche : </strong>{{ visite.protocole.echographieVasculaire.carotideInterneGauche }}</div>
+                            <div class="field" id="EIMDroit"><strong>EIM droit : </strong>{{ visite.protocole.echographieVasculaire.EIMDroit }}</div>
+                            <div class="field" id="EIMGauche"><strong>EIM gauche : </strong>{{ visite.protocole.echographieVasculaire.EIMGauche }}</div>
+                            <div class="field" id="vertebraleDroite"><strong>Vertébrale droite : </strong>{{ visite.protocole.echographieVasculaire.vertebraleDroite }}</div>
+                            <div class="field" id="vertebraleGauche"><strong>Vertébrale gauche : </strong>{{ visite.protocole.echographieVasculaire.vertebraleGauche }}</div>
+                            <div class="field" id="carotideCommuneDroite"><strong>Carotide commune droite : </strong>{{ visite.protocole.echographieVasculaire.carotideCommuneDroite }}</div>
+                            <div class="field" id="carotideCommuneGauche"><strong>Carotide commune gauche : </strong>{{ visite.protocole.echographieVasculaire.carotideCommuneGauche }}</div>
+                            <div class="field" id="sousClaviereDroite"><strong>Sous-clavière droite : </strong>{{ visite.protocole.echographieVasculaire.sousClaviereDroite }}</div>
+                            <div class="field" id="sousClaviereGauche"><strong>Sous-clavière gauche : </strong>{{ visite.protocole.echographieVasculaire.sousClaviereGauche }}</div>
+                            <div class="field" id="TSAAorte"><strong>Aorte : </strong>{{ visite.protocole.echographieVasculaire.TSAAorte }}</div>
 
-                            <div class="field"><strong>Volume carotide droite : </strong>{{ visite.protocole.echographieVasculaire.volumeCarotideDroite }}</div>
-                            <div class="field"><strong>Volume carotide gauche : </strong>{{ visite.protocole.echographieVasculaire.volumeCarotideGauche }}</div>
-                            <div class="field"><strong>Charge en athérome totale : </strong>{{ visite.protocole.echographieVasculaire.chargeAtheromeTotale }}</div>
+                            <div class="field" id="volumeCarotideDroite"><strong>Volume carotide droite : </strong>{{ visite.protocole.echographieVasculaire.volumeCarotideDroite }}</div>
+                            <div class="field" id="volumeCarotideGauche"><strong>Volume carotide gauche : </strong>{{ visite.protocole.echographieVasculaire.volumeCarotideGauche }}</div>
+                            <div class="field" id="chargeAtheromeTotale"><strong>Charge en athérome totale : </strong>{{ visite.protocole.echographieVasculaire.chargeAtheromeTotale }}</div>
                         </div>
 
                         <h3 id="membres-inferieur">Schéma membres inférieur</h3>
                         <div class="form-space schema-membres-inferieur">
-                            <div class="field"><strong>Diamètre aorte : </strong>{{ visite.protocole.echographieVasculaire.membresInferieurAorte }}</div>
-                            <div class="field"><strong>Iliaque droite : </strong>{{ visite.protocole.echographieVasculaire.iliaqueDroite }}</div>
-                            <div class="field"><strong>Iliaque gauche : </strong>{{ visite.protocole.echographieVasculaire.iliaqueGauche }}</div>
-                            <div class="field"><strong>Fémorale commune droite : </strong>{{ visite.protocole.echographieVasculaire.femoraleCommuneDroite }}</div>
-                            <div class="field"><strong>Fémorale commune gauche : </strong>{{ visite.protocole.echographieVasculaire.femoraleCommuneGauche }}</div>
-                            <div class="field"><strong>Fémorale superficielle droite : </strong>{{ visite.protocole.echographieVasculaire.femoraleSuperficielleDroite }}</div>
-                            <div class="field"><strong>Fémorale superficielle gauche : </strong>{{ visite.protocole.echographieVasculaire.femoraleSuperficielleGauche }}</div>
-                            <div class="field"><strong>Poplite droite : </strong>{{ visite.protocole.echographieVasculaire.popliteDroite }}</div>
-                            <div class="field"><strong>Poplite gauche : </strong>{{ visite.protocole.echographieVasculaire.popliteGauche }}</div>
-                            <div class="field"><strong>Axes jambiers droits : </strong>{{ visite.protocole.echographieVasculaire.axesJambiersDroits }}</div>
-                            <div class="field"><strong>Axes jambiers gauches : </strong>{{ visite.protocole.echographieVasculaire.axesJambiersGauches }}</div>
+                            <img src={{ asset('assets/images/membres_inferieur.jpg') }} alt="Schéma membres inférieur"/>
+                            <div class="field" id="membresInferieurAorte"><strong>Diamètre aorte : </strong>{{ visite.protocole.echographieVasculaire.membresInferieurAorte }}</div>
+                            <div class="field" id="iliaqueDroite"><strong>Iliaque droite : </strong>{{ visite.protocole.echographieVasculaire.iliaqueDroite }}</div>
+                            <div class="field" id="iliaqueGauche"><strong>Iliaque gauche : </strong>{{ visite.protocole.echographieVasculaire.iliaqueGauche }}</div>
+                            <div class="field" id="femoraleCommuneDroite"><strong>Fémorale commune droite : </strong>{{ visite.protocole.echographieVasculaire.femoraleCommuneDroite }}</div>
+                            <div class="field" id="femoraleCommuneGauche"><strong>Fémorale commune gauche : </strong>{{ visite.protocole.echographieVasculaire.femoraleCommuneGauche }}</div>
+                            <div class="field" id="femoraleSuperficielleDroite"><strong>Fémorale superficielle droite : </strong>{{ visite.protocole.echographieVasculaire.femoraleSuperficielleDroite }}</div>
+                            <div class="field" id="femoraleSuperficielleGauche"><strong>Fémorale superficielle gauche : </strong>{{ visite.protocole.echographieVasculaire.femoraleSuperficielleGauche }}</div>
+                            <div class="field" id="popliteDroite"><strong>Poplite droite : </strong>{{ visite.protocole.echographieVasculaire.popliteDroite }}</div>
+                            <div class="field" id="popliteGauche"><strong>Poplite gauche : </strong>{{ visite.protocole.echographieVasculaire.popliteGauche }}</div>
+                            <div class="field" id="axesJambiersDroits"><strong>Axes jambiers droits : </strong>{{ visite.protocole.echographieVasculaire.axesJambiersDroits }}</div>
+                            <div class="field" id="axesJambiersGauches"><strong>Axes jambiers gauches : </strong>{{ visite.protocole.echographieVasculaire.axesJambiersGauches }}</div>
                         </div>
 
                         <div class="form-space">
-                            <div class="flex-nowrap">
+                            <div class="column">
                                 <div class="field"><strong>IPS repos droit : </strong>{{ visite.protocole.echographieVasculaire.IPSReposDroit }}</div>
                                 <div class="field"><strong>IPS repos gauche : </strong>{{ visite.protocole.echographieVasculaire.IPSReposGauche }}</div>
                             </div>
 
-                            <div class="flex-nowrap">
+                            <div class="column">
                                 <div class="field"><strong>IPS repos gros orteil droit : </strong>{{ visite.protocole.echographieVasculaire.IPSGrosOrteilDroit }}</div>
                                 <div class="field"><strong>IPS repos gros orteil gauche : </strong>{{ visite.protocole.echographieVasculaire.IPSGrosOrteilGauche }}</div>
                             </div>
@@ -537,16 +542,16 @@
                                 <div class="field"><strong>Test de Strandness: distance max * : </strong>{{ visite.protocole.echographieVasculaire.testStrandnessDistanceMax }}</div>
                                 <div class="def">* compris entre 0 et 1000, 9999 si non réalisé</div>
                             </div>
-                            <div class="form-space flex-2">
+                            <div class="form-space">
                                 <div class="field"><strong>Arrêt pour : </strong>{{ visite.protocole.echographieVasculaire.arretPour }}</div>
                             </div>
 
-                            <div class="flex-nowrap">
+                            <div class="column">
                                 <div class="field"><strong>IPS effort droit : </strong>{{ visite.protocole.echographieVasculaire.IPSEffortDroit }}</div>
                                 <div class="field"><strong>IPS effort gauche : </strong>{{ visite.protocole.echographieVasculaire.IPSEffortGauche }}</div>
                             </div>
 
-                            <div class="form-space flex-2">
+                            <div class="form-space column">
                                 <div class="field"><strong>Vélocité de l'onde pouls : </strong>{{ visite.protocole.echographieVasculaire.vitesseOndePouls }}</div>
                             </div>
                         </div>
@@ -576,24 +581,23 @@
                     {#========== NeuroPsychologie ==========#}
                     <section class="slide" style="display: block">
                         <h1 id="bfr">Neuro-psychologie</h1>
-                        <div class="form-space">
-                            <div class="field"><strong>Rankin* : </strong>{{ visite.protocole.neuroPsychologie.rankin }}</div>
+                        <div class="field"><strong>Rankin* : </strong>{{ visite.protocole.neuroPsychologie.rankin }}</div>
+                        <div class="form-space column">
+                            <div class="field"><strong>MMSE* : </strong>{{ visite.protocole.neuroPsychologie.MMSE }}</div>
+                            <div class="field"><strong>MOCA* : </strong>{{ visite.protocole.neuroPsychologie.MOCA }}</div>
+                        </div>
 
-                            <div class="flex-nowrap">
-                                <div class="field"><strong>MMSE* : </strong>{{ visite.protocole.neuroPsychologie.MMSE }}</div>
-                                <div class="field"><strong>MOCA* : </strong>{{ visite.protocole.neuroPsychologie.MOCA }}</div>
-                            </div>
-                            <div class="flex-nowrap">
-                                <div class="field"><strong>HAD anxiété* : </strong>{{ visite.protocole.neuroPsychologie.HADAnxiete }}</div>
-                                <div class="field"><strong>HAD dépression* : </strong>{{ visite.protocole.neuroPsychologie.HADDepression }}</div>
-                            </div>
-
+                        <div class="form-space column">
+                            <div class="field"><strong>HAD anxiété* : </strong>{{ visite.protocole.neuroPsychologie.HADAnxiete }}</div>
+                            <div class="field"><strong>HAD dépression* : </strong>{{ visite.protocole.neuroPsychologie.HADDepression }}</div>
                             <div class="def">* compris entre 0 et 1000, 9999 si non réalisé</div>	
+                        </div>
 
+                        <div class="form-space">
                             <div class="field"><strong>Barrière langue : </strong>{{ visite.protocole.neuroPsychologie.barriereLangue }}</div>
                             <div class="field"><strong>Niveau socio-éducatif : </strong>{{ visite.protocole.neuroPsychologie.niveauSocioEducatif }}</div>
                             <div class="field"><strong>Aphasie : </strong>{{ visite.protocole.neuroPsychologie.aphasie }}</div>
-                           <div class="field"><strong>Difficultés mouvement fin : </strong> {{ visite.protocole.neuroPsychologie.difficultesMouvementFin }}</div>
+                            <div class="field"><strong>Difficultés mouvement fin : </strong> {{ visite.protocole.neuroPsychologie.difficultesMouvementFin }}</div>
                         </div>
                     </section>
 
@@ -689,39 +693,39 @@
                                 {% endfor %}
                                 <div class="alimentation"></div>
                             </div>
-
-                            <div class="qcm">
-                                {% for qcm in visite.protocole.suivi.facteurs %}
-                                    <div><strong>{{constants_labels["SUIVI_FACTEUR"][ loop.index0 ]}} : </strong>{{ qcm.response }}</div>
-                                {% endfor %}
-                            </div>
+                        </div>
+                        <div class="form-space column">
+                            {% for qcm in visite.protocole.suivi.facteurs %}
+                                <div class="field"><strong>{{constants_labels["SUIVI_FACTEUR"][ loop.index0 ]}} : </strong>{{ qcm.response }}</div>
+                            {% endfor %}
                         </div>
 
                         <h3 id="place">Traitement mis en place suite à l'évènement cardiovasculaire</h3>
-                        <div class="form-space">
-                            <div class="qcm">
-                                {% for qcm in visite.protocole.suivi.traitement %}
-                                    <div><strong>{{constants_labels["SUIVI_TRAITEMENT"][ loop.index0 ]}} : </strong>{{ qcm.response }}</div>
-                                {% endfor %}
-                            </div>
+                        <div class="form-space column">
+                            {% for qcm in visite.protocole.suivi.traitement %}
+                                <div class="field"><strong>{{constants_labels["SUIVI_TRAITEMENT"][ loop.index0 ]}} : </strong>{{ qcm.response }}</div>
+                            {% endfor %}
                         </div>
 
-                        <h3 id="biologie2">Biologie</h3>
+                        <h3 id="biologie">Biologie</h3>
                         <div class="form-space">
                             <div class="field"><strong>Débit de filtration glomerulaire CK-EPI : </strong>{{ visite.protocole.suivi.debitFiltrationGlomerulaire }}</div>
                         </div>
+                        
+                        <h5>Inflammation</h5>
                         <div class="form-space">
-                            <h5>Inflammation</h5>
                             <div class="field"><strong>CRP ultra-sensible : </strong>{{ visite.protocole.suivi.crp }}</div>
                         </div>
+
+                        <h5>Bilan lipidique</h5>
                         <div class="form-space">
-                            <h5>Bilan lipidique</h5>
                             <div class="field"><strong>Triglycérides : </strong>{{ visite.protocole.suivi.triglycerides }}</div>
                             <div class="field"><strong>LDL-c : </strong>{{ visite.protocole.suivi.ldl }}</div>
                             <div class="field"><strong>HDL-c : </strong>{{ visite.protocole.suivi.hdl }}</div>
                         </div>
-                        <div>
-                            <h5>HbA1c</h5>
+                        
+                        <h5>HbA1c</h5>
+                        <div class="form-space">
                             <div class="field"><strong>HbA1c : </strong>{{ visite.protocole.suivi.hba1c }}</div>
                         </div>
                     </section>
@@ -729,25 +733,19 @@
                     {#========== Test d'effort ==========#}
                     <section class="slide" style="display: block">
                         <h1 id="bfr">Test d'effort</h1>
-                        <div class="form-space">
-                            <div class="flex-nowrap">
-                                <div class="field"><strong>Maquillé : </strong>{{ visite.protocole.testEffort.maquille }}</div>
-                                <div class="field"><strong>Type : </strong>{{ visite.protocole.testEffort.type }}</div>
-                            </div>
+                        <div class="form-space column">
+                            <div class="field"><strong>Maquillé : </strong>{{ visite.protocole.testEffort.maquille }}</div>
+                            <div class="field"><strong>Type : </strong>{{ visite.protocole.testEffort.type }}</div>
                         </div>
                         <div class="form-space">
                             <div class="field"><strong>Durée totale (en min) : </strong>{{ visite.protocole.testEffort.duree }}</div>
                             <div class="field"><strong>Watts : </strong>{{ visite.protocole.testEffort.watts }}</div>
                         </div>
-                        <div class="form-space">
-                            <div class="flex-nowrap">
-                                <div class="field"><strong>Symptomes : </strong>{{ visite.protocole.testEffort.symptomes }}</div>
-                                <div class="field"><strong>% de la fréq. max : </strong>{{ visite.protocole.testEffort.frequenceMaxPercent }}</div>
-                            </div>
-                            <div class="flex-nowrap">
-                                <div class="field"><strong>ECG modifié : </strong>{{ visite.protocole.testEffort.ECGModifie }}</div>
-                                <div class="field"><strong>Mesure : </strong>{{ visite.protocole.testEffort.mesure }}</div>
-                            </div>
+                        <div class="form-space column">
+                            <div class="field"><strong>Symptomes : </strong>{{ visite.protocole.testEffort.symptomes }}</div>
+                            <div class="field"><strong>% de la fréq. max : </strong>{{ visite.protocole.testEffort.frequenceMaxPercent }}</div>
+                            <div class="field"><strong>ECG modifié : </strong>{{ visite.protocole.testEffort.ECGModifie }}</div>
+                            <div class="field"><strong>Mesure : </strong>{{ visite.protocole.testEffort.mesure }}</div>
                         </div>
                     </section>
 
@@ -790,6 +788,7 @@
         }
 
         function clean() {
+            //remove empty field
             $.each($('.letter__content .field'), function(i, elem) {
                 let length = elem.childNodes.length
                 $.each(elem.childNodes, function(j, node) {
@@ -798,10 +797,33 @@
                 });
                 if (length <= 1) elem.remove();
             });
+
+            $.each($('.letter__content .form-space'), function(i, elem) {
+                if ($(elem).children().length == 0) elem.remove();
+                if ($(elem).children().length == 1 && $(elem).has('.def').length) elem.remove();
+            });
+
+            $.each($('.letter__content h5'), function(i, elem) {
+                if ($(elem).nextUntil('h5').length == 0
+                    || $(elem).nextUntil('h3').length == 0
+                    || $(elem).nextUntil('section').length == 0) elem.remove();
+            });
+
+            $.each($('.letter__content h3'), function(i, elem) {
+                if ($(elem).nextUntil('h3').length == 0 || $(elem).nextUntil('section').length == 0) elem.remove();
+            });
+
+            $.each($('.letter__content h2'), function(i, elem) {
+                if ($(elem).nextUntil('h2').length == 0 || $(elem).nextUntil('section').length == 0) elem.remove();
+            });
+
+            $.each($('.letter__content h1'), function(i, elem) {
+                if ($(elem).nextUntil('h1').length == 0 || $(elem).nextUntil('section').length == 0) elem.remove();
+            });
         }
 
-        // cleanTable();
-        // clean();
+        cleanTable();
+        clean();
 
         /*
         * HTML TO PDF
@@ -821,7 +843,7 @@
                 format: 'a4'
             });
 
-            $('.letter__content').css("font-family", "sans-serif")
+            $('.letter__content').css("font-family", "Arial, sans-serif")
 
             let srcwidth = document.getElementById('print').scrollWidth;
             let date = new Date().
@@ -832,12 +854,12 @@
                 .html(input, {
                     callback: function (pdf) {
                         pdf.save("Horus_{{patient.general.nom}}-{{patient.general.prenom}}_" + date + ".pdf");
-                        $('.letter__content').css("Ubuntu-Regular, sans-serif", "sans-serif")
+                        $('.letter__content').css("font-family", "Ubuntu-Regular, sans-serif");
                     },
-                    margin: [25, 25, 25, 25],
+                    margin: [15, 15, 15, 15],
                     autoPaging: 'text',
                     html2canvas: {
-                        scale: 595.26 / srcwidth, //595.26 is the width of A4 page
+                        scale: (595.26 - 30) / srcwidth, //595.26 is the width of A4 page
                         scrollY: 0,
                     }
                 })
@@ -849,10 +871,10 @@
                     //loop to set header/ footer, style, alignment, text style to the page
                     for (let i = 1; i <= pageCount; i++) {
                         pdf.rect(
-                            25,
-                            25,
-                            pdf.internal.pageSize.width - 150,
-                            pdf.internal.pageSize.height - 50,
+                            0,
+                            0,
+                            pdf.internal.pageSize.width,
+                            pdf.internal.pageSize.height,
                             'S',
                         );
                         pdf.setPage(i);

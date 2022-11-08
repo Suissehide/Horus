@@ -1,7 +1,7 @@
 <h1 id="antecedentCardiovasculaire">Antécédent cardiovasculaire</h1>
 
 <div class="form-space">
-	<div class="qcm">
+	<div class="column">
 		{{ form_widget(form.antecedentCardiovasculaire.IDM_SCA, {'attr': {'class': 'input radio-row'} }) }}
 		{{ form_widget(form.antecedentCardiovasculaire.angorStable, {'attr': {'class': 'input radio-row'} }) }}
 		{{ form_widget(form.antecedentCardiovasculaire.angioplastieCoronaire, {'attr': {'class': 'input radio-row'} }) }}
@@ -18,4 +18,4 @@
 	</div>
 </div>
 
-{{ form_row(form.antecedentCardiovasculaire.save, {'attr': {'class': 'form-btn'} }) }}
+{{ form_row(form.antecedentCardiovasculaire.save, {'attr': {'class': 'form-btn btn-save'} }) }}

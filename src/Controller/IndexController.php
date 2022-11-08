@@ -33,10 +33,10 @@ class IndexController extends AbstractController
     public function list(Request $request, PatientRepository $patientRepository): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $current = $request->request->get('current');
-            $rowCount = $request->request->get('rowCount');
-            $searchPhrase = $request->request->get('searchPhrase');
-            $sort = $request->request->get('sort');
+            $current = $request->get('current');
+            $rowCount = $request->get('rowCount');
+            $searchPhrase = $request->get('searchPhrase');
+            $sort = $request->get('sort');
 
             $patients = $patientRepository->findByFilter($sort, $searchPhrase);
             
@@ -81,7 +81,7 @@ class IndexController extends AbstractController
         $conn = $this->managerRegistry->getConnection();
 
         if ($request->isXmlHttpRequest()) {
-            $id = $request->request->get('id');
+            $id = $request->get('id');
             $patient = $this->managerRegistry->getRepository(Patient::class)->find($id);
 
             $RAW_QUERY = 'SELECT f.field_id
@@ -109,7 +109,6 @@ class IndexController extends AbstractController
                 else if (!$this->array_searchRecursive(null, $item)) {
                     array_push($arr, '{"state": "completed", "number": "&nbsp;"}');
                 } else {
-                    // array_push($arr, '{"state": "unfinished", "number": "' . $i . '"}');
                     array_push($arr, '{"state": "unfinished", "number": "&nbsp;"}');
                 }
                 $iter += 1;
@@ -123,7 +122,7 @@ class IndexController extends AbstractController
     private function isError($iter, $errors)
     {
         $err = 0;
-        $list = ['verification', 'general', 'cardiovasculaire', 'information', 'donnee', 'deces'];
+        $list = ['general', 'facteur', 'information', 'antecedentCardiovasculaire', 'visite'];
         foreach ($errors as $error) {
             if (explode('_', $error['field_id'])[0] == $list[$iter]) {
                 $err++;

@@ -40,10 +40,10 @@ class UserController extends AbstractController
     public function roles_edit(UserRepository $userRepository, Request $request, AuthorizationCheckerInterface $authChecker): JsonResponse
     {
         if ($request->isXmlHttpRequest() && true === $authChecker->isGranted('ROLE_ADMIN')) {
-            $email = $request->request->get('email');
-            $nom = $request->request->get('nom');
-            $prenom = $request->request->get('prenom');
-            $roles = $request->request->get('roles');
+            $email = $request->get('email');
+            $nom = $request->get('nom');
+            $prenom = $request->get('prenom');
+            $roles = $request->get('roles');
 
             $user = $userRepository->findOneBy(['email' => $email]);
             if ($user) {
@@ -65,11 +65,11 @@ class UserController extends AbstractController
     public function list(UserRepository $UserRepository, Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $current = $request->request->get('current');
-            $rowCount = $request->request->get('rowCount');
-            $searchPhrase = $request->request->get('searchPhrase');
-            $sort = $request->request->get('sort');
-            $roles = $request->request->all()['roles'];
+            $current = $request->get('current');
+            $rowCount = $request->get('rowCount');
+            $searchPhrase = $request->get('searchPhrase');
+            $sort = $request->get('sort');
+            $roles = $request->get('roles');
 
             $Users = $UserRepository->findByFilter($sort, $searchPhrase, $roles);
             if ($searchPhrase != "" || !empty($roles))
@@ -138,7 +138,7 @@ class UserController extends AbstractController
         $psw = $this->createForm(PasswordFormType::class, $user);
         $psw->handleRequest($request);
         if ($psw->isSubmitted() && $psw->isValid()) {
-            $oldPassword = $request->request->get('password_form')['oldPassword'];
+            $oldPassword = $request->get('password_form')['oldPassword'];
             if ($psw->get('edit')->isClicked() && $this->passwordHasher->isPasswordValid($user, $oldPassword)) {
                 $user = $form->getData();
                 $password = $this->passwordHasher->hashPassword($user, $user->get('plainPassword')->getData());
@@ -182,7 +182,7 @@ class UserController extends AbstractController
     public function getByEmail(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $email = $request->request->get('email');
+            $email = $request->get('email');
             $user = $this->em->getRepository(User::class)->findOneBy(['email' => $email]);
             return new JsonResponse($user->getId());
         }

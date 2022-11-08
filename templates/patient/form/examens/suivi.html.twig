@@ -19,7 +19,7 @@
 	{{ form_row(form.protocole.suivi.alimentation, {'attr': {'class': 'input radio-row alimentation-js'} }) }}
 	<div class="alimentation"></div>
 
-	<div class="qcm">
+	<div class="column">
 		{% for qcm in form.protocole.suivi.facteurs %}
 			<div class="qcm-row">
 				<div class="qcm-question">
@@ -37,7 +37,7 @@
 
 <h3 id="place">Traitement mis en place suite à l'évènement cardiovasculaire</h3>
 <div class="form-space">
-	<div class="qcm">
+	<div class="column">
 		{% for qcm in form.protocole.suivi.traitement %}
 			<div class="qcm-row">
 				<div class="qcm-question">
@@ -53,19 +53,24 @@
 	</div>
 </div>
 
-<h3 id="biologie2">Biologie</h3>
-<div class="form-space">
-	{{ form_row(form.protocole.suivi.debitFiltrationGlomerulaire, {'attr': {'class': 'input'} }) }}
-	<h5>Inflammation</h5>
-	{{ form_row(form.protocole.suivi.crp, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+<h3 id="biologie">Biologie</h3>
+{{ form_row(form.protocole.suivi.debitFiltrationGlomerulaire, {'attr': {'class': 'input'} }) }}
 
-	<h5>Bilan lipidique</h5>
+<h5>Inflammation</h5>
+<div class="form-space">
+	{{ form_row(form.protocole.suivi.crp, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+</div>
+
+<h5>Bilan lipidique</h5>
+<div class="form-space">
 	{{ form_row(form.protocole.suivi.triglycerides, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	{{ form_row(form.protocole.suivi.ldl, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	{{ form_row(form.protocole.suivi.hdl, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+</div>
 
-	<h5>HbA1c</h5>
+<h5>HbA1c</h5>
+<div class="form-space">
 	{{ form_row(form.protocole.suivi.hba1c, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 </div>
 
-{{ form_row(form.protocole.suivi.save, {'attr': {'class': 'form-btn'} }) }}
+{{ form_row(form.protocole.suivi.save, {'attr': {'class': 'form-btn btn-save'} }) }}

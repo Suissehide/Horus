@@ -1,6 +1,6 @@
 <h1 id="testsEffort">Épreuve d'effort</h1>
 <div class="form-space">
-	<div class="flex-nowrap">
+	<div class="column">
 		{{ form_row(form.protocole.testEffort.maquille, {'attr': {'class': 'input radio-row'} }) }}
 		{{ form_row(form.protocole.testEffort.type, {'attr': {'class': 'input radio-row'} }) }}
 	</div>
@@ -12,14 +12,14 @@
 
 	<div class="separator-space"></div>
 
-	<div class="flex-nowrap">
+	<div class="column">
 		{{ form_row(form.protocole.testEffort.symptomes, {'attr': {'class': 'input'} }) }}
 		{{ form_row(form.protocole.testEffort.frequenceMaxPercent, {'attr': {'class': 'input'} }) }}
 	</div>
-	<div class="flex-nowrap">
+	<div class="column">
 		{{ form_row(form.protocole.testEffort.ECGModifie, {'attr': {'class': 'input'} }) }}
 		{{ form_row(form.protocole.testEffort.mesure, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	</div>
 </div>
 
-{{ form_row(form.protocole.testEffort.save, {'attr': {'class': 'form-btn'} }) }}
+{{ form_row(form.protocole.testEffort.save, {'attr': {'class': 'form-btn btn-save'} }) }}

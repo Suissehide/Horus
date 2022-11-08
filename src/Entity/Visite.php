@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\VisiteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: VisiteRepository::class)]
 class Visite
@@ -15,12 +16,14 @@ class Visite
     private $id;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Groups(['export', 'advancement'])]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\ManyToOne(targetEntity: Patient::class, inversedBy: 'visites', cascade: ['persist'])]
     private $patient;
 
     #[ORM\ManyToOne(targetEntity: Protocole::class, inversedBy: 'visites', cascade: ['persist', 'remove'])]
+    #[Groups(['export', 'advancement'])]
     private $protocole;
 
     public function getId(): ?int

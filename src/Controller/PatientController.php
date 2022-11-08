@@ -80,11 +80,11 @@ class PatientController extends AbstractController
     public function patient_history(ErreurRepository $erreurRepository, Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $current = $request->request->get('current');
-            $rowCount = $request->request->get('rowCount');
-            $searchPhrase = $request->request->get('searchPhrase');
-            $sort = $request->request->get('sort');
-            $patientId = $request->request->get('patientId');
+            $current = $request->get('current');
+            $rowCount = $request->get('rowCount');
+            $searchPhrase = $request->get('searchPhrase');
+            $sort = $request->get('sort');
+            $patientId = $request->get('patientId');
 
             $erreurs = $erreurRepository->findHistory($sort, $searchPhrase, $patientId);
             if ($searchPhrase != "") {
@@ -312,9 +312,9 @@ class PatientController extends AbstractController
     public function erreur_add_info(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            $patientId = $request->request->get('patientId');
-            $fieldId = $request->request->get('fieldId');
-            $message = $request->request->get('message');
+            $patientId = $request->get('patientId');
+            $fieldId = $request->get('fieldId');
+            $message = $request->get('message');
             if ($message === '') {
                 return new JsonResponse('Error: Empty message');
             }
@@ -358,7 +358,7 @@ class PatientController extends AbstractController
     #[Route(path: '/patient/delete/{id}', name: 'patient_delete', methods: ['POST', 'DELETE'])]
     public function patient_delete(Request $request, Patient $patient): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $patient->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $patient->getId(), $request->get('_token'))) {
             $this->em->remove($patient);
             $this->em->flush();
 
@@ -372,8 +372,8 @@ class PatientController extends AbstractController
     public function medicament_entree_add(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $protocoleId = $request->request->get('protocoleId');
-            $medicamentId = $request->request->get('medicamentId');
+            $protocoleId = $request->get('protocoleId');
+            $medicamentId = $request->get('medicamentId');
 
             $protocole = $this->managerRegistry->getRepository(Protocole::class)->find($protocoleId);
             $medicament = $this->managerRegistry->getRepository(Medicament::class)->find($medicamentId);
@@ -389,8 +389,8 @@ class PatientController extends AbstractController
     public function medicament_entree_delete(Request $request): Response
     {
         if ($request->isXmlHttpRequest()) {
-            $protocoleId = $request->request->get('protocoleId');
-            $medicamentId = $request->request->get('medicamentId');
+            $protocoleId = $request->get('protocoleId');
+            $medicamentId = $request->get('medicamentId');
 
             $protocole = $this->managerRegistry->getRepository(Protocole::class)->find($protocoleId);
             $medicament = $this->managerRegistry->getRepository(Medicament::class)->find($medicamentId);

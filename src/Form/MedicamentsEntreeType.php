@@ -185,7 +185,7 @@ class MedicamentsEntreeType extends AbstractType
             //     'by_reference' => false,
             // ])
         
-            ->add('save', SubmitType::class, array('label' => 'Sauvegarder'))
+            ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
         ;
     }
 
