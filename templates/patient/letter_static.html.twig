@@ -380,7 +380,7 @@
                         <h3 id="activite-physique">Tabagisme</h3>
                         <div class="form-space column">
                             <div class="field"><strong>État : </strong>{{ visite.protocole.BFR.tabagisme }}</div>
-                            <div class="field"><strong>Date d'arrêt : </strong>{{ visite.protocole.BFR.dateArret }}</div>
+                            <div class="field"><strong>Date d'arrêt : </strong>{{ visite.protocole.BFR.dateArret is empty ? "" : visite.protocole.BFR.dateArret }}</div>
                             <div class="field"><strong>Nombres de paquets par an : </strong>{{ visite.protocole.BFR.nombrePaquetsAn }}</div>
                         </div>
 
