@@ -199,7 +199,7 @@
                     <h5>Tabagisme</h5>
                     <div class="form-space column">
                         <div class="field"><strong>État : </strong>{{ patient.facteur.tabagisme }}</div>
-                        <div class="field"><strong>Date d'arrêt : </strong>{{ patient.facteur.dateArret is empty ? "" : patient.facteur.dateArret|date("d/m/Y") }}{{ patient.facteur.dateArret|date("d/m/Y") }}</div>
+                        <div class="field"><strong>Date d'arrêt : </strong>{{ patient.facteur.dateArret is empty ? "" : patient.facteur.dateArret|date("d/m/Y") }}</div>
                         <div class="field"><strong>Nombres de paquets par an : </strong>{{ patient.facteur.nombrePaquetsAn }}</div>
                     </div>
 
@@ -380,7 +380,7 @@
                         <h3 id="activite-physique">Tabagisme</h3>
                         <div class="form-space column">
                             <div class="field"><strong>État : </strong>{{ visite.protocole.BFR.tabagisme }}</div>
-                            <div class="field"><strong>Date d'arrêt : </strong>{{ visite.protocole.BFR.dateArret is empty ? "" : visite.protocole.BFR.dateArret }}</div>
+                            <div class="field"><strong>Date d'arrêt : </strong>{{ visite.protocole.BFR.dateArret is empty ? "" : visite.protocole.BFR.dateArret|date("d/m/Y") }}</div>
                             <div class="field"><strong>Nombres de paquets par an : </strong>{{ visite.protocole.BFR.nombrePaquetsAn }}</div>
                         </div>
 
