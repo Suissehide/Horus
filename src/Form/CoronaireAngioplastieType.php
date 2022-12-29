@@ -435,17 +435,14 @@ class CoronaireAngioplastieType extends AbstractType
                 'required' => false,
             ))
 
-            ->add('scoreCalciqueCoronaire', ChoiceType::class, array(
+            ->add('scoreCalciqueCoronaire', IntegerType::class, array(
                 'label' => ' ',
-                'choices' => array(
-                    '< 10' => '< 10',
-                    '11 - 99' => '11 - 99',
-                    '100 - 399' => '100 - 399',
-                    '> 400' => '> 400',
-                    '> 1000' => '> 1000',
-                    'Pas de données' => 'Pas de données'
+                'attr' => array(
+                    'unity' => '',
+                    'data-min' => 0,
+                    'data-max' => 3000
                 ),
-                'required' => false
+                'required' => false,
             ))
 
             ->add('nonAnalysable', ChoiceType::class, array(

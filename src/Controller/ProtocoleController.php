@@ -25,7 +25,6 @@ class ProtocoleController extends AbstractController
             $protocoleId = $request->get('protocoleId');
 
             $protocole = $em->getRepository(Protocole::class)->find($protocoleId);
-            dump($protocole);
             $fiches = $protocole->getFiches();
             array_push($fiches, $fiche);
             $protocole->setFiches($fiches);

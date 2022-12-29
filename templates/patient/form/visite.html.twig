@@ -1,14 +1,14 @@
+<h1 id="visite">Visite {{index}}</h1>
+
+<div class="form-space">
+	{{ form_row(visite.date, {'attr': {'class': 'input js-datepicker'} }) }}
+</div>
+
 <div class="flex-visite">
-	<h1 id="visite">Visite {{index}}</h1>
+	{{ form_row(visite.save, {'attr': {'class': 'form-btn btn-save'} }) }}
 
 	<button type="button" class="form-btn btn-danger visite-delete" data-visite-id="{{visite.vars.data.id}}">
 		<i class="fa fa-trash"></i>
 		Supprimer la visite
 	</button>
 </div>
-
-<div class="form-space">
-	{{ form_row(visite.date, {'attr': {'class': 'input js-datepicker'} }) }}
-</div>
-
-{{ form_row(visite.save, {'attr': {'class': 'form-btn btn-save'} }) }}

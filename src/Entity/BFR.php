@@ -83,9 +83,6 @@ class BFR
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $glycemieAjeun;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
-    private $glycemiePostPrandiale;
-
     #[ORM\Column(type: 'integer', nullable: true)]
     private $Hba1c;
 
@@ -351,18 +348,6 @@ class BFR
     public function setGlycemieAjeun(?string $glycemieAjeun): self
     {
         $this->glycemieAjeun = $glycemieAjeun;
-
-        return $this;
-    }
-
-    public function getGlycemiePostPrandiale(): ?string
-    {
-        return $this->glycemiePostPrandiale;
-    }
-
-    public function setGlycemiePostPrandiale(?string $glycemiePostPrandiale): self
-    {
-        $this->glycemiePostPrandiale = $glycemiePostPrandiale;
 
         return $this;
     }

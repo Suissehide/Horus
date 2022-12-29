@@ -36,8 +36,8 @@
     --dark-goldenrod-active: #9A7109;
     --lemon-curry: #CD9B1D;
     --blue-green: #2493B4;
-    --blue-green-hover: #1E7D99;
-    --blue-green-active: #186177;
+    --blue-green-hover: #186177;
+    --blue-green-active: #1E7D99;
     --blue-pantone: #001CB3;
     --persian-indigo: #280067;
     --rich-black-light: #333333;
@@ -46,6 +46,7 @@
     --alabaster: #E9EBDE;
     --gray: #e6e6e6;
     --gray-hover: #d6d6d6;
+    --gray-active: #ADADAD;
     --gray-disabled: #C2C2C2;
     --gray-dark: #8f8fa1;
 }
@@ -191,7 +192,7 @@ h1 {
     font-family: Ubuntu-Bold;
     font-size: 14px;
     color: #fff;
-    line-height: 1.2;
+    line-height: 1.3;
     text-transform: uppercase;
     display: flex;
     justify-content: center;
@@ -1102,7 +1103,11 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
 
 .modal-body {
     font-family: Ubuntu-regular;
-    padding: 20px;
+    padding: 35px;
+}
+
+.modal-body h3 {
+    margin-bottom: 15px;
 }
 
 .modal-body span {

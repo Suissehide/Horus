@@ -17,28 +17,28 @@ class Echographie
     private $reposIVA;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $reposCX;
+    private $reposCirconflexe;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $reposCD;
+    private $reposCoronaireDroite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $effortIVA;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $effortCX;
+    private $effortCirconflexe;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $effortCD;
+    private $effortCoronaireDroite;
 
     #[ORM\Column(type: 'integer', nullable: true)]
     private $nbSegmentIVA;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private $nbSegmentCX;
+    private $nbSegmentCirconflexe;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private $nbSegmentCD;
+    private $nbSegmentCoronaireDroite;
 
     #[ORM\Column(type: 'integer', nullable: true)]
     private $fractionEjection;
@@ -60,26 +60,26 @@ class Echographie
         return $this;
     }
 
-    public function getReposCX(): ?string
+    public function getReposCirconflexe(): ?string
     {
-        return $this->reposCX;
+        return $this->reposCirconflexe;
     }
 
-    public function setReposCX(?string $reposCX): self
+    public function setReposCirconflexe(?string $reposCirconflexe): self
     {
-        $this->reposCX = $reposCX;
+        $this->reposCirconflexe = $reposCirconflexe;
 
         return $this;
     }
 
-    public function getReposCD(): ?string
+    public function getReposCoronaireDroite(): ?string
     {
-        return $this->reposCD;
+        return $this->reposCoronaireDroite;
     }
 
-    public function setReposCD(?string $reposCD): self
+    public function setReposCoronaireDroite(?string $reposCoronaireDroite): self
     {
-        $this->reposCD = $reposCD;
+        $this->reposCoronaireDroite = $reposCoronaireDroite;
 
         return $this;
     }
@@ -96,26 +96,26 @@ class Echographie
         return $this;
     }
 
-    public function getEffortCX(): ?string
+    public function getEffortCirconflexe(): ?string
     {
-        return $this->effortCX;
+        return $this->effortCirconflexe;
     }
 
-    public function setEffortCX(?string $effortCX): self
+    public function setEffortCirconflexe(?string $effortCirconflexe): self
     {
-        $this->effortCX = $effortCX;
+        $this->effortCirconflexe = $effortCirconflexe;
 
         return $this;
     }
 
-    public function getEffortCD(): ?string
+    public function getEffortCoronaireDroite(): ?string
     {
-        return $this->effortCD;
+        return $this->effortCoronaireDroite;
     }
 
-    public function setEffortCD(?string $effortCD): self
+    public function setEffortCoronaireDroite(?string $effortCoronaireDroite): self
     {
-        $this->effortCD = $effortCD;
+        $this->effortCoronaireDroite = $effortCoronaireDroite;
 
         return $this;
     }
@@ -132,26 +132,26 @@ class Echographie
         return $this;
     }
 
-    public function getNbSegmentCX(): ?int
+    public function getNbSegmentCirconflexe(): ?int
     {
-        return $this->nbSegmentCX;
+        return $this->nbSegmentCirconflexe;
     }
 
-    public function setNbSegmentCX(?int $nbSegmentCX): self
+    public function setNbSegmentCirconflexe(?int $nbSegmentCirconflexe): self
     {
-        $this->nbSegmentCX = $nbSegmentCX;
+        $this->nbSegmentCirconflexe = $nbSegmentCirconflexe;
 
         return $this;
     }
 
-    public function getNbSegmentCD(): ?int
+    public function getNbSegmentCoronaireDroite(): ?int
     {
-        return $this->nbSegmentCD;
+        return $this->nbSegmentCoronaireDroite;
     }
 
-    public function setNbSegmentCD(?int $nbSegmentCD): self
+    public function setNbSegmentCoronaireDroite(?int $nbSegmentCoronaireDroite): self
     {
-        $this->nbSegmentCD = $nbSegmentCD;
+        $this->nbSegmentCoronaireDroite = $nbSegmentCoronaireDroite;
 
         return $this;
     }

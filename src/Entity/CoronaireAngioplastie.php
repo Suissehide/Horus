@@ -122,7 +122,7 @@ class CoronaireAngioplastie
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $coroscannerPontage;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $scoreCalciqueCoronaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -598,12 +598,12 @@ class CoronaireAngioplastie
         return $this;
     }
 
-    public function getScoreCalciqueCoronaire(): ?string
+    public function getScoreCalciqueCoronaire(): ?int
     {
         return $this->scoreCalciqueCoronaire;
     }
 
-    public function setScoreCalciqueCoronaire(?string $scoreCalciqueCoronaire): self
+    public function setScoreCalciqueCoronaire(?int $scoreCalciqueCoronaire): self
     {
         $this->scoreCalciqueCoronaire = $scoreCalciqueCoronaire;
 

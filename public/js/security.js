@@ -66,11 +66,22 @@ function closeEye() {
 container.on('mousedown', function () {
     if (!closed) {
         closed = true;
-        tl.to(".eyelid", { height: 35, duration: 0.2 });
+        tl.to(
+            ".eyelid", {
+                height: 35,
+                duration: 0.2
+            });
     }
 });
 
 container.on('mouseup', function () {
-    tl.to(".eyelid", { height: 0, duration: 0.2, onComplete: function() {closed = false; tl.clear();} });
+    tl.to(
+        ".eyelid", {
+            height: 0,
+            duration: 0.2,
+            onComplete: function() {
+                closed = false; tl.clear();
+            }
+        });
     
 })

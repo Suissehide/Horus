@@ -223,16 +223,6 @@ class BFRType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('glycemiePostPrandiale', NumberType::class, array(
-                'label' => 'Glycémie post prandiale',
-                'attr' => array(
-                    'unity' => 'g/L',
-                    'data-min' => 0,
-                    'data-max' => 0,
-                    'step' => 0.01,
-                ),
-                'required' => false,
-            ))
             ->add('Hba1c', IntegerType::class, array(
                 'label' => 'Hba1c',
                 'attr' => array(
@@ -245,15 +235,6 @@ class BFRType extends AbstractType
             ->add('fondOeil', ChoiceType::class, array(
                 'label' => 'Fond d\'oeil',
                 'choices' => array(
-                    'Non Renseigné' => 'Non Renseigné',
-                    'Normal' => 'Normal',
-                    'Anormal' => 'Anormal'
-                ),
-                'required' => false,
-            ))
-            ->add('neuropathieClinique', ChoiceType::class, array(
-                'label' => 'Neuropathie clinique (DN4)',
-                'choices' => array(
                     'Normal' => 'Normal',
                     'Background (micro-anévrysme ou oedème)' => 'Background (micro-anévrysme ou oedème)',
                     'Ischémique' => 'Ischémique',
@@ -261,6 +242,15 @@ class BFRType extends AbstractType
                     'Laser' => 'Laser',
                     'Anormal sans précision' => 'Anormal sans précision',
                     'Non fait' => 'Non fait'
+                ),
+                'required' => false,
+            ))
+            ->add('neuropathieClinique', ChoiceType::class, array(
+                'label' => 'Neuropathie clinique (DN4)',
+                'choices' => array(
+                    'Non Renseigné' => 'Non Renseigné',
+                    'Normal' => 'Normal',
+                    'Anormal' => 'Anormal'
                 ),
                 'required' => false,
             ))

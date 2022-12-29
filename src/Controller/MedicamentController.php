@@ -89,8 +89,6 @@ class MedicamentController extends AbstractController
 
             $medicaments = $medicamentRepository->findByRequest($q);
 
-            // dump($medicaments);
-
             return new JsonResponse($medicaments);
         }
     }

@@ -1,7 +1,6 @@
 /*
 * Alerts
 ****************************/
-
 var alert_pos = 11;
 setInterval(fadeOutAlert, 1000);
 
@@ -25,11 +24,9 @@ $('body').on('click', '.toast__close', function () {
 })
 
 
-
 /*
 * Scroll
 ****************************/
-
 jQuery(function ($) {
     // Back to Top
     var backTop = document.getElementsByClassName('js-cd-top')[0],

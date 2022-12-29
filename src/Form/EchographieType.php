@@ -25,7 +25,7 @@ class EchographieType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('reposCX', ChoiceType::class, array(
+            ->add('reposCirconflexe', ChoiceType::class, array(
                 'label' => false,
                 'placeholder' => false,
                 'choices' => array(
@@ -35,7 +35,7 @@ class EchographieType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('reposCD', ChoiceType::class, array(
+            ->add('reposCoronaireDroite', ChoiceType::class, array(
                 'label' => false,
                 'placeholder' => false,
                 'choices' => array(
@@ -56,7 +56,7 @@ class EchographieType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('effortCX', ChoiceType::class, array(
+            ->add('effortCirconflexe', ChoiceType::class, array(
                 'label' => false,
                 'placeholder' => false,
                 'choices' => array(
@@ -66,7 +66,7 @@ class EchographieType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('effortCD', ChoiceType::class, array(
+            ->add('effortCoronaireDroite', ChoiceType::class, array(
                 'label' => false,
                 'placeholder' => false,
                 'choices' => array(
@@ -86,7 +86,7 @@ class EchographieType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('nbSegmentCX', IntegerType::class, array(
+            ->add('nbSegmentCirconflexe', IntegerType::class, array(
                 'label' => false,
                 'attr' => array(
                     'unity' => '',
@@ -95,7 +95,7 @@ class EchographieType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('nbSegmentCD', IntegerType::class, array(
+            ->add('nbSegmentCoronaireDroite', IntegerType::class, array(
                 'label' => false,
                 'attr' => array(
                     'unity' => '',

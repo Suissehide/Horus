@@ -121,12 +121,23 @@ ul.tabbed li {
     cursor: pointer;
     transition: all 250ms ease;
     margin-bottom: 5px;
+    margin-left: 5px;
+    border-radius: 3px;
     user-select: none;
-    border-right: 1px solid #cacaca;
 }
 
-ul.tabbed li:last-child {
-    border-right: none;
+ul.tabbed li:hover {
+    background: var(--gray-hover);
+    color: #1a535c;
+}
+
+ul.tabbed li.action {
+    background-color: var(--dark-goldenrod);
+    color: #fff;
+}
+
+ul.tabbed li.action:hover {
+    background-color: var(--dark-goldenrod-hover);
 }
 
 ul.tabbed li.active {
@@ -135,14 +146,8 @@ ul.tabbed li.active {
     color: #fff;
 }
 
-ul.tabbed li:first-child {
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-}
-
-ul.tabbed li:last-child {
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
+ul.tabbed li.active:hover {
+    background-color: var(--blue-green-hover);
 }
 
 ul.tabbed li i {
@@ -207,8 +212,8 @@ ul.tabbed li i {
 
 .slide h1 {
     position: relative;
-    padding-top: 30px;
-    margin-bottom: 50px;
+    padding-top: 15px;
+    margin-bottom: 35px;
     font-size: 32px;
 }
 
@@ -423,12 +428,18 @@ main h3 {
     cursor: pointer;
     float: right;
     padding-left: 10px;
+    color: var(--alabaster);
     transition: 0.3s ease;
 }
 
 .etiquette .delete:hover,
 .medicament .delete:hover {
-    color: var(--blue-green-active);
+    color: var(--persian-indigo);
+}
+
+.medicaments-error {
+    padding-top: 10px;
+    color: #D74C53;
 }
 
 .def {
@@ -1300,6 +1311,21 @@ input[type='checkbox'].checkbox-round+span {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.toc .sub-sub-menu ul {
+    display: none;
+    background-color: #e6e6e6;
+}
+
+.toc .sub-sub-menu ul li a {
+    padding-left: 35px;
+    background-color: var(--gray-hover);
+    color: #1a535c;
+}
+
+.toc .sub-sub-menu ul li a.active {
+    background-color: var(--gray-active);
 }
 
 .reduce .toc ul li a,

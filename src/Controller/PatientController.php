@@ -320,7 +320,7 @@ class PatientController extends AbstractController
             }
 
             $this->addErreur(intval($patientId), $this->formatKey($fieldId), 'info', $message, true);
-            return new JsonResponse('Done.');
+            return new JsonResponse('Done.', Response::HTTP_OK);
         }
     }
 
@@ -377,11 +377,15 @@ class PatientController extends AbstractController
 
             $protocole = $this->managerRegistry->getRepository(Protocole::class)->find($protocoleId);
             $medicament = $this->managerRegistry->getRepository(Medicament::class)->find($medicamentId);
+
+            if ($protocole->getMedicamentsEntree()->getMedicaments()->contains($medicament)) {
+                return new JsonResponse(false, Response::HTTP_CONFLICT);
+            }
             $protocole->getMedicamentsEntree()->addMedicament($medicament);
 
             $this->em->flush();
 
-            return new JsonResponse(true);
+            return new JsonResponse(true, Response::HTTP_OK);
         }
     }
 
@@ -398,7 +402,7 @@ class PatientController extends AbstractController
             $protocole->getMedicamentsEntree()->removeMedicament($medicament);
             $this->em->flush();
 
-            return new JsonResponse(true);
+            return new JsonResponse(true, Response::HTTP_OK);
         }
     }
 }

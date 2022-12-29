@@ -51,16 +51,17 @@
 	{{ form_row(form.protocole.BFR.diabeteType, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.protocole.BFR.diabeteDepuis, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.protocole.BFR.glycemieAjeun, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-	{{ form_row(form.protocole.BFR.glycemiePostPrandiale, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	{{ form_row(form.protocole.BFR.Hba1c, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-	{{ form_row(form.protocole.BFR.fondOeil, {'attr': {'class': 'input'} }) }}
+
 	{{ form_row(form.protocole.BFR.neuropathieClinique, {'attr': {'class': 'input'} }) }}
 </div>
-<div class="form-space flex-nowrap">
+<div class="form-space column">
 	{{ form_row(form.protocole.BFR.neuroesthesiometriePiedDroit, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 	{{ form_row(form.protocole.BFR.neuroesthesiometriePiedGauche, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 </div>
-
+<div class="form-space column">
+	{{ form_row(form.protocole.BFR.fondOeil, {'attr': {'class': 'input'} }) }}
+</div>
 
 <h3 id="bilan-renal">Bilan rénal</h3>
 <div class="form-space column">
