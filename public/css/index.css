@@ -671,6 +671,7 @@ input[type='checkbox'].checkbox-round+span {
     min-height: 500px;
     line-height: 22px;
     padding: 15px 20px;
+    letter-spacing: 0.01px;
 }
 
 .letter__content .slide h5::after {

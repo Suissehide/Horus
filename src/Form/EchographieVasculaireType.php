@@ -48,8 +48,8 @@ class EchographieVasculaireType extends AbstractType
                 'label' => 'EIM droit',
                 'attr' => array(
                     'unity' => '',
-                    'data-min' => '0',
-                    'data-max' => '0',
+                    'data-min' => 0,
+                    'data-max' => 0,
                     'step' => '0.0001',
                 ),
                 'required' => false,
@@ -58,8 +58,8 @@ class EchographieVasculaireType extends AbstractType
                 'label' => 'EIM gauche',
                 'attr' => array(
                     'unity' => '',
-                    'data-min' => '0',
-                    'data-max' => '0',
+                    'data-min' => 0,
+                    'data-max' => 0,
                     'step' => '0.0001',
                 ),
                 'required' => false,
@@ -162,9 +162,8 @@ class EchographieVasculaireType extends AbstractType
                 'label' => 'Volume carotide droite',
                 'attr' => array(
                     'unity' => 'mm3',
-                    'data-min' => '0',
-                    'data-max' => '0',
-                    'step' => '0.01',
+                    'data-min' => 0,
+                    'data-max' => 0
                 ),
                 'required' => false,
             ))
@@ -172,9 +171,8 @@ class EchographieVasculaireType extends AbstractType
                 'label' => 'Volume carotide gauche',
                 'attr' => array(
                     'unity' => 'mm3',
-                    'data-min' => '0',
-                    'data-max' => '0',
-                    'step' => '0.01',
+                    'data-min' => 0,
+                    'data-max' => 0
                 ),
                 'required' => false,
             ))
@@ -182,9 +180,8 @@ class EchographieVasculaireType extends AbstractType
                 'label' => 'Charge en athérome totale',
                 'attr' => array(
                     'unity' => 'mm3',
-                    'data-min' => '0',
-                    'data-max' => '0',
-                    'step' => '0.01',
+                    'data-min' => 0,
+                    'data-max' => 0
                 ),
                 'required' => false,
             ))
@@ -345,8 +342,8 @@ class EchographieVasculaireType extends AbstractType
                 'label' => 'IPS repos droit',
                 'attr' => array(
                     'unity' => '',
-                    'data-min' => '0.2',
-                    'data-max' => '1.5',
+                    'data-min' => 0,
+                    'data-max' => 0,
                     'step' => '0.1',
                 ),
                 'required' => false,
@@ -355,8 +352,8 @@ class EchographieVasculaireType extends AbstractType
                 'label' => 'IPS repos gauche',
                 'attr' => array(
                     'unity' => '',
-                    'data-min' => '0.2',
-                    'data-max' => '1.5',
+                    'data-min' => 0,
+                    'data-max' => 0,
                     'step' => '0.1',
                 ),
                 'required' => false,
@@ -365,8 +362,8 @@ class EchographieVasculaireType extends AbstractType
                 'label' => 'IPS repos gros orteil droit',
                 'attr' => array(
                     'unity' => '',
-                    'data-min' => '0.2',
-                    'data-max' => '1.5',
+                    'data-min' => 0,
+                    'data-max' => 0,
                     'step' => '0.1',
                 ),
                 'required' => false,
@@ -375,8 +372,8 @@ class EchographieVasculaireType extends AbstractType
                 'label' => 'IPS repos gros orteil gauche',
                 'attr' => array(
                     'unity' => '',
-                    'data-min' => '0.2',
-                    'data-max' => '1.5',
+                    'data-min' => 0,
+                    'data-max' => 0,
                     'step' => '0.1',
                 ),
                 'required' => false,
@@ -385,8 +382,8 @@ class EchographieVasculaireType extends AbstractType
                 'label' => 'IPS effort droit',
                 'attr' => array(
                     'unity' => '',
-                    'data-min' => '0.2',
-                    'data-max' => '1.5',
+                    'data-min' => 0,
+                    'data-max' => 0,
                     'step' => '0.1',
                 ),
                 'required' => false,
@@ -395,8 +392,8 @@ class EchographieVasculaireType extends AbstractType
                 'label' => 'IPS effort gauche',
                 'attr' => array(
                     'unity' => '',
-                    'data-min' => '0.2',
-                    'data-max' => '1.5',
+                    'data-min' => 0,
+                    'data-max' => 0,
                     'step' => '0.1',
                 ),
                 'required' => false,

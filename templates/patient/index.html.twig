@@ -915,10 +915,16 @@
             return null
         }
 
-        $('#patient_protocole_BFR_taille, #patient_protocole_BFR_poids').change(function() {
-            $('#bfr_IMC').val(getIMC($('#patient_protocole_BFR_poids').val(), $('#patient_protocole_BFR_taille').val()));
+        $('.bfr_taille, .bfr_poids').change(function() {
+            let poids = $(this).parents('.form-space').find('.bfr_poids').val();
+            let taille = $(this).parents('.form-space').find('.bfr_taille').val();
+            $(this).parents('.form-space').find('.bfr_IMC').val(getIMC(poids, taille));
         });
-        $('#bfr_IMC').val(getIMC($('#patient_protocole_BFR_poids').val(), $('#patient_protocole_BFR_taille').val()));
+        $.each($(".bfr_IMC"), function() {
+            let poids = $(this).parents('.form-space').find('.bfr_poids').val();
+            let taille = $(this).parents('.form-space').find('.bfr_taille').val();
+            $(this).val(getIMC(poids, taille));
+        });
 
     </script>
 

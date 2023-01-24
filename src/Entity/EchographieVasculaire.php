@@ -44,10 +44,10 @@ class EchographieVasculaire
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $sousClaviereGauche;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $TSAAorte;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $membresInferieurAorte;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -110,10 +110,10 @@ class EchographieVasculaire
     #[ORM\Column(type: 'integer', nullable: true)]
     private $chargeAtheromeTotale;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
     private $IPSGrosOrteilDroit;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
     private $IPSGrosOrteilGauche;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

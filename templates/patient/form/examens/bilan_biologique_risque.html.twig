@@ -1,8 +1,8 @@
 <h1 id="bfr">Bilan biologique et risque</h1>
 <h3 id="biometrie">Biométrie</h3>
 <div class="form-space column">
-	{{ form_row(form.protocole.BFR.taille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-	{{ form_row(form.protocole.BFR.poids, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.taille, {'attr': {'class': 'input bfr_taille'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.BFR.poids, {'attr': {'class': 'input bfr_poids'}, 'useStyle': true }) }}
 	{{ form_row(form.protocole.BFR.tourTaille, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 
 	<div class="wrap-input">
@@ -12,7 +12,7 @@
 		</label>
 		<div class="flex">
 			<div class="form-input">
-				<input disabled type="number" id="bfr_IMC" name="bfr[IMC]" unity="" data-min="0" data-max="0" class="input">
+				<input disabled type="number" id="bfr_IMC" name="bfr[IMC]" unity="" data-min="0" data-max="0" class="input bfr_IMC">
 				<span class="focus-input"></span>
 			</div>
 		</div>
