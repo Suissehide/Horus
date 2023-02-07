@@ -41,6 +41,8 @@
 
 <h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
 <div class="form-space">
+	{{ form_row(form.information.dateAVC, {'attr': {'class': 'input js-datepicker'} }) }}
+	{{ form_row(form.information.scoreModifieRankin, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.information.localisation, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.information.taille, {'attr': {'class': 'input'} }) }}
 </div>
@@ -54,4 +56,4 @@
 	{{ form_row(form.information.etiologieDissection, {'attr': {'class': 'input'} }) }}
 </div>
 
-{{ form_row(form.information.save, {'attr': {'class': 'form-btn btn-save'} }) }}
+{{ form_row(form.information.save, {'attr': {'class': 'form-btn btn-save', 'disabled': freezeDatabase} }) }}

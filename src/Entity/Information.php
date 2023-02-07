@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\InformationRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -89,6 +90,14 @@ class Information
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
     private $complicationMecanique;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Groups(['export', 'advancement'])]
+    private ?\DateTimeInterface $dateAVC = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['export', 'advancement'])]
+    private ?int $scoreModifieRankin = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
@@ -347,6 +356,30 @@ class Information
     public function setComplicationMecanique(?string $complicationMecanique): self
     {
         $this->complicationMecanique = $complicationMecanique;
+
+        return $this;
+    }
+
+    public function getDateAVC(): ?\DateTimeInterface
+    {
+        return $this->dateAVC;
+    }
+
+    public function setDateAVC(?\DateTimeInterface $dateAVC): self
+    {
+        $this->dateAVC = $dateAVC;
+
+        return $this;
+    }
+
+    public function getScoreModifieRankin(): ?int
+    {
+        return $this->scoreModifieRankin;
+    }
+
+    public function setScoreModifieRankin(?int $scoreModifieRankin): self
+    {
+        $this->scoreModifieRankin = $scoreModifieRankin;
 
         return $this;
     }

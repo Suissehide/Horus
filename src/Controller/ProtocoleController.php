@@ -15,6 +15,7 @@ class ProtocoleController extends AbstractController
     public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
     {
     }
+    
     #[Route(path: '/fiche/add', name: 'fiche_add')]
     public function fiche_add(Request $request): Response
     {

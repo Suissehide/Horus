@@ -17,7 +17,7 @@ class GeneralType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $choices = array();
+        $choices = [];
         foreach (FormConstants::LABELS["FEUILLES"] as $feuille) {
             $choices[$feuille] = $feuille;
         }

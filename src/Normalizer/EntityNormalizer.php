@@ -57,7 +57,7 @@ class EntityNormalizer extends ObjectNormalizer
         return $data instanceof \DateTime;
     }
 
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
         return $object->format('d/m/Y');
     }

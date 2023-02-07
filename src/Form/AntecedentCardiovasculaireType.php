@@ -118,6 +118,19 @@ class AntecedentCardiovasculaireType extends AbstractType
                 'block_name' => 'qcm_type',
                 'required' => false,
             ))
+            ->add('stenoseCarotidienne', ChoiceType::class, array(
+                'label' => 'Sténose carotidienne >50%',
+                'expanded' => true,
+                'multiple' => false,
+                'placeholder' => false,
+                'choices' => array(
+                    'Oui' => 'Oui',
+                    'Non' => 'Non',
+                    'Non précisé' => 'Non précisé',
+                ),
+                'block_name' => 'qcm_type',
+                'required' => false,
+            ))
             ->add('arteriteMembresInferieurs', ChoiceType::class, array(
                 'label' => 'Artérite des membres inférieurs',
                 'expanded' => true,

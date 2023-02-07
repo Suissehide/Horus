@@ -8,7 +8,7 @@ use App\Form\MedicamentsEntreeType;
 use App\Form\AngioplastiePontageType;
 use App\Form\BFRType;
 use App\Form\CatheterisationType;
-use App\Form\CoronaireAngioplastieType;
+use App\Form\AnatomieCoronaireType;
 use App\Form\EchographieType;
 use App\Form\EchographieCardiaqueType;
 use App\Form\EchographieVasculaireType;
@@ -35,7 +35,7 @@ class ProtocoleType extends AbstractType
             ->add('catheterisation', CatheterisationType::class, array(
                 'label' => 'Cathétérisation'
             ))
-            ->add('coronaireAngioplastie', CoronaireAngioplastieType::class, array(
+            ->add('anatomieCoronaire', AnatomieCoronaireType::class, array(
                 'label' => 'Coronaire et angioplastie'
             ))
             ->add('echographie', EchographieType::class, array(

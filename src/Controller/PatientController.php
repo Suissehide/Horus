@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -39,7 +39,7 @@ class PatientController extends AbstractController
     private $security;
 
     /**
-     * @var DoctrineManager
+     * @var EntityManagerInterface
      */
     private $em;
 
@@ -99,12 +99,12 @@ class PatientController extends AbstractController
                 $erreurs->setMaxResults($max)->setFirstResult($min);
             }
             $erreurs = $erreurs->getQuery()->getResult();
-            $rows = array();
+            $rows = [];
             foreach ($erreurs as $erreur) {
                 $row = array(
                     "id" => $erreur->getId(),
                     "fieldId" => $erreur->getFieldId(),
-                    "date" => $this->formatDate($erreur->getDateCreation()),
+                    "dateCreation" => $this->formatDate($erreur->getDateCreation()),
                     "utilisateur" => $erreur->getUtilisateur(),
                     "message" => $erreur->getMessage(),
                     "etat" => $erreur->getEtat(),
@@ -126,6 +126,7 @@ class PatientController extends AbstractController
     public function patient_index(Patient $patient, Request $request): Response
     {
         $oldArray = $this->serializeEntity($patient);
+        dump($oldArray, $request);
 
         #========== PATIENT ==========#
         $form = $this->createForm(PatientType::class, $patient);
@@ -134,12 +135,13 @@ class PatientController extends AbstractController
         $this->generateErreur($patient->getId(), $form, $oldArray, 'patient', 'patient');
 
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && !$this->getParameter('freeze_database')) {
 
             /* SERIALISATION */
             $patientArray = $this->serializeEntity($form->getData());
 
             /* SPECIAL ERROR */
+            
 
             /* SEARCH DIFF */
             $this->searchDiff($patient, $oldArray, $patientArray, 'patient');
@@ -157,6 +159,7 @@ class PatientController extends AbstractController
             'patient' => $patient,
             'form' => $form->createView(),
             'constants_labels' => FormConstants::LABELS,
+            'freezeDatabase' => $this->getParameter('freeze_database')
         ]);
     }
 

@@ -112,7 +112,7 @@
                     for (i = 0; i < json.length; i++) {
                         listErr += '<div class="badge-spe badge-tab badge-' + $.parseJSON(json[i])['state'] + '">' + $.parseJSON(json[i])['number'] + '</div>';
                     };
-                    $('#data-grid tr[data-row-id=' + patientId + '] td:nth-child(5)').append(listErr);
+                    $('#data-grid tr[data-row-id=' + patientId + '] td:nth-child(5)').empty().append(listErr);
                 }
             });
         };

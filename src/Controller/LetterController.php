@@ -21,6 +21,7 @@ class LetterController extends AbstractController
     public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
     {
     }
+    
     #[Route(path: '/letter', name: 'letter', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {

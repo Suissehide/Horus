@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -170,6 +171,26 @@ class FacteurType extends AbstractType
                     'Oui' => 'Oui',
                     'Non' => 'Non',
                     'Non précisé' => 'Non précisé',
+                ),
+                'required' => false,
+            ))
+
+            ->add('LDLMaximal', NumberType::class, array(
+                'label' => 'LDL maximal au cours de la vie (en g/L)',
+                'attr' => array(
+                    'unity' => 'g/L',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                    'step' => '0.01'
+                ),
+                'required' => false
+            ))
+            ->add('ageIntroductionTraitementHypolipemiant', IntegerType::class, array(
+                'label' => 'Âge d’introduction du traitement hypolipémiant (en années)',
+                'attr' => array(
+                    'unity' => 'années',
+                    'data-min' => 0,
+                    'data-max' => 0,
                 ),
                 'required' => false,
             ))

@@ -240,7 +240,7 @@
             }
         }).on("loaded.rs.jquery.bootgrid", function () {
             grid.find("tr").on("click", function (e) {
-                if ($(this).data("row-id") != {{ id }})
+                if ($(this).data("row-id") != "{{ id }}")
                     modal_event($(this), e);
             });
         });

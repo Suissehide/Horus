@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 class VisiteController extends AbstractController
 {
     /**
-     * @var DoctrineManager
+     * @var EntityManagerInterface
      */
     private $em;
 

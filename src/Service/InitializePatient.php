@@ -9,7 +9,7 @@ use App\Entity\MedicamentsEntree;
 use App\Entity\AngioplastiePontage;
 use App\Entity\BFR;
 use App\Entity\Catheterisation;
-use App\Entity\CoronaireAngioplastie;
+use App\Entity\AnatomieCoronaire;
 use App\Entity\Echographie;
 use App\Entity\EchographieCardiaque;
 use App\Entity\EchographieVasculaire;
@@ -26,7 +26,7 @@ use App\Entity\BMQ;
 class InitializePatient
 {
     /**
-     * @var DoctrineManager
+     * @var EntityManagerInterface
      */
     private $em;
 
@@ -97,7 +97,7 @@ class InitializePatient
         $protocole->setAngioplastiePontage(new AngioplastiePontage());
         $protocole->setBFR(new BFR());
         $protocole->setCatheterisation(new Catheterisation());
-        $protocole->setCoronaireAngioplastie(new CoronaireAngioplastie());
+        $protocole->setAnatomieCoronaire(new AnatomieCoronaire());
         $protocole->setEchographie(new Echographie());
         $protocole->setEchographieCardiaque(new EchographieCardiaque());
         $protocole->setEchographieVasculaire(new EchographieVasculaire());

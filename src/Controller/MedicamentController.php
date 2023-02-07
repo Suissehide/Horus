@@ -17,6 +17,7 @@ class MedicamentController extends AbstractController
     public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
     {
     }
+    
     #[Route(path: '/medicament', name: 'medicament')]
     public function index(MedicamentRepository $medicamentRepository, Request $request): Response
     {
@@ -37,7 +38,7 @@ class MedicamentController extends AbstractController
                 $medicaments->setMaxResults($max)->setFirstResult($min);
             }
             $medicaments = $medicaments->getQuery()->getResult();
-            $rows = array();
+            $rows = [];
             foreach ($medicaments as $erreur) {
                 $row = array(
                     "id" => $erreur->getId(),

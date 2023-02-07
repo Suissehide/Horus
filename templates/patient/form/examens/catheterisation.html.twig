@@ -24,4 +24,4 @@
 	{{ form_row(form.protocole.catheterisation.FEIsotopique, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 </div>
 
-{{ form_row(form.protocole.catheterisation.save, {'attr': {'class': 'form-btn btn-save'} }) }}
+{{ form_row(form.protocole.catheterisation.save, {'attr': {'class': 'form-btn btn-save', 'disabled': freezeDatabase} }) }}

@@ -67,17 +67,23 @@ class FormConstants
 
 		"SUIVI_FACTEUR" => [
 			'Diabète',
-			'Hypertension artérielle',
-			'Dyslipidémie'
+			'Dyslipidémie',
+			'Hypertension artérielle'
 		],
 
 		"SUIVI_TRAITEMENT" => [
-			'Bêta-bloquant',
 			'Aspirine',
+			'Analogue du GLP1',
+			'Antagoniste du récepteur de l\'angiotensine 2',
+			'Anti PCSK9',
+			'Bêta-bloquant',
+			'Ezétimibe',
 			'Inhibiteur du récepteur P2Y12',
-			'Statine',
-			'Inhibiteur de l’Enzyme de Conversion',
-			'Antagoniste du récepteur de l’angiotensine 2'
+			'Inhibiteur de l\'Enzyme de Conversion',
+			'Inhibiteur SGLT2',
+			'Metformine',
+			'Insuline',
+			'Statine'
 		],
 
 		"SUIVI_GENES" => [

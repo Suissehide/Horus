@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\CoronaireAngioplastie;
+use App\Entity\AnatomieCoronaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method CoronaireAngioplastie|null find($id, $lockMode = null, $lockVersion = null)
- * @method CoronaireAngioplastie|null findOneBy(array $criteria, array $orderBy = null)
- * @method CoronaireAngioplastie[]    findAll()
- * @method CoronaireAngioplastie[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method AnatomieCoronaire|null find($id, $lockMode = null, $lockVersion = null)
+ * @method AnatomieCoronaire|null findOneBy(array $criteria, array $orderBy = null)
+ * @method AnatomieCoronaire[]    findAll()
+ * @method AnatomieCoronaire[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CoronaireAngioplastieRepository extends ServiceEntityRepository
+class AnatomieCoronaireRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CoronaireAngioplastie::class);
+        parent::__construct($registry, AnatomieCoronaire::class);
     }
 
     // /**
-    //  * @return CoronaireAngioplastie[] Returns an array of CoronaireAngioplastie objects
+    //  * @return AnatomieCoronaire[] Returns an array of AnatomieCoronaire objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class CoronaireAngioplastieRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?CoronaireAngioplastie
+    public function findOneBySomeField($value): ?AnatomieCoronaire
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')

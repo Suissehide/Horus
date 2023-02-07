@@ -52,7 +52,7 @@ class IndexController extends AbstractController
                 $patients->setMaxResults($max)->setFirstResult($min);
             }
             $patients = $patients->getQuery()->getResult();
-            $rows = array();
+            $rows = [];
             foreach ($patients as $patient) {
                 $row = array(
                     "id" => $patient->getId(),                   
@@ -99,7 +99,7 @@ class IndexController extends AbstractController
 
             $json = $this->serializeEntity($patient);
 
-            $arr = array();
+            $arr = [];
             $iter = 0;
             foreach ($json as $item) {
                 if (($i = $this->isError($iter, $errors)) != 0) {
@@ -181,7 +181,7 @@ class IndexController extends AbstractController
         $data = str_replace(",", ";", $data);
         $fileName = "export_patient_" . date("d_m_Y") . ".csv";
         $response = new Response($data);
-        $response->setStatusCode(\Symfony\Component\HttpFoundation\Response::HTTP_OK);
+        $response->setStatusCode(Response::HTTP_OK);
         $response->headers->set('Content-Type', 'text/csv; charset=UTF-8; application/excel');
         $response->headers->set('Content-Disposition', 'attachment; filename=' . $fileName);
         echo "\xEF\xBB\xBF"; // UTF-8 with BOM

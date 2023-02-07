@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CoronaireAngioplastieRepository;
+use App\Repository\AnatomieCoronaireRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CoronaireAngioplastieRepository::class)]
-class CoronaireAngioplastie
+#[ORM\Entity(repositoryClass: AnatomieCoronaireRepository::class)]
+class AnatomieCoronaire
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -160,6 +160,9 @@ class CoronaireAngioplastie
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $volumeTotalPlaque;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    private ?string $volumeCoronaireTotal = null;
 
     public function getId(): ?int
     {
@@ -750,6 +753,18 @@ class CoronaireAngioplastie
     public function setVolumeTotalPlaque(?string $volumeTotalPlaque): self
     {
         $this->volumeTotalPlaque = $volumeTotalPlaque;
+
+        return $this;
+    }
+
+    public function getVolumeCoronaireTotal(): ?string
+    {
+        return $this->volumeCoronaireTotal;
+    }
+
+    public function setVolumeCoronaireTotal(?string $volumeCoronaireTotal): self
+    {
+        $this->volumeCoronaireTotal = $volumeCoronaireTotal;
 
         return $this;
     }

@@ -18,21 +18,26 @@
 	{{ form_row(form.protocole.suivi.activite, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.protocole.suivi.alimentation, {'attr': {'class': 'input radio-row alimentation-js'} }) }}
 	<div class="alimentation"></div>
+	{{ form_row(form.protocole.suivi.hba1c, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.suivi.hypertension, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.suivi.dyslipidemie, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.suivi.poids, {'attr': {'class': 'input'} }) }}
+	<div class="score"></div>
+</div>
 
-	<div class="column">
-		{% for qcm in form.protocole.suivi.facteurs %}
-			<div class="qcm-row">
-				<div class="qcm-question">
-					{{constants_labels["SUIVI_FACTEUR"][ loop.index0 ]}}
-				</div>
-				<div class="qcm-response">
-					<div class="wrap-input qcm-flex">
-						{{ form_widget(qcm.response, {'attr': {'class': 'input radio-row'} }) }}
-					</div>
+<div class="form-space column">
+	{% for qcm in form.protocole.suivi.facteurs %}
+		<div class="qcm-row">
+			<div class="qcm-question">
+				{{constants_labels["SUIVI_FACTEUR"][ loop.index0 ]}}
+			</div>
+			<div class="qcm-response">
+				<div class="wrap-input qcm-flex">
+					{{ form_widget(qcm.response, {'attr': {'class': 'input radio-row'} }) }}
 				</div>
 			</div>
-		{% endfor %}
-	</div>
+		</div>
+	{% endfor %}
 </div>
 
 <h3 id="place">Traitement mis en place suite à l'évènement cardiovasculaire</h3>
@@ -68,9 +73,4 @@
 	{{ form_row(form.protocole.suivi.hdl, {'attr': {'class': 'input'}, 'useStyle': true }) }}
 </div>
 
-<h5>HbA1c</h5>
-<div class="form-space">
-	{{ form_row(form.protocole.suivi.hba1c, {'attr': {'class': 'input'}, 'useStyle': true }) }}
-</div>
-
-{{ form_row(form.protocole.suivi.save, {'attr': {'class': 'form-btn btn-save'} }) }}
+{{ form_row(form.protocole.suivi.save, {'attr': {'class': 'form-btn btn-save', 'disabled': freezeDatabase} }) }}

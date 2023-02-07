@@ -19,7 +19,7 @@ class SuiviType extends AbstractType
     {
         $builder
             ->add('recidive', ChoiceType::class, array(
-                'label' => 'Récidive d’événement cardiovasculaire',
+                'label' => 'Récidive d\'événement cardiovasculaire',
                 'expanded' => true,
                 'multiple' => false,
                 'placeholder' => false,
@@ -44,10 +44,9 @@ class SuiviType extends AbstractType
             ))
             ->add('type', ChoiceType::class, array(
                 'label' => 'Type d\'événement',
-                'placeholder' => '',
                 'choices' => array(
                     'Infarctus du myocarde' => 'Infarctus du myocarde',
-                    'AVC ischémique d’origine athéromateuse' => 'AVC ischémique d’origine athéromateuse',
+                    'AVC ischémique d\'origine athéromateuse' => 'AVC ischémique d\'origine athéromateuse',
                     'Revascularisation coronarienne' => 'Revascularisation coronarienne',
                     'Autre' => 'Autre',
                 ),
@@ -73,17 +72,15 @@ class SuiviType extends AbstractType
             ))
             ->add('tabac', ChoiceType::class, array(
                 'label' => 'Tabac',
-                'placeholder' => '',
                 'choices' => array(
-                    'Jamais fumé ou arrêté > 12 mois' => 'Jamais fumé ou arrêté > 12 mois',
-                    'Arrêt depuis moins de 12 mois' => 'Arrêt depuis moins de 12 mois',
                     'Fumeur actuel' => 'Fumeur actuel',
+                    'Arrêt depuis moins de 12 mois' => 'Arrêt depuis moins de 12 mois',
+                    'Jamais fumé ou arrêté > 12 mois' => 'Jamais fumé ou arrêté > 12 mois',
                 ),
                 'required' => false,
             ))
             ->add('activite', ChoiceType::class, array(
                 'label' => 'Activité physique',
-                'placeholder' => '',
                 'choices' => array(
                     'Aucune' => 'Aucune',
                     '1 à 150 min/semaine d\'activité modérée ou 1 à 75 min/semaine d\'activité vigoureuse' => '1 à 150 min/semaine d\'activité modérée ou 1 à 75 min/semaine d\'activité vigoureuse',
@@ -93,7 +90,6 @@ class SuiviType extends AbstractType
             ))
             ->add('alimentation', ChoiceType::class, array(
                 'label' => 'Alimentation',
-                'placeholder' => '',
                 'multiple' => true,
                 'expanded' => true,
                 'choices' => array(
@@ -104,6 +100,42 @@ class SuiviType extends AbstractType
                     '≤ 1 boisson sucrée/semaine' => '≤ 1 boisson sucrée/semaine',
                 ),
                 'required' => false,
+            ))
+            ->add('hba1c', ChoiceType::class, array(
+                'label' => 'HbA1C',
+                'choices' => array(
+                    '≥ 6.5%' => '≥ 6.5%',
+                    '5.7%-6.4% sans traitement ou < 5.7% avec traitement' => '5.7%-6.4% sans traitement ou < 5.7% avec traitement',
+                    '< 5.7% sans traitement' => '< 5.7% sans traitement'
+                ),
+                'required' => false
+            ))
+            ->add('hypertension', ChoiceType::class, array(
+                'label' => 'Hypertension artérielle',
+                'choices' => array(
+                    '≥ 140/90 mmHg' => '≥ 140/90 mmHg',
+                    '120-139/80-89 mmHg sans traitement ou < 120/80 avec traitement' => '120-139/80-89 mmHg sans traitement ou < 120/80 avec traitement',
+                    '< 120/80 sans traitement' => '< 120/80 sans traitement'
+                ),
+                'required' => false
+            ))
+            ->add('dyslipidemie', ChoiceType::class, array(
+                'label' => 'Dyslipidémie',
+                'choices' => array(
+                    'Cholestérol total > 2.40 g/L' => 'Cholestérol total > 2.40 g/L',
+                    'Cholestérol total < 2.00 g/L avec traitement ou 2.00-2.39 g/L sans traitement' => 'Cholestérol total < 2.00 g/L avec traitement ou 2.00-2.39 g/L sans traitement',
+                    'Cholestérol total < 2.00 g/L sans traitement' => 'Cholestérol total < 2.00 g/L sans traitement'
+                ),
+                'required' => false
+            ))
+            ->add('poids', ChoiceType::class, array(
+                'label' => 'Poids',
+                'choices' => array(
+                    'IMC ≥ 30 kg/m2' => 'IMC ≥ 30 kg/m2',
+                    'IMC 25-29.9 kg/m2' => 'IMC 25-29.9 kg/m2',
+                    'IMC < 25 kg/m2' => 'IMC < 25 kg/m2'
+                ),
+                'required' => false
             ))
 
             ->add('facteurs', CollectionType::class, array(
@@ -175,20 +207,8 @@ class SuiviType extends AbstractType
                 ),
                 'required' => false,
             ))
-            ->add('hba1c', NumberType::class, array(
-                'label' => ' ',
-                'scale' => 1,
-                'attr' => array(
-                    'unity' => '%',
-                    'data-min' => 0,
-                    'data-max' => 100,
-                    'step' => 0.1,
-                ),
-                'required' => false,
-            ))
 
-            ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
-        ;
+            ->add('save', SubmitType::class, ['label' => 'Sauvegarder']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

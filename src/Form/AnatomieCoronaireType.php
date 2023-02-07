@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\CoronaireAngioplastie;
+use App\Entity\AnatomieCoronaire;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class CoronaireAngioplastieType extends AbstractType
+class AnatomieCoronaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -543,6 +543,16 @@ class CoronaireAngioplastieType extends AbstractType
                 ),
                 'required' => false
             ))
+            ->add('volumeCoronaireTotal', NumberType::class, array(
+                'label' => 'Volume coronaire total',
+                'attr' => array(
+                    'unity' => 'mm3',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                    'step' => '0.01',
+                ),
+                'required' => false
+            ))
             ->add('volumePlaqueHypodense', NumberType::class, array(
                 'label' => 'Volume plaque hypodense (< 30 UH) BLEU',
                 'attr' => array(
@@ -591,7 +601,7 @@ class CoronaireAngioplastieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => CoronaireAngioplastie::class,
+            'data_class' => AnatomieCoronaire::class,
         ]);
     }
 }

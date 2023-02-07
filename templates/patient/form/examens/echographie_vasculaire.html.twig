@@ -23,6 +23,8 @@
 <div class="form-space schema-membres-inferieur">
 	<img src={{ asset('assets/images/membres_inferieur.jpg') }} alt="Schéma membres inférieur"/>
 	{{ form_row(form.protocole.echographieVasculaire.membresInferieurAorte, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.echographieVasculaire.volumeFemoralDroit, {'attr': {'class': 'input special'}, 'useStyle': true }) }}
+	{{ form_row(form.protocole.echographieVasculaire.volumeFemoralGauche, {'attr': {'class': 'input special'}, 'useStyle': true }) }}
 	{{ form_row(form.protocole.echographieVasculaire.iliaqueDroite, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.protocole.echographieVasculaire.iliaqueGauche, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.protocole.echographieVasculaire.femoraleCommuneDroite, {'attr': {'class': 'input'} }) }}
@@ -65,4 +67,4 @@
 	</div>
 </div>
 
-{{ form_row(form.protocole.echographieVasculaire.save, {'attr': {'class': 'form-btn btn-save'} }) }}
+{{ form_row(form.protocole.echographieVasculaire.save, {'attr': {'class': 'form-btn btn-save', 'disabled': freezeDatabase} }) }}

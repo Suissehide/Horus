@@ -141,7 +141,7 @@
                                     <th data-column-id="id" data-identifier="true" data-searchable="false" data-type="numeric" data-visible="false">Id</th>
                                     <th data-column-id="fieldId" data-searchable="false" data-visible="false">Id</th>
                                     <th data-column-id="etat" data-width="10%" data-formatter="etat" data-searchable="false">Etat</th>
-                                    <th data-column-id="date" data-width="20%">Date</th>
+                                    <th data-column-id="dateCreation" data-width="20%">Date</th>
                                     <th data-column-id="utilisateur" data-width="20%">Utilisateur</th>
                                     <th data-column-id="message" data-width="50%">Message</th>
                                 </tr>
@@ -397,7 +397,7 @@
 			<a href="{{ path('index_patient') }}" class="cd-btn btn-back">
 				<i aria-hidden="true" class="fa fa-arrow-left"></i>
 			</a>
-			<button class="cd-btn btn-check">
+			<button class="cd-btn btn-check" {{ freezeDatabase ? 'disabled' }}>
 				<i aria-hidden="true" class="fa fa-save"></i>
 			</button>
 			<button class="cd-btn btn-top">
@@ -423,6 +423,10 @@
     <script>
 		$('.btn-save').click(function(event) {
 			event.preventDefault();
+            
+            let freezeDatabase = {{ freezeDatabase ? 'true' : 'false' }};
+            if (freezeDatabase)
+                return;
 			$('.btn-save').prop("disabled", true);
 			$('.btn-save').text("En cours d'enregistrement...")
 			$(this).parents('.form').submit();
@@ -557,9 +561,36 @@
 
         $('.alimentation-js').each(function() {
             alimentation($(this).find('input:checked').length, $(this));
-        })
+        });
         $('.alimentation-js input').on('change', function () {
             alimentation($(this).parents('.alimentation-js').find('input:checked').length, $(this).parents('.alimentation-js'));
+        });
+
+        /*
+        * SCORE
+        **********************************************************************/
+
+        function score(el) {
+            let p = $(el).parent('.form-space');
+            let score = 0;
+            $.each(p.find('.input'), function(i, e) {
+                if ($(e).hasClass('alimentation-js')) {
+                    score += Math.floor($(e).find('input:checked').length / 2) - 1
+                } else {
+                    score += $(e).prop('selectedIndex') > 0 ? $(e).prop('selectedIndex') - 1 : 0;
+                }
+            });
+            $(el).empty().append('<b>Score global : </b>' + score);
+        }
+
+        $('.score').each(function() {
+            score($(this));
+        });
+
+        $('.score').parent('.form-space').find('.input').on('change', function() {
+            $('.score').each(function() {
+                score($(this));
+            });
         });
 
         /*
@@ -875,8 +906,13 @@
             });
         })
 
-        $(".visite-delete").on('click', function() {
+        $(".js-delete-visite").on('click', function() {
+            $(this).next('#modal-delete-visite').modal('show');
+        })
+
+        $(".delete-visite").on('click', function() {
             let visiteId = $(this).attr('data-visite-id');
+            $('[id=modal-delete-visite]').modal('hide');
             $.ajax({
                 type: "POST",
                 url: "{{ path('patient_visite_delete') }}",
@@ -926,20 +962,20 @@
             $(this).val(getIMC(poids, taille));
         });
 
+        /* 
+        * Delete patient
+        **********************************************************************/
+        $('#js-delete-patient').on('click', function() {
+            $('#modal-delete-patient').modal('show');
+        })
+
     </script>
 
     <script>
         /* MENU */
         $('ul.visite-list').on('click', 'li.sub-sub-menu > a', function() {
             let n = $(this).attr('name');
-            $('ul.protocole-list').each(function (i) {
-                if ($(this).hasClass('active')) $(this).slideToggle("100");
-                $(this).removeClass("active");
-            });
-            $(this).parents('li').children('ul.protocole-list').addClass("active");
-            $(this).parents('li').children('ul.protocole-list').slideToggle("100");
-            
-            selectTab($(".tabbed__visites li[name='" + n + "']"));
+            selectVisite($(".tabbed__visites li[name='" + n + "']"));
             selectExamen(this);
         })
 
@@ -952,13 +988,27 @@
         })
 
         /* TABBED */
+        function selectVisite(visite) {
+            $('ul.protocole-list').each(function (i) {
+                if ($(this).hasClass('active'))
+                    $(this).slideToggle("100");
+                $(this).removeClass("active");
+            });
+
+            selectTab(visite);
+            saveTab($(visite).attr('data-protocole'));
+
+            $(".visite-list li a").removeClass('active');
+            $(".visite-list li a[name='" + $(visite).attr('name') + "']").addClass('active');
+            $(".visite-list li a[name='" + $(visite).attr('name') + "']").parents('li').children('ul.protocole-list').addClass("active");
+            $(".visite-list li a[name='" + $(visite).attr('name') + "']").parents('li').children('ul.protocole-list').slideToggle("100");
+        }
+
         $('.tabbed__visites').on('click', 'li', function() {
             if (this.classList.contains('active') || $(this).is('[id^="js-modal-"]')) {
                 return;
             }
-            selectTab(this);
-            $(".visite-list li a").removeClass('active');
-            $(".visite-list li a[name='" + $(this).attr('name') + "']").addClass('active');
+            selectVisite(this);
         })
 
         $('.tabbed__fiches').on('click', 'li', function() {
@@ -996,6 +1046,15 @@
             $(".tabbed__fiches li[name='" + tab + "']").addClass('active');
             scrollToc('.tab-content.active #examen');
         }
+
+        /* TABBED SAVED */
+
+        function saveTab(id) {
+            localStorage.setItem('tabId', id);
+        }
+        let id = localStorage.getItem('tabId');
+        selectVisite($(".tabbed__visites li[data-protocole='" + id + "']"));
+
 
         /* TOC */
         /* Smooth scroll */
@@ -1051,12 +1110,6 @@
 
         //onLoad
         var hash = window.location.hash.substr(0);
-        /*
-        if (~hash.indexOf("examen")) {
-            selectExamen(hash.split('-')[1]);
-            selectTab($(".tabbed__visites li[name='" + hash + "']"));
-        }
-        */
 
         $('.toc > ul > li > a').each(function (i) {
             page = $(this).attr('href');

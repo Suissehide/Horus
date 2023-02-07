@@ -31,22 +31,30 @@
 					<td>{{ form_row(form.facteur.traiteDiabete, {'attr': {'class': 'input'} }) }}</td>
 				</tr>
 				<tr>
-					<td class="row-header">Hypercholestérolémie</td>
-					<td>{{ form_row(form.facteur.risqueHypercholesterolemie, {'attr': {'class': 'input'} }) }}</td>
-					<td>{{ form_row(form.facteur.depuisHypercholesterolemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}</td>
-					<td>{{ form_row(form.facteur.traiteHypercholesterolemie, {'attr': {'class': 'input'} }) }}</td>
-				</tr>
-				<tr>
 					<td class="row-header">Hypertriglycéridèmie</td>
 					<td>{{ form_row(form.facteur.risqueHypertriglyceridemie, {'attr': {'class': 'input'} }) }}</td>
 					<td>{{ form_row(form.facteur.depuisHypertriglyceridemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}</td>
 					<td>{{ form_row(form.facteur.traiteHypertriglyceridemie, {'attr': {'class': 'input'} }) }}</td>
 				</tr>
+				<tr>
+					<td class="row-header">Hypercholestérolémie</td>
+					<td>{{ form_row(form.facteur.risqueHypercholesterolemie, {'attr': {'class': 'input'} }) }}</td>
+					<td>{{ form_row(form.facteur.depuisHypercholesterolemie, {'attr': {'class': 'input'}, 'useStyle': true}) }}</td>
+					<td>{{ form_row(form.facteur.traiteHypercholesterolemie, {'attr': {'class': 'input'} }) }}</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
+</div>
 
-	<div class="margin-space"></div>
+<div class="form-space">
+	<div class="column">
+		{{ form_row(form.facteur.LDLMaximal, {'attr': {'class': 'input'}, 'useStyle': true}) }}
+		{{ form_row(form.facteur.ageIntroductionTraitementHypolipemiant, {'attr': {'class': 'input'}, 'useStyle': true}) }}
+	</div>
+</div>
+
+<div class="form-space">
 	<h5>Tabagisme</h5>
 	<div class="column">
 		{{ form_row(form.facteur.tabagisme, {'attr': {'class': 'input'} }) }}
@@ -72,4 +80,4 @@
 
 </div>
 
-{{ form_row(form.facteur.save, {'attr': {'class': 'form-btn btn-save'} }) }}
+{{ form_row(form.facteur.save, {'attr': {'class': 'form-btn btn-save', 'disabled': freezeDatabase} }) }}

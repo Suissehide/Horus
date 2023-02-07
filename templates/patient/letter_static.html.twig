@@ -57,27 +57,27 @@
 							<div class="field">
 								<strong>Civilité :
 								</strong>
-								{{ patient.general.civilite }}</div>
+								<span>{{ patient.general.civilite }}</span></div>
 							<div class="field">
 								<strong>Prénom :
 								</strong>
-								{{ patient.general.prenom }}</div>
+								<span>{{ patient.general.prenom }}</span></div>
 							<div class="field">
 								<strong>Nom :
 								</strong>
-								{{ patient.general.nom }}</div>
+								<span>{{ patient.general.nom }}</span></div>
 							<div class="field">
 								<strong>Nom de naissance :
 								</strong>
-								{{ patient.general.nomNaissance }}</div>
+								<span>{{ patient.general.nomNaissance }}</span></div>
 							<div class="field">
 								<strong>Date de naissance :
 								</strong>
-								{{ patient.general.dateNaissance is empty ? "" : patient.general.dateNaissance|date("d/m/Y") }}</div>
+								<span>{{ patient.general.dateNaissance is empty ? "" : patient.general.dateNaissance|date("d/m/Y") }}</span></div>
 							<div class="field">
 								<strong>Sexe :
 								</strong>
-								{{ patient.general.sexe }}</div>
+								<span>{{ patient.general.sexe }}</span></div>
 						</div>
 					</div>
 					<div>
@@ -86,15 +86,15 @@
 							<div class="field">
 								<strong>Professions :
 								</strong>
-								{{ patient.general.profession }}</div>
+								<span>{{ patient.general.profession }}</span></div>
 							<div class="field">
 								<strong>Statut actuel :
 								</strong>
-								{{ patient.general.statutActuel }}</div>
+								<span>{{ patient.general.statutActuel }}</span></div>
 							<div class="field">
 								<strong>Niveau d'étude :
 								</strong>
-								{{ patient.general.niveauEtude }}</div>
+								<span>{{ patient.general.niveauEtude }}</span></div>
 						</div>
 					</div>
 				</div>
@@ -107,55 +107,59 @@
 					<div class="field">
 						<strong>IDM-SCA :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.IDMSCA }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.IDMSCA }}</span></div>
 					<div class="field">
 						<strong>Angor stable :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.angorStable }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.angorStable }}</span></div>
 					<div class="field">
 						<strong>Angioplastie coronaire :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.angioplastieCoronaire }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.angioplastieCoronaire }}</span></div>
 					<div class="field">
 						<strong>Pontage coronaire :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.pontageCoronaire }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.pontageCoronaire }}</span></div>
 					<div class="field">
 						<strong>AVC :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.AVC }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.AVC }}</span></div>
 					<div class="field">
 						<strong>AIT :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.AIT }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.AIT }}</span></div>
 					<div class="field">
 						<strong>Endartériectomie carotidienne :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.endarteriectomieCarotidienne }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.endarteriectomieCarotidienne }}</span></div>
+					<div class="field">
+						<strong>Sténose carotidienne >50% :
+						</strong>
+						<span>{{ patient.antecedentCardiovasculaire.stenoseCarotidienne }}</span></div>
 					<div class="field">
 						<strong>Artérite des membres inférieurs :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.arteriteMembresInferieurs }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.arteriteMembresInferieurs }}</span></div>
 					<div class="field">
 						<strong>Angioplastie périphérique :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.angioplastiePeripherique }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.angioplastiePeripherique }}</span></div>
 					<div class="field">
 						<strong>Pontage périphérique :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.pontagePeripherique }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.pontagePeripherique }}</span></div>
 					<div class="field">
 						<strong>Antécédent de fibrillation auriculaire :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.antecedentFibrillationAuriculaire }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.antecedentFibrillationAuriculaire }}</span></div>
 					<div class="field">
 						<strong>Valvulopathie (>grade 2 ou >modérée) :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.valvulopathie }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.valvulopathie }}</span></div>
 					<div class="field">
 						<strong>Insuffisance cardiaque stade III ou IV :
 						</strong>
-						{{ patient.antecedentCardiovasculaire.insuffisanceCardiaque }}</div>
+						<span>{{ patient.antecedentCardiovasculaire.insuffisanceCardiaque }}</span></div>
 				</div>
 			</section>
 
@@ -167,11 +171,11 @@
 					<div class="field">
 						<strong>Sus-décalage du segment ST :
 						</strong>
-						{{ patient.information.susDecalage }}</div>
+						<span>{{ patient.information.susDecalage }}</span></div>
 					<div class="field">
 						<strong>Sans sus-décalage du segment ST :
 						</strong>
-						{{ patient.information.sansSusDecalage }}</div>
+						<span>{{ patient.information.sansSusDecalage }}</span></div>
 				</div>
 
 				<h5>Territoire atteint</h5>
@@ -179,23 +183,23 @@
 					<div class="field">
 						<strong>Antérieur :
 						</strong>
-						{{ patient.information.anterieur }}</div>
+						<span>{{ patient.information.anterieur }}</span></div>
 					<div class="field">
 						<strong>Septo-apical :
 						</strong>
-						{{ patient.information.septoApical }}</div>
+						<span>{{ patient.information.septoApical }}</span></div>
 					<div class="field">
 						<strong>Latéral :
 						</strong>
-						{{ patient.information.lateral }}</div>
+						<span>{{ patient.information.lateral }}</span></div>
 					<div class="field">
 						<strong>Inférieur / Postérieur :
 						</strong>
-						{{ patient.information.inferieurPosterieur }}</div>
+						<span>{{ patient.information.inferieurPosterieur }}</span></div>
 					<div class="field">
 						<strong>Sans territoire :
 						</strong>
-						{{ patient.information.sansTerritoire }}</div>
+						<span>{{ patient.information.sansTerritoire }}</span></div>
 				</div>
 
 				<h5>Coronarographie (sténose > 50%)</h5>
@@ -203,31 +207,31 @@
 					<div class="field">
 						<strong>IVA :
 						</strong>
-						{{ patient.information.IVA }}</div>
+						<span>{{ patient.information.IVA }}</span></div>
 					<div class="field">
 						<strong>Diagonale :
 						</strong>
-						{{ patient.information.diagonale }}</div>
+						<span>{{ patient.information.diagonale }}</span></div>
 					<div class="field">
 						<strong>Cx :
 						</strong>
-						{{ patient.information.Cx }}</div>
+						<span>{{ patient.information.Cx }}</span></div>
 					<div class="field">
 						<strong>Marginale :
 						</strong>
-						{{ patient.information.marginale }}</div>
+						<span>{{ patient.information.marginale }}</span></div>
 					<div class="field">
 						<strong>CD :
 						</strong>
-						{{ patient.information.CD }}</div>
+						<span>{{ patient.information.CD }}</span></div>
 					<div class="field">
 						<strong>Pontage :
 						</strong>
-						{{ patient.information.pontage }}</div>
+						<span>{{ patient.information.pontage }}</span></div>
 					<div class="field">
 						<strong>Tronc commun :
 						</strong>
-						{{ patient.information.troncCommun }}</div>
+						<span>{{ patient.information.troncCommun }}</span></div>
 				</div>
 
 				<h5>Traitement à la phase aiguë</h5>
@@ -235,11 +239,13 @@
 					<div class="field">
 						<strong>Traitement :
 						</strong>
-						{% for t in patient.information.traitementPhaseAigue %}
-							{{ t }}
-							{% if loop.last == false %},
-							{% endif %}
-						{% endfor %}
+						<span>
+							{% for t in patient.information.traitementPhaseAigue %}
+								{{ t }}
+								{% if loop.last == false %},
+								{% endif %}
+							{% endfor %}
+						</span>
 					</div>
 				</div>
 
@@ -248,54 +254,62 @@
 					<div class="field">
 						<strong>Trouble du rythme ventriculaire :
 						</strong>
-						{{ patient.information.troubleRythmeVentriculaire }}</div>
+						<span>{{ patient.information.troubleRythmeVentriculaire }}</span></div>
 					<div class="field">
 						<strong>Insuffisance cardiaque :
 						</strong>
-						{{ patient.information.insuffisanceCardiaque }}</div>
+						<span>{{ patient.information.insuffisanceCardiaque }}</span></div>
 					<div class="field">
 						<strong>Péricardite :
 						</strong>
-						{{ patient.information.pericardite }}</div>
+						<span>{{ patient.information.pericardite }}</span></div>
 					<div class="field">
 						<strong>Complication mécanique :
 						</strong>
-						{{ patient.information.complicationMecanique }}</div>
+						<span>{{ patient.information.complicationMecanique }}</span></div>
 				</div>
 
 				<h3 id="accidentVasculaireCerebral">Accident vasculaire cérébral</h3>
 				<div class="form-space">
 					<div class="field">
+						<strong>Date de l'AVC :
+						</strong>
+						<span>{{ patient.information.dateAVC is empty ? "" : patient.information.dateAVC|date("d/m/Y") }}</span></div>
+					<div class="field">
+						<strong>Score modifié de Rankin à 3 mois :
+						</strong>
+						<span>{{ patient.information.scoreModifieRankin }}</span></div>
+					<div class="field">
 						<strong>Localisation :
 						</strong>
-						{{ patient.information.localisation }}</div>
+						<span>{{ patient.information.localisation }}</span></div>
 					<div class="field">
 						<strong>Taille :
 						</strong>
-						{{ patient.information.taille }}</div>
+						<span>{{ patient.information.taille }}</span></div>
 				</div>
 
 				<div class="form-space">
 					<div class="field">
 						<strong>Cause potentielle :
 						</strong>
-						{{ patient.information.etiologieAtherosclerose }}</div>
+						<span>{{ patient.information.etiologieAtherosclerose }}</span></div>
 					<div class="field">
 						<strong>Cause incertaine :
 						</strong>
-						{{ patient.information.etiologieMaladiePetitsArteres }}</div>
+						<span>{{ patient.information.etiologieMaladiePetitsArteres }}</span></div>
 					<div class="field">
 						<strong>Cause improbable :
 						</strong>
-						{{ patient.information.etiologieCardioEmbolique }}</div>
+						<span>{{ patient.information.etiologieCardioEmbolique }}</span></div>
 					<div class="field">
 						<strong>Pathologie absente :
 						</strong>
-						{{ patient.information.etiologieAutreCause }}</div>
+						<span>{{ patient.information.etiologieAutreCause }}</span></div>
 					<div class="field">
 						<strong>Explorations insuffisantes pour statuer :
 						</strong>
-						{{ patient.information.etiologieDissection }}</div>
+						<span>{{ patient.information.etiologieDissection }}</span></div>
 				</div>
 			</section>
 
@@ -305,7 +319,7 @@
 				<div class="field">
 					<strong>Antécédent familiaux :
 					</strong>
-					{{ patient.facteur.antecedentFamiliaux }}</div>
+					<span>{{ patient.facteur.antecedentFamiliaux }}</span></div>
 
 				<div class="form-space table-container">
 					<table class="table-custom">
@@ -320,30 +334,41 @@
 						<tbody>
 							<tr>
 								<td class="row-header">HTA</td>
-								<td>{{ patient.facteur.risqueHTA }}</td>
-								<td>{{ patient.facteur.depuisHTA }}</td>
-								<td>{{ patient.facteur.traiteHTA }}</td>
+								<td><span>{{ patient.facteur.risqueHTA }}</span></td>
+								<td><span>{{ patient.facteur.depuisHTA }}</span></td>
+								<td><span>{{ patient.facteur.traiteHTA }}</span></td>
 							</tr>
 							<tr>
 								<td class="row-header">Diabète</td>
-								<td>{{ patient.facteur.risqueDiabete }}</td>
-								<td>{{ patient.facteur.depuisDiabete }}</td>
-								<td>{{ patient.facteur.traiteDiabete }}</td>
-							</tr>
-							<tr>
-								<td class="row-header">Hypercholestérolémie</td>
-								<td>{{ patient.facteur.risqueHypercholesterolemie }}</td>
-								<td>{{ patient.facteur.depuisHypercholesterolemie }}</td>
-								<td>{{ patient.facteur.traiteHypercholesterolemie }}</td>
+								<td><span>{{ patient.facteur.risqueDiabete }}</span></td>
+								<td><span>{{ patient.facteur.depuisDiabete }}</span></td>
+								<td><span>{{ patient.facteur.traiteDiabete }}</span></td>
 							</tr>
 							<tr>
 								<td class="row-header">Hypertriglycéridèmie</td>
-								<td>{{ patient.facteur.risqueHypertriglyceridemie }}</td>
-								<td>{{ patient.facteur.depuisHypertriglyceridemie }}</td>
-								<td>{{ patient.facteur.traiteHypertriglyceridemie }}</td>
+								<td><span>{{ patient.facteur.risqueHypertriglyceridemie }}</span></td>
+								<td><span>{{ patient.facteur.depuisHypertriglyceridemie }}</span></td>
+								<td><span>{{ patient.facteur.traiteHypertriglyceridemie }}</span></td>
+							</tr>
+							<tr>
+								<td class="row-header">Hypercholestérolémie</td>
+								<td><span>{{ patient.facteur.risqueHypercholesterolemie }}</span></td>
+								<td><span>{{ patient.facteur.depuisHypercholesterolemie }}</span></td>
+								<td><span>{{ patient.facteur.traiteHypercholesterolemie }}</span></td>
 							</tr>
 						</tbody>
 					</table>
+				</div>
+
+				<div class="form-space column">
+					<div class="field">
+						<strong>LDL maximal au cours de la vie (en g/L):
+						</strong>
+						<span>{{ patient.facteur.LDLMaximal }}</span></div>
+					<div class="field">
+						<strong>Âge d’introduction du traitement hypolipémiant (en années):
+						</strong>
+						<span>{{ patient.facteur.ageIntroductionTraitementHypolipemiant }}</span></div>
 				</div>
 
 				<h5>Tabagisme</h5>
@@ -351,15 +376,15 @@
 					<div class="field">
 						<strong>État :
 						</strong>
-						{{ patient.facteur.tabagisme }}</div>
+						<span>{{ patient.facteur.tabagisme }}</span></div>
 					<div class="field">
 						<strong>Date d'arrêt :
 						</strong>
-						{{ patient.facteur.dateArret is empty ? "" : patient.facteur.dateArret|date("d/m/Y") }}</div>
+						<span>{{ patient.facteur.dateArret is empty ? "" : patient.facteur.dateArret|date("d/m/Y") }}</span></div>
 					<div class="field">
 						<strong>Nombres de paquets par an :
 						</strong>
-						{{ patient.facteur.nombrePaquetsAn }}</div>
+						<span>{{ patient.facteur.nombrePaquetsAn }}</span></div>
 				</div>
 
 				<h5>Obésité</h5>
@@ -367,7 +392,7 @@
 					<div class="field">
 						<strong>État :
 						</strong>
-						{{ patient.facteur.obesite }}</div>
+						<span>{{ patient.facteur.obesite }}</span></div>
 				</div>
 
 				<h5>Alcoolisme</h5>
@@ -375,11 +400,11 @@
 					<div class="field">
 						<strong>État :
 						</strong>
-						{{ patient.facteur.alcoolisme }}</div>
+						<span>{{ patient.facteur.alcoolisme }}</span></div>
 					<div class="field">
 						<strong>Sevré :
 						</strong>
-						{{ patient.facteur.sevre }}</div>
+						<span>{{ patient.facteur.sevre }}</span></div>
 				</div>
 
 				<h5>Cannabis</h5>
@@ -387,14 +412,13 @@
 					<div class="field">
 						<strong>État :
 						</strong>
-						{{ patient.facteur.cannabis }}</div>
+						<span>{{ patient.facteur.cannabis }}</span></div>
 				</div>
 			</section>
 
 			{% for visite in patient.visites %}
 
-				<hr
-				class="separator">
+				<hr class="separator">
 
 				{#========== VISITE ==========#}
 				<section class="slide" style="display: block">
@@ -404,7 +428,7 @@
 						<div class="field">
 							<strong>Date :
 							</strong>
-							{{ visite.date is empty ? "" : visite.date|date("d/m/Y") }}</div>
+							<span>{{ visite.date is empty ? "" : visite.date|date("d/m/Y") }}</span></div>
 					</div>
 				</section>
 
@@ -430,57 +454,57 @@
 								<tbody>
 									<tr>
 										<td class="row-header">IVA</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.stenoseIVA }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.coroscannerIVA }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.ffrIVA }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.angioplastieIVA }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.cmrIVA }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.imrIVA }}</td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.stenoseIVA }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.coroscannerIVA }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.ffrIVA }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.angioplastieIVA }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.cmrIVA }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.imrIVA }}</span></td>
 									</tr>
 									<tr>
 										<td class="row-header">Diagonale</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.stenoseDiagonale }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.coroscannerDiagonale }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.ffrDiagonale }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.angioplastieDiagonale }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.cmrDiagonale }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.imrDiagonale }}</td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.stenoseDiagonale }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.coroscannerDiagonale }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.ffrDiagonale }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.angioplastieDiagonale }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.cmrDiagonale }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.imrDiagonale }}</span></td>
 									</tr>
 									<tr>
 										<td class="row-header">Circonflexe</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.stenoseCirconflexe }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.coroscannerCirconflexe }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.ffrCirconflexe }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.angioplastieCirconflexe }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.cmrCirconflexe }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.imrCirconflexe }}</td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.stenoseCirconflexe }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.coroscannerCirconflexe }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.ffrCirconflexe }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.angioplastieCirconflexe }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.cmrCirconflexe }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.imrCirconflexe }}</span></td>
 									</tr>
 									<tr>
 										<td class="row-header">Postérolatéral</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.stenosePosterolateral }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.coroscannerPosterolateral }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.ffrPosterolateral }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.angioplastiePosterolateral }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.cmrPosterolateral }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.imrPosterolateral }}</td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.stenosePosterolateral }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.coroscannerPosterolateral }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.ffrPosterolateral }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.angioplastiePosterolateral }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.cmrPosterolateral }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.imrPosterolateral }}</span></td>
 									</tr>
 									<tr>
 										<td class="row-header">Coronaire droite</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.stenoseCoronaireDroite }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.coroscannerCoronaireDroite }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.ffrCoronaireDroite }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.angioplastieCoronaireDroite }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.cmrCoronaireDroite }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.imrCoronaireDroite }}</td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.stenoseCoronaireDroite }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.coroscannerCoronaireDroite }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.ffrCoronaireDroite }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.angioplastieCoronaireDroite }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.cmrCoronaireDroite }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.imrCoronaireDroite }}</span></td>
 									</tr>
 									<tr>
 										<td class="row-header">Pontage</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.stenosePontage }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.coroscannerPontage }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.ffrPontage }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.angioplastiePontage }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.cmrPontage }}</td>
-										<td>{{ visite.protocole.coronaireAngioplastie.imrPontage }}</td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.stenosePontage }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.coroscannerPontage }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.ffrPontage }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.angioplastiePontage }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.cmrPontage }}</span></td>
+										<td><span>{{ visite.protocole.anatomieCoronaire.imrPontage }}</span></td>
 									</tr>
 								</tbody>
 							</table>
@@ -493,7 +517,7 @@
 							<div class="field">
 								<strong>Score calcique coronaire :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.scoreCalciqueCoronaire }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.scoreCalciqueCoronaire }}</span></div>
 						</div>
 
 						<h3>Athérome coronaire</h3>
@@ -501,19 +525,19 @@
 							<div class="field">
 								<strong>Non analysable devant cac élevé :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.nonAnalysable }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.nonAnalysable }}</span></div>
 							<div class="field">
 								<strong>Absence d'athérome :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.absenceAtherome }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.absenceAtherome }}</span></div>
 							<div class="field">
 								<strong>Remodelage de la plaque* :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.remodelagePlaque }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.remodelagePlaque }}</span></div>
 							<div class="field">
 								<strong>Napkin ring* :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.napkinRing }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.napkinRing }}</span></div>
 							<div class="def">*Remodelage et Napking ring décrit par le radiologue (sont des caractéristiques de plaque à risque)</div>
 						</div>
 
@@ -523,15 +547,15 @@
 							<div class="field">
 								<strong>Molle (hyperdense) :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.molle }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.molle }}</span></div>
 							<div class="field">
 								<strong>Calcaire (hyperdense) :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.calcaire }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.calcaire }}</span></div>
 							<div class="field">
 								<strong>Mixte :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.mixte }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.mixte }}</span></div>
 						</div>
 
 						<h5>Volume</h5>
@@ -539,23 +563,27 @@
 							<div class="field">
 								<strong>Volume non réalisable (charge trop importante en athérome, cac élevé...) :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.volumeNonRealisable }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.volumeNonRealisable }}</span></div>
 							<div class="field">
-								<strong>Volume plaque hypodense (< 30 UH) bleu :
+								<strong>Volume coronaire total (en mm3) :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.volumePlaqueHypodense + 0 }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.volumeCoronaireTotal }}</span></div>
 							<div class="field">
-								<strong>Volume de plaque calcifiée jaune :
+								<strong>Volume plaque hypodense (< 30 UH) bleu  (en mm3) :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.volumePlaqueCalcifiee + 0 }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.volumePlaqueHypodense }}</span></div>
 							<div class="field">
-								<strong>Volume plaque non calcifiée non hypodense rose :
+								<strong>Volume de plaque calcifiée jaune (en mm3) :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.volumePlaque + 0 }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.volumePlaqueCalcifiee }}</span></div>
 							<div class="field">
-								<strong>Volume total de plaque (bleu + jaune + rose) :
+								<strong>Volume plaque non calcifiée non hypodense rose (en mm3) :
 								</strong>
-								{{ visite.protocole.coronaireAngioplastie.volumeTotalPlaque + 0 }}</div>
+								<span>{{ visite.protocole.anatomieCoronaire.volumePlaque }}</span></div>
+							<div class="field">
+								<strong>Volume total de plaque (bleu + jaune + rose) (en mm3) :
+								</strong>
+								<span>{{ visite.protocole.anatomieCoronaire.volumeTotalPlaque }}</span></div>
 						</div>
 					</section>
 				{% endif %}
@@ -569,20 +597,20 @@
 							<div class="field">
 								<strong>Taille (en cm):
 								</strong>
-								{{ visite.protocole.BFR.taille + 0 }}</div>
+								<span>{{ visite.protocole.BFR.taille }}</span></div>
 							<div class="field">
 								<strong>Poids (en kg):
 								</strong>
-								{{ visite.protocole.BFR.poids + 0 }}</div>
+								<span>{{ visite.protocole.BFR.poids }}</span></div>
 							<div class="field">
 								<strong>Tour de taille (en cm):
 								</strong>
-								{{ visite.protocole.BFR.tourTaille }}</div>
+								<span>{{ visite.protocole.BFR.tourTaille }}</span></div>
 							{% if visite.protocole.BFR.taille != 0 %}
 								<div class="field">
 									<strong>IMC :
 									</strong>
-									{{ (visite.protocole.BFR.poids / ((visite.protocole.BFR.taille / 100) ** 2))|round(1, 'floor') }}</div>
+									<span>{{ (visite.protocole.BFR.poids / ((visite.protocole.BFR.taille / 100) ** 2))|round(1, 'floor') }}</span></div>
 							{% endif %}
 						</div>
 
@@ -591,25 +619,25 @@
 							<div class="field">
 								<strong>Systolique jour (en mmHg) :
 								</strong>
-								{{ visite.protocole.BFR.tensionArterielleSystoliqueJour + 0 }}</div>
+								<span>{{ visite.protocole.BFR.tensionArterielleSystoliqueJour }}</span></div>
 							<div class="field">
 								<strong>Diastolique jour (en mmHg) :
 								</strong>
-								{{ visite.protocole.BFR.tensionArterielleDiastoliqueJour + 0 }}</div>
+								<span>{{ visite.protocole.BFR.tensionArterielleDiastoliqueJour }}</span></div>
 							<div class="field">
 								<strong>Systolique nuit (en mmHg) :
 								</strong>
-								{{ visite.protocole.BFR.tensionArterielleSystoliqueNuit + 0 }}</div>
+								<span>{{ visite.protocole.BFR.tensionArterielleSystoliqueNuit }}</span></div>
 							<div class="field">
 								<strong>Diastolique nuit (en mmHg) :
 								</strong>
-								{{ visite.protocole.BFR.tensionArterielleDiastoliqueNuit + 0 }}</div>
+								<span>{{ visite.protocole.BFR.tensionArterielleDiastoliqueNuit }}</span></div>
 						</div>
 						<div class="form-space">
 							<div class="field">
 								<strong>HVG :
 								</strong>
-								{{ visite.protocole.BFR.HVG }}</div>
+								<span>{{ visite.protocole.BFR.HVG }}</span></div>
 						</div>
 
 						<h3 id="dyslipidemie">Dyslipidémie</h3>
@@ -617,23 +645,23 @@
 							<div class="field">
 								<strong>Cholestérol total (en g/L) :
 								</strong>
-								{{ visite.protocole.BFR.cholesterolTotal }}</div>
+								<span>{{ visite.protocole.BFR.cholesterolTotal }}</span></div>
 							<div class="field">
 								<strong>Triglicérides (en g/L) :
 								</strong>
-								{{ visite.protocole.BFR.triglicerides }}</div>
+								<span>{{ visite.protocole.BFR.triglicerides }}</span></div>
 							<div class="field">
 								<strong>HDL-C (en g/L) :
 								</strong>
-								{{ visite.protocole.BFR.HDLC }}</div>
+								<span>{{ visite.protocole.BFR.HDLC }}</span></div>
 							<div class="field">
 								<strong>LDL-C (en g/L) :
 								</strong>
-								{{ visite.protocole.BFR.LDLC }}</div>
+								<span>{{ visite.protocole.BFR.LDLC }}</span></div>
 							<div class="field">
 								<strong>Score de DUTCH :
 								</strong>
-								{{ visite.protocole.BFR.scoreDUTCH }}</div>
+								<span>{{ visite.protocole.BFR.scoreDUTCH }}</span></div>
 						</div>
 
 						<h3 id="activite-physique">Tabagisme</h3>
@@ -641,15 +669,15 @@
 							<div class="field">
 								<strong>État :
 								</strong>
-								{{ visite.protocole.BFR.tabagisme }}</div>
+								<span>{{ visite.protocole.BFR.tabagisme }}</span></div>
 							<div class="field">
 								<strong>Date d'arrêt :
 								</strong>
-								{{ visite.protocole.BFR.dateArret is empty ? "" : visite.protocole.BFR.dateArret|date("d/m/Y") }}</div>
+								<span>{{ visite.protocole.BFR.dateArret is empty ? "" : visite.protocole.BFR.dateArret|date("d/m/Y") }}</span></div>
 							<div class="field">
 								<strong>Nombres de paquets par an :
 								</strong>
-								{{ visite.protocole.BFR.nombrePaquetsAn }}</div>
+								<span>{{ visite.protocole.BFR.nombrePaquetsAn }}</span></div>
 						</div>
 
 						<h3 id="diabete">Diabète</h3>
@@ -657,39 +685,39 @@
 							<div class="field">
 								<strong>Type :
 								</strong>
-								{{ visite.protocole.BFR.diabeteType }}</div>
+								<span>{{ visite.protocole.BFR.diabeteType }}</span></div>
 							<div class="field">
 								<strong>Depuis :
 								</strong>
-								{{ visite.protocole.BFR.diabeteDepuis }}</div>
+								<span>{{ visite.protocole.BFR.diabeteDepuis }}</span></div>
 							<div class="field">
 								<strong>Glycémie ajeûn :
 								</strong>
-								{{ visite.protocole.BFR.glycemieAjeun }}</div>
+								<span>{{ visite.protocole.BFR.glycemieAjeun }}</span></div>
 							<div class="field">
 								<strong>Hba1c :
 								</strong>
-								{{ visite.protocole.BFR.Hba1c }}</div>
+								<span>{{ visite.protocole.BFR.Hba1c }}</span></div>
 							<div class="field">
 								<strong>Neuropathie clinique (DN4) :
 								</strong>
-								{{ visite.protocole.BFR.neuropathieClinique }}</div>
+								<span>{{ visite.protocole.BFR.neuropathieClinique }}</span></div>
 						</div>
 						<div class="form-space column">
 							<div class="field">
 								<strong>Neuroesthésiométrie pied droit (en volt) :
 								</strong>
-								{{ visite.protocole.BFR.neuroesthesiometriePiedDroit }}</div>
+								<span>{{ visite.protocole.BFR.neuroesthesiometriePiedDroit }}</span></div>
 							<div class="field">
 								<strong>Neuroesthésiométrie pied gauche (en volt) :
 								</strong>
-								{{ visite.protocole.BFR.neuroesthesiometriePiedGauche }}</div>
+								<span>{{ visite.protocole.BFR.neuroesthesiometriePiedGauche }}</span></div>
 						</div>
 						<div class="form-space column">
 							<div class="field">
 								<strong>Fond d'oeil :
 								</strong>
-								{{ visite.protocole.BFR.fondOeil }}</div>
+								<span>{{ visite.protocole.BFR.fondOeil }}</span></div>
 						</div>
 
 
@@ -698,19 +726,19 @@
 							<div class="field">
 								<strong>Créatinine :
 								</strong>
-								{{ visite.protocole.BFR.creatinine }}</div>
+								<span>{{ visite.protocole.BFR.creatinine }}</span></div>
 							<div class="field">
 								<strong>Débit de filtration glomerulaire CK-EPI :
 								</strong>
-								{{ visite.protocole.BFR.debitFiltrationGlomerulaire }}</div>
+								<span>{{ visite.protocole.BFR.debitFiltrationGlomerulaire }}</span></div>
 							<div class="field">
 								<strong>Microalbuminurie :
 								</strong>
-								{{ visite.protocole.BFR.microAlbuminurie }}</div>
+								<span>{{ visite.protocole.BFR.microAlbuminurie }}</span></div>
 							<div class="field">
 								<strong>Protéinurie :
 								</strong>
-								{{ visite.protocole.BFR.proteinurie }}</div>
+								<span>{{ visite.protocole.BFR.proteinurie }}</span></div>
 						</div>
 
 						<h3 id="bilan-hepatique">Bilan hépatique</h3>
@@ -718,15 +746,15 @@
 							<div class="field">
 								<strong>Transaminases ASAT :
 								</strong>
-								{{ visite.protocole.BFR.transaminasesASAT }}</div>
+								<span>{{ visite.protocole.BFR.transaminasesASAT }}</span></div>
 							<div class="field">
 								<strong>Transaminases ALAT :
 								</strong>
-								{{ visite.protocole.BFR.transaminasesALAT }}</div>
+								<span>{{ visite.protocole.BFR.transaminasesALAT }}</span></div>
 							<div class="field">
 								<strong>Gamma GT :
 								</strong>
-								{{ visite.protocole.BFR.gamma }}</div>
+								<span>{{ visite.protocole.BFR.gamma }}</span></div>
 						</div>
 
 						<h3 id="facteur-thrombogeniques">Facteur thrombogéniques</h3>
@@ -734,23 +762,23 @@
 							<div class="field">
 								<strong>Fibrinogène :
 								</strong>
-								{{ visite.protocole.BFR.fibrinogene }}</div>
+								<span>{{ visite.protocole.BFR.fibrinogene }}</span></div>
 							<div class="field">
 								<strong>CRP :
 								</strong>
-								{{ visite.protocole.BFR.CRP }}</div>
+								<span>{{ visite.protocole.BFR.CRP }}</span></div>
 							<div class="field">
 								<strong>Hémoglobine :
 								</strong>
-								{{ visite.protocole.BFR.hemoglobine }}</div>
+								<span>{{ visite.protocole.BFR.hemoglobine }}</span></div>
 							<div class="field">
 								<strong>VGM :
 								</strong>
-								{{ visite.protocole.BFR.VGM }}</div>
+								<span>{{ visite.protocole.BFR.VGM }}</span></div>
 							<div class="field">
 								<strong>Plaquettes :
 								</strong>
-								{{ visite.protocole.BFR.plaquettes }}</div>
+								<span>{{ visite.protocole.BFR.plaquettes }}</span></div>
 						</div>
 
 						<h3 id="activite-physique">Thyroïde</h3>
@@ -758,7 +786,7 @@
 							<div class="field">
 								<strong>TSH :
 								</strong>
-								{{ visite.protocole.BFR.TSH }}</div>
+								<span>{{ visite.protocole.BFR.TSH }}</span></div>
 						</div>
 
 						<h3 id="activite-physique">Activité physique</h3>
@@ -766,19 +794,20 @@
 							<div class="field">
 								<strong>Activité physique :
 								</strong>
-								{{ visite.protocole.BFR.activitePhysique }}</div>
+								<span>{{ visite.protocole.BFR.activitePhysique }}</span></div>
 						</div>
 
 						<h3 id="alimentation">Alimentation</h3>
 						<div class="form-space field">
 							<strong>Alimentation :
 							</strong>
-							{% for t in visite.protocole.BFR.alimentation %}
-								{{ t }}
-								{% if loop.last == false %},
-								{% endif %}
-							{% endfor %}
-							<div class="alimentation"></div>
+							<span class="alimentation">
+								{% for t in visite.protocole.BFR.alimentation %}
+									{{ t }}
+									{% if loop.last == false %},
+									{% endif %}
+								{% endfor %}
+							</span>
 						</div>
 					</section>
 				{% endif %}
@@ -800,21 +829,21 @@
 								<tbody>
 									<tr>
 										<td class="row-header">IVA</td>
-										<td>{{ visite.protocole.echographie.reposIVA }}</td>
-										<td>{{ visite.protocole.echographie.effortIVA }}</td>
-										<td>{{ visite.protocole.echographie.nbSegmentIVA }}</td>
+										<td><span>{{ visite.protocole.echographie.reposIVA }}</span></td>
+										<td><span>{{ visite.protocole.echographie.effortIVA }}</span></td>
+										<td><span>{{ visite.protocole.echographie.nbSegmentIVA }}</span></td>
 									</tr>
 									<tr>
 										<td class="row-header">Circonflexe</td>
-										<td>{{ visite.protocole.echographie.reposCirconflexe }}</td>
-										<td>{{ visite.protocole.echographie.effortCirconflexe }}</td>
-										<td>{{ visite.protocole.echographie.nbSegmentCirconflexe }}</td>
+										<td><span>{{ visite.protocole.echographie.reposCirconflexe }}</span></td>
+										<td><span>{{ visite.protocole.echographie.effortCirconflexe }}</span></td>
+										<td><span>{{ visite.protocole.echographie.nbSegmentCirconflexe }}</span></td>
 									</tr>
 									<tr>
 										<td class="row-header">Coronaire droite</td>
-										<td>{{ visite.protocole.echographie.reposCoronaireDroite }}</td>
-										<td>{{ visite.protocole.echographie.effortCoronaireDroite }}</td>
-										<td>{{ visite.protocole.echographie.nbSegmentCoronaireDroite }}</td>
+										<td><span>{{ visite.protocole.echographie.reposCoronaireDroite }}</span></td>
+										<td><span>{{ visite.protocole.echographie.effortCoronaireDroite }}</span></td>
+										<td><span>{{ visite.protocole.echographie.nbSegmentCoronaireDroite }}</span></td>
 									</tr>
 								</tbody>
 							</table>
@@ -824,7 +853,7 @@
 							<div class="field">
 								<strong>Fraction d'éjection (en %) :
 								</strong>
-								{{ visite.protocole.echographie.fractionEjection }}</div>
+								<span>{{ visite.protocole.echographie.fractionEjection }}</span></div>
 						</div>
 					</section>
 				{% endif %}
@@ -839,60 +868,60 @@
 							<div class="field" id="carotideInterneDroite">
 								<strong>Carotide interne droite :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.carotideInterneDroite }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.carotideInterneDroite }}</span></div>
 							<div class="field" id="carotideInterneGauche">
 								<strong>Carotide interne gauche :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.carotideInterneGauche }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.carotideInterneGauche }}</span></div>
 							<div class="field" id="EIMDroit">
 								<strong>EIM droit :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.EIMDroit }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.EIMDroit }}</span></div>
 							<div class="field" id="EIMGauche">
 								<strong>EIM gauche :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.EIMGauche }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.EIMGauche }}</span></div>
 							<div class="field" id="vertebraleDroite">
 								<strong>Vertébrale droite :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.vertebraleDroite }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.vertebraleDroite }}</span></div>
 							<div class="field" id="vertebraleGauche">
 								<strong>Vertébrale gauche :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.vertebraleGauche }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.vertebraleGauche }}</span></div>
 							<div class="field" id="carotideCommuneDroite">
 								<strong>Carotide commune droite :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.carotideCommuneDroite }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.carotideCommuneDroite }}</span></div>
 							<div class="field" id="carotideCommuneGauche">
 								<strong>Carotide commune gauche :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.carotideCommuneGauche }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.carotideCommuneGauche }}</span></div>
 							<div class="field" id="sousClaviereDroite">
 								<strong>Sous-clavière droite :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.sousClaviereDroite }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.sousClaviereDroite }}</span></div>
 							<div class="field" id="sousClaviereGauche">
 								<strong>Sous-clavière gauche :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.sousClaviereGauche }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.sousClaviereGauche }}</span></div>
 							<div class="field" id="TSAAorte">
 								<strong>Aorte :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.TSAAorte }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.TSAAorte }}</span></div>
 
 							<div class="field" id="volumeCarotideDroite">
 								<strong>Volume carotide droite :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.volumeCarotideDroite }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.volumeCarotideDroite }}</span></div>
 							<div class="field" id="volumeCarotideGauche">
 								<strong>Volume carotide gauche :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.volumeCarotideGauche }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.volumeCarotideGauche }}</span></div>
 							<div class="field" id="chargeAtheromeTotale">
 								<strong>Charge en athérome totale :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.chargeAtheromeTotale }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.chargeAtheromeTotale }}</span></div>
 						</div>
 
 						<h3 id="membres-inferieur">Schéma membres inférieur</h3>
@@ -901,47 +930,55 @@
 							<div class="field" id="membresInferieurAorte">
 								<strong>Diamètre aorte :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.membresInferieurAorte }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.membresInferieurAorte }}</span></div>
+							<div class="field" id="volumeFemoralDroit">
+								<strong>Volume fémoral droite :
+								</strong>
+								<span>{{ visite.protocole.echographieVasculaire.volumeFemoralDroit }}</span></div>
+							<div class="field" id="volumeFemoralGauche">
+								<strong>Volume fémoral gauche :
+								</strong>
+								<span>{{ visite.protocole.echographieVasculaire.volumeFemoralGauche }}</span></div>
 							<div class="field" id="iliaqueDroite">
 								<strong>Iliaque droite :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.iliaqueDroite }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.iliaqueDroite }}</span></div>
 							<div class="field" id="iliaqueGauche">
 								<strong>Iliaque gauche :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.iliaqueGauche }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.iliaqueGauche }}</span></div>
 							<div class="field" id="femoraleCommuneDroite">
 								<strong>Fémorale commune droite :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.femoraleCommuneDroite }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.femoraleCommuneDroite }}</span></div>
 							<div class="field" id="femoraleCommuneGauche">
 								<strong>Fémorale commune gauche :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.femoraleCommuneGauche }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.femoraleCommuneGauche }}</span></div>
 							<div class="field" id="femoraleSuperficielleDroite">
 								<strong>Fémorale superficielle droite :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.femoraleSuperficielleDroite }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.femoraleSuperficielleDroite }}</span></div>
 							<div class="field" id="femoraleSuperficielleGauche">
 								<strong>Fémorale superficielle gauche :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.femoraleSuperficielleGauche }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.femoraleSuperficielleGauche }}</span></div>
 							<div class="field" id="popliteDroite">
 								<strong>Poplite droite :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.popliteDroite }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.popliteDroite }}</span></div>
 							<div class="field" id="popliteGauche">
 								<strong>Poplite gauche :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.popliteGauche }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.popliteGauche }}</span></div>
 							<div class="field" id="axesJambiersDroits">
 								<strong>Axes jambiers droits :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.axesJambiersDroits }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.axesJambiersDroits }}</span></div>
 							<div class="field" id="axesJambiersGauches">
 								<strong>Axes jambiers gauches :
 								</strong>
-								{{ visite.protocole.echographieVasculaire.axesJambiersGauches }}</div>
+								<span>{{ visite.protocole.echographieVasculaire.axesJambiersGauches }}</span></div>
 						</div>
 
 						<div class="form-space">
@@ -949,58 +986,58 @@
 								<div class="field">
 									<strong>IPS repos droit :
 									</strong>
-									{{ visite.protocole.echographieVasculaire.IPSReposDroit }}</div>
+									<span>{{ visite.protocole.echographieVasculaire.IPSReposDroit }}</span></div>
 								<div class="field">
 									<strong>IPS repos gauche :
 									</strong>
-									{{ visite.protocole.echographieVasculaire.IPSReposGauche }}</div>
+									<span>{{ visite.protocole.echographieVasculaire.IPSReposGauche }}</span></div>
 							</div>
 
 							<div class="column">
 								<div class="field">
 									<strong>IPS repos gros orteil droit :
 									</strong>
-									{{ visite.protocole.echographieVasculaire.IPSGrosOrteilDroit }}</div>
+									<span>{{ visite.protocole.echographieVasculaire.IPSGrosOrteilDroit }}</span></div>
 								<div class="field">
 									<strong>IPS repos gros orteil gauche :
 									</strong>
-									{{ visite.protocole.echographieVasculaire.IPSGrosOrteilGauche }}</div>
+									<span>{{ visite.protocole.echographieVasculaire.IPSGrosOrteilGauche }}</span></div>
 							</div>
 
 							<div class="form-space">
 								<div class="field">
 									<strong>Test de Strandness: distance de première gêne :
 									</strong>
-									{{ visite.protocole.echographieVasculaire.testStrandnessDistanceGene }}</div>
+									<span>{{ visite.protocole.echographieVasculaire.testStrandnessDistanceGene }}</span></div>
 								<div class="field">
 									<strong>Test de Strandness: distance max * :
 									</strong>
-									{{ visite.protocole.echographieVasculaire.testStrandnessDistanceMax }}</div>
+									<span>{{ visite.protocole.echographieVasculaire.testStrandnessDistanceMax }}</span></div>
 								<div class="def">* compris entre 0 et 1000, 9999 si non réalisé</div>
 							</div>
 							<div class="form-space">
 								<div class="field">
 									<strong>Arrêt pour :
 									</strong>
-									{{ visite.protocole.echographieVasculaire.arretPour }}</div>
+									<span>{{ visite.protocole.echographieVasculaire.arretPour }}</span></div>
 							</div>
 
 							<div class="column">
 								<div class="field">
 									<strong>IPS effort droit :
 									</strong>
-									{{ visite.protocole.echographieVasculaire.IPSEffortDroit }}</div>
+									<span>{{ visite.protocole.echographieVasculaire.IPSEffortDroit }}</span></div>
 								<div class="field">
 									<strong>IPS effort gauche :
 									</strong>
-									{{ visite.protocole.echographieVasculaire.IPSEffortGauche }}</div>
+									<span>{{ visite.protocole.echographieVasculaire.IPSEffortGauche }}</span></div>
 							</div>
 
 							<div class="form-space column">
 								<div class="field">
 									<strong>Vélocité de l'onde pouls :
 									</strong>
-									{{ visite.protocole.echographieVasculaire.vitesseOndePouls }}</div>
+									<span>{{ visite.protocole.echographieVasculaire.vitesseOndePouls }}</span></div>
 							</div>
 						</div>
 					</section>
@@ -1014,39 +1051,39 @@
 							<div class="field">
 								<strong>Maquillé :
 								</strong>
-								{{ visite.protocole.testEffort.maquille }}</div>
+								<span>{{ visite.protocole.testEffort.maquille }}</span></div>
 							<div class="field">
 								<strong>Type :
 								</strong>
-								{{ visite.protocole.testEffort.type }}</div>
+								<span>{{ visite.protocole.testEffort.type }}</span></div>
 						</div>
 						<div class="form-space">
 							<div class="field">
 								<strong>Durée totale (en min) :
 								</strong>
-								{{ visite.protocole.testEffort.duree }}</div>
+								<span>{{ visite.protocole.testEffort.duree }}</span></div>
 							<div class="field">
 								<strong>Watts :
 								</strong>
-								{{ visite.protocole.testEffort.watts }}</div>
+								<span>{{ visite.protocole.testEffort.watts }}</span></div>
 						</div>
 						<div class="form-space column">
 							<div class="field">
 								<strong>Symptomes :
 								</strong>
-								{{ visite.protocole.testEffort.symptomes }}</div>
+								<span>{{ visite.protocole.testEffort.symptomes }}</span></div>
 							<div class="field">
 								<strong>% de la fréq. max :
 								</strong>
-								{{ visite.protocole.testEffort.frequenceMaxPercent }}</div>
+								<span>{{ visite.protocole.testEffort.frequenceMaxPercent }}</span></div>
 							<div class="field">
 								<strong>ECG modifié :
 								</strong>
-								{{ visite.protocole.testEffort.ECGModifie }}</div>
+								<span>{{ visite.protocole.testEffort.ECGModifie }}</span></div>
 							<div class="field">
 								<strong>Mesure :
 								</strong>
-								{{ visite.protocole.testEffort.mesure }}</div>
+								<span>{{ visite.protocole.testEffort.mesure }}</span></div>
 						</div>
 					</section>
 				{% endif %}
@@ -1058,56 +1095,60 @@
 						<div class="form-space">
 							<div class="field">
 								<strong>Nombre d'unités de prise de médicament (par semaine) : </strong>
-								{{ visite.protocole.medicamentsEntree.NbMedicamentSemaine }}</div>
+								<span>{{ visite.protocole.medicamentsEntree.NbMedicamentSemaine }}</span></div>
 							<div class="field">
 								<strong>Délai depuis la mise sous traitement (en mois) : </strong>
-								{{ visite.protocole.medicamentsEntree.DelaiSousTraitement }}</div>
+								<span>{{ visite.protocole.medicamentsEntree.DelaiSousTraitement }}</span></div>
 							<div class="field">
 								<strong>Pilulier : </strong>
-								{{ visite.protocole.medicamentsEntree.pilulier }}</div>
+								<span>{{ visite.protocole.medicamentsEntree.pilulier }}</span></div>
 							<div class="field">
 								<strong>Gestion des médicaments : </strong>
-								{% for t in visite.protocole.medicamentsEntree.gestionMedicaments %}
-									{{ t }}
-									{% if loop.last == false %},
-									{% endif %}
-								{% endfor %}
-							</div>
-							<div class="field">
-								<strong>Satisfaction pratique de la prise de traitement : </strong>
-								{{ visite.protocole.medicamentsEntree.satisfaction }}</div>
-							<div class="field">
-								<strong>Connaissance de la durée de traitement :</strong>
-								{{ visite.protocole.medicamentsEntree.ConnaissanceDureeTraitement }}</div>
-							<div class="field">
-								<strong>Score échelle adhésion Mascard (/5) : </strong>
-								{{ visite.protocole.medicamentsEntree.scoreMasCard }}</div>
-							<div class="sub">
-								<div class="field">
-									<strong>Item problèmes : </strong>
-									{% for t in visite.protocole.medicamentsEntree.problemes %}
+								<span>
+									{% for t in visite.protocole.medicamentsEntree.gestionMedicaments %}
 										{{ t }}
 										{% if loop.last == false %},
 										{% endif %}
 									{% endfor %}
+								</span>
+							</div>
+							<div class="field">
+								<strong>Satisfaction pratique de la prise de traitement : </strong>
+								<span>{{ visite.protocole.medicamentsEntree.satisfaction }}</span></div>
+							<div class="field">
+								<strong>Connaissance de la durée de traitement :</strong>
+								<span>{{ visite.protocole.medicamentsEntree.ConnaissanceDureeTraitement }}</span></div>
+							<div class="field">
+								<strong>Score échelle adhésion Mascard (/5) : </strong>
+								<span>{{ visite.protocole.medicamentsEntree.scoreMasCard }}</span></div>
+							<div class="sub">
+								<div class="field">
+									<strong>Item problèmes : </strong>
+									<span>
+										{% for t in visite.protocole.medicamentsEntree.problemes %}
+											{{ t }}
+											{% if loop.last == false %},
+											{% endif %}
+										{% endfor %}
+									</span>
 								</div>
 								<div class="field">
 									<strong>Remarques : </strong>
-									{{ visite.protocole.medicamentsEntree.remarques }}</div>
+									<span>{{ visite.protocole.medicamentsEntree.remarques }}</span></div>
 							</div>
 
 							<div class="field">
 								<strong>Effet indésirable ressenti au moment de l'enquête : </strong>
-								{{ visite.protocole.medicamentsEntree.effetIndesirable }}</div>
+								<span>{{ visite.protocole.medicamentsEntree.effetIndesirable }}</span></div>
 							<div class="sub">
 								<div class="field">
 									<strong>Si oui lequel(s) : </strong>
-									{{ visite.protocole.medicamentsEntree.lequel }}</div>
+									<span>{{ visite.protocole.medicamentsEntree.lequel }}</span></div>
 							</div>
 
 							<div class="field">
 								<strong>Verbatims vécu des médicaments : </strong>
-								{{ visite.protocole.medicamentsEntree.verbatimsMedicaments }}</div>
+								<span>{{ visite.protocole.medicamentsEntree.verbatimsMedicaments }}</span></div>
 						</div>
 
 						<h5>Verbatims vécu</h5>
@@ -1115,14 +1156,14 @@
 							{% for qcm in visite.protocole.medicamentsEntree.verbatims %}
 								<div class="field">
 									<strong>{{constants_labels["MEDICAMENTSENTREE_VERBATIMS_VECU"][ loop.index0 ]}} : </strong>
-									{{ qcm.response }}</div>
+									<span>{{ qcm.response }}</span></div>
 							{% endfor %}
 						</div>
 
 						<div class="form-space">
 							<div class="field">
 								<strong>Verbatims apport des médicaments pour la santé : </strong>
-								{{ visite.protocole.medicamentsEntree.verbatimsApportSante }}</div>
+								<span>{{ visite.protocole.medicamentsEntree.verbatimsApportSante }}</span></div>
 						</div>
 
 						<h5>Verbatims santé</h5>
@@ -1130,14 +1171,14 @@
 							{% for qcm in visite.protocole.medicamentsEntree.verbatimsSante %}
 								<div class="field">
 									<strong>{{constants_labels["MEDICAMENTSENTREE_VERBATIMS_SANTE"][ loop.index0 ]}} : </strong>
-									{{ qcm.response }}</div>
+									<span>{{ qcm.response }}</span></div>
 							{% endfor %}
 						</div>
 
 						<div class="form-space">
 							<div class="field">
 								<strong>Vécu du traitement : </strong>
-								{{ visite.protocole.medicamentsEntree.vecuTraitement }}</div>
+								<span>{{ visite.protocole.medicamentsEntree.vecuTraitement }}</span></div>
 						</div>
 
 						<h5>Questionnaire BMQ</h5>
@@ -1145,18 +1186,20 @@
 							{% for qcm in visite.protocole.medicamentsEntree.questionnaire %}
 								<div class="field">
 									<strong>{{constants_labels["MEDICAMENTSENTREE_QUESTIONNAIRE"][ loop.index0 ]}} : </strong>
-									{{ qcm.response }}</div>
+									<span>{{ qcm.response }}</span></div>
 							{% endfor %}
 						</div>
 
 						<div class="form-space">
 							<div class="field">
-								{% for medicament in visite.protocole.medicamentsEntree.medicaments %}
-									<strong>Liste des médicaments : </strong>
-									{{ medicament.name }}
-									{% if loop.last == false %},
-									{% endif %}
-								{% endfor %}
+								<strong>Liste des médicaments : </strong>
+								<span>
+									{% for medicament in visite.protocole.medicamentsEntree.medicaments %}
+										{{ medicament.name }}
+										{% if loop.last == false %},
+										{% endif %}
+									{% endfor %}
+								</span>
 							</div>
 						</div>
 					</section>
@@ -1169,27 +1212,27 @@
 						<div class="field">
 							<strong>Rankin* :
 							</strong>
-							{{ visite.protocole.neuroPsychologie.rankin }}</div>
+							<span>{{ visite.protocole.neuroPsychologie.rankin }}</span></div>
 						<div class="form-space column">
 							<div class="field">
 								<strong>MMSE* :
 								</strong>
-								{{ visite.protocole.neuroPsychologie.MMSE }}</div>
+								<span>{{ visite.protocole.neuroPsychologie.MMSE }}</span></div>
 							<div class="field">
 								<strong>MOCA* :
 								</strong>
-								{{ visite.protocole.neuroPsychologie.MOCA }}</div>
+								<span>{{ visite.protocole.neuroPsychologie.MOCA }}</span></div>
 						</div>
 
 						<div class="form-space column">
 							<div class="field">
 								<strong>HAD anxiété* :
 								</strong>
-								{{ visite.protocole.neuroPsychologie.HADAnxiete }}</div>
+								<span>{{ visite.protocole.neuroPsychologie.HADAnxiete }}</span></div>
 							<div class="field">
 								<strong>HAD dépression* :
 								</strong>
-								{{ visite.protocole.neuroPsychologie.HADDepression }}</div>
+								<span>{{ visite.protocole.neuroPsychologie.HADDepression }}</span></div>
 							<div class="def">* compris entre 0 et 1000, 9999 si non réalisé</div>
 						</div>
 
@@ -1197,19 +1240,19 @@
 							<div class="field">
 								<strong>Barrière langue :
 								</strong>
-								{{ visite.protocole.neuroPsychologie.barriereLangue }}</div>
+								<span>{{ visite.protocole.neuroPsychologie.barriereLangue }}</span></div>
 							<div class="field">
 								<strong>Niveau socio-éducatif :
 								</strong>
-								{{ visite.protocole.neuroPsychologie.niveauSocioEducatif }}</div>
+								<span>{{ visite.protocole.neuroPsychologie.niveauSocioEducatif }}</span></div>
 							<div class="field">
 								<strong>Aphasie :
 								</strong>
-								{{ visite.protocole.neuroPsychologie.aphasie }}</div>
+								<span>{{ visite.protocole.neuroPsychologie.aphasie }}</span></div>
 							<div class="field">
 								<strong>Difficultés mouvement fin :
 								</strong>
-								{{ visite.protocole.neuroPsychologie.difficultesMouvementFin }}</div>
+								<span>{{ visite.protocole.neuroPsychologie.difficultesMouvementFin }}</span></div>
 						</div>
 					</section>
 				{% endif %}
@@ -1239,35 +1282,35 @@
 								<tbody>
 									<tr>
 										<td class="row-header">IVA</td>
-										<td>{{ visite.protocole.scintigraphie.reposAnalyseVisuelleIVA }}</td>
-										<td>{{ visite.protocole.scintigraphie.regadenosonAnalyseVisuelleIVA }}</td>
-										<td>{{ visite.protocole.scintigraphie.reposDebitIVA }}</td>
-										<td>{{ visite.protocole.scintigraphie.regadenosonDebitIVA }}</td>
-										<td>{{ visite.protocole.scintigraphie.reserveIVA }}</td>
+										<td><span>{{ visite.protocole.scintigraphie.reposAnalyseVisuelleIVA }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.regadenosonAnalyseVisuelleIVA }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.reposDebitIVA }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.regadenosonDebitIVA }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.reserveIVA }}</span></td>
 									</tr>
 									<tr>
 										<td class="row-header">CX</td>
-										<td>{{ visite.protocole.scintigraphie.reposAnalyseVisuelleCX }}</td>
-										<td>{{ visite.protocole.scintigraphie.regadenosonAnalyseVisuelleCX }}</td>
-										<td>{{ visite.protocole.scintigraphie.reposDebitCX }}</td>
-										<td>{{ visite.protocole.scintigraphie.regadenosonDebitCX }}</td>
-										<td>{{ visite.protocole.scintigraphie.reserveCX }}</td>
+										<td><span>{{ visite.protocole.scintigraphie.reposAnalyseVisuelleCX }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.regadenosonAnalyseVisuelleCX }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.reposDebitCX }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.regadenosonDebitCX }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.reserveCX }}</span></td>
 									</tr>
 									<tr>
 										<td class="row-header">CD</td>
-										<td>{{ visite.protocole.scintigraphie.reposAnalyseVisuelleCD }}</td>
-										<td>{{ visite.protocole.scintigraphie.regadenosonAnalyseVisuelleCD }}</td>
-										<td>{{ visite.protocole.scintigraphie.reposDebitCD }}</td>
-										<td>{{ visite.protocole.scintigraphie.regadenosonDebitCD }}</td>
-										<td>{{ visite.protocole.scintigraphie.reserveCD }}</td>
+										<td><span>{{ visite.protocole.scintigraphie.reposAnalyseVisuelleCD }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.regadenosonAnalyseVisuelleCD }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.reposDebitCD }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.regadenosonDebitCD }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.reserveCD }}</span></td>
 									</tr>
 									<tr>
 										<td class="row-header">Total</td>
 										<td></td>
 										<td></td>
-										<td>{{ visite.protocole.scintigraphie.reposDebitTotal }}</td>
-										<td>{{ visite.protocole.scintigraphie.regadenosonDebitTotal }}</td>
-										<td>{{ visite.protocole.scintigraphie.reserveTotal }}</td>
+										<td><span>{{ visite.protocole.scintigraphie.reposDebitTotal }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.regadenosonDebitTotal }}</span></td>
+										<td><span>{{ visite.protocole.scintigraphie.reserveTotal }}</span></td>
 									</tr>
 								</tbody>
 							</table>
@@ -1277,7 +1320,7 @@
 							<div class="field">
 								<strong>Fraction d'éjection sous régadénoson (en %) :
 								</strong>
-								{{ visite.protocole.scintigraphie.fractionEjection }}</div>
+								<span>{{ visite.protocole.scintigraphie.fractionEjection }}</span></div>
 						</div>
 					</section>
 				{% endif %}
@@ -1291,15 +1334,15 @@
 							<div class="field">
 								<strong>Récidive d'événement cardiovasculaire :
 								</strong>
-								{{ visite.protocole.suivi.recidive }}</div>
+								<span>{{ visite.protocole.suivi.recidive }}</span></div>
 							<div class="field">
 								<strong>Date de survenue :
 								</strong>
-								{{ visite.protocole.suivi.dateSurvenue is empty ? "" : visite.protocole.suivi.dateSurvenue|date("d/m/Y") }}</div>
+								<span>{{ visite.protocole.suivi.dateSurvenue is empty ? "" : visite.protocole.suivi.dateSurvenue|date("d/m/Y") }}</span></div>
 							<div class="field">
 								<strong>Type d'événement :
 								</strong>
-								{{ visite.protocole.suivi.type }}</div>
+								<span>{{ visite.protocole.suivi.type }}</span></div>
 						</div>
 
 						<h3 id="clinique">Clinique</h3>
@@ -1307,11 +1350,11 @@
 							<div class="field">
 								<strong>Dyspnée :
 								</strong>
-								{{ visite.protocole.suivi.dyspnee }}</div>
+								<span>{{ visite.protocole.suivi.dyspnee }}</span></div>
 							<div class="field">
 								<strong>Douleur thoracique :
 								</strong>
-								{{ visite.protocole.suivi.douleur }}</div>
+								<span>{{ visite.protocole.suivi.douleur }}</span></div>
 						</div>
 
 						<h3 id="facteur">Facteurs de risque cardiovasculaire</h3>
@@ -1319,28 +1362,45 @@
 							<div class="field">
 								<strong>Tabac :
 								</strong>
-								{{ visite.protocole.suivi.tabac }}</div>
+								<span>{{ visite.protocole.suivi.tabac }}</span></div>
 							<div class="field">
 								<strong>Activité physique :
 								</strong>
-								{{ visite.protocole.suivi.activite }}</div>
-							<div class="form-space field">
+								<span>{{ visite.protocole.suivi.activite }}</span></div>
+							<div class="field">
 								<strong>Alimentation :
 								</strong>
-								{% for t in visite.protocole.suivi.alimentation %}
-									{{ t }}
-									{% if loop.last == false %},
-									{% endif %}
-								{% endfor %}
-								<div class="alimentation"></div>
+								<span class="alimentation">
+									{% for t in visite.protocole.suivi.alimentation %}
+										{{ t }}
+										{% if loop.last == false %},
+										{% endif %}
+									{% endfor %}
+								</span>
 							</div>
+							<div class="field">
+								<strong>HbA1C :
+								</strong>
+								<span>{{ visite.protocole.suivi.hba1c }}</span></div>
+							<div class="field">
+								<strong>Hypertension artérielle :
+								</strong>
+								<span>{{ visite.protocole.suivi.hypertension }}</span></div>
+							<div class="field">
+								<strong>Dyslipidémie :
+								</strong>
+								<span>{{ visite.protocole.suivi.dyslipidemie }}</span></div>
+							<div class="field">
+								<strong>Poids :
+								</strong>
+								<span>{{ visite.protocole.suivi.poids }}</span></div>
 						</div>
 						<div class="form-space column">
 							{% for qcm in visite.protocole.suivi.facteurs %}
 								<div class="field">
 									<strong>{{constants_labels["SUIVI_FACTEUR"][ loop.index0 ]}} :
 									</strong>
-									{{ qcm.response }}</div>
+									<span>{{ qcm.response }}</span></div>
 							{% endfor %}
 						</div>
 
@@ -1351,7 +1411,7 @@
 									<strong>{{constants_labels["SUIVI_TRAITEMENT"][ loop.index0 ]}}
 										:
 									</strong>
-									{{ qcm.response }}</div>
+									<span>{{ qcm.response }}</span></div>
 							{% endfor %}
 						</div>
 
@@ -1360,7 +1420,7 @@
 							<div class="field">
 								<strong>Débit de filtration glomerulaire CK-EPI :
 								</strong>
-								{{ visite.protocole.suivi.debitFiltrationGlomerulaire }}</div>
+								<span>{{ visite.protocole.suivi.debitFiltrationGlomerulaire }}</span></div>
 						</div>
 
 						<h5>Inflammation</h5>
@@ -1368,7 +1428,7 @@
 							<div class="field">
 								<strong>CRP ultra-sensible :
 								</strong>
-								{{ visite.protocole.suivi.crp }}</div>
+								<span>{{ visite.protocole.suivi.crp }}</span></div>
 						</div>
 
 						<h5>Bilan lipidique</h5>
@@ -1376,23 +1436,15 @@
 							<div class="field">
 								<strong>Triglycérides :
 								</strong>
-								{{ visite.protocole.suivi.triglycerides }}</div>
+								<span>{{ visite.protocole.suivi.triglycerides }}</span></div>
 							<div class="field">
 								<strong>LDL-c :
 								</strong>
-								{{ visite.protocole.suivi.ldl }}</div>
+								<span>{{ visite.protocole.suivi.ldl }}</span></div>
 							<div class="field">
 								<strong>HDL-c :
 								</strong>
-								{{ visite.protocole.suivi.hdl }}</div>
-						</div>
-
-						<h5>HbA1c</h5>
-						<div class="form-space">
-							<div class="field">
-								<strong>HbA1c :
-								</strong>
-								{{ visite.protocole.suivi.hba1c }}</div>
+								<span>{{ visite.protocole.suivi.hdl }}</span></div>
 						</div>
 					</section>
 				{% endif %}
@@ -1414,8 +1466,14 @@
         * COPY
         **********************************************************************/
         $('#copy').click(function() {
-            $(".letter__content").select();
-            document.execCommand('copy');
+			var $temp = $("<div>");
+			$(".title-wrapper").append($temp);
+			$temp.attr("contenteditable", true)
+				.html($(".letter__content").html()).select()
+				.on("focus", function() { document.execCommand('selectAll', false, null); })
+				.focus();
+			document.execCommand("copy");
+			$temp.remove();
         });
 
         /*
@@ -1448,7 +1506,8 @@
 
             $.each($('.letter__content .form-space'), function(i, elem) {
                 if ($(elem).children().length == 0) elem.remove();
-                if ($(elem).children().length == 1 && $(elem).has('.def').length) elem.remove();
+                if ($(elem).children().length >= 1 && $(elem).has('.def').length) elem.remove();
+				if ($(elem).children().length >= 1 && $(elem).has('.sub').length) elem.remove();
             });
 
             $.each($('.letter__content h5'), function(i, elem) {
@@ -1480,20 +1539,20 @@
        window.jsPDF = window.jspdf.jsPDF;
 
         $('#export').on('click', function () {
-            // createPDFObject();
             buildPDF();
         });
 
         function buildPDF() {
             const input = document.getElementById('print');
             const pdf = new jsPDF({
-                orientation: 'p',
+                orientation: '',
                 unit: 'pt',
                 format: 'a4'
             });
 
 			pdf.setFont('times', 'normal');
 
+			$('.alimentation').html($('.alimentation').html().replace(/\≥/g, '>='));
             let srcwidth = document.getElementById('print').scrollWidth;
             let date = new Date().
                 toLocaleString('fr-FR', {year: 'numeric', month: '2-digit', day: '2-digit'}).
@@ -1505,10 +1564,12 @@
                         pdf.save("Horus_{{patient.general.nom}}-{{patient.general.prenom}}_" + date + ".pdf");
                     },
                     margin: [15, 15, 15, 15],
-                    autoPaging: 'text',
+                    //autoPaging: 'text',
                     html2canvas: {
                         scale: (595.26 - 30) / srcwidth, //595.26 is the width of A4 page
                         scrollY: 0,
+						allowTaint: true,
+						letterRendering: true
                     }
                 })
                 .then(() => {
@@ -1528,56 +1589,6 @@
                         pdf.setPage(i);
                     };
                 });
-        }
-
-        function createPDFObject() {
-            html2canvas($(".letter__content")[0]).then(function(canvas) {
-                    var contentWidth = canvas.width;
-                    var contentHeight = canvas.height;
-
-                    //One page pdf shows the height of canvas generated by html page;
-                    var pageHeight = contentWidth / 595.28 * 841.89;
-                    //html page height without pdf generation
-                    var leftHeight = contentHeight;
-                    //Page offset
-                    var position = 0;
-                    //a4 paper size [595.28;841.89], width and height of image in pdf of canvas generated by html page
-                    var imgWidth = 595.28; 
-                    var imgHeight = 595.28 / contentWidth * contentHeight;
-
-                    //Return picture dataURL, parameters: picture format and sharpness (0-1)
-                    var pageData = canvas.toDataURL('image/jpeg', 1.0);
-
-                    //Direction is vertical by default, dimension ponits, format A4 [595.28;841.89]
-                    var pdf = new jsPDF('', 'pt', 'a4');
-
-                    //There are two heights to distinguish, one is the actual height of the html page, and the height of the generated pdf page (841.89)
-                    //When the content does not exceed the display range of one page of pdf, paging is not required
-                    var margin = 25;
-                    if (leftHeight + (margin * 2) < pageHeight) {
-                        pdf.addImage(pageData, 'JPEG', margin, margin, imgWidth - (margin * 2), imgHeight);
-                    } else {
-                        while (leftHeight > 0) {
-                            pdf.addImage(pageData, 'JPEG', margin, position + margin, imgWidth - (margin * 2), imgHeight - (margin * 2))
-                            
-                            pdf.setLineWidth(25);
-                            pdf.setDrawColor(255, 0, 0);
-                            pdf.rect(margin / 2, margin / 2, 595.28 - margin, 841.89 - margin);
-
-                            leftHeight -= pageHeight - (margin * 2);
-                            position -= 841.89 - (margin * 2);
-                            //Avoid adding blank pages
-                            if (leftHeight > 0) {
-                                pdf.addPage();
-                            }
-                        }
-                    }
-                    let date = new Date().
-                        toLocaleString('fr-FR', {year: 'numeric', month: '2-digit', day: '2-digit'}).
-                        replace(/(\d+)\/(\d+)\/(\d+)/, '$1-$2-$3');
-                    pdf.save("Horus_{{patient.general.nom}}-{{patient.general.prenom}}_" + date + ".pdf");
-                }
-            );
         }
     </script>
 {% endblock %}

@@ -48,6 +48,22 @@ class Suivi
     #[Groups(['advancement', 'export'])]
     private $alimentation = [];
 
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['advancement', 'export'])]
+    private ?string $hba1c = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['advancement', 'export'])]
+    private ?string $hypertension = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['advancement', 'export'])]
+    private ?string $dyslipidemie = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['advancement', 'export'])]
+    private ?string $poids = null;
+
     #[ORM\JoinTable(name: 'donnee_qcm_facteurs')]
     #[ORM\JoinColumn(name: 'facteurs_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     #[ORM\InverseJoinColumn(name: 'qcm_id', referencedColumnName: 'id', onDelete: 'CASCADE', unique: true)]
@@ -82,15 +98,10 @@ class Suivi
     #[Groups(['advancement', 'export'])]
     private $hdl;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 1, nullable: true)]
-    #[Groups(['advancement', 'export'])]
-    private $hba1c;
-
     public function __construct()
     {
         $this->facteurs = new ArrayCollection();
         $this->traitement = new ArrayCollection();
-        $this->genes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -190,6 +201,54 @@ class Suivi
     public function setAlimentation(?array $alimentation): self
     {
         $this->alimentation = $alimentation;
+
+        return $this;
+    }
+
+    public function getHba1c(): ?string
+    {
+        return $this->hba1c;
+    }
+
+    public function setHba1c(?string $hba1c): self
+    {
+        $this->hba1c = $hba1c;
+
+        return $this;
+    }
+
+    public function getHypertension(): ?string
+    {
+        return $this->hypertension;
+    }
+
+    public function setHypertension(?string $hypertension): self
+    {
+        $this->hypertension = $hypertension;
+
+        return $this;
+    }
+
+    public function getDyslipidemie(): ?string
+    {
+        return $this->dyslipidemie;
+    }
+
+    public function setDyslipidemie(?string $dyslipidemie): self
+    {
+        $this->dyslipidemie = $dyslipidemie;
+
+        return $this;
+    }
+
+    public function getPoids(): ?string
+    {
+        return $this->poids;
+    }
+
+    public function setPoids(?string $poids): self
+    {
+        $this->poids = $poids;
 
         return $this;
     }
@@ -298,18 +357,6 @@ class Suivi
     public function setHdl(?string $hdl): self
     {
         $this->hdl = $hdl;
-
-        return $this;
-    }
-
-    public function getHba1c(): ?string
-    {
-        return $this->hba1c;
-    }
-
-    public function setHba1c(?string $hba1c): self
-    {
-        $this->hba1c = $hba1c;
 
         return $this;
     }

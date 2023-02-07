@@ -3,15 +3,13 @@
 namespace App\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
@@ -30,14 +28,12 @@ class LoginFormAuthenticator extends AbstractAuthenticator
     protected $security;
     private $entityManager;
     private $csrfTokenManager;
-    private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordHasherInterface $passwordHasher, Security $security)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, Security $security)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
-        $this->passwordHasher = $passwordHasher;
         $this->security = $security;
     }
 
@@ -90,7 +86,8 @@ class LoginFormAuthenticator extends AbstractAuthenticator
             // $this->translator->trans($exception->getMessageKey(), $exception->getMessageData())
         ];
 
-        return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
+        $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
+        return new RedirectResponse($this->urlGenerator->generate('app_login'));
     }
 
     protected function getLoginUrl(): string

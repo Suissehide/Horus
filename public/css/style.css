@@ -1127,7 +1127,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     margin: 0;
 }
 
-.modal-body .btn-bar>button:not(:first-child) {
+.modal-body .btn-bar>:not(:first-child) {
     margin-left: 15px;
 }
 

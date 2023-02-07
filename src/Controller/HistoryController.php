@@ -38,7 +38,7 @@ class HistoryController extends AbstractController
                 $erreurs->setMaxResults($max)->setFirstResult($min);
             }
             $erreurs = $erreurs->getQuery()->getResult();
-            $rows = array();
+            $rows = [];
             foreach ($erreurs as $erreur) {
                 $row = array(
                     "id" => $erreur->getId(),

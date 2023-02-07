@@ -20,9 +20,14 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class UserController extends AbstractController
 {
     /**
-     * @var DoctrineManager
+     * @var EntityManagerInterface
      */
     private $em;
+
+    /**
+     * @var UserPasswordHasherInterface
+     */
+    private $passwordHasher;
 
     public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
     {
@@ -82,9 +87,9 @@ class UserController extends AbstractController
                 $Users->setMaxResults($max)->setFirstResult($min);
             }
             $Users = $Users->getQuery()->getResult();
-            $rows = array();
+            $rows = [];
             foreach ($Users as $User) {
-                $status = $this->getUser()->getId() == $User->getId() ? 1 : 0;
+                $status = $this->getUser()->getUserIdentifier() == $User->getUserIdentifier() ? 1 : 0;
                 $row = array(
                     "id" => $User->getId(),
                     "nom" => $User->getNom(),
@@ -107,7 +112,7 @@ class UserController extends AbstractController
 
         return $this->render('user/list.html.twig', [
             'controller_name' => 'ListController',
-            'id' => $this->getUser()->getId(),
+            'id' => $this->getUser()->getUserIdentifier(),
         ]);
     }
 
@@ -140,9 +145,13 @@ class UserController extends AbstractController
         if ($psw->isSubmitted() && $psw->isValid()) {
             $oldPassword = $request->get('password_form')['oldPassword'];
             if ($psw->get('edit')->isClicked() && $this->passwordHasher->isPasswordValid($user, $oldPassword)) {
-                $user = $form->getData();
-                $password = $this->passwordHasher->hashPassword($user, $user->get('plainPassword')->getData());
-                $user->setPassword($password);
+                $user = $psw->getData();
+                $user->setPassword(
+                    $this->passwordHasher->hashPassword(
+                        $user,
+                        $psw->get('plainPassword')->getData()
+                    )
+                );
                 $user->setRoles($user->getRoles());
 
                 $this->em->persist($user);

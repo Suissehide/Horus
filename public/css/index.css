@@ -231,6 +231,13 @@ ul.tabbed li i {
     display: block;
 }
 
+.hero-tabs h2,
+.slide h2,
+main h2 {
+    position: relative;
+    margin-bottom: 10px;
+}
+
 .hero-tabs h3,
 .slide h3,
 main h3 {
@@ -547,7 +554,8 @@ input[type='checkbox'].checkbox-round+span {
 }
 
 .table-container {
-    margin: 0 -10px;
+    margin-left: -10px;
+    margin-right: -10px;
 }
 
 .letter__content .table-container tbody tr {
@@ -666,10 +674,10 @@ input[type='checkbox'].checkbox-round+span {
 /* Letter
 ========================================================================== */
 .letter__content {
-    resize: none;
-    width: 100%;
-    min-height: 500px;
-    line-height: 22px;
+    /* resize: none; */
+    /* width: 100%; */
+    /* min-height: 500px; */
+    /* line-height: 22px; */
     padding: 15px 20px;
     letter-spacing: 0.01px;
 }
@@ -959,7 +967,7 @@ input[type='checkbox'].checkbox-round+span {
     width: 220px;
 }
 
-.schema-tsa .special {
+.schema-tsa .special, .schema-membres-inferieur .special {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left: 5px solid var(--dark-goldenrod);
@@ -1076,53 +1084,63 @@ input[type='checkbox'].checkbox-round+span {
     left: 330px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-of-type(2), #iliaqueDroite {
+.schema-membres-inferieur>.wrap-input:nth-of-type(2), #volumeFemoralDroit {
     top: 95px;
     left: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-of-type(3), #iliaqueGauche {
+.schema-membres-inferieur>.wrap-input:nth-of-type(3), #volumeFemoralGauche {
     top: 95px;
     right: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-of-type(4), #femoraleCommuneDroite {
+.schema-membres-inferieur>.wrap-input:nth-of-type(4), #iliaqueDroite {
     top: 175px;
     left: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-of-type(5), #femoraleCommuneGauche {
+.schema-membres-inferieur>.wrap-input:nth-of-type(5), #iliaqueGauche {
     top: 175px;
     right: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-of-type(6), #femoraleSuperficielleDroite {
+.schema-membres-inferieur>.wrap-input:nth-of-type(6), #femoraleCommuneDroite {
     top: 275px;
     left: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-of-type(7), #femoraleSuperficielleGauche {
+.schema-membres-inferieur>.wrap-input:nth-of-type(7), #femoraleCommuneGauche {
     top: 275px;
     right: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-of-type(8), #popliteDroite {
+.schema-membres-inferieur>.wrap-input:nth-of-type(8), #femoraleSuperficielleDroite {
     top: 385px;
     left: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-of-type(9), #popliteGauche {
+.schema-membres-inferieur>.wrap-input:nth-of-type(9), #femoraleSuperficielleGauche {
     top: 385px;
     right: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-of-type(10), #axesJambiersDroits {
+.schema-membres-inferieur>.wrap-input:nth-of-type(10), #popliteDroite {
     top: 495px;
     left: 90px;
 }
 
-.schema-membres-inferieur>.wrap-input:nth-of-type(11), #axesJambiersGauches {
+.schema-membres-inferieur>.wrap-input:nth-of-type(11), #popliteGauche {
     top: 495px;
+    right: 90px;
+}
+
+.schema-membres-inferieur>.wrap-input:nth-of-type(12), #axesJambiersDroits {
+    top: 605px;
+    left: 90px;
+}
+
+.schema-membres-inferieur>.wrap-input:nth-of-type(13), #axesJambiersGauches {
+    top: 605px;
     right: 90px;
 }
 

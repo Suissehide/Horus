@@ -163,7 +163,8 @@ class EchographieVasculaireType extends AbstractType
                 'attr' => array(
                     'unity' => 'mm3',
                     'data-min' => 0,
-                    'data-max' => 0
+                    'data-max' => 0,
+                    'step' => '0.1'
                 ),
                 'required' => false,
             ))
@@ -172,7 +173,8 @@ class EchographieVasculaireType extends AbstractType
                 'attr' => array(
                     'unity' => 'mm3',
                     'data-min' => 0,
-                    'data-max' => 0
+                    'data-max' => 0,
+                    'step' => '0.1'
                 ),
                 'required' => false,
             ))
@@ -181,7 +183,8 @@ class EchographieVasculaireType extends AbstractType
                 'attr' => array(
                     'unity' => 'mm3',
                     'data-min' => 0,
-                    'data-max' => 0
+                    'data-max' => 0,
+                    'step' => '0.1'
                 ),
                 'required' => false,
             ))
@@ -192,7 +195,27 @@ class EchographieVasculaireType extends AbstractType
                 'attr' => array(
                     'unity' => 'mm',
                     'data-min' => 0,
+                    'data-max' => 0
+                ),
+                'required' => false,
+            ))
+            ->add('volumeFemoralDroit', NumberType::class, array(
+                'label' => 'Volume fémoral droite',
+                'attr' => array(
+                    'unity' => 'mm3',
+                    'data-min' => 0,
                     'data-max' => 0,
+                    'step' => '0.1'
+                ),
+                'required' => false,
+            ))
+            ->add('volumeFemoralGauche', NumberType::class, array(
+                'label' => 'Volume fémoral gauche',
+                'attr' => array(
+                    'unity' => 'mm3',
+                    'data-min' => 0,
+                    'data-max' => 0,
+                    'step' => '0.1'
                 ),
                 'required' => false,
             ))
@@ -344,7 +367,7 @@ class EchographieVasculaireType extends AbstractType
                     'unity' => '',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => '0.1',
+                    'step' => '0.1'
                 ),
                 'required' => false,
             ))
@@ -354,7 +377,7 @@ class EchographieVasculaireType extends AbstractType
                     'unity' => '',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => '0.1',
+                    'step' => '0.1'
                 ),
                 'required' => false,
             ))
@@ -364,7 +387,7 @@ class EchographieVasculaireType extends AbstractType
                     'unity' => '',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => '0.1',
+                    'step' => '0.1'
                 ),
                 'required' => false,
             ))
@@ -374,7 +397,7 @@ class EchographieVasculaireType extends AbstractType
                     'unity' => '',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => '0.1',
+                    'step' => '0.1'
                 ),
                 'required' => false,
             ))
@@ -384,7 +407,7 @@ class EchographieVasculaireType extends AbstractType
                     'unity' => '',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => '0.1',
+                    'step' => '0.1'
                 ),
                 'required' => false,
             ))
@@ -394,7 +417,7 @@ class EchographieVasculaireType extends AbstractType
                     'unity' => '',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => '0.1',
+                    'step' => '0.1'
                 ),
                 'required' => false,
             ))

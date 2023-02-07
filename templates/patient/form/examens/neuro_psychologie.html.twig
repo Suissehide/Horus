@@ -19,4 +19,4 @@
 	{{ form_row(form.protocole.neuroPsychologie.difficultesMouvementFin, {'attr': {'class': 'input radio-row'} }) }}
 </div>
 
-{{ form_row(form.protocole.neuroPsychologie.save, {'attr': {'class': 'form-btn btn-save'} }) }}
+{{ form_row(form.protocole.neuroPsychologie.save, {'attr': {'class': 'form-btn btn-save', 'disabled': freezeDatabase} }) }}

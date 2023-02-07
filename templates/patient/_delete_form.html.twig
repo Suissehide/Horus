@@ -1,8 +1,31 @@
-<form method="post" action="{{ path('patient_delete', {'id': patient.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ patient.id) }}">
-    <button type="submit" value="delete" class="form-btn btn-danger">
-        <i class="fa fa-trash" aria-hidden="true" id="btn-delete"></i>
-        Supprimer
-    </button>
-</form>
+<button class="form-btn btn-danger" id="js-delete-patient">
+	Supprimer
+</button>
+
+<!-- Modal confirmation delete -->
+<div id="modal-delete-patient" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">
+					Confirmation de la suppression
+				</h4>
+			</div>
+			<div class="modal-body">
+				<p>Êtes-vous sûr de vouloir supprimer ce patient ?</p>
+				<div class="btn-bar">
+					<button type="button" class="form-btn btn-default" data-dismiss="modal">Annuler</button>
+					<form method="post" action="{{ path('patient_delete', {'id': patient.id}) }}">
+						<input type="hidden" name="_method" value="DELETE">
+						<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ patient.id) }}">
+						<button type="submit" value="delete" class="form-btn btn-danger">
+							<i class="fa fa-trash" aria-hidden="true" id="btn-delete"></i>
+							Supprimer
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

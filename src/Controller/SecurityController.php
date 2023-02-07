@@ -16,7 +16,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class SecurityController extends AbstractController
 {
-    
+    private $entityManager;
+    private $passwordHasher;
+
     public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
     {
         $this->entityManager = $entityManager;

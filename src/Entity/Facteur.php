@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\FacteurRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -61,6 +62,14 @@ class Facteur
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
     private $traiteHypertriglyceridemie;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export', 'advancement'])]
+    private ?string $LDLMaximal = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['export', 'advancement'])]
+    private ?int $ageIntroductionTraitementHypolipemiant = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
@@ -239,6 +248,30 @@ class Facteur
     public function setTraiteHypertriglyceridemie(?string $traiteHypertriglyceridemie): self
     {
         $this->traiteHypertriglyceridemie = $traiteHypertriglyceridemie;
+
+        return $this;
+    }
+
+    public function getLDLMaximal(): ?string
+    {
+        return $this->LDLMaximal;
+    }
+
+    public function setLDLMaximal(?string $LDLMaximal): self
+    {
+        $this->LDLMaximal = $LDLMaximal;
+
+        return $this;
+    }
+
+    public function getAgeIntroductionTraitementHypolipemiant(): ?int
+    {
+        return $this->ageIntroductionTraitementHypolipemiant;
+    }
+
+    public function setAgeIntroductionTraitementHypolipemiant(?int $ageIntroductionTraitementHypolipemiant): self
+    {
+        $this->ageIntroductionTraitementHypolipemiant = $ageIntroductionTraitementHypolipemiant;
 
         return $this;
     }

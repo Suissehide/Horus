@@ -5,10 +5,34 @@
 </div>
 
 <div class="flex-visite">
-	{{ form_row(visite.save, {'attr': {'class': 'form-btn btn-save'} }) }}
+	{{ form_row(visite.save, {'attr': {'class': 'form-btn btn-save', 'disabled': freezeDatabase} }) }}
 
-	<button type="button" class="form-btn btn-danger visite-delete" data-visite-id="{{visite.vars.data.id}}">
+	<button type="button" class="form-btn btn-danger js-delete-visite">
 		<i class="fa fa-trash"></i>
 		Supprimer la visite
 	</button>
+
+	<!-- Modal confirmation delete -->
+	<div id="modal-delete-visite" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">
+						Confirmation de la suppression
+					</h4>
+				</div>
+				<div class="modal-body">
+					<p>Êtes-vous sûr de vouloir supprimer cette visite ?</p>
+					<div class="btn-bar">
+						<button type="button" class="form-btn btn-default" data-dismiss="modal">Annuler</button>
+						<button type="button" class="form-btn btn-danger delete-visite" data-visite-id="{{visite.vars.data.id}}">
+							<i class="fa fa-trash"></i>
+							Supprimer la visite
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

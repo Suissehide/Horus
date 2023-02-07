@@ -9,6 +9,7 @@
 		{{ form_widget(form.antecedentCardiovasculaire.AIT, {'attr': {'class': 'input radio-row'} }) }}
 		{{ form_widget(form.antecedentCardiovasculaire.AVC, {'attr': {'class': 'input radio-row'} }) }}
 		{{ form_widget(form.antecedentCardiovasculaire.endarteriectomieCarotidienne, {'attr': {'class': 'input radio-row'} }) }}
+		{{ form_widget(form.antecedentCardiovasculaire.stenoseCarotidienne, {'attr': {'class': 'input radio-row'} }) }}
 		{{ form_widget(form.antecedentCardiovasculaire.arteriteMembresInferieurs, {'attr': {'class': 'input radio-row'} }) }}
 		{{ form_widget(form.antecedentCardiovasculaire.angioplastiePeripherique, {'attr': {'class': 'input radio-row'} }) }}
 		{{ form_widget(form.antecedentCardiovasculaire.pontagePeripherique, {'attr': {'class': 'input radio-row'} }) }}
@@ -18,4 +19,4 @@
 	</div>
 </div>
 
-{{ form_row(form.antecedentCardiovasculaire.save, {'attr': {'class': 'form-btn btn-save'} }) }}
+{{ form_row(form.antecedentCardiovasculaire.save, {'attr': {'class': 'form-btn btn-save', 'disabled': freezeDatabase} }) }}

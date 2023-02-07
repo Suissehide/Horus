@@ -31,9 +31,9 @@ class Protocole
     #[Groups(['advancement', 'export'])]
     private $catheterisation;
 
-    #[ORM\OneToOne(targetEntity: 'App\Entity\CoronaireAngioplastie', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: 'App\Entity\AnatomieCoronaire', cascade: ['persist', 'remove'])]
     #[Groups(['advancement', 'export'])]
-    private $coronaireAngioplastie;
+    private $anatomieCoronaire;
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\Echographie', cascade: ['persist', 'remove'])]
     #[Groups(['advancement', 'export'])]
@@ -140,14 +140,14 @@ class Protocole
         return $this;
     }
 
-    public function getCoronaireAngioplastie(): ?CoronaireAngioplastie
+    public function getAnatomieCoronaire(): ?AnatomieCoronaire
     {
-        return $this->coronaireAngioplastie;
+        return $this->anatomieCoronaire;
     }
 
-    public function setCoronaireAngioplastie(?CoronaireAngioplastie $coronaireAngioplastie): self
+    public function setAnatomieCoronaire(?AnatomieCoronaire $anatomieCoronaire): self
     {
-        $this->coronaireAngioplastie = $coronaireAngioplastie;
+        $this->anatomieCoronaire = $anatomieCoronaire;
 
         return $this;
     }

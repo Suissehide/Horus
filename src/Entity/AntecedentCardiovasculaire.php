@@ -12,59 +12,63 @@ class AntecedentCardiovasculaire
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?string $id;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
-    private $IDM_SCA;
+    private ?string $IDM_SCA = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
-    private $angorStable;
+    private ?string $angorStable = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
-    private $angioplastieCoronaire;
+    private ?string $angioplastieCoronaire = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
-    private $pontageCoronaire;
+    private ?string $pontageCoronaire = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
-    private $insuffisanceCardiaque;
+    private ?string $insuffisanceCardiaque = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
-    private $AVC;
+    private ?string $AVC = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
-    private $AIT;
+    private ?string $AIT = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
-    private $endarteriectomieCarotidienne;
+    private ?string $endarteriectomieCarotidienne = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])] 
+    private ?string $stenoseCarotidienne = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
-    private $arteriteMembresInferieurs;
+    private ?string $arteriteMembresInferieurs = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
-    private $angioplastiePeripherique;
+    private ?string $angioplastiePeripherique = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
-    private $pontagePeripherique;
+    private ?string $pontagePeripherique = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]
-    private $antecedentFibrillationAuriculaire;
+    private ?string $antecedentFibrillationAuriculaire = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export', 'advancement'])]    
-    private $valvulopathie;
+    private ?string $valvulopathie = null;
 
     public function getId(): ?int
     {
@@ -163,6 +167,18 @@ class AntecedentCardiovasculaire
     public function setEndarteriectomieCarotidienne(?string $endarteriectomieCarotidienne): self
     {
         $this->endarteriectomieCarotidienne = $endarteriectomieCarotidienne;
+
+        return $this;
+    }
+
+    public function getStenoseCarotidienne(): ?string
+    {
+        return $this->stenoseCarotidienne;
+    }
+
+    public function setStenoseCarotidienne(?string $stenoseCarotidienne): self
+    {
+        $this->stenoseCarotidienne = $stenoseCarotidienne;
 
         return $this;
     }

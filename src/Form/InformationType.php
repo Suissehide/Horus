@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class InformationType extends AbstractType
@@ -266,7 +268,27 @@ class InformationType extends AbstractType
                 'required' => false,
             ))
 
-
+            ->add('dateAVC', DateType::class, array(
+                'label' => 'Date de l\'AVC',
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+                'attr' => [
+                    'placeholder' => 'dd/mm/yyyy',
+                    'class' => 'datepicker',
+                    'autocomplete' => 'off'
+                ],
+                'html5' => false,
+                'required' => false,
+            ))
+            ->add('scoreModifieRankin', IntegerType::class, array(
+                'label' => 'Score modifié de Rankin à 3 mois (valeur entre 0 et 5)',
+                'attr' => array(
+                    'unity' => '',
+                    'data-min' => 0,
+                    'data-max' => 5
+                ),
+                'required' => false,
+            ))
             ->add('localisation', ChoiceType::class, array(
                 'label' => 'Localisation',
                 'expanded' => false,

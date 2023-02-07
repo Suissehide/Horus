@@ -119,6 +119,12 @@ class EchographieVasculaire
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $arretPour;
 
+    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 1, nullable: true)]
+    private ?string $volumeFemoralDroit = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 1, nullable: true)]
+    private ?string $volumeFemoralGauche = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -540,6 +546,30 @@ class EchographieVasculaire
     public function setArretPour(?string $arretPour): self
     {
         $this->arretPour = $arretPour;
+
+        return $this;
+    }
+
+    public function getVolumeFemoralDroit(): ?string
+    {
+        return $this->volumeFemoralDroit;
+    }
+
+    public function setVolumeFemoralDroit(?string $volumeFemoralDroit): self
+    {
+        $this->volumeFemoralDroit = $volumeFemoralDroit;
+
+        return $this;
+    }
+
+    public function getVolumeFemoralGauche(): ?string
+    {
+        return $this->volumeFemoralGauche;
+    }
+
+    public function setVolumeFemoralGauche(?string $volumeFemoralGauche): self
+    {
+        $this->volumeFemoralGauche = $volumeFemoralGauche;
 
         return $this;
     }
