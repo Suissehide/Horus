@@ -412,6 +412,7 @@
 {% block javascripts %}
     <script src="{{ asset('js/vendor/select2.min.js') }}"></script>
     <script src="{{ asset('js/vendor/bootgrid.min.js') }}"></script>
+    <script src="{{ asset('js/vendor/jquery.dirty.js') }}"></script>
 
     <script>
         $('.sidebar-navigation ul li').on('click', function () {
@@ -571,23 +572,32 @@
         **********************************************************************/
 
         function score(el) {
-            let p = $(el).parent('.form-space');
+            let p = $(el).parents('.form-space');
             let score = 0;
             $.each(p.find('.input'), function(i, e) {
-                if ($(e).hasClass('alimentation-js')) {
-                    score += Math.floor($(e).find('input:checked').length / 2) - 1
+                if ($(e).hasClass('score')) {
+                    return true;
+                } else if ($(e).hasClass('alimentation-js')) {
+                    score += Math.floor($(e).find('input:checked').length / 2);
                 } else {
                     score += $(e).prop('selectedIndex') > 0 ? $(e).prop('selectedIndex') - 1 : 0;
                 }
             });
-            $(el).empty().append('<b>Score global : </b>' + score);
+
+            if (score >= 10)
+                $(el).val("Idéal : " + score);
+            else if (score >= 5)
+                $(el).val("Intermédiaire : " + score);
+            else
+                $(el).val("Péjoratif : " + score);
         }
 
         $('.score').each(function() {
             score($(this));
         });
 
-        $('.score').parent('.form-space').find('.input').on('change', function() {
+        $('.score').parents('.form-space').find('.input').on('change', function() {
+            console.log("hey");
             $('.score').each(function() {
                 score($(this));
             });
@@ -1048,13 +1058,17 @@
         }
 
         /* TABBED SAVED */
-
         function saveTab(id) {
             localStorage.setItem('tabId', id);
         }
         let id = localStorage.getItem('tabId');
         selectVisite($(".tabbed__visites li[data-protocole='" + id + "']"));
 
+
+        /* TABBED SAVED */
+        $("form[name='patient']").dirty({
+            preventLeaving: true
+        });
 
         /* TOC */
         /* Smooth scroll */

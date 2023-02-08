@@ -83,7 +83,7 @@ class BFR
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
     private $glycemieAjeun;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
     private $Hba1c;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -352,12 +352,12 @@ class BFR
         return $this;
     }
 
-    public function getHba1c(): ?int
+    public function getHba1c(): ?string
     {
         return $this->Hba1c;
     }
 
-    public function setHba1c(?int $Hba1c): self
+    public function setHba1c(?string $Hba1c): self
     {
         $this->Hba1c = $Hba1c;
 

@@ -98,6 +98,9 @@ class Suivi
     #[Groups(['advancement', 'export'])]
     private $hdl;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $score = null;
+
     public function __construct()
     {
         $this->facteurs = new ArrayCollection();
@@ -357,6 +360,18 @@ class Suivi
     public function setHdl(?string $hdl): self
     {
         $this->hdl = $hdl;
+
+        return $this;
+    }
+
+    public function getScore(): ?string
+    {
+        return $this->score;
+    }
+
+    public function setScore(?string $score): self
+    {
+        $this->score = $score;
 
         return $this;
     }

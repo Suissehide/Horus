@@ -22,7 +22,7 @@
 	{{ form_row(form.protocole.suivi.hypertension, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.protocole.suivi.dyslipidemie, {'attr': {'class': 'input'} }) }}
 	{{ form_row(form.protocole.suivi.poids, {'attr': {'class': 'input'} }) }}
-	<div class="score"></div>
+	{{ form_row(form.protocole.suivi.score, {'attr': {'class': 'input score', 'readonly': true} }) }}
 </div>
 
 <div class="form-space column">

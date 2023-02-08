@@ -495,7 +495,7 @@ class AnatomieCoronaireType extends AbstractType
             ))
 
             ->add('molle', ChoiceType::class, array(
-                'label' => 'Molle (hyperdense)',
+                'label' => 'Molle (hypodense)',
                 'expanded' => true,
                 'multiple' => false,
                 'placeholder' => false,

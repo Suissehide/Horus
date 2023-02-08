@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -135,6 +136,10 @@ class SuiviType extends AbstractType
                     'IMC 25-29.9 kg/m2' => 'IMC 25-29.9 kg/m2',
                     'IMC < 25 kg/m2' => 'IMC < 25 kg/m2'
                 ),
+                'required' => false
+            ))
+            ->add('score', TextType::class, array(
+                'label' => 'Score globale',
                 'required' => false
             ))
 

@@ -545,7 +545,7 @@
 						<h5>Caractéristiques</h5>
 						<div class="form-space">
 							<div class="field">
-								<strong>Molle (hyperdense) :
+								<strong>Molle (hypodense) :
 								</strong>
 								<span>{{ visite.protocole.anatomieCoronaire.molle }}</span></div>
 							<div class="field">
@@ -906,20 +906,20 @@
 								</strong>
 								<span>{{ visite.protocole.echographieVasculaire.sousClaviereGauche }}</span></div>
 							<div class="field" id="TSAAorte">
-								<strong>Aorte :
+								<strong>Aorte (en mm) :
 								</strong>
 								<span>{{ visite.protocole.echographieVasculaire.TSAAorte }}</span></div>
 
 							<div class="field" id="volumeCarotideDroite">
-								<strong>Volume carotide droite :
+								<strong>Volume carotide droite (en mm3) :
 								</strong>
 								<span>{{ visite.protocole.echographieVasculaire.volumeCarotideDroite }}</span></div>
 							<div class="field" id="volumeCarotideGauche">
-								<strong>Volume carotide gauche :
+								<strong>Volume carotide gauche (en mm3) :
 								</strong>
 								<span>{{ visite.protocole.echographieVasculaire.volumeCarotideGauche }}</span></div>
 							<div class="field" id="chargeAtheromeTotale">
-								<strong>Charge en athérome totale :
+								<strong>Charge en athérome totale (en mm3) :
 								</strong>
 								<span>{{ visite.protocole.echographieVasculaire.chargeAtheromeTotale }}</span></div>
 						</div>
@@ -928,15 +928,15 @@
 						<div class="form-space schema-membres-inferieur">
 							<img src={{ asset('assets/images/membres_inferieur.jpg') }} alt="Schéma membres inférieur"/>
 							<div class="field" id="membresInferieurAorte">
-								<strong>Diamètre aorte :
+								<strong>Diamètre aorte (en mm) :
 								</strong>
 								<span>{{ visite.protocole.echographieVasculaire.membresInferieurAorte }}</span></div>
 							<div class="field" id="volumeFemoralDroit">
-								<strong>Volume fémoral droite :
+								<strong>Volume fémoral droite (en mm3) :
 								</strong>
 								<span>{{ visite.protocole.echographieVasculaire.volumeFemoralDroit }}</span></div>
 							<div class="field" id="volumeFemoralGauche">
-								<strong>Volume fémoral gauche :
+								<strong>Volume fémoral gauche (en mm3) :
 								</strong>
 								<span>{{ visite.protocole.echographieVasculaire.volumeFemoralGauche }}</span></div>
 							<div class="field" id="iliaqueDroite">
@@ -1394,6 +1394,10 @@
 								<strong>Poids :
 								</strong>
 								<span>{{ visite.protocole.suivi.poids }}</span></div>
+							<div class="field">
+								<strong>Score globale :
+								</strong>
+								<span>{{ visite.protocole.suivi.score }}</span></div>
 						</div>
 						<div class="form-space column">
 							{% for qcm in visite.protocole.suivi.facteurs %}
