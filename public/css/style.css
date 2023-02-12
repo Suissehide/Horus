@@ -748,6 +748,25 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     border-radius: 50%;
 }
 
+/* Error
+========================================================================== */
+.error-container {
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid #d63b53;
+}
+
+.error-list {
+    margin-bottom: 5px;
+}
+
+.error-form {
+    display: flex;
+    gap: 15px;
+}
+
+
 /* Alert Flashbag
 ========================================================================== */
 

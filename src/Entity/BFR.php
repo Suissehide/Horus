@@ -14,13 +14,13 @@ class BFR
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
     private $taille;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
     private $poids;
 
-    #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
     private $tourTaille;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 3, nullable: true)]
@@ -84,7 +84,7 @@ class BFR
     private $glycemieAjeun;
 
     #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
-    private $Hba1c;
+    private $hba1c;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $neuropathieClinique;
@@ -354,12 +354,12 @@ class BFR
 
     public function getHba1c(): ?string
     {
-        return $this->Hba1c;
+        return $this->hba1c;
     }
 
-    public function setHba1c(?string $Hba1c): self
+    public function setHba1c(?string $hba1c): self
     {
-        $this->Hba1c = $Hba1c;
+        $this->hba1c = $hba1c;
 
         return $this;
     }

@@ -17,32 +17,35 @@ class BFRType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taille', IntegerType::class, array(
+            ->add('taille', NumberType::class, array(
                 'label' => 'Taille (en cm)',
                 'attr' => array(
                     'unity' => 'cm',
                     'data-min' => 100,
                     'data-max' => 260,
+                    'step' => 0.1
                 ),
-                'required' => false,
+                'required' => false
             ))
-            ->add('poids', IntegerType::class, array(
+            ->add('poids', NumberType::class, array(
                 'label' => 'Poids (en kg)',
                 'attr' => array(
                     'unity' => 'kg',
                     'data-min' => 10,
                     'data-max' => 500,
+                    'step' => 0.1
                 ),
-                'required' => false,
+                'required' => false
             ))
-            ->add('tourTaille', IntegerType::class, array(
+            ->add('tourTaille', NumberType::class, array(
                 'label' => 'Tour de taille (en cm)',
                 'attr' => array(
                     'unity' => 'cm',
                     'data-min' => 10,
                     'data-max' => 200,
+                    'step' => 0.1
                 ),
-                'required' => false,
+                'required' => false
             ))
 
 
@@ -53,14 +56,14 @@ class BFRType extends AbstractType
                     'data-min' => 1,
                     'data-max' => 200,
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('tensionArterielleDiastoliqueJour', NumberType::class, array(
                 'label' => 'Diastolique jour (en mmHg)',
                 'attr' => array(
                     'unity' => 'mmHg',
                     'data-min' => 1,
-                    'data-max' => 200,
+                    'data-max' => 200
                 ),
                 'required' => false
             ))
@@ -69,16 +72,16 @@ class BFRType extends AbstractType
                 'attr' => array(
                     'unity' => 'mmHg',
                     'data-min' => 1,
-                    'data-max' => 200,
+                    'data-max' => 200
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('tensionArterielleDiastoliqueNuit', NumberType::class, array(
                 'label' => 'Diastolique nuit (en mmHg)',
                 'attr' => array(
                     'unity' => 'mmHg',
                     'data-min' => 1,
-                    'data-max' => 200,
+                    'data-max' => 200
                 ),
                 'required' => false
             ))
@@ -102,9 +105,9 @@ class BFRType extends AbstractType
                     'unity' => 'g/L',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('triglicerides', NumberType::class, array(
                 'label' => 'Triglicérides (en g/L)',
@@ -112,9 +115,9 @@ class BFRType extends AbstractType
                     'unity' => 'g/L',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('HDLC', NumberType::class, array(
                 'label' => 'HDL-C (en g/L)',
@@ -122,9 +125,9 @@ class BFRType extends AbstractType
                     'unity' => 'g/L',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('LDLC', NumberType::class, array(
                 'label' => 'LDL-C (en g/L)',
@@ -132,9 +135,9 @@ class BFRType extends AbstractType
                     'unity' => 'g/L',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('scoreDUTCH', ChoiceType::class, array(
                 'label' => 'Score de DUTCH',
@@ -148,7 +151,7 @@ class BFRType extends AbstractType
                     '6-8 HF probable' => '6-8 HF probable',
                     '>8 HF certaine' => '>8 HF certaine',
                 ),
-                'required' => false,
+                'required' => false
             ))
 
 
@@ -163,7 +166,7 @@ class BFRType extends AbstractType
                     'Ancien fumeur' => 'Ancien fumeur',
                     'Fumeur' => 'Fumeur',
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('dateArret', DateType::class, array(
                 'label' => 'Date d\'arrêt',
@@ -175,16 +178,16 @@ class BFRType extends AbstractType
                     'autocomplete' => 'off'
                 ],
                 'html5' => false,
-                'required' => false,
+                'required' => false
             ))
             ->add('nombrePaquetsAn', IntegerType::class, array(
                 'label' => 'Nombres de paquets par an',
                 'attr' => array(
                     'unity' => 'paquets/an',
                     'data-min' => 0,
-                    'data-max' => 0,
+                    'data-max' => 0
                 ),
-                'required' => false,
+                'required' => false
             ))
 
             ->add('diabeteType', ChoiceType::class, array(
@@ -195,9 +198,9 @@ class BFRType extends AbstractType
                 'choices' => array(
                     '' => '',
                     'Type 1' => 'Type 1',
-                    'Type 2' => 'Type 2',
+                    'Type 2' => 'Type 2'
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('diabeteDepuis', ChoiceType::class, array(
                 'label' => 'Depuis',
@@ -209,9 +212,9 @@ class BFRType extends AbstractType
                     '< 5 ans' => '< 5 ans',
                     '< 10 ans' => '< 10 ans',
                     '< 15 ans' => '< 15 ans',
-                    '< 20 ans' => '< 20 ans',
+                    '< 20 ans' => '< 20 ans'
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('glycemieAjeun', NumberType::class, array(
                 'label' => 'Glycémie ajeûn',
@@ -219,18 +222,19 @@ class BFRType extends AbstractType
                     'unity' => 'g/L',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
-            ->add('Hba1c', IntegerType::class, array(
+            ->add('hba1c', NumberType::class, array(
                 'label' => 'Hba1c',
                 'attr' => array(
                     'unity' => '%',
                     'data-min' => 0,
                     'data-max' => 0,
+                    'step' => 0.1
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('fondOeil', ChoiceType::class, array(
                 'label' => 'Fond d\'oeil',
@@ -243,7 +247,7 @@ class BFRType extends AbstractType
                     'Anormal sans précision' => 'Anormal sans précision',
                     'Non fait' => 'Non fait'
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('neuropathieClinique', ChoiceType::class, array(
                 'label' => 'Neuropathie clinique (DN4)',
@@ -252,7 +256,7 @@ class BFRType extends AbstractType
                     'Normal' => 'Normal',
                     'Anormal' => 'Anormal'
                 ),
-                'required' => false,
+                'required' => false
             ))
 
             ->add('neuroesthesiometriePiedDroit', NumberType::class, array(
@@ -261,9 +265,9 @@ class BFRType extends AbstractType
                     'unity' => 'volt',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('neuroesthesiometriePiedGauche', NumberType::class, array(
                 'label' => 'Neuroesthésiométrie pied gauche (en volt)',
@@ -271,9 +275,9 @@ class BFRType extends AbstractType
                     'unity' => 'volt',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
 
 
@@ -283,9 +287,9 @@ class BFRType extends AbstractType
                     'unity' => 'umol/L',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('debitFiltrationGlomerulaire', NumberType::class, array(
                 'label' => 'Débit de filtration glomerulaire CK-EPI',
@@ -293,9 +297,9 @@ class BFRType extends AbstractType
                     'unity' => '',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('microAlbuminurie', NumberType::class, array(
                 'label' => 'Microalbuminurie',
@@ -303,9 +307,9 @@ class BFRType extends AbstractType
                     'unity' => 'mg/24h',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('proteinurie', NumberType::class, array(
                 'label' => 'Protéinurie',
@@ -313,9 +317,9 @@ class BFRType extends AbstractType
                     'unity' => 'g/l',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
 
 
@@ -325,9 +329,9 @@ class BFRType extends AbstractType
                     'unity' => 'U/L',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('transaminasesALAT', NumberType::class, array(
                 'label' => 'Transaminases ALAT',
@@ -335,9 +339,9 @@ class BFRType extends AbstractType
                     'unity' => 'U/L',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('gamma', NumberType::class, array(
                 'label' => 'Gamma GT',
@@ -345,9 +349,9 @@ class BFRType extends AbstractType
                     'unity' => 'U/L',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
 
 
@@ -357,9 +361,9 @@ class BFRType extends AbstractType
                     'unity' => 'g/L',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('CRP', NumberType::class, array(
                 'label' => 'CRP',
@@ -367,9 +371,9 @@ class BFRType extends AbstractType
                     'unity' => 'mmol/L',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('hemoglobine', NumberType::class, array(
                 'label' => 'Hémoglobine',
@@ -377,9 +381,9 @@ class BFRType extends AbstractType
                     'unity' => 'g/dL',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('VGM', NumberType::class, array(
                 'label' => 'VGM',
@@ -387,9 +391,9 @@ class BFRType extends AbstractType
                     'unity' => '',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('plaquettes', NumberType::class, array(
                 'label' => 'Plaquettes',
@@ -397,9 +401,9 @@ class BFRType extends AbstractType
                     'unity' => '10^9/L',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             ->add('TSH', NumberType::class, array(
                 'label' => 'TSH',
@@ -407,9 +411,9 @@ class BFRType extends AbstractType
                     'unity' => '',
                     'data-min' => 0,
                     'data-max' => 0,
-                    'step' => 0.01,
+                    'step' => 0.01
                 ),
-                'required' => false,
+                'required' => false
             ))
             
             ->add('activitePhysique', ChoiceType::class, array(
@@ -419,7 +423,7 @@ class BFRType extends AbstractType
                     '1 à 150 min/semaine d\'activité modérée ou 1 à 75 min/semaine d\'activité vigoureuse' => '1 à 150 min/semaine d\'activité modérée ou 1 à 75 min/semaine d\'activité vigoureuse',
                     '> 150 min/semaine d\'activité modérée ou > 75 min/semaine d\'activité vigoureuse' => '> 150 min/semaine d\'activité modérée ou > 75 min/semaine d\'activité vigoureuse'
                 ),
-                'required' => false,
+                'required' => false
             ))
 
             ->add('alimentation', ChoiceType::class, array(
@@ -431,9 +435,9 @@ class BFRType extends AbstractType
                     '≥ 2 portions de poisson/semaine' => '≥  2 portions de poisson/semaine',
                     '≥ 3 portions de céréales ou fibres/semaine' => '≥ 3 portions de céréales ou fibres/semaine',
                     '< 15g de sel/jour' => '< 15g de sel/jour',
-                    '≤ 1 boisson sucrée/semaine' => '≤ 1 boisson sucrée/semaine',
+                    '≤ 1 boisson sucrée/semaine' => '≤ 1 boisson sucrée/semaine'
                 ),
-                'required' => false,
+                'required' => false
             ))
 
             ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
