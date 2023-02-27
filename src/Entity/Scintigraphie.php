@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ScintigraphieRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ScintigraphieRepository::class)]
 class Scintigraphie
@@ -14,60 +15,79 @@ class Scintigraphie
     private $id;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $reposDebitIVA;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $reposDebitCX;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $reposDebitCD;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $reposDebitTotal;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $regadenosonDebitIVA;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $regadenosonDebitCX;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $regadenosonDebitCD;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $regadenosonDebitTotal;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $reserveIVA;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $reserveCX;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $reserveCD;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $reserveTotal;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $reposAnalyseVisuelleIVA;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $reposAnalyseVisuelleCX;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $reposAnalyseVisuelleCD;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $regadenosonAnalyseVisuelleIVA;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $regadenosonAnalyseVisuelleCX;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $regadenosonAnalyseVisuelleCD;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $fractionEjection;
 
     public function getId(): ?int

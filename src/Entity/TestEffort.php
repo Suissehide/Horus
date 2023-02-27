@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TestEffortRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TestEffortRepository::class)]
 class TestEffort
@@ -14,27 +15,35 @@ class TestEffort
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $maquille;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $type;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $duree;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $watts;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $frequenceMaxPercent;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $ECGModifie;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $mesure;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $symptomes;
 
     public function getId(): ?int

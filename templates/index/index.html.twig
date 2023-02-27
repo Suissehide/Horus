@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootgrid.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 {% endblock %}
 
@@ -24,6 +26,16 @@
 				<a href="{{ path('patient_add') }}" class="btn">
 					<i aria-hidden="true" class="fa fa-plus"></i>Ajouter un patient</a>
 			</div>
+            <div class="filter__container">
+                <div class="filter__name">Filtrer par protocoles : </div>
+                <select class="input js-basic-multiple" name="protocoles[]" multiple="multiple">
+                    <option value="Vocca3D - Hyperchol">Vocca3D - Hyperchol</option>
+                    <option value="Vocca3D - Diabète">Vocca3D - Diabète</option>
+                    <option value="TransMetabo">TransMetabo</option>
+                    <option value="CAC stroke">CAC stroke</option>
+                    <option value="Parentéral Nut">Parentéral Nut</option>
+                </select>
+            </div>
 			<div class="flex">
 				<div class="table-wrapper">
 					<table cellspacing="0" class="table table-condensed table-hover table-striped" id="data-grid">
@@ -34,6 +46,7 @@
 								<th data-column-id="prenom">Prénom</th>
 								<th data-column-id="nom">Nom</th>
 								<th data-column-id="dateNaissance">Date de naissance</th>
+                                <th data-column-id="protocolesList" data-formatter="protocolesList" data-sortable="false">Protocoles</th>
 								<th data-column-id="error" data-formatter="error" data-sortable="false" data-width="261px"></th>
 								<th data-column-id="status" data-searchable="false" data-visible="false">Status</th>
 							</tr>
@@ -46,6 +59,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('js/vendor/select2.min.js') }}"></script>
     <script src="{{ asset('js/vendor/bootgrid.min.js') }}"></script>
 
     <script>
@@ -58,6 +72,26 @@
     </script>
 
     <script>
+        let protocolesSelected = [];
+
+        $('.js-basic-multiple').select2({
+            multiple: true,
+            width: '100%',
+            language: 'fr',
+            placeholder: 'Sélectionner des protocoles',
+            allowClear: true,
+        });
+
+        $('.js-basic-multiple').on('change', function (e) {
+            let data = $('.js-basic-multiple').select2('data');
+            let arr = [];
+            $.each(data, function(e, v) {
+                arr.push(v.id);
+            });
+            protocolesSelected = arr;
+            $('#data-grid').bootgrid('reload');
+        });
+
         var grid = $("#data-grid").bootgrid({
             rowCount: [
                 20, 50, -1
@@ -71,11 +105,19 @@
             requestHandler: function (request) {
                 return request;
             },
+            post: function () {
+                return {
+                    protocoles: protocolesSelected,
+                };
+            },
             url: "{{ path('patient_list') }}",
             formatters: {
-                "error": function (column, row) {
-                    fetchAdvancement(row.id);
+                protocolesList: function (column, row) {
+                    return row.protocolesList.join(", ");
                 },
+                error: function (column, row) {
+                    fetchAdvancement(row.id);
+                }
             }
         }).on("loaded.rs.jquery.bootgrid", function () {
             grid.find("tr").on("click", function (e) {
@@ -112,7 +154,7 @@
                     for (i = 0; i < json.length; i++) {
                         listErr += '<div class="badge-spe badge-tab badge-' + $.parseJSON(json[i])['state'] + '">' + $.parseJSON(json[i])['number'] + '</div>';
                     };
-                    $('#data-grid tr[data-row-id=' + patientId + '] td:nth-child(5)').empty().append(listErr);
+                    $('#data-grid tr[data-row-id=' + patientId + '] td:nth-child(6)').empty().append(listErr);
                 }
             });
         };

@@ -3,8 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EchographieCardiaqueRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EchographieCardiaqueRepository::class)]
 class EchographieCardiaque
@@ -15,51 +15,67 @@ class EchographieCardiaque
     private $id;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['export'])]
     private $date;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $fcRepos;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $fcMax;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $rythmeCardiaque;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $taSystoliqueRepos;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $taSystoliquePic;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $basalEchographie;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $basalFMTPercent;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $basalResult;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $basalNumberSegment;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $basalIschemieLocation;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $stressEchographie;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $stressFMTPercent;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $stressResult;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $stressNumberSegment;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $stressIschemieLocation;
 
     public function getId(): ?int

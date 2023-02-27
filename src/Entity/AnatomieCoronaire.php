@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AnatomieCoronaireRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AnatomieCoronaireRepository::class)]
 class AnatomieCoronaire
@@ -15,153 +16,203 @@ class AnatomieCoronaire
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $stenoseIVA;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $stenoseDiagonale;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $stenoseCirconflexe;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $stenosePosterolateral;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $stenoseCoronaireDroite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $stenosePontage;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $ffrIVA;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $ffrDiagonale;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $ffrCirconflexe;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $ffrPosterolateral;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $ffrCoronaireDroite;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $ffrPontage;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $cmrIVA;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $cmrDiagonale;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $cmrCirconflexe;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $cmrPosterolateral;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $cmrCoronaireDroite;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $cmrPontage;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $imrIVA;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $imrDiagonale;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $imrCirconflexe;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $imrPosterolateral;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $imrCoronaireDroite;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $imrPontage;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $angioplastieIVA;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $angioplastieDiagonale;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $angioplastieCirconflexe;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $angioplastiePosterolateral;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $angioplastieCoronaireDroite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $angioplastiePontage;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $coroscannerIVA;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $coroscannerDiagonale;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $coroscannerCirconflexe;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $coroscannerPosterolateral;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $coroscannerCoronaireDroite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $coroscannerPontage;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $scoreCalciqueCoronaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $nonAnalysable;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $absenceAtherome;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $remodelagePlaque;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $napkinRing;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $molle;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $calcaire;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $mixte;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $volumeNonRealisable;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $volumePlaqueHypodense;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $volumePlaqueCalcifiee;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $volumePlaque;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $volumeTotalPlaque;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private ?string $volumeCoronaireTotal = null;
 
     public function getId(): ?int

@@ -17,88 +17,89 @@ class Suivi
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $recidive;
 
     #[ORM\Column(type: 'date', nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $dateSurvenue;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $type;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $dyspnee;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $douleur;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $tabac;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $activite;
 
     #[ORM\Column(type: 'array', nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $alimentation = [];
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private ?string $hba1c = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private ?string $hypertension = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private ?string $dyslipidemie = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private ?string $poids = null;
 
     #[ORM\JoinTable(name: 'donnee_qcm_facteurs')]
     #[ORM\JoinColumn(name: 'facteurs_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     #[ORM\InverseJoinColumn(name: 'qcm_id', referencedColumnName: 'id', onDelete: 'CASCADE', unique: true)]
     #[ORM\ManyToMany(targetEntity: QCM::class, cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $facteurs;
 
     #[ORM\JoinTable(name: 'donnee_qcm_traitement')]
     #[ORM\JoinColumn(name: 'traitement_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     #[ORM\InverseJoinColumn(name: 'qcm_id', referencedColumnName: 'id', onDelete: 'CASCADE', unique: true)]
     #[ORM\ManyToMany(targetEntity: QCM::class, cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $traitement;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $debitFiltrationGlomerulaire;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $crp;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $triglycerides;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $ldl;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $hdl;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['export'])]
     private ?string $score = null;
 
     public function __construct()

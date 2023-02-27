@@ -20,51 +20,51 @@ class Protocole
     private $fiches = [];
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\AngioplastiePontage', cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $angioplastiePontage;
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\BFR', cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $BFR;
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\Catheterisation', cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $catheterisation;
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\AnatomieCoronaire', cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $anatomieCoronaire;
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\Echographie', cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $echographie;
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\EchographieCardiaque', cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $echographieCardiaque;
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\EchographieVasculaire', cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $echographieVasculaire;
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\MedicamentsEntree', cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $medicamentsEntree;
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\NeuroPsychologie', cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $neuroPsychologie;
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\Scintigraphie', cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $scintigraphie;
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\TestEffort', cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $testEffort;
 
     #[ORM\OneToOne(targetEntity: 'App\Entity\Suivi', cascade: ['persist', 'remove'])]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $suivi;
 
     #[ORM\OneToMany(targetEntity: Visite::class, mappedBy: 'protocole', cascade: ['persist', 'remove'])]

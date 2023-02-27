@@ -6,6 +6,7 @@ use App\Repository\MedicamentsEntreeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: MedicamentsEntreeRepository::class)]
 class MedicamentsEntree
@@ -19,63 +20,80 @@ class MedicamentsEntree
     private $medicaments;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $NbMedicamentSemaine;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $DelaiSousTraitement;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $pilulier;
 
     #[ORM\Column(type: 'array', nullable: true)]
+    #[Groups(['export'])]
     private $gestionMedicaments = [];
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $satisfaction;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $ConnaissanceDureeTraitement;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $scoreMasCard;
 
     #[ORM\Column(type: 'array', nullable: true)]
+    #[Groups(['export'])]
     private $problemes = [];
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['export'])]
     private $remarques;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $effetIndesirable;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['export'])]
     private $lequel;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['export'])]
     private $verbatimsMedicaments;
 
     #[ORM\JoinTable(name: 'medicaments_entree_qcm_verbatims')]
     #[ORM\JoinColumn(name: 'verbatims_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     #[ORM\InverseJoinColumn(name: 'qcm_id', referencedColumnName: 'id', onDelete: 'CASCADE', unique: true)]
     #[ORM\ManyToMany(targetEntity: QCM::class, cascade: ['persist', 'remove'])]
+    #[Groups(['export'])]
     private $verbatims;
 
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['export'])]
     private $verbatimsApportSante;
 
     #[ORM\JoinTable(name: 'medicaments_entree_qcm_verbatims_sante')]
     #[ORM\JoinColumn(name: 'verbatims_sante_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     #[ORM\InverseJoinColumn(name: 'qcm_id', referencedColumnName: 'id', onDelete: 'CASCADE', unique: true)]
     #[ORM\ManyToMany(targetEntity: QCM::class, cascade: ['persist', 'remove'])]
+    #[Groups(['export'])]
     private $verbatimsSante;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $vecuTraitement;
 
     #[ORM\JoinTable(name: 'medicaments_entree_bmq_questionnaire')]
     #[ORM\JoinColumn(name: 'questionnaire_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     #[ORM\InverseJoinColumn(name: 'bmq_id', referencedColumnName: 'id', onDelete: 'CASCADE', unique: true)]
     #[ORM\ManyToMany(targetEntity: BMQ::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[Groups(['export'])]
     private $questionnaire;
 
     public function __construct()

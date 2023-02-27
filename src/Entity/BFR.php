@@ -3,8 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BFRRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: BFRRepository::class)]
 class BFR
@@ -15,120 +15,159 @@ class BFR
     private $id;
 
     #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
+    #[Groups(['export'])]
     private $taille;
 
     #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
+    #[Groups(['export'])]
     private $poids;
 
     #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
+    #[Groups(['export'])]
     private $tourTaille;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 3, nullable: true)]
+    #[Groups(['export'])]
     private $tensionArterielleSystoliqueJour;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 3, nullable: true)]
+    #[Groups(['export'])]
     private $tensionArterielleDiastoliqueJour;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 3, nullable: true)]
+    #[Groups(['export'])]
     private $tensionArterielleSystoliqueNuit;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 3, nullable: true)]
+    #[Groups(['export'])]
     private $tensionArterielleDiastoliqueNuit;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $HVG;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $cholesterolTotal;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $triglicerides;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $HDLC;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $LDLC;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $scoreDUTCH;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $tabagisme;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['export'])]
     private $dateArret;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $nombrePaquetsAn;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $microAlbuminurie;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $creatinine;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $debitFiltrationGlomerulaire;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $proteinurie;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $diabeteType;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $diabeteDepuis;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $glycemieAjeun;
 
     #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
+    #[Groups(['export'])]
     private $hba1c;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $neuropathieClinique;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $fondOeil;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $neuroesthesiometriePiedDroit;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $neuroesthesiometriePiedGauche;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $transaminasesASAT;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $transaminasesALAT;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $gamma;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $fibrinogene;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $CRP;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $hemoglobine;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $VGM;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $plaquettes;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $TSH;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $activitePhysique;
 
     #[ORM\Column(type: 'array', nullable: true)]
+    #[Groups(['export'])]
     private $alimentation = [];
 
     public function getId(): ?int

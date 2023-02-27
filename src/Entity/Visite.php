@@ -15,6 +15,10 @@ class Visite
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['export', 'advancement'])]
+    private ?string $protocoleNom = null;
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Groups(['export', 'advancement'])]
     private ?\DateTimeInterface $date = null;
@@ -23,7 +27,7 @@ class Visite
     private $patient;
 
     #[ORM\ManyToOne(targetEntity: Protocole::class, inversedBy: 'visites', cascade: ['persist', 'remove'])]
-    #[Groups(['export', 'advancement'])]
+    #[Groups(['export'])]
     private $protocole;
 
     public function getId(): ?int
@@ -63,6 +67,18 @@ class Visite
     public function setProtocole(?Protocole $protocole): self
     {
         $this->protocole = $protocole;
+
+        return $this;
+    }
+
+    public function getProtocoleNom(): ?string
+    {
+        return $this->protocoleNom;
+    }
+
+    public function setProtocoleNom(?string $protocoleNom): self
+    {
+        $this->protocoleNom = $protocoleNom;
 
         return $this;
     }

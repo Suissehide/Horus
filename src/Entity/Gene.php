@@ -15,23 +15,23 @@ class Gene
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $statut;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $mutation;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $frequence;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $classification;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export'])]
     private $commentaire;
 
     public function getId(): ?int

@@ -40,6 +40,7 @@ class InitializePatient
         $visite = new Visite();
 
         $visite->setProtocole(new Protocole());
+        $visite->setProtocoleNom($type);
 
         switch ($type) {
             case FormConstants::LABELS['FEUILLES'][0]:

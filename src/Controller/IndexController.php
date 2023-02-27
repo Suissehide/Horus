@@ -11,14 +11,29 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Doctrine\Persistence\ManagerRegistry;
+
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class IndexController extends AbstractController
 {
-    public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry, private \Symfony\Component\Serializer\SerializerInterface $serializer)
+    /**
+     * @var SerializerInterface
+     */
+    private $serializer;
+
+    /**
+     * @var ManagerRegistry
+     */
+    private $managerRegistry;
+
+    public function __construct(ManagerRegistry $managerRegistry, SerializerInterface $serializer)
     {
+        $this->managerRegistry = $managerRegistry;
+        $this->serializer = $serializer;
     }
 
     #[Route(path: '/index', name: 'index_patient')]
@@ -37,8 +52,9 @@ class IndexController extends AbstractController
             $rowCount = $request->get('rowCount');
             $searchPhrase = $request->get('searchPhrase');
             $sort = $request->get('sort');
+            $protocoles = $request->get('protocoles');
 
-            $patients = $patientRepository->findByFilter($sort, $searchPhrase);
+            $patients = $patientRepository->findByFilter($sort, $searchPhrase, $protocoles);
             
             if ($searchPhrase != "") {
                 $count = count($patients->getQuery()->getResult());
@@ -60,6 +76,7 @@ class IndexController extends AbstractController
                     "prenom" => $patient->getGeneral()->getPrenom(),
                     "nom" => $patient->getGeneral()->getNom(),
                     "dateNaissance" => $patient->getGeneral()->getDateNaissance() ? $patient->getGeneral()->getDateNaissance()->format('d/m/Y') : '',
+                    "protocolesList" => $this->buildProtocolesList($patient),
                     "error" => ''
                 );
                 array_push($rows, $row);
@@ -73,6 +90,20 @@ class IndexController extends AbstractController
             return new JsonResponse($data);
         }
         return new JsonResponse('no results found', Response::HTTP_NOT_FOUND);
+    }
+
+    private function buildProtocolesList(Patient $patient)
+    {
+        $visites = $patient->getVisites();
+        $protocolesList = [];
+
+        foreach ($visites as $visite) {
+            $nom = $visite->getProtocoleNom();
+            if (!empty($nom) && !in_array($nom, $protocolesList))
+                array_push($protocolesList, $nom);
+        }
+
+        return $protocolesList;
     }
 
     #[Route(path: '/advancement', name: 'advancement', methods: ['GET', 'POST'])]
@@ -169,16 +200,14 @@ class IndexController extends AbstractController
     #[Route(path: '/export/csv', name: 'export_csv', methods: ['GET'])]
     public function generateCsvAction(PatientRepository $patientRepository)
     {
-        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
-
         $res = $this->serializer->normalize(
             $patientRepository->findAll(),
             'json',
             ['groups' => ['export']]
         );
-        $data = $serializer->encode($res, 'csv');
-
+        $data = $this->serializer->encode($res, 'csv');
         $data = str_replace(",", ";", $data);
+
         $fileName = "export_patient_" . date("d_m_Y") . ".csv";
         $response = new Response($data);
         $response->setStatusCode(Response::HTTP_OK);

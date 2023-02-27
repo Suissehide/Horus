@@ -27,21 +27,29 @@ class PatientRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
-    public function findByFilter($sort, $searchPhrase)
+    public function findByFilter($sort, $searchPhrase, $protocoles)
     {
         $qb = $this->createQueryBuilder('p');
         $qb->leftJoin('p.general', 'g');
 
         if ($searchPhrase != "") {
-            $qb
-            ->andWhere('
+            $qb 
+                ->andWhere('
                     g.civilite LIKE :search
                     OR g.nom LIKE :search
                     OR g.prenom LIKE :search
                     OR g.dateNaissance LIKE :search
                 ')
-            ->setParameter('search', '%' . $searchPhrase . '%');
+                ->setParameter('search', '%' . $searchPhrase . '%');
         }
+
+        if ($protocoles) {
+            $qb
+                ->innerJoin('p.visites', 'v')
+                ->andWhere('v.protocoleNom IN(:protocoleNom)')
+                ->setParameter('protocoleNom', $protocoles);
+        }
+
         if ($sort) {
             foreach ($sort as $key => $value) {
                 if ($key == 'civilite')

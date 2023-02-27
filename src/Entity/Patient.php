@@ -36,7 +36,7 @@ class Patient
     private $facteur;
 
     #[ORM\OneToMany(targetEntity: Visite::class, mappedBy: 'patient', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[Groups(['advancement', 'export'])]
+    #[Groups(['export', 'advancement'])]
     private $visites;
 
     #[ORM\OneToMany(targetEntity: 'App\Entity\Erreur', mappedBy: 'patient', cascade: ['remove'])]

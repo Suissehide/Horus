@@ -132,11 +132,11 @@ class GeneralType extends AbstractType
                 'required' => false,
             ))
 
-            ->add('feuille', ChoiceType::class, [
+            ->add('protocoleNom', ChoiceType::class, [
                 'label' => 'Protocoles',
                 'expanded' => false,
                 'multiple' => false,
-                'placeholder' => false,
+                'placeholder' => '',
                 'choices' => $choices,
                 'mapped' => false
             ])

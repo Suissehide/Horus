@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SegmentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SegmentRepository::class)]
 class Segment
@@ -14,6 +15,7 @@ class Segment
     private $id;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 2, nullable: true)]
+    #[Groups(['export'])]
     private $segment;
 
     public function getId(): ?int

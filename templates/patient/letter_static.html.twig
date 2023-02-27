@@ -424,6 +424,11 @@
 				<section class="slide" style="display: block">
 					<h1 id={{"visite-" ~ visite.id }} class="no-delete">Visite
 						{{ loop.index }}</h1>
+
+					<div class="field">
+						<strong>Protocole :
+						</strong>
+						<span>{{ visite.protocoleNom }}</span></div>
 					<div class="form-space">
 						<div class="field">
 							<strong>Date :

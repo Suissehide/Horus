@@ -59,7 +59,7 @@ class PatientController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $patient = $form->getData();
-            $type = $form->get('general')->get('feuille')->getData();
+            $type = $form->get('general')->get('protocoleNom')->getData();
 
             $initializePatient->createVisite($patient, $type);
 
@@ -125,8 +125,7 @@ class PatientController extends AbstractController
     #[Route(path: '/patient/view/{id}', name: 'patient_view', methods: ['GET', 'POST'])]
     public function patient_index(Patient $patient, Request $request): Response
     {
-        $oldArray = $this->serializeEntity($patient);
-        dump($oldArray, $request);
+        $oldArray = $this->serializeEntity($patient);                                                                                                                                                                                     
 
         #========== PATIENT ==========#
         $form = $this->createForm(PatientType::class, $patient);

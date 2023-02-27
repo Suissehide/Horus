@@ -6,10 +6,11 @@ class FormConstants
 {
 	const LABELS = [
 		"FEUILLES" => [
-			'Ensemble 1',
-			'Ensemble 2',
-			'Ensemble 3',
-			'Ensemble 4'
+			'Vocca3D - Hyperchol',
+			'Vocca3D - Diabète',
+			'TransMetabo',
+			'CAC stroke',
+			'Parentéral Nut'
 		],
 
 		"MEDICAMENTSENTREE_VERBATIMS_VECU" => [

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\QCMRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: QCMRepository::class)]
 class QCM
@@ -14,6 +15,7 @@ class QCM
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $response;
 
     public function getId(): ?int

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EchographieVasculaireRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EchographieVasculaireRepository::class)]
 class EchographieVasculaire
@@ -15,114 +16,151 @@ class EchographieVasculaire
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $carotideInterneDroite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $carotideInterneGauche;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 4, nullable: true)]
+    #[Groups(['export'])]
     private $EIMDroit;
 
     #[ORM\Column(type: 'decimal', precision: 10, scale: 4, nullable: true)]
+    #[Groups(['export'])]
     private $EIMGauche;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $vertebraleDroite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $vertebraleGauche;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $carotideCommuneDroite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $carotideCommuneGauche;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $sousClaviereDroite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $sousClaviereGauche;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $TSAAorte;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $membresInferieurAorte;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $iliaqueDroite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $iliaqueGauche;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $femoraleCommuneDroite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $femoraleCommuneGauche;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $femoraleSuperficielleDroite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $femoraleSuperficielleGauche;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $popliteDroite;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $popliteGauche;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $axesJambiersDroits;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $axesJambiersGauches;
 
     #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
+    #[Groups(['export'])]
     private $IPSReposDroit;
 
     #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
+    #[Groups(['export'])]
     private $IPSReposGauche;
 
     #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
+    #[Groups(['export'])]
     private $IPSEffortDroit;
 
     #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
+    #[Groups(['export'])]
     private $IPSEffortGauche;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $testStrandnessDistanceMax;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $testStrandnessDistanceGene;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $vitesseOndePouls;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $volumeCarotideDroite;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $volumeCarotideGauche;
 
     #[ORM\Column(type: 'integer', nullable: true)]
+    #[Groups(['export'])]
     private $chargeAtheromeTotale;
 
     #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
+    #[Groups(['export'])]
     private $IPSGrosOrteilDroit;
 
     #[ORM\Column(type: 'decimal', precision: 5, scale: 1, nullable: true)]
+    #[Groups(['export'])]
     private $IPSGrosOrteilGauche;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $arretPour;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 1, nullable: true)]
+    #[Groups(['export'])]
     private ?string $volumeFemoralDroit = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 1, nullable: true)]
+    #[Groups(['export'])]
     private ?string $volumeFemoralGauche = null;
 
     public function getId(): ?int

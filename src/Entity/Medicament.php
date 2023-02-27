@@ -6,6 +6,7 @@ use App\Repository\MedicamentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: MedicamentRepository::class)]
 class Medicament
@@ -16,9 +17,11 @@ class Medicament
     private $id;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups(['export'])]
     private $name;
 
     #[ORM\ManyToMany(targetEntity: MedicamentsEntree::class, mappedBy: 'medicaments', cascade: ['persist', 'remove'])]
+    #[Groups(['export'])]
     private $medicamentsEntrees;
 
     public function __construct()
