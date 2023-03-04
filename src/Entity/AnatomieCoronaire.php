@@ -163,6 +163,10 @@ class AnatomieCoronaire
     #[Groups(['export'])]
     private $scoreCalciqueCoronaire;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['export'])]
+    private ?string $cadrads = null;
+
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     #[Groups(['export'])]
     private $nonAnalysable;
@@ -660,6 +664,18 @@ class AnatomieCoronaire
     public function setScoreCalciqueCoronaire(?int $scoreCalciqueCoronaire): self
     {
         $this->scoreCalciqueCoronaire = $scoreCalciqueCoronaire;
+
+        return $this;
+    }
+
+    public function getCadrads(): ?string
+    {
+        return $this->cadrads;
+    }
+
+    public function setCadrads(?string $cadrads): self
+    {
+        $this->cadrads = $cadrads;
 
         return $this;
     }

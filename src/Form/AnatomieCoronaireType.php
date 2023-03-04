@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -440,10 +441,15 @@ class AnatomieCoronaireType extends AbstractType
                 'attr' => array(
                     'unity' => '',
                     'data-min' => 0,
-                    'data-max' => 3000
+                    'data-max' => 0
                 ),
                 'required' => false,
             ))
+            ->add('cadrads', TextType::class, array(
+                'label' => 'Cadrads',
+                'required' => false,
+            ))
+
 
             ->add('nonAnalysable', ChoiceType::class, array(
                 'label' => 'Non analysable devant CAC élevé',
