@@ -1565,7 +1565,8 @@
 
 			pdf.setFont('times', 'normal');
 
-			$('.alimentation').html($('.alimentation').html().replace(/\≥/g, '>='));
+			if ($('.alimentation').html())
+				$('.alimentation').html($('.alimentation').html().replace(/\≥/g, '>='));
             let srcwidth = document.getElementById('print').scrollWidth;
             let date = new Date().
                 toLocaleString('fr-FR', {year: 'numeric', month: '2-digit', day: '2-digit'}).
