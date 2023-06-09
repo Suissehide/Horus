@@ -27,6 +27,10 @@ class Protocole
     #[Groups(['export'])]
     private $BFR;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[Groups(['export'])]
+    private ?Chip $chip = null;
+
     #[ORM\OneToOne(targetEntity: 'App\Entity\Catheterisation', cascade: ['persist', 'remove'])]
     #[Groups(['export'])]
     private $catheterisation;
@@ -124,6 +128,18 @@ class Protocole
     public function setBFR(?BFR $BFR): self
     {
         $this->BFR = $BFR;
+
+        return $this;
+    }
+
+    public function getChip(): ?Chip
+    {
+        return $this->chip;
+    }
+
+    public function setChip(?Chip $chip): self
+    {
+        $this->chip = $chip;
 
         return $this;
     }

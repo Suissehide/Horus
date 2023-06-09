@@ -28,8 +28,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Context\Normalizer\ObjectNormalizerContextBuilder;
+
 
 class PatientController extends AbstractController
 {
@@ -123,9 +124,9 @@ class PatientController extends AbstractController
     }
 
     #[Route(path: '/patient/view/{id}', name: 'patient_view', methods: ['GET', 'POST'])]
-    public function patient_index(Patient $patient, Request $request): Response
+    public function patient_index(Patient $patient, Request $request, SerializerInterface $serializer): Response
     {
-        $oldArray = $this->serializeEntity($patient);                                                                                                                                                                                     
+        $oldArray = $this->serializeEntity($patient, 'export', $serializer);
 
         #========== PATIENT ==========#
         $form = $this->createForm(PatientType::class, $patient);
@@ -137,10 +138,10 @@ class PatientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid() && !$this->getParameter('freeze_database')) {
 
             /* SERIALISATION */
-            $patientArray = $this->serializeEntity($form->getData());
+            $patientArray = $this->serializeEntity($form->getData(), 'export', $serializer);
 
             /* SPECIAL ERROR */
-            
+
 
             /* SEARCH DIFF */
             $this->searchDiff($patient, $oldArray, $patientArray, 'patient');
@@ -177,19 +178,26 @@ class PatientController extends AbstractController
         return strtolower(preg_replace('/(?<=[a-z])([A-Z]+)/', '_$1', $key));
     }
 
-    private function serializeEntity($data)
+    private function serializeEntity($entity, $group, SerializerInterface $serializer)
     {
-        $encoders = array(new JsonEncoder());
-        $normalizers = array(new ObjectNormalizer());
-        $serializer = new Serializer($normalizers, $encoders);
+        $context = (new ObjectNormalizerContextBuilder())
+            ->withGroups($group)
+            ->toArray();
 
-        $serialized = $serializer->serialize($data, 'json', [
-            'groups' => 'advancement',
-            'circular_reference_handler' => function ($object) {
-                return $object->getId();
-            },
-        ]);
-        return json_decode($serialized, true);
+        // $data = $serializer->serialize($entity, 'json', [
+        //     'groups' => [$group],
+        //     'circular_reference_handler' => function ($object) {
+        //         return $object->getId();
+        //     },
+        // ]);
+        // return json_decode($data, true);
+
+        $json = $serializer->serialize(
+            $entity,
+            JsonEncoder::FORMAT,
+            $context
+        );
+        return $json;
     }
 
     private function checkEmpty($x, $path = null)
@@ -241,6 +249,7 @@ class PatientController extends AbstractController
                     $this->searchDiff($patient, $oldArray[$key], $newArray[$key], $path . '_' . $this->formatKey($key));
                 }
             } else {
+
                 if ($oldArray[$key] !== $value && $key === 'medicaments') {
                     $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key], 'name') . '] en [' . $this->checkEmpty($value, 'name') . ']', true);
                 } else if ($oldArray[$key] !== $value && ($key === 'stressBullseye' || $key === 'basalBullseye') && $this->array_diff_depth($oldArray[$key]['segments'], $value['segments'], 'segment')) {
@@ -327,7 +336,7 @@ class PatientController extends AbstractController
     }
 
     #[Route(path: '/patient/{id}/letter', name: 'patient_letter', methods: ['GET', 'POST'])]
-    public function letter(Patient $patient): Response
+    public function letter(Patient $patient, SerializerInterface $serializer): Response
     {
         $letter = $this->em->getRepository(Letter::class)->findOneBy([]);
         if (!$letter) {
@@ -336,7 +345,7 @@ class PatientController extends AbstractController
             $this->em->flush();
         }
 
-        $jsonPatient = $this->serializeEntity($patient, 'json');
+        $jsonPatient = $this->serializeEntity($patient, 'export', $serializer);
 
         return $this->render('patient/letter.html.twig', [
             'title' => 'Création de la lettre',

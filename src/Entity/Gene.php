@@ -14,25 +14,25 @@ class Gene
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export'])]
-    private $statut;
+    private ?string $statut = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export'])]
-    private $mutation;
+    private ?string $mutation = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(nullable: true)]
     #[Groups(['export'])]
-    private $frequence;
+    private ?int $frequence = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export'])]
-    private $classification;
+    private ?string $classification = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['export'])]
-    private $commentaire;
+    private ?string $commentaire = null;
 
     public function getId(): ?int
     {

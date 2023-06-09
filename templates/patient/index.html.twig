@@ -108,8 +108,9 @@
                                         {% set protocoleMenuIds = protocoleMenuIds|merge([visite.protocole.id]) %}
                                         <ul class="protocole-list" data-protocole={{visite.protocole.id}}>
                                             {% for fiche in visite.protocole.fiches %}
-                                                {% if fiche == 'bfr' %}<li><a name='bfr'>Bilan biologique et risque</a></li>{% endif %}
                                                 {% if fiche == 'anatomieCoronaire' %}<li><a name="anatomieCoronaire">Anatomie coronaire</a></li>{% endif %}
+                                                {% if fiche == 'bfr' %}<li><a name='bfr'>Bilan biologique et risque</a></li>{% endif %}
+                                                {% if fiche == 'chip' %}<li><a name='chip'>CHIP</a></li>{% endif %}
                                                 {% if fiche == 'echographie' %}<li><a name="echographie">Échocardiographie</a></li>{% endif %}
                                                 {% if fiche == 'echographieVasculaire' %}<li><a name='echographieVasculaire'>Échographie vasculaire</a></li>{% endif %}
                                                 {% if fiche == 'medicaments' %}<li><a name='medicaments'>Médicaments</a></li>{% endif %}
@@ -251,8 +252,9 @@
                                                     <ul class="etiquettes__list">
                                                         {% for fiche in visite.protocole.vars.value.fiches %}
                                                             <li name={{ fiche }} class='etiquette'>
-                                                                {% if fiche == 'bfr' %}Bilan biologique et risque{% endif %}
                                                                 {% if fiche == 'anatomieCoronaire' %}Anatomie coronaire{% endif %}
+                                                                {% if fiche == 'bfr' %}Bilan biologique et risque{% endif %}
+                                                                {% if fiche == 'chip' %}CHIP{% endif %}
                                                                 {% if fiche == 'echographie' %}Échocardiographie{% endif %}
                                                                 {% if fiche == 'echographieVasculaire' %}Échographie vasculaire{% endif %}
                                                                 {% if fiche == 'medicaments' %}Médicaments{% endif %}
@@ -277,8 +279,9 @@
                                                 <div class="wrap-input">
                                                     <select id="protocole-fiches" name="protocole[fiches]" class="input">
                                                         <option value=""></option>
-                                                        {% if "bfr" not in fiches %}<option value="bfr">Bilan biologique et risque</option>{% endif %}
                                                         {% if "anatomieCoronaire" not in fiches %}<option value="anatomieCoronaire">Anatomie coronaire</option>{% endif %}
+                                                        {% if "bfr" not in fiches %}<option value="bfr">Bilan biologique et risque</option>{% endif %}
+                                                        {% if "chip" not in fiches %}<option value="chip">CHIP</option>{% endif %}
                                                         {% if "echographie" not in fiches %}<option value="echographie">Échocardiographie</option>{% endif %}
                                                         {% if "echographieVasculaire" not in fiches %}<option value="echographieVasculaire">Échographie vasculaire</option>{% endif %}
                                                         {% if "medicaments" not in fiches %}<option value="medicaments">Médicaments</option>{% endif %}
@@ -302,8 +305,9 @@
 
                                     <ul class="tabbed tabbed__fiches">
                                         {% for fiche in fiches %}
-                                            {% if fiche == 'bfr' %}<li name="bfr">Bilan biologique et risque</li>{% endif %}
                                             {% if fiche == 'anatomieCoronaire' %}<li name="anatomieCoronaire">Anatomie coronaire</li>{% endif %}
+                                            {% if fiche == 'bfr' %}<li name="bfr">Bilan biologique et risque</li>{% endif %}
+                                            {% if fiche == 'chip' %}<li name="chip">CHIP</li>{% endif %}
                                             {% if fiche == 'echographie' %}<li name="echographie">Échocardiographie</li>{% endif %}
                                             {% if fiche == 'echographieVasculaire' %}<li name="echographieVasculaire">Échographie vasculaire</li>{% endif %}
                                             {% if fiche == 'medicaments' %}<li name="medicaments">Médicaments</li>{% endif %}
@@ -329,6 +333,13 @@
                                             <li class="tab-content" name="bfr">
                                                 <div id="examen-bfr">
                                                     {% include 'patient/form/examens/bilan_biologique_risque.html.twig' with {form: visite} %}
+                                                </div>
+                                            </li>
+
+                                            {#========== CHIP ==========#}
+                                            <li class="tab-content" name="chip">
+                                                <div id="examen-chip">
+                                                    {% include 'patient/form/examens/chip.html.twig' with {form: visite} %}
                                                 </div>
                                             </li>
 
@@ -937,6 +948,31 @@
                 },
             });
         })
+
+        /* 
+        * MUTATIONS
+        **********************************************************************/
+        $('.add_item_link').on('click', function(e) {
+            addFormToCollection(e);
+        })
+
+        const addFormToCollection = (e) => {
+            const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+
+            const item = document.createElement('li');
+
+            item.innerHTML = collectionHolder
+                .dataset
+                .prototype
+                .replace(
+                /__name__/g,
+                collectionHolder.dataset.index
+                );
+
+            collectionHolder.appendChild(item);
+            collectionHolder.dataset.index++;
+        };
+
 
         /* 
         * IMC

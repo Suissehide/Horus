@@ -5,17 +5,17 @@ namespace App\Form;
 use App\Entity\Protocole;
 
 use App\Form\MedicamentsEntreeType;
+use App\Form\AnatomieCoronaireType;
 use App\Form\AngioplastiePontageType;
 use App\Form\BFRType;
 use App\Form\CatheterisationType;
-use App\Form\AnatomieCoronaireType;
+use App\Form\ChipType;
 use App\Form\EchographieType;
 use App\Form\EchographieCardiaqueType;
 use App\Form\EchographieVasculaireType;
 use App\Form\NeuroPsychologieType;
 use App\Form\ScintigraphieType;
 use App\Form\TestEffortType;
-use App\Form\VisiteType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,6 +26,9 @@ class ProtocoleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('anatomieCoronaire', AnatomieCoronaireType::class, array(
+                'label' => 'Coronaire et angioplastie'
+            ))
             ->add('angioplastiePontage', AngioplastiePontageType::class, array(
                 'label' => 'Angioplastie Pontage'
             ))
@@ -35,8 +38,8 @@ class ProtocoleType extends AbstractType
             ->add('catheterisation', CatheterisationType::class, array(
                 'label' => 'Cathétérisation'
             ))
-            ->add('anatomieCoronaire', AnatomieCoronaireType::class, array(
-                'label' => 'Coronaire et angioplastie'
+            ->add('chip', ChipType::class, array(
+                'label' => 'CHIP'
             ))
             ->add('echographie', EchographieType::class, array(
                 'label' => 'Echographie'

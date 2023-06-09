@@ -97,11 +97,20 @@
 			</table>
 		</div>
 		<div class="bmq-results">
-			<h5>Calcul automatique de score : </h5>
-			<div class="result">Nécessité traitements (1 à 5) : <span></span></div>
-			<div class="result">Danger dépendance (6 à 10) : <span></span></div>
-			<div class="result">Croyances médecin (11 à 14) : <span></span></div>
-			<div class="result">Croyances médecin (15 à 18) : <span></span></div>
+			<h5>Calcul automatique de score :
+			</h5>
+			<div class="result">Nécessité traitements (1 à 5) :
+				<span></span>
+			</div>
+			<div class="result">Danger dépendance (6 à 10) :
+				<span></span>
+			</div>
+			<div class="result">Croyances médecin (11 à 14) :
+				<span></span>
+			</div>
+			<div class="result">Croyances médecin (15 à 18) :
+				<span></span>
+			</div>
 		</div>
 	</div>
 
@@ -119,14 +128,16 @@
 
 <div class="form-space">
 	<div class="medicaments__list">
-		{% for medicament in visite.protocole.medicamentsEntree.vars.value.medicaments %}
-			<div data-id='{{ medicament.id }}' class='medicament'>
-				{{ medicament.name }}
-				<span class="delete">
-					<i class="fa fa-times"></i>
-				</span>
-			</div>
-		{% endfor %}
+		{% if visite.protocole.medicamentsEntree.vars.value %}
+			{% for medicament in visite.protocole.medicamentsEntree.vars.value.medicaments %}
+				<div data-id='{{ medicament.id }}' class='medicament'>
+					{{ medicament.name }}
+					<span class="delete">
+						<i class="fa fa-times"></i>
+					</span>
+				</div>
+			{% endfor %}
+		{% endif %}
 	</div>
 </div>
 <div class="form-space">

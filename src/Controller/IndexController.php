@@ -2,21 +2,16 @@
 
 namespace App\Controller;
 
+use App\Constant\FormConstants;
 use App\Entity\Patient;
 use App\Repository\PatientRepository;
-
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
-
 use Doctrine\Persistence\ManagerRegistry;
-
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class IndexController extends AbstractController
 {
@@ -40,6 +35,7 @@ class IndexController extends AbstractController
     public function index(): Response
     {
         return $this->render('index/index.html.twig', [
+            'constants_labels' => FormConstants::LABELS['FEUILLES'],
             'controller_name' => 'IndexController',
         ]);
     }
@@ -55,13 +51,13 @@ class IndexController extends AbstractController
             $protocoles = $request->get('protocoles');
 
             $patients = $patientRepository->findByFilter($sort, $searchPhrase, $protocoles);
-            
+
             if ($searchPhrase != "") {
                 $count = count($patients->getQuery()->getResult());
             } else {
                 $count = $patientRepository->getCount();
             }
-            
+
             if ($rowCount != -1) {
                 $min = ($current - 1) * $rowCount;
                 $max = $rowCount;
@@ -71,7 +67,7 @@ class IndexController extends AbstractController
             $rows = [];
             foreach ($patients as $patient) {
                 $row = array(
-                    "id" => $patient->getId(),                   
+                    "id" => $patient->getId(),
                     "civilite" => $patient->getGeneral()->getCivilite(),
                     "prenom" => $patient->getGeneral()->getPrenom(),
                     "nom" => $patient->getGeneral()->getNom(),
@@ -79,7 +75,7 @@ class IndexController extends AbstractController
                     "protocolesList" => $this->buildProtocolesList($patient),
                     "error" => ''
                 );
-                array_push($rows, $row);
+                $rows[] = $row;
             }
             $data = array(
                 "current" => intval($current),
@@ -134,13 +130,12 @@ class IndexController extends AbstractController
             $iter = 0;
             foreach ($json as $item) {
                 if (($i = $this->isError($iter, $errors)) != 0) {
-                    array_push($arr, '{"state": "error", "number": "' . $i . '"}');
-                }
-                // else if (($i = $this->isCompleted($item, 0)) == 0)
+                    $arr[] = '{"state": "error", "number": "' . $i . '"}';
+                } // else if (($i = $this->isCompleted($item, 0)) == 0)
                 else if (!$this->array_searchRecursive(null, $item)) {
-                    array_push($arr, '{"state": "completed", "number": "&nbsp;"}');
+                    $arr[] = '{"state": "completed", "number": "&nbsp;"}';
                 } else {
-                    array_push($arr, '{"state": "unfinished", "number": "&nbsp;"}');
+                    $arr[] = '{"state": "unfinished", "number": "&nbsp;"}';
                 }
                 $iter += 1;
             }
@@ -173,7 +168,7 @@ class IndexController extends AbstractController
         return $i;
     }
 
-    public function array_searchRecursive($needle, $haystack, $strict = false)
+    public function array_searchRecursive($needle, $haystack, $strict = false): bool
     {
         if (!is_array($haystack))
             return false;
@@ -198,7 +193,7 @@ class IndexController extends AbstractController
     }
 
     #[Route(path: '/export/csv', name: 'export_csv', methods: ['GET'])]
-    public function generateCsvAction(PatientRepository $patientRepository)
+    public function generateCsvAction(PatientRepository $patientRepository): Response
     {
         $res = $this->serializer->normalize(
             $patientRepository->findAll(),

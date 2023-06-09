@@ -1,3 +1,5 @@
-index:
-     path: /login
-     controller: App\Controller\SecurityController::app_login
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute

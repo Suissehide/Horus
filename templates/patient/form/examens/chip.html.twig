@@ -1,0 +1,21 @@
+<h1 id="chip">CHIP</h1>
+
+<div class="form-space">
+	{{ form_row(form.protocole.chip.chip, {'attr': {'class': 'input radio-row'}}) }}
+	{{ form_row(form.protocole.chip.numberOfClones, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+	{# <ul
+	class="mutations"
+	data-index="{{ form.protocole.chip.mutations|length > 0 ? form.protocole.chip.mutations|last.vars.name + 1 : 0 }}"
+	data-prototype="{{ form_widget(form.protocole.chip.mutations.vars.prototype)|e('html_attr') }}">
+		{% for mutations in form.protocole.chip.mutations %}
+			<li>
+				{{ form_row(mutations.gene, {'attr': {'class': 'input'}}) }}
+				{{ form_row(mutations.nomenclature, {'attr': {'class': 'input'}}) }}
+				{{ form_row(mutations.vaf, {'attr': {'class': 'input'}, 'useStyle': true }) }}
+			</li>
+		{% endfor %}
+	</ul> #}
+	<button type="button" class="btn add_item_link" data-collection-holder-class="mutations">Add a tag</button>
+</div>
+
+{{ form_row(form.protocole.chip.save, {'attr': {'class': 'form-btn btn-save', 'disabled': freezeDatabase} }) }}
