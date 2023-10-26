@@ -3,9 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
-
 use App\Repository\ErreurRepository;
-
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,7 +46,7 @@ class HistoryController extends AbstractController
                     "message" => $erreur->getMessage(),
                     "etat" => $erreur->getEtat(),
                 );
-                array_push($rows, $row);
+                $rows[] = $row;
             }
 
             $data = array(
@@ -67,7 +66,7 @@ class HistoryController extends AbstractController
         ]);
     }
 
-    private function formatDate(\DateTime $date)
+    private function formatDate(DateTime $date)
     {
         $formatter = new \IntlDateFormatter(
             \Locale::getDefault(),

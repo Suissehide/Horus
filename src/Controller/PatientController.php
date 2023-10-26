@@ -3,51 +3,39 @@
 namespace App\Controller;
 
 use App\Constant\FormConstants;
-
 use App\Entity\Erreur;
 use App\Entity\Letter;
 use App\Entity\Medicament;
-use App\Entity\Protocole;
 use App\Entity\Patient;
-
+use App\Entity\Protocole;
 use App\Form\PatientType;
-
 use App\Repository\ErreurRepository;
-
 use App\Service\InitializePatient;
-
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Context\Normalizer\ObjectNormalizerContextBuilder;
 
 
 class PatientController extends AbstractController
 {
-    /**
-     * @var Security
-     */
-    private $security;
+    private Security $security;
+    private EntityManagerInterface $em;
+    private SerializerInterface $serializer;
 
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
-
-    public function __construct(Security $security, EntityManagerInterface $entityManager, private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
+    public function __construct(Security $security, EntityManagerInterface $entityManager, SerializerInterface $serializer, private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
     {
         $this->security = $security;
         $this->em = $entityManager;
+        $this->serializer = $serializer;
     }
 
     #[Route(path: '/patient/add', name: 'patient_add', methods: ['GET', 'POST'])]
@@ -121,12 +109,13 @@ class PatientController extends AbstractController
             );
             return new JsonResponse($data);
         }
+        return new JsonResponse(['error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 
     #[Route(path: '/patient/view/{id}', name: 'patient_view', methods: ['GET', 'POST'])]
-    public function patient_index(Patient $patient, Request $request, SerializerInterface $serializer): Response
+    public function patient_index(Patient $patient, Request $request): Response
     {
-        $oldArray = $this->serializeEntity($patient, 'export', $serializer);
+        $oldArray = $this->serializeEntity($patient, 'export');
 
         #========== PATIENT ==========#
         $form = $this->createForm(PatientType::class, $patient);
@@ -138,13 +127,13 @@ class PatientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid() && !$this->getParameter('freeze_database')) {
 
             /* SERIALISATION */
-            $patientArray = $this->serializeEntity($form->getData(), 'export', $serializer);
+            $patientArray = $this->serializeEntity($form->getData(), 'export');
 
             /* SPECIAL ERROR */
 
 
             /* SEARCH DIFF */
-            $this->searchDiff($patient, $oldArray, $patientArray, 'patient');
+            $this->searchDiff($patient->getId(), $oldArray, $patientArray, 'patient');
 
             $patient = $form->getData();
             $this->em->flush();
@@ -173,34 +162,22 @@ class PatientController extends AbstractController
         return $formatter->format($date);
     }
 
-    private function formatKey($key)
+    private function formatKey($key): string
     {
         return strtolower(preg_replace('/(?<=[a-z])([A-Z]+)/', '_$1', $key));
     }
 
-    private function serializeEntity($entity, $group, SerializerInterface $serializer)
+    private function serializeEntity($entity, $group)
     {
-        $context = (new ObjectNormalizerContextBuilder())
-            ->withGroups($group)
-            ->toArray();
-
-        // $data = $serializer->serialize($entity, 'json', [
-        //     'groups' => [$group],
-        //     'circular_reference_handler' => function ($object) {
-        //         return $object->getId();
-        //     },
-        // ]);
-        // return json_decode($data, true);
-
-        $json = $serializer->serialize(
+        $res = $this->serializer->normalize(
             $entity,
-            JsonEncoder::FORMAT,
-            $context
+            'json',
+            ['groups' => [$group]]
         );
-        return $json;
+        return $res;
     }
 
-    private function checkEmpty($x, $path = null)
+    private function checkEmpty($x, $path = null): string
     {
         if (is_array($x)) {
             $err = '{';
@@ -220,7 +197,7 @@ class PatientController extends AbstractController
             $err .= '}';
             return $num > 0 ? $err : '(vide)';
         }
-        return isset($x) ? $x : '(vide)';
+        return isset($x) && $x !== '' ? $x : '(vide)';
     }
 
     private function array_diff_depth($a, $b, $path)
@@ -233,42 +210,80 @@ class PatientController extends AbstractController
         return false;
     }
 
-    private function searchDiff(Patient $patient, $oldArray, $newArray, $path)
+    private function searchDiff($patientId, $oldArray, $newArray, $path = ''): void
     {
-        foreach ($newArray as $key => $value) {
-            if (is_array($value)) {
-                if (array_key_exists('timestamp', $value) && !isset($oldArray[$key]['timestamp'])) {
-                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [(vide)] en [' . date('d/m/Y', $value['timestamp']) . ']', true);
-                } else if (array_key_exists('timestamp', $value) && $oldArray[$key]['timestamp'] !== $value['timestamp']) {
-                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . date('d/m/Y', $oldArray[$key]['timestamp']) . '] en [' . date('d/m/Y', $value['timestamp']) . ']', true);
-                } else if (array_key_exists('response', $value) && $oldArray[$key]['response'] !== $value['response']) {
-                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) . '_response', 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]['response']) . '] en [' . $this->checkEmpty($value['response']) . ']', true);
-                } else if ($this->isMultipleSelect($key) && !empty(array_diff($oldArray[$key], $value))) {
-                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
-                } else if (!$this->isMultipleSelect($key)) {
-                    $this->searchDiff($patient, $oldArray[$key], $newArray[$key], $path . '_' . $this->formatKey($key));
+        foreach ($newArray as $key => $newValue) {
+            if (array_key_exists($key, $oldArray)) {
+                $oldValue = $oldArray[$key];
+                if (is_array($newValue) && is_array($oldValue)) {
+                    if ($this->isMultipleSelect($key) && !empty(array_diff($oldValue, $newValue))) {
+                        $p = $path . '/' . $this->formatKey($key);
+                        $message = 'Modification du champ [' . $p . '] de [' . $this->checkEmpty($newValue) . '] en [' . $this->checkEmpty($oldArray[$key]) . ']';
+                        $this->addErreur($patientId, $p, 'notice', $message);
+                    } else {
+                        // Appel récursif pour les tableaux imbriqués
+                        $this->searchDiff($patientId, $newValue, $oldValue, $path . '/' . $key);
+                    }
+                } else {
+                    // Comparaison des valeurs
+                    if ($newValue != $oldValue) {
+                        // Différence trouvée
+                        $p = $path . '/' . $this->formatKey($key);
+                        $message = 'Modification du champ [' . $p . '] de [' . $this->checkEmpty($oldArray[$key]) . '] en [' . $this->checkEmpty($newValue) . ']';
+                        $this->addErreur($patientId, $p, 'notice', $message);
+                    }
                 }
             } else {
+                // Clé manquante dans le deuxième tableau
+                $p = $path . '/' . $this->formatKey($key);
+                $message = 'Modification du champ [' . $p . '] de [' . $this->checkEmpty($newValue) . '] en [(vide)]';
+                $this->addErreur($patientId, $p, 'notice', $message);
+            }
 
-                if ($oldArray[$key] !== $value && $key === 'medicaments') {
-                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key], 'name') . '] en [' . $this->checkEmpty($value, 'name') . ']', true);
-                } else if ($oldArray[$key] !== $value && ($key === 'stressBullseye' || $key === 'basalBullseye') && $this->array_diff_depth($oldArray[$key]['segments'], $value['segments'], 'segment')) {
-                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]['segments'], 'segment') . '] en [' . $this->checkEmpty($value['segments'], 'segment') . ']', true);
-                } else if ($oldArray[$key] !== $value) {
-                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
-                }
+//            if (is_array($value)) {
+//                if (array_key_exists('timestamp', $value) && !isset($oldArray[$key]['timestamp'])) {
+//                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [(vide)] en [' . date('d/m/Y', $value['timestamp']) . ']', true);
+//                } else if (array_key_exists('timestamp', $value) && $oldArray[$key]['timestamp'] !== $value['timestamp']) {
+//                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . date('d/m/Y', $oldArray[$key]['timestamp']) . '] en [' . date('d/m/Y', $value['timestamp']) . ']', true);
+//                } else if (array_key_exists('response', $value) && $oldArray[$key]['response'] !== $value['response']) {
+//                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key) . '_response', 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]['response']) . '] en [' . $this->checkEmpty($value['response']) . ']', true);
+//                } else if ($this->isMultipleSelect($key) && !empty(array_diff($oldArray[$key] ?? null, $value))) {
+//                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
+//                } else if (!$this->isMultipleSelect($key) && isset($oldArray[$key])) {
+//                    $this->searchDiff($patient, $oldArray[$key], $value, $path . '_' . $this->formatKey($key));
+//                }
+//            } else if (isset($oldArray[$key]) && $oldArray[$key] !== $value) {
+//                if ($key === 'medicaments') {
+//                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key], 'name') . '] en [' . $this->checkEmpty($value, 'name') . ']', true);
+//                } else if (($key === 'stressBullseye' || $key === 'basalBullseye') && $this->array_diff_depth($oldArray[$key]['segments'], $value['segments'], 'segment')) {
+//                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]['segments'], 'segment') . '] en [' . $this->checkEmpty($value['segments'], 'segment') . ']', true);
+//                } else {
+//                    $this->addErreur($patient->getId(), $path . '_' . $this->formatKey($key), 'notice', 'Modification du champ [' . $path . '_' . $this->formatKey($key) . '] de [' . $this->checkEmpty($oldArray[$key]) . '] en [' . $this->checkEmpty($value) . ']', true);
+//                }
+//            } else {
+//
+//            }
+        }
+
+        // Vérifier les clés manquantes dans le premier tableau
+        foreach ($oldArray as $key => $oldValue) {
+            if (!array_key_exists($key, $newArray)) {
+                // Clé manquante dans le premier tableau, appeler votre fonction avec le chemin
+                $p = $path . '_' . $this->formatKey($key);
+                $message = 'Modification du champ [' . $p . '] de [' . $this->checkEmpty($oldValue) . '] en [' . $this->checkEmpty($newArray[$key]) . ']';
+                $this->addErreur($patientId, $p, 'notice', $message);
             }
         }
     }
 
-    private function isMultipleSelect($key)
+    private function isMultipleSelect($key): bool
     {
-        if (!is_string($key)) return;
+        if (!is_string($key)) return false;
         $field = array("alimentation", "gestionMedicaments", "problemes", "traitementPhaseAigue", "motifs");
         return in_array($key, $field);
     }
 
-    private function addErreur($patientId, $fieldId, $etat, $message, bool $user)
+    private function addErreur($patientId, $fieldId, $etat, $message, bool $user = true): void
     {
         $patient = $this->em->getRepository(Patient::class)->find($patientId);
         $createdAt = new DateTime("now", new DateTimeZone('Europe/Paris'));
@@ -285,7 +300,7 @@ class PatientController extends AbstractController
         $this->em->flush();
     }
 
-    private function generateErreur($patientId, formInterface $form, $array, $start, $path)
+    private function generateErreur($patientId, formInterface $form, $array, $start, $path): void
     {
         $erreurs = $this->em->getRepository(Erreur::class)->getLastErreur($patientId);
 
@@ -333,6 +348,8 @@ class PatientController extends AbstractController
             $this->addErreur(intval($patientId), $this->formatKey($fieldId), 'info', $message, true);
             return new JsonResponse('Done.', Response::HTTP_OK);
         }
+
+        return new JsonResponse(['error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 
     #[Route(path: '/patient/{id}/letter', name: 'patient_letter', methods: ['GET', 'POST'])]
@@ -398,6 +415,8 @@ class PatientController extends AbstractController
 
             return new JsonResponse(true, Response::HTTP_OK);
         }
+
+        return new JsonResponse(['error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 
     #[Route(path: '/patient/medicament/delete', name: 'medicament_entree_delete')]
@@ -415,5 +434,7 @@ class PatientController extends AbstractController
 
             return new JsonResponse(true, Response::HTTP_OK);
         }
+
+        return new JsonResponse(['error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 }

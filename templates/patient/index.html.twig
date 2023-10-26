@@ -1,14 +1,14 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-	Patient
+    Patient
     {{ patient.general.prenom }} {{ patient.general.nom }}
 {% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootgrid.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 {% endblock %}
 
 {% block page_content %}
@@ -133,7 +133,7 @@
 
             <section class="slide active" id="tab-history">
                 <h1 id="history">Historique</h1>
-    
+
                 <div class="flex">
                     <div class="table-wrapper">
                         <table cellspacing="0" class="table table-condensed table-hover table-striped" id="data-grid">
@@ -234,7 +234,7 @@
 
                             {% if visite.protocole.vars.value.id not in protocoleIds %}
                                 {% set protocoleIds = protocoleIds|merge([visite.protocole.vars.value.id]) %}
-                                
+
                                 <!-- Modal PROTOCOLE -->
                                 <div id={{ "modal-protocole-" ~ loop.index }} class="modal fade" data-protocole={{visite.protocole.vars.value.id}} role="dialog">
                                     <div class="modal-dialog">
@@ -433,28 +433,28 @@
     </script>
 
     <script>
-		$('.btn-save').click(function(event) {
-			event.preventDefault();
-            
+        $('.btn-save').click(function (event) {
+            event.preventDefault();
+
             let freezeDatabase = {{ freezeDatabase ? 'true' : 'false' }};
             if (freezeDatabase)
                 return;
-			$('.btn-save').prop("disabled", true);
-			$('.btn-save').text("En cours d'enregistrement...")
-			$(this).parents('.form').submit();
-		})
+            $('.btn-save').prop("disabled", true);
+            $('.btn-save').text("En cours d'enregistrement...")
+            $(this).parents('.form').submit();
+        })
 
-        $('.error-list li').each(function() {
+        $('.error-list li').each(function () {
             $(this).html($(this).text().replace(/\[(.*?)\]/g, "<b>$1</b>"));
         })
 
         /* Erreur badges */
-        $('.slide').each(function() {
+        $('.slide').each(function () {
             let count = $(this).find('.error-container').length;
             let id = $(this).attr('id').split('-')[1];
             if (count > 0) $(".toc a[href$='#" + id + "']").append('<span class="badge badge-spe">' + count + '</span>');
         });
-        $('h3').each(function() {
+        $('h3').each(function () {
             let count = $(this).nextUntil('h3').find('.error-container').length;
             let id = $(this).attr('id');
             if (count > 0) $(".toc a[href$='#" + id + "']").append('<span class="badge badge-spe">' + count + '</span>');
@@ -480,41 +480,41 @@
             url: url,
             formatters: {
                 "etat": function (column, row) {
-                    if (row.etat == 'notice') 
+                    if (row.etat === 'notice')
                         return "<div class=\"pastille pastille__notice\"></div>";
-                    if (row.etat == 'info') 
+                    if (row.etat === 'info')
                         return "<div class=\"pastille pastille__info\"></div>";
-                    if (row.etat == 'error') 
+                    if (row.etat === 'error')
                         return "<div class=\"pastille pastille__error\"></div>";
                 },
             }
         }).on('click.rs.jquery.bootgrid', function (e, cols, row, target) {
             if (typeof row != "undefined")
                 redirect(row.fieldId);
-        }).on("loaded.rs.jquery.bootgrid", function() {
-            $('.table tr td:nth-child(4)').each(function() {
+        }).on("loaded.rs.jquery.bootgrid", function () {
+            $('.table tr td:nth-child(4)').each(function () {
                 $(this).html($(this).text().replace(/\[(.*?)\]/g, "<b class='history-markup'>$1</b>"));
             })
-        });;
+        });
 
         function redirect(id) {
-            if (id == undefined) 
+            if (id == undefined)
                 return;
-    
+
             let pathArray = window.location.pathname.split("/");
             let url = window.location.protocol + "//" + window.location.host;
-            for (let i = 0; i < pathArray.length - 2; i++) 
+            for (let i = 0; i < pathArray.length - 2; i++)
                 url += pathArray[i] + "/";
-            window.location.assign(url + {{ patient.id }} + "/history/" + id);
-        };
+            window.location.assign(url + {{ patient.id }} +"/history/" + id);
+        }
 
         /* Add error info */
-        $('.js-error-button').click(function(event) {
+        $('.js-error-button').click(function (event) {
             event.preventDefault();
             let message = $(this).parent().find('.js-error-input').val();
             let patientId = '{{ patient.id }}';
             let fieldId = $(this).parents('.wrap-input').find('.input').attr('id');
-            if (message == '') {
+            if (message === '') {
                 $(this).parent().find('.js-error-input').attr('placeholder', 'Veuillez entrer un message.');
                 return
             }
@@ -526,7 +526,7 @@
                     'patientId': patientId,
                     'fieldId': fieldId,
                 },
-                success: function(response) {
+                success: function (response) {
                     location.reload();
                 },
             });
@@ -535,8 +535,8 @@
         /*
         * HISTORY
         **********************************************************************/
-        $('.history').click(function(event) {
-            event.preventDefault(); 
+        $('main').on('click', '.history', function (event) {
+            event.preventDefault();
             let patientId = "{{ patient.id }}";
             let fieldId = $(this).parent().find('input, select, textarea').attr('id');
             /* lowercase + add '_' before capital */
@@ -545,7 +545,7 @@
             if (fieldId.substring(fieldId.length - 2) === "_0") {
                 fieldId = fieldId.substring(0, fieldId.length - 2);
             }
-            let url = '{{ path("history_list_field", {'patient': 'patientId', 'fieldId': 'fieldId'}) }}'; 
+            let url = '{{ path("history_list_field", {'patient': 'patientId', 'fieldId': 'fieldId'}) }}';
             url = url.replace("patientId", patientId);
             url = url.replace("fieldId", fieldId);
             window.location.href = url;
@@ -571,7 +571,7 @@
                 ali.append('<span class="red">Faible (0-1)</span');
         }
 
-        $('.alimentation-js').each(function() {
+        $('.alimentation-js').each(function () {
             alimentation($(this).find('input:checked').length, $(this));
         });
         $('.alimentation-js input').on('change', function () {
@@ -581,11 +581,10 @@
         /*
         * SCORE
         **********************************************************************/
-
         function score(el) {
             let p = $(el).parents('.form-space');
             let score = 0;
-            $.each(p.find('.input'), function(i, e) {
+            $.each(p.find('.input'), function (i, e) {
                 if ($(e).hasClass('score')) {
                     return true;
                 } else if ($(e).hasClass('alimentation-js')) {
@@ -603,13 +602,12 @@
                 $(el).val("Péjoratif : " + score);
         }
 
-        $('.score').each(function() {
+        $('.score').each(function () {
             score($(this));
         });
 
-        $('.score').parents('.form-space').find('.input').on('change', function() {
-            console.log("hey");
-            $('.score').each(function() {
+        $('.score').parents('.form-space').find('.input').on('change', function () {
+            $('.score').each(function () {
                 score($(this));
             });
         });
@@ -627,7 +625,7 @@
             });
         });
 
-        $("main").on("click", "#fiche-add", function() {
+        $("main").on("click", "#fiche-add", function () {
             let protocoleId = $(this).parents('.modal').attr("data-protocole");
             let modal = $(".modal[data-protocole=" + protocoleId + "]");
             let fiche = modal.find("#protocole-fiches").val();
@@ -660,11 +658,12 @@
                     'fiche': fiche,
                     'protocoleId': protocoleId
                 },
-                success: function(response) {},
+                success: function (response) {
+                },
             });
         })
 
-        $('.etiquettes__list').on('click', '.etiquette .delete', function() {
+        $('.etiquettes__list').on('click', '.etiquette .delete', function () {
             let protocoleId = $(this).parents('.modal').attr("data-protocole");
             let modal = $(".modal[data-protocole=" + protocoleId + "]");
             let fiche = $(this).parent().attr('name');
@@ -675,7 +674,7 @@
             }
 
             if (fiches[protocoleId].length === 0
-            || $('.tabbed__fiches li[name="' + fiche + '"]').hasClass('active')) {
+                || $('.tabbed__fiches li[name="' + fiche + '"]').hasClass('active')) {
                 $(".examen .tab-content").removeClass('active');
                 $(".tabbed__fiches li").removeClass('active');
             }
@@ -696,16 +695,19 @@
                     'fiche': fiche,
                     'protocoleId': protocoleId
                 },
-                success: function(response) {},
+                success: function (response) {
+                },
             });
         })
 
         function sortAllList(list, element, depth = '') {
-            $.each(list, function(i, e) { sortList(e, element, depth) });
+            $.each(list, function (i, e) {
+                sortList(e, element, depth)
+            });
         }
 
         function sortList(e, element, depth = '') {
-            $(e).find(element).sort(function(a, b) {
+            $(e).find(element).sort(function (a, b) {
                 if (depth) {
                     return $(a).find(depth).text().trim().toUpperCase().localeCompare($(b).find(depth).text().trim().toUpperCase());
                 }
@@ -715,7 +717,7 @@
 
         function isTabAvailable(tab) {
             let ret = false;
-            $('.tabbed__fiches li').each(function() {
+            $('.tabbed__fiches li').each(function () {
                 if ($(this).attr('name') === tab)
                     ret = true;
             })
@@ -731,7 +733,7 @@
         /*
         * MEDICAMENT
         **********************************************************************/
-        $('.examen').on('click', '#medicament-add', function() {
+        $('.examen').on('click', '#medicament-add', function () {
             let select = $(this).parents('.form-space').find('.js-medicaments-ajax')
             let medicament = select.select2('data');
             let protocoleId = $(this).parents('section').attr("data-protocole");
@@ -742,7 +744,7 @@
                 $('.medicaments-error').text("Ce médicament est invalide ou existe déjà.");
                 return;
             }
-            
+
             let t = $(
                 `<div class='medicament' data-id='` + medicament[0].id + `'>
                     ` + medicament[0].name + `
@@ -751,7 +753,7 @@
                     </span>
                 </div>`
             );
-            
+
             $.ajax({
                 type: "POST",
                 url: "{{ path('medicament_entree_add') }}",
@@ -759,19 +761,19 @@
                     'medicamentId': medicament[0].id,
                     'protocoleId': protocoleId,
                 },
-                success: function(response) {
+                success: function (response) {
                     $('section[data-protocole="' + protocoleId + '"] .medicaments__list').append(t);
                     select.val(null).trigger("change");
                     sortMedicamentsList();
                 },
-                error: function(response) {
+                error: function (response) {
                     $('.medicaments-error').text("Ce médicament est invalide ou existe déjà.");
                     select.val(null).trigger("change");
                 }
             });
         })
 
-        $('section').on('click', '.medicaments__list .medicament .delete', function() {
+        $('section').on('click', '.medicaments__list .medicament .delete', function () {
             let medicamentId = $(this).parent().attr('data-id');
             let protocoleId = $(this).parents('section').attr("data-protocole");
 
@@ -782,7 +784,7 @@
                     'medicamentId': medicamentId,
                     'protocoleId': protocoleId,
                 },
-                success: function(response) {
+                success: function (response) {
                     $('section[data-protocole="' + protocoleId + '"] .medicament[data-id="' + medicamentId + '"]').remove();
                     sortMedicamentsList();
                 },
@@ -842,18 +844,19 @@
         }
 
         function sortMedicamentsList() {
-            $.each($('.medicaments__list'), function(i, e) {
+            $.each($('.medicaments__list'), function (i, e) {
                 let listitems = $(this).children('div').get();
 
-                listitems.sort(function(a, b) {
+                listitems.sort(function (a, b) {
                     return $(a).text().toUpperCase().localeCompare($(b).text().toUpperCase());
                 });
 
-                $.each(listitems, function(index, item) {
-                    $(this).append(item); 
+                $.each(listitems, function (index, item) {
+                    $(this).append(item);
                 });
             });
         }
+
         sortMedicamentsList();
 
         /*
@@ -861,28 +864,28 @@
         **********************************************************************/
         let bmqResults = [];
 
-        $.sum = function(arr) {
+        $.sum = function (arr) {
             var r = 0;
-            $.each(arr, function(i, v) {
+            $.each(arr, function (i, v) {
                 r += +v;
             });
             return r;
         }
 
-		function processResults(bmqInputs) {
+        function processResults(bmqInputs) {
             bmqResults = [];
-			$.each(bmqInputs.find(".input"), function() {
+            $.each(bmqInputs.find(".input"), function () {
                 let items = $(this).find("input[type='radio']");
                 let check = 0;
-                $.each(items, function(index) {
-				    if ($(this).is(':checked')) {
+                $.each(items, function (index) {
+                    if ($(this).is(':checked')) {
                         check = index + 1;
                     }
                 });
                 bmqResults.push(check);
-			});
+            });
             displayBMQResults(bmqInputs);
-		}
+        }
 
         function displayBMQResults(bmqInputs) {
             results = bmqInputs.parents(".bmq").find(".bmq-results .result");
@@ -892,17 +895,17 @@
             results.eq(3).find('span').html($.sum(bmqResults.slice(14, 18)));
         }
 
-        $('.table-bmq tbody tr .input').on('change', function() {
+        $('.table-bmq tbody tr .input').on('change', function () {
             processResults($(this).parents(".table-bmq"));
         });
-        $.each($(".table-bmq"), function() {
+        $.each($(".table-bmq"), function () {
             processResults($(this));
         });
 
         /*
         * QCM DEFAULT
         **********************************************************************/
-        $.each($('.qcm-default .radio-row'), function() {
+        $.each($('.qcm-default .radio-row'), function () {
             let r = $(this).find('input[type="radio"]:checked');
             if (r.length == 0) {
                 $(this).find('input[value="Non"]').prop("checked", true);
@@ -912,7 +915,7 @@
         /*
         * VISITE
         **********************************************************************/
-        $("#visite-add-new").on('click', function() {
+        $("#visite-add-new").on('click', function () {
             let type = $("#protocole_new option").filter(":selected").val();
             $.ajax({
                 type: "POST",
@@ -921,17 +924,17 @@
                     'patientId': {{ patient.id }},
                     'type': type
                 },
-                success: function(response) {
+                success: function (response) {
                     location.reload();
                 },
             });
         })
 
-        $(".js-delete-visite").on('click', function() {
+        $(".js-delete-visite").on('click', function () {
             $(this).next('#modal-delete-visite').modal('show');
         })
 
-        $(".delete-visite").on('click', function() {
+        $(".delete-visite").on('click', function () {
             let visiteId = $(this).attr('data-visite-id');
             $('[id=modal-delete-visite]').modal('hide');
             $.ajax({
@@ -941,7 +944,7 @@
                     'patientId': {{ patient.id }},
                     'visiteId': visiteId
                 },
-                success: function() {
+                success: function () {
                     $('.visite-list li a[name="visite-' + visiteId + '"]').remove();
                     $('.tab-list .tab-content[name="visite-' + visiteId + '"]').remove();
                     $('.tabbed li[name="visite-' + visiteId + '"]').remove();
@@ -952,25 +955,34 @@
         /* 
         * MUTATIONS
         **********************************************************************/
-        $('.add_item_link').on('click', function(e) {
-            addFormToCollection(e);
+        $('main').on('change', '.nb-clones', function (e) {
+            let collectionHolder = $(this).parents('#examen-chip').find('ul.mutations');
+            let index = collectionHolder.attr('data-index');
+            const c = $(this).val() - collectionHolder.find('li').length;
+            if (c > 0) {
+                for (let i = 0; i < c; i++) {
+                    addFormToCollection(collectionHolder);
+                }
+            } else {
+                for (let i = c; i < 0; i++) {
+                    collectionHolder.find('li').last().remove();
+                    collectionHolder.attr('data-index', parseInt(index) - 1)
+                }
+            }
         })
 
-        const addFormToCollection = (e) => {
-            const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
-
-            const item = document.createElement('li');
-
-            item.innerHTML = collectionHolder
-                .dataset
-                .prototype
+        const addFormToCollection = (collectionHolder) => {
+            let index = collectionHolder.attr('data-index');
+            let item = collectionHolder
+                .attr('data-prototype')
                 .replace(
-                /__name__/g,
-                collectionHolder.dataset.index
-                );
+                    /__name__/g,
+                    index
+                )
+            console.log(item);
 
-            collectionHolder.appendChild(item);
-            collectionHolder.dataset.index++;
+            collectionHolder.append(item);
+            collectionHolder.attr('data-index', parseInt(index) + 1)
         };
 
 
@@ -985,12 +997,12 @@
             return null
         }
 
-        $('.bfr_taille, .bfr_poids').change(function() {
+        $('.bfr_taille, .bfr_poids').change(function () {
             let poids = $(this).parents('.form-space').find('.bfr_poids').val();
             let taille = $(this).parents('.form-space').find('.bfr_taille').val();
             $(this).parents('.form-space').find('.bfr_IMC').val(getIMC(poids, taille));
         });
-        $.each($(".bfr_IMC"), function() {
+        $.each($(".bfr_IMC"), function () {
             let poids = $(this).parents('.form-space').find('.bfr_poids').val();
             let taille = $(this).parents('.form-space').find('.bfr_taille').val();
             $(this).val(getIMC(poids, taille));
@@ -999,7 +1011,7 @@
         /* 
         * Delete patient
         **********************************************************************/
-        $('#js-delete-patient').on('click', function() {
+        $('#js-delete-patient').on('click', function () {
             $('#modal-delete-patient').modal('show');
         })
 
@@ -1007,13 +1019,13 @@
 
     <script>
         /* MENU */
-        $('ul.visite-list').on('click', 'li.sub-sub-menu > a', function() {
+        $('ul.visite-list').on('click', 'li.sub-sub-menu > a', function () {
             let n = $(this).attr('name');
             selectVisite($(".tabbed__visites li[name='" + n + "']"));
             selectExamen(this);
         })
 
-        $('ul.protocole-list').on('click', 'li a', function() {
+        $('ul.protocole-list').on('click', 'li a', function () {
             let tab = $(this).attr('name');
             $('ul.protocole-list li a').removeClass("active");
             $(this).addClass("active");
@@ -1038,14 +1050,14 @@
             $(".visite-list li a[name='" + $(visite).attr('name') + "']").parents('li').children('ul.protocole-list').slideToggle("100");
         }
 
-        $('.tabbed__visites').on('click', 'li', function() {
+        $('.tabbed__visites').on('click', 'li', function () {
             if (this.classList.contains('active') || $(this).is('[id^="js-modal-"]')) {
                 return;
             }
             selectVisite(this);
         })
 
-        $('.tabbed__fiches').on('click', 'li', function() {
+        $('.tabbed__fiches').on('click', 'li', function () {
             if (this.classList.contains('active') || $(this).is('[id^="js-modal-"]')) {
                 return;
             }
@@ -1054,11 +1066,11 @@
             $(".protocole-list.active li a[name='" + $(this).attr('name') + "']").addClass('active');
         })
 
-        $('.slide').on('click', '#js-modal-visite', function() {
+        $('.slide').on('click', '#js-modal-visite', function () {
             $('#modal-visite').modal('show');
         });
 
-        $('.slide').on('click', '#js-modal-protocole', function() {
+        $('.slide').on('click', '#js-modal-protocole', function () {
             $('#modal-protocole-' + $(this).attr("data-id")).modal('show');
         });
 
@@ -1085,6 +1097,7 @@
         function saveTab(id) {
             localStorage.setItem('tabId', id);
         }
+
         let id = localStorage.getItem('tabId');
         selectVisite($(".tabbed__visites li[data-protocole='" + id + "']"));
 
@@ -1101,14 +1114,14 @@
             $(this).addClass('active');
             scrollToc($(this).attr('href'));
         });
-        
+
         $('.toc > ul > li > a').on('click', function () {
             displaySlide($(this).attr('href'));
             window.location.hash = $(this).attr("href");
 
             if (!$(this).hasClass('js-active')) {
                 $('.toc > ul > li > a').each(function (i) {
-                    if ($(this).hasClass('js-active')) 
+                    if ($(this).hasClass('js-active'))
                         toggleMenu($(this));
                     $(this).removeClass('js-active active');
                 });
@@ -1129,7 +1142,7 @@
         }
 
         function displaySlide(page) {
-            $('.slide').each(function(i, e) {
+            $('.slide').each(function (i, e) {
                 let id = 'tab-' + page.substring(1);
                 $(this).removeClass('active');
                 if ($(this).attr('id') == id) {
@@ -1158,9 +1171,9 @@
                 scrollToc(page);
             }
         });
-        
-        $(function() {
-            $(window).on('scroll', function () { 
+
+        $(function () {
+            $(window).on('scroll', function () {
                 onScroll();
             });
         });
@@ -1179,32 +1192,33 @@
         /* Reduce menu */
         let reduce = localStorage.getItem('reduceMenu') === "true";
         if (reduce) reduceMenu()
-        $('#js-reducemenu').click(function() {
-            localStorage.setItem('reduceMenu', !reduce);    
+        $('#js-reducemenu').click(function () {
+            localStorage.setItem('reduceMenu', !reduce);
             reduce = !reduce;
-            reduceMenu();        
+            reduceMenu();
         })
 
         function reduceMenu() {
             $('.main').toggleClass("reduce");
             $('#js-reducemenu .fas').toggleClass("fa-arrow-left fa-arrow-right");
 
-            $('.toc > ul > li > a').each(function(i) {
-                if ($(this).hasClass('js-active')) 
+            $('.toc > ul > li > a').each(function (i) {
+                if ($(this).hasClass('js-active'))
                     toggleMenu($(this));
                 $(this).removeClass('js-active');
             });
         }
 
         /* TEXTAREA */
-        $("textarea").keyup(function(e) {
-            while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
+        $("textarea").keyup(function (e) {
+            while ($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
                 $(this).height($(this).height() + 1);
-            };
+            }
+
         });
 
         /* On key "ENTER" pressed */
-        $(document).keypress(function(event) {
+        $(document).keypress(function (event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if (keycode == '13' && !$("textarea").is(":focus")) {
                 event.preventDefault();

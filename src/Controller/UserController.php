@@ -3,31 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\UserFormType;
 use App\Form\PasswordFormType;
+use App\Form\UserFormType;
 use App\Repository\UserRepository;
-
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 
 class UserController extends AbstractController
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
-
-    /**
-     * @var UserPasswordHasherInterface
-     */
-    private $passwordHasher;
+    private EntityManagerInterface $em;
+    private UserPasswordHasherInterface $passwordHasher;
 
     public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
     {
@@ -64,6 +56,7 @@ class UserController extends AbstractController
             }
             return new JsonResponse();
         }
+        return new JsonResponse(['error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 
     #[Route(path: '/user/list', name: 'user_list')]
@@ -98,7 +91,7 @@ class UserController extends AbstractController
                     "roles" => $User->getRoles(),
                     "status" => $status,
                 );
-                array_push($rows, $row);
+                $rows[] = $row;
             }
 
             $data = array(
@@ -195,5 +188,6 @@ class UserController extends AbstractController
             $user = $this->em->getRepository(User::class)->findOneBy(['email' => $email]);
             return new JsonResponse($user->getId());
         }
+        return new JsonResponse(['error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 }

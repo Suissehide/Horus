@@ -80,11 +80,42 @@
                 {{ form_help(form) }}
                 <span class="focus-input"></span>
             </div>
-            <button class="history" tabindex="-1"><div class="history-icon"></div></button>
+            <button class="history" tabindex="-1"><span class="history-icon"></span></button>
         </div>
         {{ form_errors(form) }}
     </div>
 {% endblock form_row %}
+
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    {% if type == 'range' or type == 'color' %}
+        {# Attribute "required" is not supported #}
+        {% set required = false %}
+    {% endif %}
+    <input type="{{ type }}" {% set attr = attr|merge({'class': (attr.class|default('input'))}) %} {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endblock form_widget_simple %}
+
+{% block choice_widget_collapsed %}
+    {% if required and placeholder is none and not placeholder_in_choices and not multiple and (attr.size is not defined or attr.size <= 1) %}
+        {% set required = false %}
+    {% endif %}
+    <select {% set attr = attr|merge({'class': (attr.class|default('input'))}) %} {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+        {% if placeholder is not none %}
+            <option value=""{% if placeholder_attr|default({}) %}{% with { attr: placeholder_attr } %}{{ block('attributes') }}{% endwith %}{% endif %}{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder != '' ? (translation_domain is same as(false) ? placeholder : placeholder|trans({}, translation_domain)) }}</option>
+        {% endif %}
+        {% if preferred_choices|length > 0 %}
+            {% set options = preferred_choices %}
+            {% set render_preferred_choices = true %}
+            {{- block('choice_widget_options') -}}
+            {% if choices|length > 0 and separator is not none %}
+                <option disabled="disabled">{{ separator }}</option>
+            {% endif %}
+        {% endif %}
+        {% set options = choices %}
+        {% set render_preferred_choices = false %}
+        {{- block('choice_widget_options') -}}
+    </select>
+{% endblock choice_widget_collapsed %}
 
 {% block form_errors %}
     {% if errors|length > 0 %}
@@ -151,6 +182,7 @@
     {% endif %}
 {% endblock number_widget %}
 
+
 {% block _patient_antecedentCardiovasculaire_qcm_type_widget %}
     {{ block('qcm_widget_special') }}
 {% endblock _patient_antecedentCardiovasculaire_qcm_type_widget %}
@@ -170,7 +202,7 @@
                     {{ form_widget(child) }}
                 {% endfor %}
             </div>
-            <button class="history" tabindex="-1"><div class="history-icon"></div></button>
+            <button class="history" tabindex="-1"><span class="history-icon"></span></button>
         </div>
         {{ form_errors(form) }}
     </div>
@@ -185,7 +217,6 @@
     {{ block('qcm_widget') }}
 {% endblock _patient_visites_entry_qcm_type_entry_response_widget %}
 
-
 {% block qcm_widget %}
     <div class="flex">
         <div {{ block('widget_container_attributes') }}>
@@ -197,7 +228,21 @@
                 {% endif %}
             {% endfor %}
         </div>
-        <button class="history" tabindex="-1"><div class="history-icon"></div></button>
+        <button class="history" tabindex="-1"><span class="history-icon"></span></button>
     </div>
     {{ form_errors(form) }}
 {% endblock qcm_widget %}
+
+
+{% block _patient_visites_entry_protocole_chip_mutation_type_entry_widget %}
+    {{ block('mutation_widget') }}
+{% endblock _patient_visites_entry_protocole_chip_mutation_type_entry_widget %}
+
+{% block mutation_widget %}
+    <li class="flex-nowrap" {{ block('widget_container_attributes') }}>
+        {% for child in form %}
+            {{ form_row(child) }}
+        {% endfor %}
+        {{ form_errors(form) }}
+    </li>
+{% endblock mutation_widget %}

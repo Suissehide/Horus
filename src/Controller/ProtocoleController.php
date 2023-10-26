@@ -3,28 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\Protocole;
-
 use App\Service\InitializePatient;
-
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProtocoleController extends AbstractController
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
-    
+    private EntityManagerInterface $em;
+
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->em = $entityManager;
     }
-    
+
     #[Route(path: '/fiche/add', name: 'fiche_add')]
     public function fiche_add(Request $request, InitializePatient $initializePatient): Response
     {
@@ -35,7 +30,7 @@ class ProtocoleController extends AbstractController
             $protocole = $this->em->getRepository(Protocole::class)->find($protocoleId);
 
             $fiches = $protocole->getFiches();
-            array_push($fiches, $fiche);
+            $fiches[] = $fiche;
             $protocole->setFiches($fiches);
 
             $initializePatient->createProtocole($protocole);
@@ -44,7 +39,7 @@ class ProtocoleController extends AbstractController
 
             return new JsonResponse('success!', Response::HTTP_OK);
         }
-        return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
+        return new JsonResponse(['error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 
     #[Route(path: '/fiche/delete', name: 'fiche_delete')]
@@ -65,6 +60,6 @@ class ProtocoleController extends AbstractController
 
             return new JsonResponse('success!', Response::HTTP_OK);
         }
-        return new JsonResponse('bad request', Response::HTTP_BAD_REQUEST);
+        return new JsonResponse(['error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 }

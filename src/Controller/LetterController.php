@@ -4,24 +4,22 @@ namespace App\Controller;
 
 use App\Entity\Letter;
 use App\Entity\Patient;
-
 use App\Form\LetterType;
-
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 class LetterController extends AbstractController
 {
-    public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
+    public function __construct(private readonly ManagerRegistry $managerRegistry)
     {
     }
-    
+
     #[Route(path: '/letter', name: 'letter', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
@@ -48,7 +46,6 @@ class LetterController extends AbstractController
 
         $jsonPatient = $this->serializeEntity(
             $em->getRepository(Patient::class)->findOneBy([], ['id' => 'desc']),
-            'json'
         );
 
         return $this->render('letter/index.html.twig', [

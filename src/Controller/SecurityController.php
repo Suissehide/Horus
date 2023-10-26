@@ -4,20 +4,19 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-
 use Doctrine\ORM\EntityManagerInterface;
+use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    private $entityManager;
-    private $passwordHasher;
+    private EntityManagerInterface $entityManager;
+    private UserPasswordHasherInterface $passwordHasher;
 
     public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher)
     {
@@ -42,7 +41,7 @@ class SecurityController extends AbstractController
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout()
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        throw new LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
     #[Route(path: '/register', name: 'app_register', methods: ['GET', 'POST'])]
@@ -67,7 +66,7 @@ class SecurityController extends AbstractController
             $this->entityManager->flush();
 
             $this->addFlash('notice', 'Félicitations ! Votre compte a été créé avec succès !');
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('login');
         } else {
             foreach ($form->getErrors(true) as $error) {
                 $errors[] = $error->getMessage();
@@ -86,7 +85,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/guest', name: 'guest')]
-    public function guest()
+    public function guest(): Response
     {
         return $this->render('user/guest.html.twig', [
             'controller_name' => 'GuestController',

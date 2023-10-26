@@ -41,7 +41,9 @@ class ChipType extends AbstractType
                 'entry_type' => MutationType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
+                'allow_delete' => true,
                 'by_reference' => false,
+                'block_name' => 'mutation_type',
             ])
 
             ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])

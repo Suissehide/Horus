@@ -4,12 +4,12 @@ namespace App\Form;
 
 use App\Entity\EchographieVasculaire;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EchographieVasculaireType extends AbstractType
 {
@@ -157,7 +157,6 @@ class EchographieVasculaireType extends AbstractType
                 ),
                 'required' => false,
             ))
-
             ->add('volumeCarotideDroite', NumberType::class, array(
                 'label' => 'Volume carotide droite',
                 'attr' => array(
@@ -188,8 +187,6 @@ class EchographieVasculaireType extends AbstractType
                 ),
                 'required' => false,
             ))
-
-
             ->add('membresInferieurAorte', IntegerType::class, array(
                 'label' => 'Diamètre aorte',
                 'attr' => array(
@@ -359,8 +356,6 @@ class EchographieVasculaireType extends AbstractType
                 ),
                 'required' => false,
             ))
-
-
             ->add('IPSReposDroit', NumberType::class, array(
                 'label' => 'IPS repos droit',
                 'attr' => array(
@@ -421,8 +416,6 @@ class EchographieVasculaireType extends AbstractType
                 ),
                 'required' => false,
             ))
-            
-
             ->add('testStrandnessDistanceMax', IntegerType::class, array(
                 'label' => 'Test de Strandness: distance max *',
                 'attr' => array(
@@ -463,9 +456,7 @@ class EchographieVasculaireType extends AbstractType
                 ),
                 'required' => false,
             ))
-
-            ->add('save', SubmitType::class, ['label' => 'Sauvegarder'])
-        ;
+            ->add('save', SubmitType::class, ['label' => 'Sauvegarder']);
     }
 
     public function configureOptions(OptionsResolver $resolver)

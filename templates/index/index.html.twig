@@ -29,11 +29,9 @@
             <div class="filter__container">
                 <div class="filter__name">Filtrer par protocoles : </div>
                 <select class="input js-basic-multiple" name="protocoles[]" multiple="multiple">
-                    <option value="Vocca3D - Hyperchol">Vocca3D - Hyperchol</option>
-                    <option value="Vocca3D - Diabète">Vocca3D - Diabète</option>
-                    <option value="TransMetabo">TransMetabo</option>
-                    <option value="CAC stroke">CAC stroke</option>
-                    <option value="Parentéral Nut">Parentéral Nut</option>
+                    {% for feuille in constants_feuilles %}
+                        <option value={{ feuille }}>{{ feuille }}</option>
+                    {% endfor %}
                 </select>
             </div>
 			<div class="flex">

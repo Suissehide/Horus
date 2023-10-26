@@ -4,15 +4,15 @@ namespace App\Form;
 
 use App\Entity\Suivi;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class SuiviType extends AbstractType
 {
@@ -142,7 +142,6 @@ class SuiviType extends AbstractType
                 'label' => 'Score globale',
                 'required' => false
             ))
-
             ->add('facteurs', CollectionType::class, array(
                 'entry_type' => QCMType::class,
                 // 'entry_options' => array('label' => false),
@@ -150,7 +149,6 @@ class SuiviType extends AbstractType
                 'by_reference' => false,
                 'block_name' => 'qcm_type',
             ))
-
             ->add('traitement', CollectionType::class, array(
                 'entry_type' => QCMType::class,
                 // 'entry_options' => array('label' => false),
@@ -158,7 +156,6 @@ class SuiviType extends AbstractType
                 'by_reference' => false,
                 'block_name' => 'qcm_type',
             ))
-
             ->add('debitFiltrationGlomerulaire', NumberType::class, array(
                 'label' => 'Débit de filtration glomerulaire CK-EPI',
                 'attr' => array(
@@ -212,7 +209,6 @@ class SuiviType extends AbstractType
                 ),
                 'required' => false,
             ))
-
             ->add('save', SubmitType::class, ['label' => 'Sauvegarder']);
     }
 

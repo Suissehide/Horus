@@ -1,7 +1,8 @@
-<?php declare(strict_types = 1);
+<?php
 
 namespace App\Normalizer;
 
+use App\Entity\Participant;
 use Doctrine\ORM\EntityManagerInterface;
 
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -44,9 +45,12 @@ class EntityNormalizer extends ObjectNormalizer
 
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return strpos($type, 'App\\Entity\\') === 0 && (is_numeric($data) || is_string($data));
+        return str_starts_with($type, 'App\\Entity\\') && (is_numeric($data) || is_string($data));
     }
 
+    /**
+     * @return mixed
+     */
     public function denormalize($data, $class, $format = null, array $context = [])
     {
         return $this->em->find($class, $data);

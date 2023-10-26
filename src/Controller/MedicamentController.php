@@ -3,21 +3,24 @@
 namespace App\Controller;
 
 use App\Entity\Medicament;
-
 use App\Repository\MedicamentRepository;
-
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MedicamentController extends AbstractController
 {
-    public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
+    private EntityManagerInterface $em;
+
+    public function __construct(private readonly ManagerRegistry $managerRegistry, EntityManagerInterface $entityManager)
     {
+        $this->em = $entityManager;
     }
-    
+
     #[Route(path: '/medicament', name: 'medicament')]
     public function index(MedicamentRepository $medicamentRepository, Request $request): Response
     {
@@ -28,7 +31,7 @@ class MedicamentController extends AbstractController
             $sort = $request->get('sort');
 
             $medicaments = $medicamentRepository->findByFilter($sort, $searchPhrase);
-            if ($searchPhrase != "")
+            if ($searchPhrase !== "")
                 $count = count($medicaments->getQuery()->getResult());
             else
                 $count = $medicamentRepository->getCount();
@@ -44,7 +47,7 @@ class MedicamentController extends AbstractController
                     "id" => $erreur->getId(),
                     "name" => $erreur->getName(),
                 );
-                array_push($rows, $row);
+                $rows[] = $row;
             }
 
             $data = array(
@@ -64,19 +67,18 @@ class MedicamentController extends AbstractController
     #[Route(path: '/medicament/add', name: 'medicament_add')]
     public function medicament_add(Request $request): Response
     {
-        $em = $this->managerRegistry->getManager();
-
         if ($request->isXmlHttpRequest()) {
             $name = $request->get('name');
 
             $medicament = new Medicament();
             $medicament->setName($name);
 
-            $em->persist($medicament);
-            $em->flush();
+            $this->em->persist($medicament);
+            $this->em->flush();
 
             return new JsonResponse(true);
         }
+        return new JsonResponse(['error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 
     #[Route(path: '/medicament/search', name: 'medicament_search')]
@@ -92,22 +94,22 @@ class MedicamentController extends AbstractController
 
             return new JsonResponse($medicaments);
         }
+        return new JsonResponse(['error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 
     #[Route(path: '/medicament/delete', name: 'medicament_delete')]
     public function medicament_delete(Request $request): Response
     {
-        $em = $this->managerRegistry->getManager();
-
         if ($request->isXmlHttpRequest()) {
             $id = $request->get('id');
 
-            $medicament = $this->managerRegistry->getRepository(Medicament::class)->find($id);;
+            $medicament = $this->managerRegistry->getRepository(Medicament::class)->find($id);
 
-            $em->remove($medicament);
-            $em->flush();
+            $this->em->remove($medicament);
+            $this->em->flush();
 
             return new JsonResponse(true);
         }
+        return new JsonResponse(['error' => 'Invalid request'], Response::HTTP_BAD_REQUEST);
     }
 }

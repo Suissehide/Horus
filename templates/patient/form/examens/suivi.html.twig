@@ -3,7 +3,7 @@
 <div class="form-space">
 	{{ form_row(form.protocole.suivi.recidive, {'attr': {'class': 'input radio-row'} }) }}
 	{{ form_row(form.protocole.suivi.dateSurvenue, {'attr': {'class': 'input js-datepicker'} }) }}
-	{{ form_row(form.protocole.suivi.type, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.suivi.type) }}
 </div>
 
 <h3 id="clinique">Clinique</h3>
@@ -14,14 +14,14 @@
 
 <h3 id="facteur">Facteurs de risque cardiovasculaire</h3>
 <div class="form-space">
-	{{ form_row(form.protocole.suivi.tabac, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.suivi.activite, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.suivi.tabac) }}
+	{{ form_row(form.protocole.suivi.activite) }}
 	{{ form_row(form.protocole.suivi.alimentation, {'attr': {'class': 'input radio-row alimentation-js'} }) }}
 	<div class="alimentation"></div>
-	{{ form_row(form.protocole.suivi.hba1c, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.suivi.hypertension, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.suivi.dyslipidemie, {'attr': {'class': 'input'} }) }}
-	{{ form_row(form.protocole.suivi.poids, {'attr': {'class': 'input'} }) }}
+	{{ form_row(form.protocole.suivi.hba1c) }}
+	{{ form_row(form.protocole.suivi.hypertension) }}
+	{{ form_row(form.protocole.suivi.dyslipidemie) }}
+	{{ form_row(form.protocole.suivi.poids) }}
 	{{ form_row(form.protocole.suivi.score, {'attr': {'class': 'input score', 'readonly': true} }) }}
 </div>
 
@@ -59,7 +59,7 @@
 </div>
 
 <h3 id="biologie">Biologie</h3>
-{{ form_row(form.protocole.suivi.debitFiltrationGlomerulaire, {'attr': {'class': 'input'} }) }}
+{{ form_row(form.protocole.suivi.debitFiltrationGlomerulaire) }}
 
 <h5>Inflammation</h5>
 <div class="form-space">

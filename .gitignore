@@ -1,23 +1,14 @@
 
-###> symfony/framework-bundle ###
-/.env.local
-/.env.local.php
-/.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
+# Symfony/framework-bundle #
+.env.local
 /var/
 /vendor/
 /migrations/
-###< symfony/framework-bundle ###
 
-###> symfony/phpunit-bridge ###
-.phpunit.result.cache
-/phpunit.xml
-###< symfony/phpunit-bridge ###
+# IDE and editor files
+/.idea/
+/.vscode/
 
-###> phpunit/phpunit ###
-/phpunit.xml
-.phpunit.result.cache
-###< phpunit/phpunit ###
-
-.vscode
+# node_modules and npm logs
+/node_modules/
+npm-debug.log

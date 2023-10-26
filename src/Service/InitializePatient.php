@@ -36,7 +36,7 @@ class InitializePatient
         $this->em = $entityManager;
     }
 
-    public function createVisite(Patient $patient, $type)
+    public function createVisite(Patient $patient, $type): void
     {
         $visite = new Visite();
 
@@ -64,12 +64,12 @@ class InitializePatient
         $this->em->flush();
     }
 
-    public function createProtocole(Protocole $protocole)
+    public function createProtocole(Protocole $protocole): void
     {
         $fiches = $protocole->getFiches();
 
         foreach ($fiches as $fiche) {
-            if ($fiche == 'medicaments') {
+            if ($fiche == 'medicaments' && !$protocole->getMedicamentsEntree()) {
                 $medicamentsEntree = new MedicamentsEntree();
 
                 foreach (FormConstants::LABELS["MEDICAMENTSENTREE_VERBATIMS_VECU"] as $name) {
@@ -87,27 +87,27 @@ class InitializePatient
                     $medicamentsEntree->addQuestionnaire($bmq);
                 }
                 $protocole->setMedicamentsEntree($medicamentsEntree);
-            } else if ($fiche == 'anatomieCoronaire') {
+            } else if ($fiche == 'anatomieCoronaire' && !$protocole->getAnatomieCoronaire()) {
                 $protocole->setAnatomieCoronaire(new AnatomieCoronaire());
-            } else if ($fiche == 'angioplastiePontage') {
+            } else if ($fiche == 'angioplastiePontage' && !$protocole->getAngioplastiePontage()) {
                 $protocole->setAngioplastiePontage(new AngioplastiePontage());
-            } else if ($fiche == 'bfr') {
+            } else if ($fiche == 'bfr' && !$protocole->getBFR()) {
                 $protocole->setBFR(new BFR());
-            } else if ($fiche == 'chip') {
+            } else if ($fiche == 'chip' && !$protocole->getChip()) {
                 $protocole->setChip(new Chip());
-            } else if ($fiche == 'catheterisation') {
+            } else if ($fiche == 'catheterisation' && !$protocole->getCatheterisation()) {
                 $protocole->setCatheterisation(new Catheterisation());
-            } else if ($fiche == 'echographie') {
+            } else if ($fiche == 'echographie' && !$protocole->getEchographie()) {
                 $protocole->setEchographie(new Echographie());
-            } else if ($fiche == 'echographieCardiaque') {
+            } else if ($fiche == 'echographieCardiaque' && !$protocole->getEchographieCardiaque()) {
                 $protocole->setEchographieCardiaque(new EchographieCardiaque());
-            } else if ($fiche == 'echographieVasculaire') {
+            } else if ($fiche == 'echographieVasculaire' && !$protocole->getEchographieVasculaire()) {
                 $protocole->setEchographieVasculaire(new EchographieVasculaire());
-            } else if ($fiche == 'neuroPsychologie') {
+            } else if ($fiche == 'neuroPsychologie' && !$protocole->getNeuroPsychologie()) {
                 $protocole->setNeuroPsychologie(new NeuroPsychologie());
-            } else if ($fiche == 'scintigraphie') {
+            } else if ($fiche == 'scintigraphie' && !$protocole->getScintigraphie()) {
                 $protocole->setScintigraphie(new Scintigraphie());
-            } else if ($fiche == 'suivi') {
+            } else if ($fiche == 'suivi' && !$protocole->getSuivi()) {
                 $suivi = new Suivi();
                 foreach (FormConstants::LABELS["SUIVI_FACTEUR"] as $name) {
                     $qcm = new Qcm();
@@ -119,7 +119,7 @@ class InitializePatient
                     $suivi->addTraitement($qcm);
                 }
                 $protocole->setSuivi($suivi);
-            } else if ($fiche == 'testsEffort') {
+            } else if ($fiche == 'testsEffort' && !$protocole->getTestEffort()) {
                 $protocole->setTestEffort(new TestEffort());
             }
         }

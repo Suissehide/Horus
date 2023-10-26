@@ -24,7 +24,7 @@ class Chip
     #[Groups(['export'])]
     private ?int $numberOfClones = null;
 
-    #[ORM\OneToMany(mappedBy: 'chip', targetEntity: Mutation::class)]
+    #[ORM\OneToMany(mappedBy: 'chip', targetEntity: Mutation::class, cascade: ["persist", "remove"])]
     #[Groups(['export'])]
     private Collection $mutations;
 

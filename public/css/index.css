@@ -1294,6 +1294,11 @@ input[type="checkbox"].checkbox-round + span {
     margin-right: 5px;
 }
 
+.select2-container--default .select2-selection--multiple .select2-selection__clear {
+    font-size: 20px;
+    padding: 0;
+}
+
 /* ========= TOC ========= */
 
 .toc {

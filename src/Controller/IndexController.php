@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Constant\FormConstants;
+
 use App\Entity\Patient;
+
 use App\Repository\PatientRepository;
+
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,15 +18,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class IndexController extends AbstractController
 {
-    /**
-     * @var SerializerInterface
-     */
-    private $serializer;
-
-    /**
-     * @var ManagerRegistry
-     */
-    private $managerRegistry;
+    private ManagerRegistry $managerRegistry;
+    private SerializerInterface $serializer;
 
     public function __construct(ManagerRegistry $managerRegistry, SerializerInterface $serializer)
     {
@@ -35,7 +31,7 @@ class IndexController extends AbstractController
     public function index(): Response
     {
         return $this->render('index/index.html.twig', [
-            'constants_labels' => FormConstants::LABELS['FEUILLES'],
+            'constants_feuilles' => FormConstants::LABELS['FEUILLES'],
             'controller_name' => 'IndexController',
         ]);
     }
